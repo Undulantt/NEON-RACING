@@ -1,1 +1,25 @@
-{"schema_version":1,"association_max_distance_m":8.0,"ambiguity_margin_m":3.0,"estimated_floor_height_m":3.1,"categories":["residential","commercial","restaurant","hotel","institutional","cultural","industrial","unknown"]}
+{
+  "schema_version": 1,
+  "association_max_distance_m": 8.0,
+  "ambiguity_margin_m": 3.0,
+  "estimated_floor_height_m": 3.1,
+  "categories": [
+    "residential",
+    "commercial",
+    "restaurant",
+    "hotel",
+    "institutional",
+    "cultural",
+    "industrial",
+    "unknown"
+  ],
+  "overture_min_confidence": 0.6,
+  "sources": {
+    "overture_places": {
+      "metadata_file": "overture_places_20261021.meta.json"
+    },
+    "denue": {
+      "metadata_file": "denue_03_csv.meta.json"
+    }
+  }
+}

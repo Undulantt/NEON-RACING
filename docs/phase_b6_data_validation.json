@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "pois": 300,
+  "pois": 5836,
   "landmarks": 6,
   "mapped_surfaces": 22,
   "visual_ground_coverage_verified": true,
@@ -9,19 +9,25 @@
   "water_building_overlap_m2": 0,
   "orphan_overrides": [],
   "statistics": {
-    "pois": 300,
-    "associated": 124,
-    "unassociated": 176,
-    "duplicate_candidates": 15,
+    "pois": 5836,
+    "records_by_source": {
+      "denue": 2482,
+      "osm": 300,
+      "overture": 3054
+    },
+    "classification_ineligible": 1368,
+    "associated": 689,
+    "unassociated": 5147,
+    "duplicate_candidates": 490,
     "categories": {
-      "commercial": 41,
-      "institutional": 2,
-      "restaurant": 40,
-      "unknown": 7661,
-      "cultural": 3,
-      "hotel": 11,
+      "commercial": 164,
+      "institutional": 48,
+      "restaurant": 113,
+      "cultural": 11,
+      "hotel": 27,
+      "unknown": 7394,
       "residential": 20,
-      "industrial": 1
+      "industrial": 2
     }
   }
 }

@@ -1,3 +1,5 @@
+> Actualización: Overture Places, DENUE y fachadas ampliadas ya están integrados. Estado actual y pruebas en [PHASE_B6_SOURCES.md](PHASE_B6_SOURCES.md). Los resultados siguientes conservan la entrega anterior como línea base.
+
 # Fase B.6 — registro de implementación incremental
 
 ## Alcance y auditoría previa

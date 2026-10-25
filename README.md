@@ -1,8 +1,8 @@
 # Fase B.6 — enriquecimiento urbano
 
-Implementación y registro: [docs/PHASE_B6.md](docs/PHASE_B6.md). Conserva conducción, vías y 7.779 huellas; incorpora 300 POI OSM, categorías, fachadas, overrides, costa, espacios abiertos y seis registros de lugares. La Catedral incorpora una silueta simplificada con dimensiones estimadas. **F9** muestra nombres de lugares; **F8** conserva el control de ciudad.
+Implementación y registro: [docs/PHASE_B6.md](docs/PHASE_B6.md). Conserva conducción, vías y 7.779 huellas; incorpora 5.836 registros POI (OSM, Overture Places y DENUE), con 385 edificios clasificados, categorías, fachadas, overrides, costa, espacios abiertos y seis registros de lugares. La Catedral incorpora una silueta simplificada con dimensiones estimadas. **F9** muestra nombres de lugares; **F8** conserva el control de ciudad.
 
-Regeneración: `tools/build_urban_city.py` con `.venv-urban`. Validación adicional: `tools/validate_urban_enrichment.py` y `tests/godot_phase_b6.gd`. Detalles de fuentes complementarias pendientes y alcance de verificación en el registro B.6.
+Regeneración: `tools/build_urban_city.py` con `.venv-urban`. Validación adicional: `tools/validate_urban_enrichment.py` y `tests/godot_phase_b6.gd`. Integración de fuentes y verificación: [continuación B.6](docs/PHASE_B6_SOURCES.md).
 
 El texto siguiente conserva la documentación histórica B.5.
 

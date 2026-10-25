@@ -11,7 +11,7 @@
       "failed_chunks": [],
       "loaded_buildings": 2035,
       "loaded_chunks": 22,
-      "max_chunk_build_ms": 18,
+      "max_chunk_build_ms": 21,
       "max_loaded_chunks": 22
     },
     "inactive_distant_collision_bodies": 14,
@@ -22,7 +22,7 @@
       "failed_chunks": [],
       "loaded_buildings": 1514,
       "loaded_chunks": 17,
-      "max_chunk_build_ms": 18,
+      "max_chunk_build_ms": 21,
       "max_loaded_chunks": 17
     }
   },

@@ -1,15 +1,15 @@
 {
   "failures": [],
-  "frame_time_ratio": 1.00013670267057,
+  "frame_time_ratio": 1.00027296092345,
   "passed": true,
   "results": {
     "b5_equivalent": {
-      "average_fps": 119.985999336714,
-      "max_frame_ms": 25.706,
-      "mean_frame_ms": 8.33430571506699,
-      "p95_frame_ms": 8.63,
+      "average_fps": 119.920482587305,
+      "max_frame_ms": 24.353,
+      "mean_frame_ms": 8.33885903746242,
+      "p95_frame_ms": 8.651,
       "peak_nodes": 435.0,
-      "peak_static_memory_bytes": 98747679.0,
+      "peak_static_memory_bytes": 98751387.0,
       "render_frames": 7314,
       "route": {
         "route_distance_m": 1197.92808151245,
@@ -37,17 +37,17 @@
         "failed_chunks": [],
         "loaded_buildings": 4219,
         "loaded_chunks": 35,
-        "max_chunk_build_ms": 9,
+        "max_chunk_build_ms": 8,
         "max_loaded_chunks": 36
       }
     },
     "b6": {
-      "average_fps": 119.969599172121,
-      "max_frame_ms": 25.025,
-      "mean_frame_ms": 8.33544503691554,
-      "p95_frame_ms": 8.631,
-      "peak_nodes": 448.0,
-      "peak_static_memory_bytes": 100146595.0,
+      "average_fps": 119.887757914194,
+      "max_frame_ms": 26.471,
+      "mean_frame_ms": 8.34113522012578,
+      "p95_frame_ms": 8.632,
+      "peak_nodes": 444.0,
+      "peak_static_memory_bytes": 100196102.0,
       "render_frames": 7314,
       "route": {
         "route_distance_m": 1197.92808151245,
@@ -75,7 +75,7 @@
         "failed_chunks": [],
         "loaded_buildings": 4219,
         "loaded_chunks": 35,
-        "max_chunk_build_ms": 18,
+        "max_chunk_build_ms": 21,
         "max_loaded_chunks": 36
       }
     }

@@ -27,7 +27,10 @@ def request(url,data=None):
     with urllib.request.urlopen(req,timeout=150) as response: return response.read()
 
 def main():
-    ap=argparse.ArgumentParser(description=__doc__); ap.add_argument('source',choices=['overture','inegi','protected']); ap.add_argument('--refresh',action='store_true'); args=ap.parse_args()
+    ap=argparse.ArgumentParser(description=__doc__); ap.add_argument('source',choices=['overture','inegi','protected','places','denue']); ap.add_argument('--refresh',action='store_true'); args=ap.parse_args()
+    if args.source in ('places','denue'):
+        from fetch_poi_sources import fetch
+        fetch(args.source,args.refresh); return
     cfg=load_json(ROOT/'config/map_config.json'); urban=load_json(ROOT/'config/urban_config.json'); bbox=cfg['bbox']; kind={'overture':'overture_buildings','inegi':'inegi_blocks','protected':'osm_protected'}[args.source]
     found=cached(kind,bbox,release=urban["overture_release"] if args.source=="overture" else None,url=urban["inegi_url"] if args.source=="inegi" else None)
     if found and not args.refresh:

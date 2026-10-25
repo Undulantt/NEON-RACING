@@ -27,10 +27,14 @@ def validate():
     assert 5 <= len(landmarks) <= 10
     poi={p['id']:p for p in e['pois']}; assert len(poi)==len(e['pois'])
     south,west,north,east=cfg['bbox']
+    source_hashes={}
     for p in poi.values():
         assert math.dist(project(p['lon'],p['lat']),p['position_xz']) < 1e-8
         assert west<=p['lon']<=east and south<=p['lat']<=north
-        assert digest(ROOT/'data/raw'/p['source']['file'])==p['source']['sha256']
+        filename=p['source']['file']
+        if filename not in source_hashes: source_hashes[filename]=digest(ROOT/'data/raw'/filename)
+        assert source_hashes[filename]==p['source']['sha256']
+        if not p.get('eligible_for_classification', True): assert not p['building_id']
         if p['building_id']:
             assert p['building_id'] in buildings
             if p['association_reason']=='unique containment':
@@ -42,6 +46,7 @@ def validate():
         assert not landmark['architecture_verified']
     for b in buildings.values():
         assert Polygon(b['footprint_xz'],b['holes_xz']).intersection(water).area<=0.01
+        if 'facade_edge_index' in b: assert 0 <= b['facade_edge_index'] < len(b['footprint_xz'])
     return {'passed':True,'pois':len(poi),'landmarks':len(landmarks),'mapped_surfaces':len(geo['surfaces']),'visual_ground_coverage_verified':True,'visual_surface_overlap_m2':0,'water_area_m2':water.area,'water_building_overlap_m2':0,'orphan_overrides':e['orphan_overrides'],'statistics':e['statistics']}
 
 if __name__=='__main__':

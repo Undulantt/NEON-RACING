@@ -9,7 +9,7 @@ func _initialize() -> void:
 	var parent := Node3D.new()
 	root.add_child(parent)
 	var stats := Builder.build(parent, {"buildings":[b], "category_facades":true, "detail_windows":false})
-	check(stats["building_triangles"] == 14, "bounded facade triangles")
+	check(stats["building_triangles"] == 20, "bounded facade triangles")
 	var body := parent.get_child(0) as StaticBody3D
 	var shell := (body.get_child(1) as CollisionShape3D).shape as ConcavePolygonShape3D
 	check(shell.get_faces().size() == 30, "facades excluded from physics")
@@ -25,7 +25,7 @@ func _initialize() -> void:
 	root.add_child(cathedral)
 	# _ready runs after initialization when the tree begins processing.
 	cathedral._ready()
-	check(cathedral.get_child_count() == 5, "cathedral silhouette builds five visual meshes")
+	check(cathedral.get_child_count() == 1, "cathedral details stay in one mesh")
 	cathedral.free()
 	var f := FileAccess.open("res://docs/phase_b6_runtime.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify({"passed":failures.is_empty(),"failures":failures},"  "))

@@ -1,0 +1,34 @@
+{
+  "kind": "overture_places",
+  "file": "overture_places_20261021.geojson",
+  "bbox": [
+    24.148,
+    -110.334,
+    24.17,
+    -110.305
+  ],
+  "sha256": "a1ea604ea9abfd0831dd5c5b88076ec4455cf14d4d127d45f1649fd6570ec551",
+  "extracted_at_utc": "2026-10-25T04:52:22.528396+00:00",
+  "source": "Overture Maps Foundation Places",
+  "release": "2026-10-21.0",
+  "license": "CDLA-Permissive-2.0; Apache-2.0; CC0-1.0 (per record sources)",
+  "url": "https://stac.overturemaps.org/2026-10-21.0/catalog.json",
+  "schema_reference": "https://docs.overturemaps.org/schema/reference/places/place/",
+  "observed_fields": [
+    "addresses",
+    "basic_category",
+    "brand",
+    "confidence",
+    "emails",
+    "names",
+    "operating_status",
+    "phones",
+    "socials",
+    "sources",
+    "taxonomy",
+    "version",
+    "websites"
+  ],
+  "feature_count": 3055,
+  "acquisition": "overturemaps download --bbox=-110.334,24.148,-110.305,24.170 -f geojson --type=place --release 2026-10-21.0"
+}

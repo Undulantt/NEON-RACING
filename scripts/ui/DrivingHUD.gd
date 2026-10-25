@@ -41,7 +41,7 @@ func _ready() -> void:
 	label("W / ↑ acelerar   S / ↓ frenar y reversa   A D / ← → girar", Vector2(24, 580), 16)
 	label("ESPACIO freno de mano   R recuperar   ESC pausa   C inspección aérea", Vector2(24, 610), 16)
 	label("© OpenStreetMap contributors · Overture Maps Foundation · INEGI", Vector2(24, 658), 13, Color("d7d5ce"))
-	label("B.6 · alturas estimadas · OSM/Overture: ODbL · fuentes y términos en créditos", Vector2(24, 686), 13, Color("d7d5ce"))
+	label("B.6 · alturas estimadas · datos abiertos · fuentes y licencias en créditos", Vector2(24, 686), 13, Color("d7d5ce"))
 	pause_panel = PanelContainer.new()
 	pause_panel.position = Vector2(430, 190)
 	pause_panel.custom_minimum_size = Vector2(420, 290)

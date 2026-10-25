@@ -80,6 +80,9 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 				if length > longest:
 					longest = length
 					edge = i
+			if building.has("facade_edge_index"):
+				edge = int(building["facade_edge_index"])
+				longest = Vector2(ring[edge][0], ring[edge][1]).distance_to(Vector2(ring[(edge+1)%ring.size()][0], ring[(edge+1)%ring.size()][1]))
 			if longest > 3.0:
 				var p: Array = ring[edge]
 				var q: Array = ring[(edge + 1) % ring.size()]
@@ -99,6 +102,19 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 				if category in ["commercial", "restaurant", "hotel", "cultural", "institutional"]:
 					var accent := Color("a45337") if category == "restaurant" else color.darkened(0.28)
 					quad(output, start + Vector3.UP * top, finish + Vector3.UP * top, finish + Vector3.UP * (top + 0.25), start + Vector3.UP * (top + 0.25), normal, accent)
+				# Bounded rows/windows, built into the same sector mesh.
+				var levels := mini(3, maxi(1, floori(height / 3.1)))
+				var columns := mini(8, maxi(1, floori(longest / 4.0)))
+				var spacing := (longest - 1.2) / float(columns)
+				for level in range(1, levels):
+					for column in range(columns):
+						var left := start + direction * (column * spacing + 0.2) + Vector3.UP * (level * 3.1 + 0.8)
+						var right := left + direction * minf(1.4, spacing - 0.4)
+						quad(output, left, right, right + Vector3.UP, left + Vector3.UP, normal, glass)
+				if category in ["commercial", "restaurant"]:
+					for column in range(1, columns):
+						var left := start + direction * (column * spacing - 0.08) + normal * 0.005
+						quad(output, left, left + direction * 0.16, left + direction * 0.16 + Vector3.UP * top, left + Vector3.UP * top, normal, color)
 		if not data.get("detail_windows", true):
 			continue
 		for i in range(ring.size()):

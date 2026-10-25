@@ -6,7 +6,7 @@
     "failed_chunks": [],
     "loaded_buildings": 1514,
     "loaded_chunks": 17,
-    "max_chunk_build_ms": 9,
+    "max_chunk_build_ms": 22,
     "max_loaded_chunks": 36
   },
   "failures": [],
@@ -51,7 +51,7 @@
   "passed": true,
   "physics_frames": 9384,
   "world": {
-    "build_ms": 120,
+    "build_ms": 178,
     "buildings": 7779.0,
     "chunks": 74,
     "collision_buildings": 7369.0,

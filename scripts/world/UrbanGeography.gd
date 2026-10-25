@@ -14,7 +14,8 @@ func configure(manifest: Dictionary) -> bool:
 		if hash.finish().hex_encode() != manifest["b6_files"][filename]:
 			push_error("B6 data hash mismatch: " + filename)
 			return false
-		datasets[filename] = JSON.parse_string(bytes.get_string_from_utf8())
+		if filename in ["urban_geography.json", "landmarks.json"]:
+			datasets[filename] = JSON.parse_string(bytes.get_string_from_utf8())
 	if not datasets.has("urban_geography.json"):
 		return false
 	# One mesh for all mapped open surfaces; no extra physics bodies.
