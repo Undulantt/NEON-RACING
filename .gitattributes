@@ -1,0 +1,6 @@
+# Normalize ordinary source text; preserve bytes of geographically hashed assets.
+* text=auto eol=lf
+/data/** -text
+/config/** -text
+/scripts/driving/ArcadeCar.gd -text
+/docs/b6_baseline/** -text

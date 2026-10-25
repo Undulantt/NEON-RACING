@@ -1,0 +1,30 @@
+{
+  "failures": [],
+  "metrics": {
+    "active_near_collision_bodies": 4,
+    "city_on_off_position_difference_m": 0.0,
+    "city_on_off_velocity_difference_mps": 0.0,
+    "final_streaming": {
+      "chunk_loads": 62,
+      "chunk_unloads": 40,
+      "enabled": true,
+      "failed_chunks": [],
+      "loaded_buildings": 2035,
+      "loaded_chunks": 22,
+      "max_chunk_build_ms": 18,
+      "max_loaded_chunks": 22
+    },
+    "inactive_distant_collision_bodies": 14,
+    "spawn_streaming": {
+      "chunk_loads": 17,
+      "chunk_unloads": 0,
+      "enabled": true,
+      "failed_chunks": [],
+      "loaded_buildings": 1514,
+      "loaded_chunks": 17,
+      "max_chunk_build_ms": 18,
+      "max_loaded_chunks": 17
+    }
+  },
+  "passed": true
+}

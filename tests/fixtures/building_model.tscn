@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="BoxMesh" id="box"]
+size = Vector3(4, 3, 4)
+[node name="VisualOnlyFixture" type="Node3D"]
+[node name="Mesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("box")

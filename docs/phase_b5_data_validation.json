@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "buildings": 7779,
+  "fictional": 167,
+  "source_counts": {
+    "overture": 7387,
+    "fictional": 167,
+    "osm": 225
+  },
+  "roof_triangles": 34038,
+  "chunks": 75,
+  "baseline_hashes_unchanged": true,
+  "road_and_protected_overlap_m2": 0
+}

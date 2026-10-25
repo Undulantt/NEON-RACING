@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "overture_release": "2026-10-21.0",
+  "inegi_url": "https://gaia.inegi.org.mx/wscatgeo/v2/geo/mza/03/003/0001",
+  "inegi_locality_code": "030030001",
+  "road_clearance_m": 1.25,
+  "real_min_area_m2": 12,
+  "real_max_area_m2": 25000,
+  "fill_seed": 20261024,
+  "fill_min_block_coverage": 0.08,
+  "fill_road_distance_m": 38,
+  "fill_spacing_m": 20,
+  "fill_max_per_block": 12,
+  "fill_max_total": 1000,
+  "chunk_size_m": 256,
+  "visual_load_radius_m": 650,
+  "visual_unload_radius_m": 850,
+  "collision_radius_m": 180,
+  "max_chunks_per_frame": 1
+}

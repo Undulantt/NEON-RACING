@@ -1,0 +1,119 @@
+{
+  "results": {
+    "legacy": {
+      "average_fps": 120.213812846663,
+      "frames": 602,
+      "max_frame_ms": 11.176,
+      "mean_draw_calls": 165.0,
+      "mean_visible_primitives": 15090.3056478405,
+      "nodes": 412.0,
+      "p95_frame_ms": 8.697,
+      "sample_s": 5.007744,
+      "streaming": {},
+      "viewport_px": [
+        1280,
+        720
+      ],
+      "world": {
+        "build_ms": 112,
+        "building_chunks": 41,
+        "building_triangles": 19509,
+        "buildings": 239,
+        "chunks": 74,
+        "triangles": 5712
+      }
+    },
+    "urban": {
+      "average_fps": 120.203659342829,
+      "frames": 602,
+      "max_frame_ms": 12.115,
+      "mean_draw_calls": 172.0,
+      "mean_visible_primitives": 30824.0,
+      "nodes": 358.0,
+      "p95_frame_ms": 8.87,
+      "sample_s": 5.008167,
+      "streaming": {
+        "chunk_loads": 17,
+        "chunk_unloads": 0,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 1514,
+        "loaded_chunks": 17,
+        "max_chunk_build_ms": 7,
+        "max_loaded_chunks": 17
+      },
+      "viewport_px": [
+        1280,
+        720
+      ],
+      "world": {
+        "build_ms": 92,
+        "buildings": 7779.0,
+        "chunks": 74,
+        "collision_buildings": 7369.0,
+        "eligible_infill_blocks": 183.0,
+        "excluded_buildings": 657.0,
+        "fictional_buildings": 167.0,
+        "height_estimated": 7779.0,
+        "inegi_blocks_in_bbox": 321.0,
+        "overture_downloaded": 8033.0,
+        "protected_features": 109.0,
+        "real_buildings": 7612.0,
+        "source_counts": {
+          "fictional": 167.0,
+          "osm": 225.0,
+          "overture": 7387.0
+        },
+        "triangles": 5712,
+        "urban_chunks": 75
+      }
+    },
+    "urban_hidden": {
+      "average_fps": 120.394029893658,
+      "frames": 603,
+      "max_frame_ms": 17.035,
+      "mean_draw_calls": 155.0,
+      "mean_visible_primitives": 9904.0,
+      "nodes": 306.0,
+      "p95_frame_ms": 8.768,
+      "sample_s": 5.008554,
+      "streaming": {
+        "chunk_loads": 4,
+        "chunk_unloads": 0,
+        "enabled": false,
+        "failed_chunks": [],
+        "loaded_buildings": 220,
+        "loaded_chunks": 4,
+        "max_chunk_build_ms": 6,
+        "max_loaded_chunks": 4
+      },
+      "viewport_px": [
+        1280,
+        720
+      ],
+      "world": {
+        "build_ms": 95,
+        "buildings": 7779.0,
+        "chunks": 74,
+        "collision_buildings": 7369.0,
+        "eligible_infill_blocks": 183.0,
+        "excluded_buildings": 657.0,
+        "fictional_buildings": 167.0,
+        "height_estimated": 7779.0,
+        "inegi_blocks_in_bbox": 321.0,
+        "overture_downloaded": 8033.0,
+        "protected_features": 109.0,
+        "real_buildings": 7612.0,
+        "source_counts": {
+          "fictional": 167.0,
+          "osm": 225.0,
+          "overture": 7387.0
+        },
+        "triangles": 5712,
+        "urban_chunks": 75
+      }
+    }
+  },
+  "scenario": "Static spawn, same camera, fixed 1280x720 viewport, 2s warmup + 5s sample per mode; not a sustained driving benchmark",
+  "urban_to_legacy_fps_ratio": 0.999915537960296
+}

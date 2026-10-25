@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "pois": 300,
+  "landmarks": 6,
+  "mapped_surfaces": 22,
+  "visual_ground_coverage_verified": true,
+  "visual_surface_overlap_m2": 0,
+  "water_area_m2": 2805558.0367114097,
+  "water_building_overlap_m2": 0,
+  "orphan_overrides": [],
+  "statistics": {
+    "pois": 300,
+    "associated": 124,
+    "unassociated": 176,
+    "duplicate_candidates": 15,
+    "categories": {
+      "commercial": 41,
+      "institutional": 2,
+      "restaurant": 40,
+      "unknown": 7661,
+      "cultural": 3,
+      "hotel": 11,
+      "residential": 20,
+      "industrial": 1
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Python conversion tools
+__pycache__/
+*.py[cod]
+.venv/
+
+# Optional urban source conversion environment
+.venv-urban/
+
+# Overture client download checkpoint (not the immutable source snapshot)
+data/raw/*.state
+.godot-local-profile/

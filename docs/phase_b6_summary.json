@@ -1,0 +1,40 @@
+{
+  "scope": "Incremental B6 P0 and basic P1; remaining source integrations documented",
+  "python_tests": 28,
+  "python_passed": true,
+  "full_rebuild_deterministic": true,
+  "manifest_sha256": "7eb70550149febe8be762b8c45bb68fc97074308c1de1bc2c90c5f63a3115545",
+  "data_validation": {
+    "passed": true,
+    "pois": 300,
+    "landmarks": 6,
+    "mapped_surfaces": 22,
+    "visual_ground_coverage_verified": true,
+    "visual_surface_overlap_m2": 0,
+    "water_area_m2": 2805558.0367114097,
+    "water_building_overlap_m2": 0,
+    "orphan_overrides": [],
+    "statistics": {
+      "pois": 300,
+      "associated": 124,
+      "unassociated": 176,
+      "duplicate_candidates": 15,
+      "categories": {
+        "commercial": 41,
+        "institutional": 2,
+        "restaurant": 40,
+        "unknown": 7661,
+        "cultural": 3,
+        "hotel": 11,
+        "residential": 20,
+        "industrial": 1
+      }
+    }
+  },
+  "runtime_validation": {
+    "failures": [],
+    "passed": true
+  },
+  "route_benchmark_passed": true,
+  "mean_frame_time_ratio": 1.00013670267057
+}

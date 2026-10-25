@@ -1,0 +1,18 @@
+{
+  "failures": [],
+  "independent_drop_probes": 1,
+  "junctions": 381,
+  "mesh": {
+    "build_ms": 14,
+    "chunks": 74,
+    "triangles": 5712
+  },
+  "passed": true,
+  "physics_frames": 4671,
+  "probe_max_y": 0.450998336076736,
+  "probe_min_y": 0.450748711824417,
+  "ray_edge_misses": 1,
+  "ray_samples": 32751,
+  "route_junctions": 22,
+  "route_m": 2325.34715688229
+}

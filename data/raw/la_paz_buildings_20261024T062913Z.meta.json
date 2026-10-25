@@ -1,0 +1,17 @@
+{
+  "file": "la_paz_buildings_20261024T062913Z.json",
+  "kind": "buildings",
+  "bbox": [
+    24.148,
+    -110.334,
+    24.17,
+    -110.305
+  ],
+  "query": "[out:json][timeout:90];way[\"building\"][\"building\"!=\"no\"](24.148,-110.334,24.17,-110.305);(._;>;);out body;",
+  "url": "https://overpass.private.coffee/api/interpreter",
+  "extracted_at_utc": "2026-10-24T06:29:13.133849+00:00",
+  "osm_base_timestamp": "2026-06-01T08:52:28Z",
+  "sha256": "e75bee4a4fb3e3158ba2e3a46a0e620dd38b5279110bbe5660e8279fb68405a8",
+  "license": "ODbL-1.0",
+  "source": "OpenStreetMap contributors"
+}

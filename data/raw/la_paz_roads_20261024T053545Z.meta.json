@@ -1,0 +1,28 @@
+{
+  "file": "la_paz_roads_20261024T053545Z.json",
+  "extracted_at_utc": "2026-10-24T05:35:45.879010+00:00",
+  "url": "https://overpass.kumi.systems/api/interpreter",
+  "bbox": [
+    24.148,
+    -110.334,
+    24.17,
+    -110.305
+  ],
+  "highways": [
+    "primary",
+    "primary_link",
+    "secondary",
+    "secondary_link",
+    "tertiary",
+    "tertiary_link",
+    "residential",
+    "unclassified",
+    "living_street",
+    "service"
+  ],
+  "query": "[out:json][timeout:90];way[\"highway\"~\"^(primary|primary_link|secondary|secondary_link|tertiary|tertiary_link|residential|unclassified|living_street|service)$\"](24.148,-110.334,24.17,-110.305);(._;>;);out body;",
+  "sha256": "a80c891a315fe1f0d1dc3f3dd74a040d41a8a68a94947925336a8754b0ee8142",
+  "osm_base_timestamp": "2026-07-15T15:22:01Z",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0"
+}

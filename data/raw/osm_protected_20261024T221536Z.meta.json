@@ -1,0 +1,23 @@
+{
+  "kind": "osm_protected",
+  "file": "osm_protected_20261024T221536Z.json",
+  "bbox": [
+    24.148,
+    -110.334,
+    24.17,
+    -110.305
+  ],
+  "sha256": "36c28c84cf5a4a60083520f50dab0855207f0b6929cc56e53ca5c18efe8a5ecb",
+  "extracted_at_utc": "2026-10-24T22:15:39.431177+00:00",
+  "source": "OpenStreetMap contributors",
+  "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.336,24.146,-110.30300000000001,24.172",
+  "license": "ODbL-1.0",
+  "normalization": "Protected tagged elements normalized from original OSM XML; exact XML kept separately",
+  "original_file": "osm_map_20261024T221536Z.osm",
+  "original_sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+  "element_count": 111,
+  "incomplete_relations_omitted": [],
+  "overpass_failures": [
+    "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1032)>"
+  ]
+}

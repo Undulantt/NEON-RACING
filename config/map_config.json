@@ -1,0 +1,40 @@
+{
+  "bbox": [
+	24.148,
+	-110.334,
+	24.17,
+	-110.305
+  ],
+  "origin_lat": 24.159,
+  "origin_lon": -110.3195,
+  "chunk_size_m": 256,
+  "overpass_urls": [
+	"https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter"
+  ],
+  "highways": [
+	"primary",
+	"primary_link",
+	"secondary",
+	"secondary_link",
+	"tertiary",
+	"tertiary_link",
+	"residential",
+	"unclassified",
+	"living_street",
+    "service"
+  ],
+  "widths_m": {
+	"primary": 12,
+	"primary_link": 7,
+	"secondary": 11,
+	"secondary_link": 7,
+	"tertiary": 9,
+	"tertiary_link": 6,
+	"residential": 7,
+	"unclassified": 6,
+	"living_street": 6,
+	"service": 4.5
+  },
+  "default_speed_kph": 40
+}

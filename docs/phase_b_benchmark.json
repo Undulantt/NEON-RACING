@@ -1,0 +1,23 @@
+{
+  "average_fps": 115.908351266653,
+  "elapsed_s": 10.007907,
+  "frames": 1160,
+  "max_frame_ms": 149.677,
+  "mean_draw_calls": 163.875862068966,
+  "mean_primitives": 14972.7862068966,
+  "node_count": 411.0,
+  "p95_frame_ms": 8.88,
+  "scenario": "Static spawn, normal renderer, 2s warmup + 10s sample; not a full driving benchmark",
+  "viewport_texture_px": [
+    2690,
+    1414
+  ],
+  "world": {
+    "build_ms": 107,
+    "building_chunks": 41,
+    "building_triangles": 19509,
+    "buildings": 239,
+    "chunks": 74,
+    "triangles": 5712
+  }
+}

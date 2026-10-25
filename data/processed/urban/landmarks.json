@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "landmarks": [
+    {
+      "id": "landmark:osm:node:958717770",
+      "poi_id": "osm:node:958717770",
+      "name": "Centro Cultural La Paz",
+      "position_xz": [
+        410.77392228240717,
+        -338.88877793459545
+      ],
+      "lat": 24.1620477,
+      "lon": -110.3154512,
+      "category": "cultural",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_20261024T221536Z.osm",
+        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:155831056",
+      "poi_id": "osm:way:155831056",
+      "name": "Museo de Arte de Baja California Sur",
+      "position_xz": [
+        546.1173863511281,
+        -383.7281321041828
+      ],
+      "lat": 24.16245095,
+      "lon": -110.31411718489437,
+      "category": "cultural",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_20261024T221536Z.osm",
+        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:155831064",
+      "poi_id": "osm:way:155831064",
+      "name": "Museo de Antropología e Historia",
+      "position_xz": [
+        1090.3158335900866,
+        -64.94339690681036
+      ],
+      "lat": 24.15958405,
+      "lon": -110.30875328384403,
+      "category": "cultural",
+      "building_id": "osm:155831064:0",
+      "source": {
+        "file": "osm_map_20261024T221536Z.osm",
+        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:155831066",
+      "poi_id": "osm:way:155831066",
+      "name": "Catedral de Nuestra Señora de La Paz",
+      "position_xz": [
+        669.6952121969947,
+        -288.673149062123
+      ],
+      "lat": 24.1615961,
+      "lon": -110.31289913799766,
+      "category": "cultural",
+      "building_id": "osm:155831066:0",
+      "source": {
+        "file": "osm_map_20261024T221536Z.osm",
+        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "license": "ODbL-1.0"
+      },
+      "priority": 1,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": "res://scenes/landmarks/Cathedral.tscn",
+      "rotation_degrees": 0,
+      "scale": 1,
+      "silhouette_reference": "https://sitiosymonumentos.cultura.gob.mx/iii-estudios-monograficos/nuestra-senora-de-la-paz-catedral/",
+      "dimensions_estimated": true
+    },
+    {
+      "id": "landmark:osm:way:450296320",
+      "poi_id": "osm:way:450296320",
+      "name": "Mercado Bravo",
+      "position_xz": [
+        495.2039824950691,
+        342.9807512351341
+      ],
+      "lat": 24.1559155,
+      "lon": -110.31461901370665,
+      "category": "commercial",
+      "building_id": "overture:01326eca-6638-4e93-bf74-debbb03e33ac:0:0",
+      "source": {
+        "file": "osm_map_20261024T221536Z.osm",
+        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:450296505",
+      "poi_id": "osm:way:450296505",
+      "name": "Mercado Francisco I. Madero",
+      "position_xz": [
+        402.92687502725926,
+        79.15410853213436
+      ],
+      "lat": 24.158288149999997,
+      "lon": -110.31552854455184,
+      "category": "commercial",
+      "building_id": "overture:5ab8adc6-35b9-49ba-8f09-d6ca66e4781f:0:0",
+      "source": {
+        "file": "osm_map_20261024T221536Z.osm",
+        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    }
+  ]
+}

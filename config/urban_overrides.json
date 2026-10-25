@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "buildings": {
+    "osm:155831066:0": {
+      "height_m": 10,
+      "category": "cultural",
+      "priority": 1,
+      "model_path": "res://scenes/landmarks/Cathedral.tscn",
+      "reason": "Simplified twin-tower silhouette; footprint preserved; 10 m nave and 18/21 m towers are illustrative estimates, not measured dimensions. Ground collision shell follows footprint.",
+      "source": "https://sitiosymonumentos.cultura.gob.mx/iii-estudios-monograficos/nuestra-senora-de-la-paz-catedral/"
+    }
+  },
+  "pois": {}
+}

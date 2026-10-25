@@ -1,0 +1,84 @@
+{
+  "failures": [],
+  "frame_time_ratio": 1.00013670267057,
+  "passed": true,
+  "results": {
+    "b5_equivalent": {
+      "average_fps": 119.985999336714,
+      "max_frame_ms": 25.706,
+      "mean_frame_ms": 8.33430571506699,
+      "p95_frame_ms": 8.63,
+      "peak_nodes": 435.0,
+      "peak_static_memory_bytes": 98747679.0,
+      "render_frames": 7314,
+      "route": {
+        "route_distance_m": 1197.92808151245,
+        "route_expected_m": 1200.91927719116,
+        "route_frames": 7294,
+        "route_junctions_crossed": 14,
+        "route_max_deviation_m": 2.06773281097412,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "16 de Septiembre",
+          "Calle 16 de Septiembre",
+          "Calle Aquiles Serdán",
+          "Calle Ignacio Ramírez",
+          "Calle Melchor Ocampo",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "streaming": {
+        "chunk_loads": 41,
+        "chunk_unloads": 6,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 4219,
+        "loaded_chunks": 35,
+        "max_chunk_build_ms": 9,
+        "max_loaded_chunks": 36
+      }
+    },
+    "b6": {
+      "average_fps": 119.969599172121,
+      "max_frame_ms": 25.025,
+      "mean_frame_ms": 8.33544503691554,
+      "p95_frame_ms": 8.631,
+      "peak_nodes": 448.0,
+      "peak_static_memory_bytes": 100146595.0,
+      "render_frames": 7314,
+      "route": {
+        "route_distance_m": 1197.92808151245,
+        "route_expected_m": 1200.91927719116,
+        "route_frames": 7294,
+        "route_junctions_crossed": 14,
+        "route_max_deviation_m": 2.06773281097412,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "16 de Septiembre",
+          "Calle 16 de Septiembre",
+          "Calle Aquiles Serdán",
+          "Calle Ignacio Ramírez",
+          "Calle Melchor Ocampo",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "streaming": {
+        "chunk_loads": 41,
+        "chunk_unloads": 6,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 4219,
+        "loaded_chunks": 35,
+        "max_chunk_build_ms": 18,
+        "max_loaded_chunks": 36
+      }
+    }
+  },
+  "scenario": "Same 1.2 km route, production car, 1280x720; B5-equivalent uses same footprints with B6 cosmetics and geography disabled"
+}

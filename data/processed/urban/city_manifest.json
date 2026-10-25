@@ -1,0 +1,1150 @@
+{
+  "schema_version": 1,
+  "map_sha256": "af601d66c25c0d7ad441dcc63e1ef642ad8d2919697a145e99dd6f7bded3f369",
+  "units": "meters",
+  "origin_lat": 24.159,
+  "origin_lon": -110.3195,
+  "bbox": [
+    24.148,
+    -110.334,
+    24.17,
+    -110.305
+  ],
+  "metadata": {
+    "sources": {
+      "overture_buildings": {
+        "kind": "overture_buildings",
+        "file": "overture_buildings_20261024T220936Z.geojson",
+        "bbox": [
+          24.148,
+          -110.334,
+          24.17,
+          -110.305
+        ],
+        "sha256": "8112a17469bfad6720970b45153780554198c1d07f292867a27b9670f287b9aa",
+        "extracted_at_utc": "2026-10-24T22:09:39.536884+00:00",
+        "source": "Overture Maps Foundation",
+        "release": "2026-10-21.0",
+        "license": "ODbL-1.0",
+        "command": [
+          "-m",
+          "overturemaps",
+          "download",
+          "--bbox=-110.334,24.148,-110.305,24.17",
+          "-f",
+          "geojson",
+          "--type=building",
+          "--release",
+          "2026-10-21.0",
+          "--connect_timeout",
+          "30",
+          "--request_timeout",
+          "120",
+          "-o",
+          "C:\\Users\\emili\\Desktop\\Godot_v4.7.2-stable_win64.exe\\Proyectos\\racing-darks-la-paz\\data\\raw\\overture_buildings_20261024T220936Z.geojson"
+        ],
+        "url": "https://stac.overturemaps.org/2026-10-21.0/catalog.json",
+        "feature_count": 8033
+      },
+      "inegi_blocks": {
+        "kind": "inegi_blocks",
+        "file": "inegi_blocks_20261024T220934Z.geojson",
+        "bbox": [
+          24.148,
+          -110.334,
+          24.17,
+          -110.305
+        ],
+        "sha256": "3f421a39b699dd37abd938aac5726adfdc67eb14284394542d6b31e14d43d4f9",
+        "extracted_at_utc": "2026-10-24T22:09:40.759849+00:00",
+        "source": "INEGI Marco Geoestadistico / Catalogo Unico",
+        "url": "https://gaia.inegi.org.mx/wscatgeo/v2/geo/mza/03/003/0001",
+        "locality_code": "030030001",
+        "license_url": "https://www.inegi.org.mx/inegi/terminos.html",
+        "feature_count": 5796,
+        "scope": "Full locality, subset clipped offline; source publication date not asserted"
+      },
+      "osm_protected": {
+        "kind": "osm_protected",
+        "file": "osm_protected_20261024T221536Z.json",
+        "bbox": [
+          24.148,
+          -110.334,
+          24.17,
+          -110.305
+        ],
+        "sha256": "36c28c84cf5a4a60083520f50dab0855207f0b6929cc56e53ca5c18efe8a5ecb",
+        "extracted_at_utc": "2026-10-24T22:15:39.431177+00:00",
+        "source": "OpenStreetMap contributors",
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.336,24.146,-110.30300000000001,24.172",
+        "license": "ODbL-1.0",
+        "normalization": "Protected tagged elements normalized from original OSM XML; exact XML kept separately",
+        "original_file": "osm_map_20261024T221536Z.osm",
+        "original_sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "element_count": 111,
+        "incomplete_relations_omitted": [],
+        "overpass_failures": [
+          "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1032)>"
+        ]
+      }
+    },
+    "license": "ODbL-1.0 for derived OSM/Overture database; INEGI terms retained separately",
+    "height_note": "Observed height where provided; otherwise explicitly estimated from floors or deterministic low-rise fallback",
+    "fictional_note": "Only footprints with source_kind=fictional are invented; never attributed to Overture or INEGI",
+    "inegi_metadata": {
+      "Fuente_informacion_vectorial": "INEGI. Marco Geoestadístico, diciembre de 2025",
+      "Fuente_informacion_estadistica": "INEGI. Censo de Población y Vivienda, 2020"
+    },
+    "crs_operations": {
+      "EPSG:6365": {
+        "operation": "Mexico ITRF2008 to WGS 84 (1) (with axis order normalized for visualization)",
+        "accuracy_m": 1.0,
+        "always_xy": true
+      }
+    }
+  },
+  "settings": {
+    "schema_version": 1,
+    "overture_release": "2026-10-21.0",
+    "inegi_url": "https://gaia.inegi.org.mx/wscatgeo/v2/geo/mza/03/003/0001",
+    "inegi_locality_code": "030030001",
+    "road_clearance_m": 1.25,
+    "real_min_area_m2": 12,
+    "real_max_area_m2": 25000,
+    "fill_seed": 20261024,
+    "fill_min_block_coverage": 0.08,
+    "fill_road_distance_m": 38,
+    "fill_spacing_m": 20,
+    "fill_max_per_block": 12,
+    "fill_max_total": 1000,
+    "chunk_size_m": 256,
+    "visual_load_radius_m": 650,
+    "visual_unload_radius_m": 850,
+    "collision_radius_m": 180,
+    "max_chunks_per_frame": 1
+  },
+  "chunks": [
+    {
+      "id": "-6_3",
+      "file": "chunks/-6_3.json",
+      "sha256": "633f8328c459ed18e5399156589f3b85124c18bc76c4f07545ed3d18dffb03d3",
+      "bounds_xz": [
+        -1458.4564228846702,
+        832.7054471630715,
+        -1274.5273466876824,
+        1027.8747824093864
+      ],
+      "building_count": 55,
+      "collision_count": 44
+    },
+    {
+      "id": "-6_4",
+      "file": "chunks/-6_4.json",
+      "sha256": "abeb76091fc9fbd787c4bfaf6914dfa8f2ec7369c97fe9c74a957bbba3a68457",
+      "bounds_xz": [
+        -1470.1542674907073,
+        1016.8442456865215,
+        -1276.0288913554273,
+        1222.4436650523094
+      ],
+      "building_count": 109,
+      "collision_count": 109
+    },
+    {
+      "id": "-5_2",
+      "file": "chunks/-5_2.json",
+      "sha256": "5a6718db45c5d1ae279bde52a44924f5447bb59c720f3a81d21b5dd7fea6f13b",
+      "bounds_xz": [
+        -1097.3247847782368,
+        746.785127344554,
+        -1019.8430508215733,
+        774.083481836004
+      ],
+      "building_count": 3,
+      "collision_count": 0
+    },
+    {
+      "id": "-5_3",
+      "file": "chunks/-5_3.json",
+      "sha256": "931fab3a0fb536b3143f9682a39b98f94733e0756d50ed59cdb4755f2e19b438",
+      "bounds_xz": [
+        -1284.7439377703674,
+        763.108542576321,
+        -1009.3525292931939,
+        1032.6784032404707
+      ],
+      "building_count": 53,
+      "collision_count": 27
+    },
+    {
+      "id": "-5_4",
+      "file": "chunks/-5_4.json",
+      "sha256": "d0cf3380f7f2e742575c9dbea34b18ce4832acf33454653fb86a3f6cbc922906",
+      "bounds_xz": [
+        -1283.3844311119283,
+        1022.9266081739501,
+        -1016.8095247702158,
+        1221.5652251318231
+      ],
+      "building_count": 114,
+      "collision_count": 108
+    },
+    {
+      "id": "-4_2",
+      "file": "chunks/-4_2.json",
+      "sha256": "6f976e30b3bceae0877b6998c79893fba2ac56b979b4ac3187bbce6ecf900c1f",
+      "bounds_xz": [
+        -1021.3243043449256,
+        577.3907760942384,
+        -758.8583546943979,
+        776.6632041342814
+      ],
+      "building_count": 28,
+      "collision_count": 20
+    },
+    {
+      "id": "-4_3",
+      "file": "chunks/-4_3.json",
+      "sha256": "b908338068a582ee2488f242004252a1868060a8217e77f3d1dc48b4a042de70",
+      "bounds_xz": [
+        -1032.3322500488262,
+        770.2138983885881,
+        -764.4461966990161,
+        1027.3632857467696
+      ],
+      "building_count": 136,
+      "collision_count": 129
+    },
+    {
+      "id": "-4_4",
+      "file": "chunks/-4_4.json",
+      "sha256": "15402f6cc93adf72438998beae52618acde02fb0e6e4975c3422a7ec564288a8",
+      "bounds_xz": [
+        -1030.2118254850395,
+        1020.4247223244435,
+        -764.8543877924601,
+        1219.5303579741505
+      ],
+      "building_count": 110,
+      "collision_count": 106
+    },
+    {
+      "id": "-3_1",
+      "file": "chunks/-3_1.json",
+      "sha256": "810528478566e1a1088ae0045a5aa15cf6a0570944155b5197a11c50e43bfbc2",
+      "bounds_xz": [
+        -637.0709074735541,
+        332.7285789983962,
+        -506.6191416994723,
+        509.79538018717227
+      ],
+      "building_count": 18,
+      "collision_count": 15
+    },
+    {
+      "id": "-3_2",
+      "file": "chunks/-3_2.json",
+      "sha256": "7104f6e495037f85b293ebe195c75b09decb4da1e1e5b891d3536229628fe7cd",
+      "bounds_xz": [
+        -772.1794908330933,
+        504.0021245088427,
+        -508.6076738268704,
+        778.0309017317958
+      ],
+      "building_count": 127,
+      "collision_count": 119
+    },
+    {
+      "id": "-3_3",
+      "file": "chunks/-3_3.json",
+      "sha256": "e9f52550ef4e3a9711f3a321210db91c2f6a1acfbea5982191ff744a97bad5c8",
+      "bounds_xz": [
+        -777.3334414482376,
+        758.482833627577,
+        -500.30859586693066,
+        1037.5598605203256
+      ],
+      "building_count": 112,
+      "collision_count": 107
+    },
+    {
+      "id": "-3_4",
+      "file": "chunks/-3_4.json",
+      "sha256": "44782bdff9e08dd5b7e6df48eebe2d68cdadb7c7ea11e4c6c4cc3eac04fd37a2",
+      "bounds_xz": [
+        -773.0215733160112,
+        1022.4341089416828,
+        -501.76955824589044,
+        1220.5088733286013
+      ],
+      "building_count": 96,
+      "collision_count": 93
+    },
+    {
+      "id": "-2_1",
+      "file": "chunks/-2_1.json",
+      "sha256": "051956f9da339143ec6ad1f24e6c89d84bb5480cef89ef94199ea8dfabf02837",
+      "bounds_xz": [
+        -528.4929950994094,
+        388.33716181334034,
+        -253.6798842294929,
+        513.4425737810706
+      ],
+      "building_count": 49,
+      "collision_count": 49
+    },
+    {
+      "id": "-2_2",
+      "file": "chunks/-2_2.json",
+      "sha256": "3c2b64de6b510adefb2f99d6b137dfb7d2d106ff04bef281ac891a202219c262",
+      "bounds_xz": [
+        -527.6914949052767,
+        507.67155708832973,
+        -245.77648358160275,
+        777.663958473926
+      ],
+      "building_count": 134,
+      "collision_count": 125
+    },
+    {
+      "id": "-2_3",
+      "file": "chunks/-2_3.json",
+      "sha256": "83c3bba6dd84a89155d4328524f5c6ddfaf2e3daca47589d0b028c6dfe2b3c05",
+      "bounds_xz": [
+        -517.3125746688934,
+        763.686756194519,
+        -249.6318009714856,
+        1034.0683398235738
+      ],
+      "building_count": 144,
+      "collision_count": 135
+    },
+    {
+      "id": "-2_4",
+      "file": "chunks/-2_4.json",
+      "sha256": "c4f2552213d914f3e6f4f920245a934c3f6296700af6a71bad54bb3289f64a23",
+      "bounds_xz": [
+        -517.3771793139013,
+        1015.8990888100587,
+        -247.6737055599554,
+        1222.5103820082857
+      ],
+      "building_count": 84,
+      "collision_count": 83
+    },
+    {
+      "id": "-1_0",
+      "file": "chunks/-1_0.json",
+      "sha256": "1201759c468efc2fec8ea5de070c2b954386381f9db7456c5f1470f851cd0e3c",
+      "bounds_xz": [
+        -106.0009370665725,
+        136.34721905131838,
+        38.2589523058579,
+        259.4511223397593
+      ],
+      "building_count": 13,
+      "collision_count": 13
+    },
+    {
+      "id": "-1_1",
+      "file": "chunks/-1_1.json",
+      "sha256": "ba61d4b79c0324bbcf0df1b44ffa027456ac2280a68633a48a3a3f7d441c1315",
+      "bounds_xz": [
+        -262.3239116397801,
+        251.6007605185635,
+        4.403178282713656,
+        522.4827213174406
+      ],
+      "building_count": 121,
+      "collision_count": 120
+    },
+    {
+      "id": "-1_2",
+      "file": "chunks/-1_2.json",
+      "sha256": "23bc3ce3e961ac9f149311bca273a83520bb7644f9a9434a2534b780bbb5b20a",
+      "bounds_xz": [
+        -263.11526626243756,
+        497.4638628223744,
+        10.00353406872618,
+        776.4296947883643
+      ],
+      "building_count": 164,
+      "collision_count": 150
+    },
+    {
+      "id": "-1_3",
+      "file": "chunks/-1_3.json",
+      "sha256": "7ac823bd5f236ea770e32cf528e1cc43eb55793d35210e57cd8349c75f1c7359",
+      "bounds_xz": [
+        -271.20128720841853,
+        753.0676407003065,
+        11.54566102525603,
+        1034.3685661254672
+      ],
+      "building_count": 137,
+      "collision_count": 130
+    },
+    {
+      "id": "-1_4",
+      "file": "chunks/-1_4.json",
+      "sha256": "011701b1ad7c91fb4338c56ac029872663532f847b016bc41bf0ce86b2195db4",
+      "bounds_xz": [
+        -265.773406146138,
+        1015.0317683819717,
+        0.7203356180045236,
+        1218.5184841417115
+      ],
+      "building_count": 114,
+      "collision_count": 104
+    },
+    {
+      "id": "0_-2",
+      "file": "chunks/0_-2.json",
+      "sha256": "4d203e9be5c4c7bdfabb4d186a97bf1beaf9f5e2258b101b40ec4ac386d22e95",
+      "bounds_xz": [
+        94.6176051964566,
+        -453.36395491531863,
+        265.5806402780135,
+        -248.76528988917534
+      ],
+      "building_count": 14,
+      "collision_count": 14
+    },
+    {
+      "id": "0_-1",
+      "file": "chunks/0_-1.json",
+      "sha256": "ebb326d9b93fb45a81d6a0e9b3c443aefdf6df3836ec0f18ed87534ee263fb7b",
+      "bounds_xz": [
+        40.78519975316964,
+        -252.56815638061502,
+        266.5850519146297,
+        0.07783644837566422
+      ],
+      "building_count": 51,
+      "collision_count": 51
+    },
+    {
+      "id": "0_0",
+      "file": "chunks/0_0.json",
+      "sha256": "fec46bc837beb26c56c48a9067f90ac3a7aba11e22a9612e4734df7c4cdb7a57",
+      "bounds_xz": [
+        11.59638888551643,
+        -14.277428581300304,
+        264.6168109316242,
+        262.2865929691475
+      ],
+      "building_count": 130,
+      "collision_count": 128
+    },
+    {
+      "id": "0_1",
+      "file": "chunks/0_1.json",
+      "sha256": "5830ccb39bddc134811ec5ccee1e5c99f80edde81a05c53075cb2531bd0596ea",
+      "bounds_xz": [
+        -12.773275245864559,
+        248.409466123705,
+        267.9952864333291,
+        521.3040550950608
+      ],
+      "building_count": 142,
+      "collision_count": 132
+    },
+    {
+      "id": "0_2",
+      "file": "chunks/0_2.json",
+      "sha256": "5d7387b2c57e1e98caf4c4e1c626e802b1d17c17f394e8930289bc99af44fc07",
+      "bounds_xz": [
+        -23.000011900024855,
+        507.1155824549305,
+        265.71253271584396,
+        777.4415686208033
+      ],
+      "building_count": 133,
+      "collision_count": 119
+    },
+    {
+      "id": "0_3",
+      "file": "chunks/0_3.json",
+      "sha256": "c29b56d29ee92ec7793f81c19ce719d46cee965728ce3df7fe35d9d182628899",
+      "bounds_xz": [
+        -9.48610989176326,
+        762.7082408400682,
+        275.9392693700043,
+        1032.0223531735019
+      ],
+      "building_count": 157,
+      "collision_count": 147
+    },
+    {
+      "id": "0_4",
+      "file": "chunks/0_4.json",
+      "sha256": "c9b38880f6e647203a365fd8851943383128c9ea453d598376101156ed96ad32",
+      "bounds_xz": [
+        -6.9902991603194,
+        1018.67896197587,
+        260.89338597812997,
+        1221.6319420877994
+      ],
+      "building_count": 94,
+      "collision_count": 85
+    },
+    {
+      "id": "1_-3",
+      "file": "chunks/1_-3.json",
+      "sha256": "4490dddee39d982ad2891a6e313067c6cd183263784c2dc334b8e594b6d7e816",
+      "bounds_xz": [
+        365.86962026657733,
+        -611.0494803898167,
+        511.21508585175224,
+        -499.3096986049123
+      ],
+      "building_count": 22,
+      "collision_count": 20
+    },
+    {
+      "id": "1_-2",
+      "file": "chunks/1_-2.json",
+      "sha256": "ae8614681b4fbce186916a8bc66f85bf24900ae02d3fc5080b9240cd385cae05",
+      "bounds_xz": [
+        245.51269870882538,
+        -514.9993027545095,
+        520.1026069918661,
+        -241.38194676020876
+      ],
+      "building_count": 77,
+      "collision_count": 77
+    },
+    {
+      "id": "1_-1",
+      "file": "chunks/1_-1.json",
+      "sha256": "0de6f957a842ffa99925de0d2e3ae783bf67d12a6ede85977469efb74ac5f417",
+      "bounds_xz": [
+        248.34331331769954,
+        -256.0930355553551,
+        512.0673139061454,
+        0.15567289714637217
+      ],
+      "building_count": 78,
+      "collision_count": 78
+    },
+    {
+      "id": "1_0",
+      "file": "chunks/1_0.json",
+      "sha256": "63fade8d22b0038a4d108bb495ee3d8ee3490aeffe58a522f86c8a81fb18c057",
+      "bounds_xz": [
+        241.20083057515717,
+        -26.70902138006268,
+        523.6535572187447,
+        252.91286065289592
+      ],
+      "building_count": 82,
+      "collision_count": 81
+    },
+    {
+      "id": "1_1",
+      "file": "chunks/1_1.json",
+      "sha256": "eca8928e537d47d76bb4b8ca9011a97797ee949a9837b351e03d6c5787c737ea",
+      "bounds_xz": [
+        243.48358429264226,
+        244.30637333076697,
+        520.5895944515192,
+        520.9927093003729
+      ],
+      "building_count": 117,
+      "collision_count": 111
+    },
+    {
+      "id": "1_2",
+      "file": "chunks/1_2.json",
+      "sha256": "27d7e86e0d6d12b1b73846bd8fe3122e984402bf3fc109b7d1097992a037969a",
+      "bounds_xz": [
+        242.49946380186037,
+        501.55583612291304,
+        519.3315435136011,
+        773.5719851733874
+      ],
+      "building_count": 148,
+      "collision_count": 138
+    },
+    {
+      "id": "1_3",
+      "file": "chunks/1_3.json",
+      "sha256": "e4f4df5c0564712b09e579e009e53f420fd2f1c4a0f02e73152d2fbed818aabc",
+      "bounds_xz": [
+        241.1620088190869,
+        756.8816266841455,
+        519.4431448070391,
+        1036.414552775934
+      ],
+      "building_count": 142,
+      "collision_count": 137
+    },
+    {
+      "id": "1_4",
+      "file": "chunks/1_4.json",
+      "sha256": "9d82a6323b79e1fd9c099b6180e6aad3d8514611e7220b1b81539d9fa625f590",
+      "bounds_xz": [
+        251.22465578827584,
+        1012.207417245378,
+        515.4052071190654,
+        1219.252370657451
+      ],
+      "building_count": 111,
+      "collision_count": 102
+    },
+    {
+      "id": "2_-4",
+      "file": "chunks/2_-4.json",
+      "sha256": "2caadbb8fdd69a76c0801e4c606df606c610f4e6e1fec22edbb285e45056732d",
+      "bounds_xz": [
+        750.6201501690775,
+        -802.8829678373161,
+        770.9011487522243,
+        -778.3422475268785
+      ],
+      "building_count": 3,
+      "collision_count": 3
+    },
+    {
+      "id": "2_-3",
+      "file": "chunks/2_-3.json",
+      "sha256": "55cacdb048199e42b8f3d5b51666d788b5f87a9a3006c2ca8a4f30e5e73df7a1",
+      "bounds_xz": [
+        506.60899612799693,
+        -770.7142755588054,
+        785.7847029904003,
+        -500.95538351912626
+      ],
+      "building_count": 99,
+      "collision_count": 99
+    },
+    {
+      "id": "2_-2",
+      "file": "chunks/2_-2.json",
+      "sha256": "f7cff14b0ee63c44779d46cf0648719c9c38eb3e95a50aeda39d58c619f86c2d",
+      "bounds_xz": [
+        503.9610018157719,
+        -521.7265958165074,
+        776.5928146872824,
+        -229.40625316048616
+      ],
+      "building_count": 73,
+      "collision_count": 71
+    },
+    {
+      "id": "2_-1",
+      "file": "chunks/2_-1.json",
+      "sha256": "b8a169ed813bc38129c0dcbef228559b36b8be1756e4d57d52c823d35c9afdb1",
+      "bounds_xz": [
+        490.37608080429914,
+        -259.49058496275387,
+        781.6960374421662,
+        7.194311753832062
+      ],
+      "building_count": 113,
+      "collision_count": 112
+    },
+    {
+      "id": "2_0",
+      "file": "chunks/2_0.json",
+      "sha256": "7d44e46eeb41bda74279beefc5b532d67153a52568a9d33b0e69e7808b878c69",
+      "bounds_xz": [
+        509.41931959392036,
+        -9.540524706192306,
+        773.823073510144,
+        262.34219043232935
+      ],
+      "building_count": 135,
+      "collision_count": 127
+    },
+    {
+      "id": "2_1",
+      "file": "chunks/2_1.json",
+      "sha256": "1f87a0f6054f5cbf6094408e048d5e42bebb5bf75e889f2629268ca697aa6440",
+      "bounds_xz": [
+        488.16434609146694,
+        245.54063701632867,
+        773.8129279386686,
+        517.5456665744036
+      ],
+      "building_count": 113,
+      "collision_count": 111
+    },
+    {
+      "id": "2_2",
+      "file": "chunks/2_2.json",
+      "sha256": "99175ba968ac8c064660b85ce19fc922a1717f1b6f3678ca9d2786daf482f0e2",
+      "bounds_xz": [
+        504.14362211386276,
+        501.9672573515653,
+        778.276979653118,
+        779.5097942560689
+      ],
+      "building_count": 156,
+      "collision_count": 145
+    },
+    {
+      "id": "2_3",
+      "file": "chunks/2_3.json",
+      "sha256": "02521c74d9bc374b5f20e263fe6955c3e138fbccb44e157b5fc6365e85eb8fab",
+      "bounds_xz": [
+        504.43784370394974,
+        756.1255011828173,
+        783.5323859887831,
+        1028.0304553069277
+      ],
+      "building_count": 164,
+      "collision_count": 160
+    },
+    {
+      "id": "2_4",
+      "file": "chunks/2_4.json",
+      "sha256": "36ccc561b86590a8103417b2b810b216ecaabfffd7e2468b91c488c7ed4328ca",
+      "bounds_xz": [
+        505.0059957397313,
+        1014.2867623734379,
+        774.2491875380615,
+        1222.4436650523094
+      ],
+      "building_count": 134,
+      "collision_count": 127
+    },
+    {
+      "id": "3_-5",
+      "file": "chunks/3_-5.json",
+      "sha256": "4f54682b3556ee5c1ea6de4a6c347833e9645f7effd56181ebfa97af259f1b88",
+      "bounds_xz": [
+        933.0375361254032,
+        -1116.686170320869,
+        1030.3640090672625,
+        -1015.3285836179219
+      ],
+      "building_count": 8,
+      "collision_count": 8
+    },
+    {
+      "id": "3_-4",
+      "file": "chunks/3_-4.json",
+      "sha256": "8bf61bca89a3daf3df6966190644499b698020ab71dcb5a89c10a1274bfc97da",
+      "bounds_xz": [
+        766.6095717629487,
+        -1029.16464355892,
+        1034.9498076466252,
+        -761.7519644712061
+      ],
+      "building_count": 108,
+      "collision_count": 108
+    },
+    {
+      "id": "3_-3",
+      "file": "chunks/3_-3.json",
+      "sha256": "ce72e6922a5d627fa5633dbd8289a7335439e5cf662970cc995a55fbbf30bf3d",
+      "bounds_xz": [
+        762.7846910903755,
+        -774.283632704328,
+        1031.5510410005277,
+        -507.78275201508865
+      ],
+      "building_count": 146,
+      "collision_count": 137
+    },
+    {
+      "id": "3_-2",
+      "file": "chunks/3_-2.json",
+      "sha256": "027a9b1cffc2127160f07402f3580ae86be70fcd69a93390f9294181210426df",
+      "bounds_xz": [
+        767.5125276776023,
+        -525.095802093706,
+        1036.5325168904983,
+        -246.5858693271509
+      ],
+      "building_count": 119,
+      "collision_count": 116
+    },
+    {
+      "id": "3_-1",
+      "file": "chunks/3_-1.json",
+      "sha256": "057bd16871c59cb391b36406e3898c68a5650bc178c280b2671cd0e01dfdd78b",
+      "bounds_xz": [
+        754.9523094456965,
+        -260.65202754772787,
+        1026.701457546946,
+        15.94535248070802
+      ],
+      "building_count": 134,
+      "collision_count": 131
+    },
+    {
+      "id": "3_0",
+      "file": "chunks/3_0.json",
+      "sha256": "15e810572b593bbabc44892e8fd25819266539f8acd339db9fd5d58ee8417bca",
+      "bounds_xz": [
+        758.5235508169677,
+        -6.860726973950519,
+        1033.4381174059633,
+        262.1086810864123
+      ],
+      "building_count": 164,
+      "collision_count": 156
+    },
+    {
+      "id": "3_1",
+      "file": "chunks/3_1.json",
+      "sha256": "28708cac355165bf8b99d539c982e71dd0dc55693cc8b99f65468bd924597415",
+      "bounds_xz": [
+        752.7903199549339,
+        250.9780689291879,
+        1032.22064875683,
+        518.1714389607225
+      ],
+      "building_count": 155,
+      "collision_count": 150
+    },
+    {
+      "id": "3_2",
+      "file": "chunks/3_2.json",
+      "sha256": "c870aed68e6e3361e45151184d73ed6264422f47b79a1d17c7f9f7af1e6c9f32",
+      "bounds_xz": [
+        756.9104048572267,
+        505.3587026139577,
+        1038.8964351841116,
+        785.4031253683629
+      ],
+      "building_count": 130,
+      "collision_count": 122
+    },
+    {
+      "id": "3_3",
+      "file": "chunks/3_3.json",
+      "sha256": "92cacacd145f01e7707da136cc1a9692d9ad241fc608e727dc65883b584bbfa7",
+      "bounds_xz": [
+        757.2959365963592,
+        761.9298763535462,
+        1024.581032983159,
+        1032.111309114672
+      ],
+      "building_count": 149,
+      "collision_count": 141
+    },
+    {
+      "id": "3_4",
+      "file": "chunks/3_4.json",
+      "sha256": "003724b37daef47d4be08d11f1836643d78957860a9b352e79764bd22e8f076d",
+      "bounds_xz": [
+        767.066122506734,
+        1013.7307877404337,
+        1032.7888007940535,
+        1219.5525969593443
+      ],
+      "building_count": 65,
+      "collision_count": 61
+    },
+    {
+      "id": "4_-5",
+      "file": "chunks/4_-5.json",
+      "sha256": "bca5266483cc9fd46dff61fc08e2933570cf158985c74fe012b38d6ff3d89d64",
+      "bounds_xz": [
+        1022.2881336927568,
+        -1222.777249832191,
+        1290.6486607208258,
+        -1014.43131577858
+      ],
+      "building_count": 124,
+      "collision_count": 120
+    },
+    {
+      "id": "4_-4",
+      "file": "chunks/4_-4.json",
+      "sha256": "38420e462871c4692d7edf490fa804c9658c8f1715d7d9d8c5ac62180b052e17",
+      "bounds_xz": [
+        1009.1597634250694,
+        -1031.5886929596559,
+        1292.9719967256542,
+        -757.9824564581496
+      ],
+      "building_count": 172,
+      "collision_count": 161
+    },
+    {
+      "id": "4_-3",
+      "file": "chunks/4_-3.json",
+      "sha256": "63205597b2adf4824c2c71f572f4190fcfcb41bbf27612160da9d93770fb1878",
+      "bounds_xz": [
+        1019.9140698276681,
+        -779.0316560718353,
+        1290.3645847022142,
+        -502.4898735069764
+      ],
+      "building_count": 159,
+      "collision_count": 152
+    },
+    {
+      "id": "4_-2",
+      "file": "chunks/4_-2.json",
+      "sha256": "460a32491f9f57a8a1f95c87b32e51aa8859149c136f07c4fce30a6c98101fcc",
+      "bounds_xz": [
+        1008.7437949700691,
+        -522.9052620388871,
+        1291.8154015096986,
+        -248.08700083661785
+      ],
+      "building_count": 170,
+      "collision_count": 161
+    },
+    {
+      "id": "4_-1",
+      "file": "chunks/4_-1.json",
+      "sha256": "6db4e4ec345b0d51e664f901959d851b255818b2a234fa1fc5c83d82bb842be1",
+      "bounds_xz": [
+        1013.9992013057342,
+        -262.2532344911593,
+        1286.093298857331,
+        29.60008947263275
+      ],
+      "building_count": 137,
+      "collision_count": 131
+    },
+    {
+      "id": "4_0",
+      "file": "chunks/4_0.json",
+      "sha256": "8f5254250644a20e6bbdbf9aba184b755ecec04470ca62690257b97d4ef931f8",
+      "bounds_xz": [
+        1014.4861887653875,
+        -5.993406546258507,
+        1291.490743202302,
+        265.4000509152352
+      ],
+      "building_count": 130,
+      "collision_count": 126
+    },
+    {
+      "id": "4_1",
+      "file": "chunks/4_1.json",
+      "sha256": "671d0c401ba5133f9b46258b123bac5437312859f9dc866404364d0eef3376b5",
+      "bounds_xz": [
+        1010.6410169484218,
+        244.7956310077949,
+        1286.9353813402488,
+        517.1676038237396
+      ],
+      "building_count": 160,
+      "collision_count": 152
+    },
+    {
+      "id": "4_2",
+      "file": "chunks/4_2.json",
+      "sha256": "336b6d589add8c335e862a8df3da68d328057d5c58e1ab2806e3eb8c01747328",
+      "bounds_xz": [
+        1015.6123472654751,
+        504.268992333143,
+        1287.3006219349888,
+        779.3318823737287
+      ],
+      "building_count": 142,
+      "collision_count": 136
+    },
+    {
+      "id": "4_3",
+      "file": "chunks/4_3.json",
+      "sha256": "15678ecf2e09186bb9d864acbe818889683a376aa28e0bc60b3f0f900e39a96d",
+      "bounds_xz": [
+        1011.3309158491166,
+        760.7289711459727,
+        1284.6729187671563,
+        1033.3122143222456
+      ],
+      "building_count": 61,
+      "collision_count": 61
+    },
+    {
+      "id": "4_4",
+      "file": "chunks/4_4.json",
+      "sha256": "9d54e5a52fe050d7652fa288d93291eaa5fcb9992a7fa1b6e7a3089343d28d21",
+      "bounds_xz": [
+        1015.7848219920907,
+        1007.7040227161871,
+        1242.507921211155,
+        1222.3324701255506
+      ],
+      "building_count": 54,
+      "collision_count": 51
+    },
+    {
+      "id": "5_-5",
+      "file": "chunks/5_-5.json",
+      "sha256": "534bed4c601aac5821c9914f35d9a53b840388d2af4d265279d79abf2525c6e0",
+      "bounds_xz": [
+        1275.957872352216,
+        -1222.2657531699692,
+        1469.768735751575,
+        -1020.7328280290793
+      ],
+      "building_count": 75,
+      "collision_count": 71
+    },
+    {
+      "id": "5_-4",
+      "file": "chunks/5_-4.json",
+      "sha256": "f771beb542cc299566a9e635add47fe0f06570302a901d5a9f7480b721c581c3",
+      "bounds_xz": [
+        1272.9953653055115,
+        -1031.3440641209445,
+        1467.8512226288296,
+        -761.0736754186486
+      ],
+      "building_count": 80,
+      "collision_count": 76
+    },
+    {
+      "id": "5_-3",
+      "file": "chunks/5_-3.json",
+      "sha256": "59600a748d9058a9a186c537bfc9231980f898ed648d4e15b984087dcd7df200",
+      "bounds_xz": [
+        1273.1678400306853,
+        -766.455509868326,
+        1468.3077733726152,
+        -510.4403107621367
+      ],
+      "building_count": 91,
+      "collision_count": 81
+    },
+    {
+      "id": "5_-2",
+      "file": "chunks/5_-2.json",
+      "sha256": "0089baa2c5f618852086bb6a5e884f45417396775f96ba292138ad734a11a1bf",
+      "bounds_xz": [
+        1276.3129673740389,
+        -519.8140430779931,
+        1471.057223405361,
+        -252.34576652709728
+      ],
+      "building_count": 119,
+      "collision_count": 107
+    },
+    {
+      "id": "5_-1",
+      "file": "chunks/5_-1.json",
+      "sha256": "5d97d33dc8b3662bab9a82d3fd15ad01e9d21de91caa4c12195aae019bb82452",
+      "bounds_xz": [
+        1271.7474599390687,
+        -261.61942340938435,
+        1467.7294757639165,
+        5.547742628221676
+      ],
+      "building_count": 125,
+      "collision_count": 112
+    },
+    {
+      "id": "5_0",
+      "file": "chunks/5_0.json",
+      "sha256": "0948a452bcd81055e290e86252ba54d7b8ef1a1f87ff97068a5e02ce37d1d5c6",
+      "bounds_xz": [
+        1265.967189576698,
+        -14.388623508059167,
+        1470.7528562437985,
+        264.21026520006103
+      ],
+      "building_count": 77,
+      "collision_count": 75
+    },
+    {
+      "id": "5_1",
+      "file": "chunks/5_1.json",
+      "sha256": "c7531739808e352b2a0274e4195578437bd1f5ca57a2ccf6cf0f2c24b3bc208a",
+      "bounds_xz": [
+        1271.503966209242,
+        250.31089936942485,
+        1468.6425772514872,
+        519.7918040924044
+      ],
+      "building_count": 129,
+      "collision_count": 126
+    },
+    {
+      "id": "5_2",
+      "file": "chunks/5_2.json",
+      "sha256": "022f0a33d7cace5d6aae00350ff347be0fca6ca1389bd71168992f5812902e1b",
+      "bounds_xz": [
+        1269.596598659414,
+        506.0147526813214,
+        1470.062957341662,
+        766.6556607362548
+      ],
+      "building_count": 106,
+      "collision_count": 99
+    },
+    {
+      "id": "5_3",
+      "file": "chunks/5_3.json",
+      "sha256": "bd4014bef630066ee25c2baafdc435509da7ac0310252f37a942553cc1c31a2c",
+      "bounds_xz": [
+        1270.915523029068,
+        755.8697528517065,
+        1470.844166392844,
+        1031.0994352822331
+      ],
+      "building_count": 66,
+      "collision_count": 65
+    },
+    {
+      "id": "5_4",
+      "file": "chunks/5_4.json",
+      "sha256": "3c3403b6c53e3d8f755c44799d1523c84eb0e5f02e9d0ce7a06e5ed649a394db",
+      "bounds_xz": [
+        1341.406957825412,
+        1026.651638216619,
+        1468.2570455123548,
+        1211.9913419476425
+      ],
+      "building_count": 15,
+      "collision_count": 15
+    }
+  ],
+  "audit_file": "placement_audit.json",
+  "audit_sha256": "f6d7f938c174e659878b96fc226f02de7d238ffe7056bed515b322aca7b6a9e9",
+  "statistics": {
+    "overture_downloaded": 8033,
+    "source_counts": {
+      "osm": 225,
+      "overture": 7387,
+      "fictional": 167
+    },
+    "buildings": 7779,
+    "real_buildings": 7612,
+    "fictional_buildings": 167,
+    "height_estimated": 7779,
+    "collision_buildings": 7369,
+    "chunks": 75,
+    "protected_features": 109,
+    "inegi_blocks_in_bbox": 321,
+    "eligible_infill_blocks": 183,
+    "excluded_buildings": 657
+  },
+  "baseline_hashes": {
+    "scripts\\driving\\ArcadeCar.gd": "33003d01559d0a4e74aae2f9957c1da240114575fb994d5810e1a3e03588591f",
+    "config\\driving_config.json": "dcadad866a385d565016af0e9aa336e78a09ded619d390d304ad605082a0ada7",
+    "data\\processed\\la_paz_map.json": "af601d66c25c0d7ad441dcc63e1ef642ad8d2919697a145e99dd6f7bded3f369",
+    "data\\processed\\la_paz_environment.json": "ff469c42ed9f5cae9cb4e8a4b8f870b3e5e5256f9cc6e8c243568fff5d84ce38"
+  },
+  "enrichment_statistics": {
+    "pois": 300,
+    "associated": 124,
+    "unassociated": 176,
+    "duplicate_candidates": 15,
+    "categories": {
+      "commercial": 41,
+      "institutional": 2,
+      "restaurant": 40,
+      "unknown": 7661,
+      "cultural": 3,
+      "hotel": 11,
+      "residential": 20,
+      "industrial": 1
+    }
+  },
+  "b6_files": {
+    "urban_enrichment.json": "e880164499ee5ab2a36cb9affe6690846240031d8abf47185f072e8c4a74a9da",
+    "urban_geography.json": "c57e4481d0597d5f6a93fb12e4297956e14d53233d4d859a06094c62d227a2d1",
+    "landmarks.json": "35cd98b964669be2c9631bee453728fe1efb266cf2063b1d065dff9244c30102"
+  }
+}
