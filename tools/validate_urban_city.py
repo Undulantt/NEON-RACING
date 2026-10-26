@@ -5,6 +5,7 @@ from pathlib import Path
 from shapely.geometry import Polygon,LineString,shape
 from shapely.ops import transform,unary_union
 from shapely.strtree import STRtree
+from shapely.prepared import prep
 from fetch_urban_sources import ROOT,load_json,digest
 
 
@@ -30,9 +31,13 @@ def validate(manifest_path=None):
     sources={str(f.get('id',f['properties'].get('id'))):f for f in raw['features']}
     old=load_json(ROOT/'data/processed/la_paz_environment.json'); osm={b['osm_way_id']:b for b in old['buildings']}
     baseline_map=load_json(ROOT/'data/processed/la_paz_map.json')
-    surface=unary_union([Polygon([(p[0]+c['origin_xz'][0],p[1]+c['origin_xz'][1]) for p in tri]) for c in baseline_map['chunks'] for tri in c['triangles_xz']])
+    surface_parts=[unary_union([Polygon([(p[0]+c['origin_xz'][0],p[1]+c['origin_xz'][1]) for p in tri]) for tri in c['triangles_xz']]) for c in baseline_map['chunks']]
+    surface=unary_union(surface_parts)
+    surface_tree=STRtree(surface_parts)
     clearance=surface.buffer(manifest['settings']['road_clearance_m'])
     protected=unary_union([shape(f['geometry_xz']) for f in audit['protected']])
+    clearance_prepared=prep(clearance)
+    protected_prepared=prep(protected)
     eligible={b['id']:b for b in audit['eligible_blocks']}; coast=shape(audit['coast_guard_xz'])
     project=projection(manifest); ids=set(); estimates=0; triangle_count=0; by_block=Counter()
     for chunk in manifest['chunks']:
@@ -43,8 +48,10 @@ def validate(manifest_path=None):
             poly=Polygon(b['footprint_xz'],b.get('holes_xz',[])); assert poly.is_valid and poly.area>1
             assert all(math.isfinite(v) for xy in b['footprint_xz'] for v in xy)
             assert math.isfinite(b['height_m']) and 2.8<=b['height_m']<=48
-            assert poly.intersection(clearance).area<1e-6, 'Road intrusion: '+b['id']
-            assert poly.intersection(protected).area<1e-6, 'Protected intrusion: '+b['id']
+            if clearance_prepared.intersects(poly):
+                assert poly.intersection(clearance).area<1e-6, 'Road intrusion: '+b['id']
+            if protected_prepared.intersects(poly):
+                assert poly.intersection(protected).area<1e-6, 'Protected intrusion: '+b['id']
             roof=unary_union([Polygon(t) for t in b['roof_triangles_xz']]); assert poly.symmetric_difference(roof).area<1e-5, b['id']
             triangle_count+=len(b['roof_triangles_xz'])
             estimates+=bool(b['height_estimated'])
@@ -68,7 +75,8 @@ def validate(manifest_path=None):
                     assert b['height_estimated'] and b['height_source']=='manual override'
                 else:
                     assert b['height_estimated']==(b['height_m_source'] is None)
-            assert b['collision_enabled']==(poly.distance(surface)<=manifest['settings']['fill_road_distance_m'])
+            nearest_surface=surface_parts[int(surface_tree.nearest(poly))]
+            assert b['collision_enabled']==(poly.distance(nearest_surface)<=manifest['settings']['fill_road_distance_m'])
             city.append(b); polygons.append(poly)
     assert len(city)==manifest['statistics']['buildings'] and len(city)>len(old['buildings'])
     assert Counter(b['source_kind'] for b in city)==manifest['statistics']['source_counts']

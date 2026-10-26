@@ -1,0 +1,34 @@
+{
+  "kind": "overture_buildings",
+  "file": "overture_buildings_20261026T064408Z.geojson",
+  "bbox": [
+    24.09,
+    -110.342,
+    24.185,
+    -110.281
+  ],
+  "sha256": "bef1283309ec393bbea5e665fd59c0480d572846ca2f8abd3e08e2147fc4da6e",
+  "extracted_at_utc": "2026-10-26T06:44:15.034409+00:00",
+  "source": "Overture Maps Foundation",
+  "release": "2026-10-21.0",
+  "license": "ODbL-1.0",
+  "command": [
+    "-m",
+    "overturemaps",
+    "download",
+    "--bbox=-110.342,24.09,-110.281,24.185",
+    "-f",
+    "geojson",
+    "--type=building",
+    "--release",
+    "2026-10-21.0",
+    "--connect_timeout",
+    "30",
+    "--request_timeout",
+    "120",
+    "-o",
+    "C:\\Users\\emili\\Desktop\\Godot_v4.7.2-stable_win64.exe\\Proyectos\\racing-darks-la-paz\\data\\raw\\overture_buildings_20261026T064408Z.geojson"
+  ],
+  "url": "https://stac.overturemaps.org/2026-10-21.0/catalog.json",
+  "feature_count": 84824
+}

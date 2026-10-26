@@ -1,0 +1,26 @@
+{
+  "kind": "inegi_blocks",
+  "file": "inegi_blocks_20261024T220934Z.geojson",
+  "bbox": [
+    24.148,
+    -110.334,
+    24.185,
+    -110.281
+  ],
+  "sha256": "3f421a39b699dd37abd938aac5726adfdc67eb14284394542d6b31e14d43d4f9",
+  "extracted_at_utc": "2026-10-24T22:09:40.759849+00:00",
+  "source": "INEGI Marco Geoestadistico / Catalogo Unico",
+  "url": "https://gaia.inegi.org.mx/wscatgeo/v2/geo/mza/03/003/0001",
+  "locality_code": "030030001",
+  "license_url": "https://www.inegi.org.mx/inegi/terminos.html",
+  "feature_count": 5796,
+  "scope": "Full locality, subset clipped offline; source publication date not asserted",
+  "prior_selection_bbox": [
+    24.148,
+    -110.334,
+    24.17,
+    -110.305
+  ],
+  "selection_note": "Same immutable full-locality/full-state source, reselected for C.5 blocks; not a new download.",
+  "prior_metadata_file": "inegi_blocks_20261024T220934Z.meta.json"
+}

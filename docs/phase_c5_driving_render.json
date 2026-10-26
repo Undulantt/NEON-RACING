@@ -1,0 +1,160 @@
+{
+  "failures": [],
+  "north_facade_tests": {
+    "colina_del_sol": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05217480659485
+    },
+    "costa_norte": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05226802825928
+    },
+    "esterito": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 1,
+      "facade_distance_after_impact_m": 2.05491328239441
+    },
+    "pedregal_del_cortez": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.0521936416626
+    }
+  },
+  "passed": true,
+  "physics_frames": 41824,
+  "rendered": true,
+  "routes": {
+    "north_coast": {
+      "driving": {
+        "route_distance_m": 3695.97621905804,
+        "route_expected_m": 3698.81132304668,
+        "route_frames": 19295,
+        "route_junctions_crossed": 31,
+        "route_max_deviation_m": 1.75294613838196,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "Calle Francisco I. Madero",
+          "Calle Heroico Colegio Militar",
+          "Calle Vicente Guerrero",
+          "Carretera La Paz-Pichilingue",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 19.12,
+      "mean_frame_ms": 1.35146419880922,
+      "p95_frame_ms": 1.829,
+      "peak_nodes": 451.0,
+      "peak_static_memory_bytes": 134362591.0,
+      "road_streaming": {
+        "chunk_loads": 95,
+        "chunk_unloads": 57,
+        "loaded_chunks": 38,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 66,
+        "total_chunks": 138
+      },
+      "urban_streaming": {
+        "chunk_loads": 62,
+        "chunk_unloads": 46,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 391,
+        "loaded_chunks": 16,
+        "max_chunk_build_ms": 22,
+        "max_loaded_chunks": 27
+      }
+    },
+    "north_neighborhoods": {
+      "driving": {
+        "route_distance_m": 3969.1191996336,
+        "route_expected_m": 3972.00161540508,
+        "route_frames": 21319,
+        "route_junctions_crossed": 35,
+        "route_max_deviation_m": 2.26745820045471,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Andador Refugio A. Cota",
+          "Avenida Pedregal del Cortés",
+          "Calle Colina Capristano",
+          "Calle Colina de Mocuzari",
+          "Calle Colina del Sol",
+          "Calle Conquistadores de California",
+          "Calle Escritores",
+          "Calle Mar Bermejo",
+          "Calle Misioneros Jesuitas",
+          "Calle Márqués de Villapuente",
+          "Calle Navegantes",
+          "Carretera La Paz-Pichilingue",
+          "Paseo Álvaro Obregón",
+          "Privada Colina del Sol"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 46.259,
+      "mean_frame_ms": 1.32440926984722,
+      "p95_frame_ms": 1.788,
+      "peak_nodes": 563.0,
+      "peak_static_memory_bytes": 136491267.0,
+      "road_streaming": {
+        "chunk_loads": 200,
+        "chunk_unloads": 137,
+        "loaded_chunks": 63,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 80,
+        "total_chunks": 138
+      },
+      "urban_streaming": {
+        "chunk_loads": 138,
+        "chunk_unloads": 110,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 2416,
+        "loaded_chunks": 28,
+        "max_chunk_build_ms": 22,
+        "max_loaded_chunks": 39
+      }
+    }
+  },
+  "viewport_px": [
+    1280,
+    720
+  ],
+  "world": {
+    "arcade_layout": {
+      "arcade_asphalt_area_m2": 1505477.86569603,
+      "buildings_adjusted": 1398.0,
+      "buildings_removed": 9.0,
+      "buildings_total": 12212.0,
+      "max_adjusted_building_overlap_m2": 0.0,
+      "source_asphalt_area_m2": 871054.442836224,
+      "triangulation_error_m2": 0.00000000908039510250092
+    },
+    "build_ms": 347,
+    "buildings": 12212.0,
+    "chunks": 138,
+    "collision_buildings": 11658.0,
+    "eligible_infill_blocks": 326.0,
+    "excluded_buildings": 9495.0,
+    "fictional_buildings": 298.0,
+    "height_estimated": 12212.0,
+    "inegi_blocks_in_bbox": 705.0,
+    "overture_downloaded": 20679.0,
+    "protected_features": 149.0,
+    "real_buildings": 11914.0,
+    "source_counts": {
+      "fictional": 298.0,
+      "osm": 692.0,
+      "overture": 11222.0
+    },
+    "triangles": 13026,
+    "urban_chunks": 137
+  }
+}

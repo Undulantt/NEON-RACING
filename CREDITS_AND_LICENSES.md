@@ -50,3 +50,24 @@ Se consultó la monografía oficial **MX-SC-DGSMPC-EM-03-001004**, Secretaría d
 **INEGI. Directorio Estadístico Nacional de Unidades Económicas (DENUE), edición mayo de 2026**, metadatos modificados el 20/05/2026. [ZIP oficial de Baja California Sur](https://www.inegi.org.mx/contenidos/masiva/denue/denue_03_csv.zip), [términos de libre uso](https://www.inegi.org.mx/inegi/terminos.html). Archivo original y metadatos conservados localmente. La información se recorta al mapa y la actividad SCIAN se traduce a categorías visuales aproximadas. INEGI no certifica las fachadas, entradas, alturas ni asociaciones propuestas. `fecha_alta` es fecha de alta del registro, no de publicación ni garantía de operación actual.
 
 La Catedral amplía la referencia histórica ya citada con arcos, óculo, divisiones de torre, cubierta a dos aguas y cruces. Geometría original procedural, sin copiar fotografías ni planos. Nave de 10 m, cumbrera de 12,4 m, torres de 18 m, remates hasta 21 m y cruces hasta 22,7 m: todas son dimensiones estimadas. La orientación de fachadas genéricas hacia la vía más próxima es una inferencia visual, no una entrada levantada en campo.
+
+
+## Ampliación C.5 — bloque norte
+
+Se añadieron ocho respuestas XML de la API de OpenStreetMap, guardadas sin modificar como `data/raw/osm_c5_north_*.osm`, con metadatos y SHA-256. La normalización combinada identifica cada respuesta de origen en `source_tiles`; © OpenStreetMap contributors, ODbL-1.0. API: https://api.openstreetmap.org/api/0.6/map . El archivo combinado es un producto normalizado, no una respuesta original única.
+
+La nueva selección de Overture Buildings conserva el release 2026-10-21.0 y las atribuciones por registro. INEGI y DENUE se reutilizan desde sus archivos originales completos de localidad/estado; los manifiestos C.5 declaran el cambio de selección. Overture Places conserva explícitamente cobertura parcial del núcleo.
+
+Los anchos arcade y las huellas ficticias siguen identificados como adaptaciones de juego. Los nombres/puntos aproximados de los barrios no son límites administrativos. La referencia visual facilitada por el usuario no se incorporó como textura del juego.
+
+
+## Ampliación C.5 — corredor sur
+
+Veinte teselas adicionales de la API oficial de OpenStreetMap, con atribución a © OpenStreetMap contributors, ODbL-1.0. Las respuestas originales `osm_c5_south_*.osm` y sus metadatos se conservan sin modificar. Los agregados `*_c5_south.*` combinan núcleo, norte y sur por ID/versión OSM, con trazabilidad y hashes de cada fuente.
+
+Nueva selección Overture Buildings 2026-10-21.0 de 84.824 registros descargados, con licencia ODbL-1.0 y procedencia por registro. INEGI y DENUE mantienen sus fuentes completas originales; nuevos manifiestos declaran la selección ampliada. Overture Places conserva su cobertura parcial del núcleo. Campus UABCS y hospital Salvatierra se identifican por las referencias OSM way/137201460 y way/301737276; no se afirma fidelidad de sus modelos arquitectónicos.
+
+
+## Corrección vial del Cajoncito
+
+Se reutilizan los mismos XML OSM originales verificados y se guardan nuevos agregados `*_c5_cajoncito.*`, derivados de esas respuestas sin modificarlas. Se incorporan trunk/trunk_link y cuatro cruces Forjadores revisados, con nodos, sentidos, etiquetas y atribución ODbL preservados. El tratamiento plano de los cruces y la exclusión provisional de la vía inferior 660516292 se declaran en `docs/CAJONCITO_ROADS.md` y en los metadatos de la red.

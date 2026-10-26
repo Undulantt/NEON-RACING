@@ -3,7 +3,11 @@ extends Node3D
 const Builder = preload("res://scripts/world/BuildingBuilder.gd")
 const DATA_ROOT := "res://data/processed/urban/"
 var manifest: Dictionary = {}
+var spatial_index: Dictionary = {}
+var last_refresh_position := Vector3.ZERO
 var baseline_b6 := false
+var building_overrides: Dictionary = {}
+var chunk_overrides: Dictionary = {}
 var target: CharacterBody3D
 var loaded: Dictionary = {}
 var pending: Array = []
@@ -18,6 +22,15 @@ var failed_chunks: Array[String] = []
 
 func configure(data: Dictionary, player: CharacterBody3D) -> void:
 	manifest = data
+	spatial_index.clear()
+	for entry in manifest["chunks"]:
+		var bounds: Array = entry["bounds_xz"]
+		for x in range(floori(float(bounds[0]) / 256), floori(float(bounds[2]) / 256) + 1):
+			for z in range(floori(float(bounds[1]) / 256), floori(float(bounds[3]) / 256) + 1):
+				var cell := Vector2i(x, z)
+				if not spatial_index.has(cell):
+					spatial_index[cell] = []
+				spatial_index[cell].append(entry)
 	target = player
 	process_physics_priority = -50
 	# Prime only the immediate collision neighbourhood before driving starts.
@@ -41,7 +54,18 @@ func distance_to(entry: Dictionary) -> float:
 func refresh(_prime: bool = false) -> void:
 	pending.clear()
 	var settings: Dictionary = manifest["settings"]
-	for chunk in manifest["chunks"]:
+	last_refresh_position = target.global_position
+	var nearby: Dictionary = {}
+	var extent := ceili(float(settings["visual_load_radius_m"]) / 256) + 1
+	var center := Vector2i(floori(target.position.x / 256), floori(target.position.z / 256))
+	for x in range(center.x - extent, center.x + extent + 1):
+		for z in range(center.y - extent, center.y + extent + 1):
+			for entry in spatial_index.get(Vector2i(x, z), []):
+				nearby[entry["id"]] = entry
+	# Always audit currently loaded sectors for unloading, even after a teleport.
+	for id in loaded:
+		nearby[id] = loaded[id]["source"]
+	for chunk in nearby.values():
 		var id: String = chunk["id"]
 		var distance := distance_to(chunk)
 		if loaded.has(id):
@@ -80,6 +104,8 @@ func load_chunk(entry: Dictionary) -> void:
 		push_error("Invalid urban chunk schema: " + path)
 		failed_chunks.append(id)
 		return
+	if not apply_arcade_layout(data):
+		return
 	if baseline_b6:
 		data["category_facades"] = false
 		for building in data["buildings"]:
@@ -94,11 +120,36 @@ func load_chunk(entry: Dictionary) -> void:
 	var info: Dictionary = Builder.build(node, data)
 	node.visible = city_enabled
 	set_collisions(node, city_enabled and distance_to(entry) <= float(manifest["settings"]["collision_radius_m"]))
-	loaded[id] = {"node": node, "count": int(entry["building_count"]), "info": info}
+	loaded[id] = {"source": entry, "node": node, "count": int(entry["building_count"]), "info": info}
 	loaded_buildings += int(entry["building_count"])
 	total_chunk_loads += 1
 	max_loaded_chunks = maxi(max_loaded_chunks, loaded.size())
 	max_chunk_build_ms = maxi(max_chunk_build_ms, Time.get_ticks_msec() - start)
+
+func apply_arcade_layout(data: Dictionary) -> bool:
+	var overrides := building_overrides
+	var chunk_id: String = str(data.get("id", ""))
+	if chunk_overrides.has(chunk_id):
+		var entry: Dictionary = chunk_overrides[chunk_id]
+		var bytes := FileAccess.get_file_as_bytes("res://" + str(entry["file"]))
+		var hashing := HashingContext.new()
+		hashing.start(HashingContext.HASH_SHA256)
+		hashing.update(bytes)
+		var parsed = JSON.parse_string(bytes.get_string_from_utf8())
+		if hashing.finish().hex_encode() != entry["sha256"] or not parsed is Dictionary or parsed.size() != int(entry["buildings"]):
+			push_error("Arcade facade sector invalid: " + chunk_id)
+			if chunk_id not in failed_chunks:
+				failed_chunks.append(chunk_id)
+			return false
+		overrides = parsed
+	for building in data["buildings"]:
+		var id: String = building.get("id", "")
+		if overrides.has(id):
+			building.merge(overrides[id], true)
+			# Indices and custom model dimensions refer to the original footprint.
+			building.erase("facade_edge_index")
+			building.erase("model_path")
+	return true
 
 func set_city_enabled(active: bool) -> bool:
 	# Re-enabling hidden collision is allowed only on fully supported road, whose
@@ -122,9 +173,11 @@ func fixture_buildings() -> Array:
 	for chunk in manifest["chunks"]:
 		if loaded.has(chunk["id"]) and distance_to(chunk) < 160:
 			var data = JSON.parse_string(FileAccess.get_file_as_string(DATA_ROOT + str(chunk["file"])))
+			if not apply_arcade_layout(data):
+				return []
 			var result: Array = []
 			for building in data["buildings"]:
-				if building.get("collision_enabled", false):
+				if building.get("collision_enabled", false) and not building.get("disabled", false):
 					var center := Vector2.ZERO
 					for p in building["footprint_xz"]:
 						center += Vector2(p[0], p[1])
@@ -139,9 +192,16 @@ func _physics_process(delta: float) -> void:
 	if target == null or manifest.is_empty() or not city_enabled:
 		return
 	refresh_timer += delta
-	if refresh_timer >= 0.12:
+	var jumped := target.global_position.distance_squared_to(last_refresh_position) > 4096.0
+	if refresh_timer >= 0.12 or jumped:
 		refresh_timer = 0
 		refresh()
+		if jumped:
+			# Prime collision neighbours before the car's next physics step.
+			var immediate: Array = pending.duplicate()
+			for entry in immediate:
+				if float(entry["distance"]) <= float(manifest["settings"]["collision_radius_m"]):
+					load_chunk(entry["chunk"])
 	for i in range(mini(int(manifest["settings"]["max_chunks_per_frame"]), pending.size())):
 		var entry: Dictionary = pending.pop_front()
 		load_chunk(entry["chunk"])

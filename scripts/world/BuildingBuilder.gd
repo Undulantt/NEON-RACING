@@ -187,14 +187,77 @@ static func solid_box(parent: Node3D, at: Vector3, size: Vector3, color: Color, 
 	parent.add_child(body)
 	return body
 
-static func build_limits(parent: Node3D, bounds: Array) -> void:
+static func build_limits(parent: Node3D, bounds: Array, environment: Dictionary = {}) -> void:
+	if environment.has("playable_boundary_xz"):
+		build_clipped_limits(parent, environment)
+		return
 	var x0: float = bounds[0]
 	var z0: float = bounds[1]
 	var x1: float = bounds[2]
 	var z1: float = bounds[3]
-	solid_box(parent, Vector3((x0 + x1) / 2, -0.33, (z0 + z1) / 2), Vector3(x1 - x0, 0.5, z1 - z0), Color("b4a386"), 2, "NeutralSafetyPlatform")
+	var ground := solid_box(parent, Vector3((x0 + x1) / 2, -0.25, (z0 + z1) / 2), Vector3(x1 - x0, 0.5, z1 - z0), Color("b4a386"), 2, "NeutralSafetyPlatform")
+	# Physics stays flush with asphalt (Y=0). The visible fallback sits below
+	# mapped land/water and covers every gap, including the map margin.
+	ground.get_child(0).position.y = -0.1
 	var color := Color("d88a50")
 	solid_box(parent, Vector3(x0, 1.4, (z0 + z1) / 2), Vector3(2, 3, z1 - z0 + 2), color, 8, "WestLimit")
 	solid_box(parent, Vector3(x1, 1.4, (z0 + z1) / 2), Vector3(2, 3, z1 - z0 + 2), color, 8, "EastLimit")
 	solid_box(parent, Vector3((x0 + x1) / 2, 1.4, z0), Vector3(x1 - x0, 3, 2), color, 8, "NorthLimit")
 	solid_box(parent, Vector3((x0 + x1) / 2, 1.4, z1), Vector3(x1 - x0, 3, 2), color, 8, "SouthLimit")
+
+
+static func build_clipped_limits(parent: Node3D, environment: Dictionary) -> void:
+	var out := {"vertices": PackedVector3Array(), "normals": PackedVector3Array(), "colors": PackedColorArray()}
+	var faces := PackedVector3Array()
+	for tri in environment["safety_triangles_xz"]:
+		var a := Vector3(tri[0][0], 0, tri[0][1])
+		var b := Vector3(tri[1][0], 0, tri[1][1])
+		var c := Vector3(tri[2][0], 0, tri[2][1])
+		# Use the same upward winding as the road collider.
+		if (b - a).cross(c - a).y > 0:
+			var swap := b
+			b = c
+			c = swap
+		faces.append_array(PackedVector3Array([a, b, c]))
+		triangle(out, a - Vector3.UP * 0.1, b - Vector3.UP * 0.1, c - Vector3.UP * 0.1, Vector3.UP, Color("b4a386"))
+	var body := StaticBody3D.new()
+	body.name = "ClippedSafetyPlatform"
+	body.collision_layer = 2
+	body.collision_mask = 0
+	var collision := CollisionShape3D.new()
+	var shape := ConcavePolygonShape3D.new()
+	shape.set_faces(faces)
+	shape.backface_collision = true
+	collision.shape = shape
+	body.add_child(collision)
+	var mesh := ArrayMesh.new()
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = out["vertices"]
+	arrays[Mesh.ARRAY_NORMAL] = out["normals"]
+	arrays[Mesh.ARRAY_COLOR] = out["colors"]
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	var material := StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	material.roughness = 0.9
+	mesh.surface_set_material(0, material)
+	var visual := MeshInstance3D.new()
+	visual.mesh = mesh
+	body.add_child(visual)
+	parent.add_child(body)
+	var ring: Array = environment["playable_boundary_xz"]
+	for i in range(ring.size()):
+		var a := Vector3(ring[i][0], 0, ring[i][1])
+		var b := Vector3(ring[(i + 1) % ring.size()][0], 0, ring[(i + 1) % ring.size()][1])
+		var wall := StaticBody3D.new()
+		wall.name = "PlayableBoundary_%d" % i
+		wall.collision_layer = 8
+		wall.position = (a + b) * 0.5 + Vector3.UP * 1.4
+		wall.rotation.y = atan2((b - a).x, (b - a).z)
+		var collider := CollisionShape3D.new()
+		var box := BoxShape3D.new()
+		box.size = Vector3(2, 3, a.distance_to(b) + 2)
+		collider.shape = box
+		wall.add_child(collider)
+		parent.add_child(wall)

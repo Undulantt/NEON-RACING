@@ -2,6 +2,7 @@
 
 Original snapshots remain immutable. No road or vehicle source is modified.
 """
+from expansion_regions import metric_region
 import argparse,hashlib,json,math,random,unicodedata
 from collections import Counter,defaultdict
 from pathlib import Path
@@ -11,6 +12,7 @@ from shapely.ops import transform,unary_union,polygonize
 from shapely.affinity import rotate
 from shapely import constrained_delaunay_triangles
 from shapely.strtree import STRtree
+from shapely.prepared import prep
 from pyproj import Transformer
 from fetch_urban_sources import ROOT,cached,digest,load_json
 
@@ -63,7 +65,7 @@ def encode_building(identifier,kind,poly,height,extra,roads,cfg):
     key=int(hashlib.sha256(identifier.encode()).hexdigest()[:12],16)
     return {'id':identifier,'source_kind':kind,'fictional':kind=='fictional','footprint_xz':[list(p) for p in list(poly.exterior.coords)[:-1]],'holes_xz':[[list(p) for p in list(r.coords)[:-1]] for r in poly.interiors],
         'roof_triangles_xz':[[list(p) for p in list(t.exterior.coords)[:3]] for t in constrained_delaunay_triangles(poly).geoms if t.area>1e-6],
-        'height_m':height,'palette_index':key%6,'collision_enabled':poly.distance(roads)<=cfg['fill_road_distance_m'],**extra}
+        'height_m':height,'palette_index':key%6,'collision_enabled':roads(poly) if callable(roads) else poly.distance(roads)<=cfg['fill_road_distance_m'],**extra}
 
 def build():
     cfg=load_json(ROOT/'config/map_config.json'); settings=load_json(ROOT/'config/urban_config.json'); source_map=ROOT/'data/processed/la_paz_map.json'; data=load_json(source_map); baseline=load_json(ROOT/'data/processed/la_paz_environment.json')
@@ -76,11 +78,30 @@ def build():
         if not found: raise SystemExit(f'Missing verified source {kind}; run fetch_urban_sources.py. No fictional fallback.')
         inputs[kind]=found
     print("URBAN: verified source snapshots",flush=True)
-    project=projector(cfg); south,west,north,east=cfg['bbox']; region=transform(project,box(west,south,east,north))
-    road_surface=unary_union([Polygon([(p[0]+c['origin_xz'][0],p[1]+c['origin_xz'][1]) for p in tri]) for c in data['chunks'] for tri in c['triangles_xz']])
+    project=projector(cfg); south,west,north,east=cfg['bbox']; region=metric_region(cfg)
+    road_parts=[unary_union([Polygon([(p[0]+c['origin_xz'][0],p[1]+c['origin_xz'][1]) for p in tri]) for tri in c['triangles_xz']]) for c in data['chunks']]
+    road_surface=unary_union(road_parts)
+    road_tree=STRtree(road_parts)
+    def close_to_road(poly):
+        limit=settings['fill_road_distance_m']
+        return any(poly.distance(road_parts[int(i)]) <= limit for i in road_tree.query(poly.buffer(limit).envelope))
     road_mask=road_surface.buffer(settings['road_clearance_m'])
+    # Exact spatial partition of the unioned mask. Each building uses only the
+    # intersecting pieces; never approximate widths or trim against remote roads.
+    x0,z0,x1,z1=road_mask.bounds
+    mask_tiles=[]
+    for x in range(math.floor(x0/256),math.floor(x1/256)+1):
+        for z in range(math.floor(z0/256),math.floor(z1/256)+1):
+            tile=road_mask.intersection(box(x*256,z*256,(x+1)*256,(z+1)*256))
+            if not tile.is_empty: mask_tiles.append(tile)
+    mask_tree=STRtree(mask_tiles)
+    def local_mask(geometry):
+        return unary_union([mask_tiles[int(i)] for i in mask_tree.query(geometry)])
+    print("URBAN: indexed exact road mask",len(mask_tiles),flush=True)
     protected,coast=protected_shapes(load_json(inputs['osm_protected'][0]),project)
     protected_union=unary_union([g for _,g,_ in protected])
+    protected_prepared=prep(protected_union)
+    region_prepared=prep(region)
     # Additional coast guard for fictional fill only. Real buildings still require
     # geometric exclusion of mapped parks/beaches/water.
     obregon=unary_union([LineString(r['points_xz']) for r in data['roads'] if 'obreg' in r['street_name'].lower()])
@@ -96,13 +117,13 @@ def build():
     def accept_real(identifier,kind,original,props):
         if not original.is_valid or original.is_empty:
             audit.append({'id':identifier,'reason':'invalid geometry'}); return
-        if not region.covers(original):
+        if not region_prepared.covers(original):
             audit.append({'id':identifier,'reason':'outside bbox; no partial landmark'}); return
         if original.area<settings['real_min_area_m2'] or original.area>settings['real_max_area_m2']:
             audit.append({'id':identifier,'reason':'size outside prototype limits'}); return
-        if original.intersects(protected_union):
+        if protected_prepared.intersects(original):
             audit.append({'id':identifier,'reason':'mapped protected/open space'}); return
-        candidate=original.simplify(0.12,preserve_topology=True).difference(road_mask)
+        candidate=original.simplify(0.12,preserve_topology=True).difference(local_mask(original))
         overlap=unary_union([geometries[i] for i in nearby(candidate)] if not candidate.is_empty else [])
         if not overlap.is_empty:
             if candidate.intersection(overlap).area/max(0.01,min(candidate.area,overlap.area))>0.25:
@@ -120,7 +141,7 @@ def build():
             if p.area<settings['real_min_area_m2']: continue
             extra={'source_id':props.get('source_id',identifier),'height_m_source':observed_height,'num_floors_source':floors,'height_estimated':observed_height is None,'height_source':'source:height' if observed_height else (f'estimated:num_floors*{floor_height}' if floors else 'estimated:deterministic_1_to_3_floors'),'height_stylized':bool(observed_height and abs(height-observed_height)>0.01),'original_area_m2':original.area,'retained_fraction':candidate.area/original.area,'geometry_adjusted':original.symmetric_difference(candidate).area>0.01,'geometry_simplification_m':0.12,'sources':props.get('sources',[]),'source_attributes':{k:props[k] for k in ('class','subtype','names','level','num_floors') if props.get(k) is not None}}
             if kind=='osm': extra['osm_way_id']=props['source_id']
-            add_record(encode_building(identifier+':'+str(index),kind,p,height,extra,road_surface,settings),p)
+            add_record(encode_building(identifier+':'+str(index),kind,p,height,extra,close_to_road,settings),p)
     # Existing verified OSM footprints have priority over overlapping inferred ML.
     for b in baseline['buildings']:
         tags=b['osm_tags']; h=tags.get('height'); levels=tags.get('building:levels')
@@ -130,14 +151,15 @@ def build():
         except (ValueError,TypeError): levels=None
         accept_real('osm:'+b['osm_way_id'],'osm',Polygon(b['footprint_xz']),{'height':h,'num_floors':levels,'source_id':b['osm_way_id'],'sources':[{'dataset':'OpenStreetMap'}]})
     overture=load_json(inputs['overture_buildings'][0])
-    for feature in sorted(overture['features'],key=lambda f:f.get('id',f['properties'].get('id',''))):
+    for feature_index,feature in enumerate(sorted(overture['features'],key=lambda f:f.get('id',f['properties'].get('id','')))):
+        if feature_index % 10000 == 0: print('URBAN: Overture',feature_index,'/',len(overture['features']),flush=True)
         props=feature['properties']; identifier=str(feature.get('id',props.get('id')))
         if props.get('is_underground'):
             audit.append({'id':identifier,'reason':'underground'}); continue
         for i,p in enumerate(parts(transform(project,shape(feature['geometry'])))):
             accept_real('overture:'+identifier+':'+str(i),'overture',p,{**props,'source_id':identifier})
     print(f"URBAN: accepted {len(buildings)} real volumes",flush=True)
-    real_union=unary_union(geometries); real_count=len(buildings)
+    real_count=len(buildings)
     raw_blocks=load_json(inputs['inegi_blocks'][0]); normalized=[]; block_audit=[]; eligible=[]; rejected=[]
     crs_ops={}; transformers={}
     for feature in raw_blocks['features']:
@@ -158,18 +180,20 @@ def build():
         elif geometry.area<300 or geometry.area>40000: reason='atypical area'
         elif geometry.intersects(protected_union) or geometry.intersects(coast_guard): reason='open/protected/coastal guard'
         else:
-            coverage=geometry.intersection(real_union).area/geometry.area
+            local_real=unary_union([geometries[i] for i in nearby(geometry)])
+            coverage=geometry.intersection(local_real).area/geometry.area
             try: inhabitants=int(props.get('total_viviendas_habitadas') or 0)
             except ValueError: inhabitants=0
             if coverage<settings['fill_min_block_coverage'] or inhabitants<=0: reason='insufficient occupied-building and inhabited-dwelling evidence'
         if reason:
             block_audit.append({'id':code,'reason':reason}); rejected.append(geometry); continue
-        safe=geometry.buffer(-5).difference(road_mask).difference(protected_union).difference(coast_guard).difference(real_union.buffer(2))
+        safe=geometry.buffer(-5).difference(local_mask(geometry)).difference(protected_union).difference(coast_guard).difference(local_real.buffer(2))
         if safe.is_empty: block_audit.append({'id':code,'reason':'no safe residual area'}); continue
         eligible.append({'id':code,'geometry_xz':mapping(geometry),'safe_geometry_xz':mapping(safe),'real_coverage':coverage,'inhabited_dwellings':inhabitants})
     print(f"URBAN: {len(normalized)} local blocks, {len(eligible)} eligible",flush=True)
     fill_total=0
-    for entry in sorted(eligible,key=lambda b:b['id']):
+    for fill_index,entry in enumerate(sorted(eligible,key=lambda b:b['id'])):
+        if fill_index % 250 == 0: print('URBAN: infill blocks',fill_index,'/',len(eligible),'volumes',fill_total,flush=True)
         code=entry['id']; safe=shape(entry['safe_geometry_xz']); whole=shape(entry['geometry_xz']); rng=random.Random(f"{settings['fill_seed']}:{code}")
         rect=list(whole.minimum_rotated_rectangle.exterior.coords); edges=[(a,b) for a,b in zip(rect,rect[1:])]; a,b=max(edges,key=lambda e:math.dist(*e)); angle=math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))
         x0,z0,x1,z1=safe.bounds; count=0
@@ -177,19 +201,23 @@ def build():
             for z in range(math.floor(z0/settings['fill_spacing_m']),math.ceil(z1/settings['fill_spacing_m'])):
                 cx=(x+0.5)*settings['fill_spacing_m']; cz=(z+0.5)*settings['fill_spacing_m']; w=rng.uniform(8,12); depth=rng.uniform(10,16)
                 poly=rotate(box(cx-w/2,cz-depth/2,cx+w/2,cz+depth/2),angle,origin=(cx,cz))
-                if not safe.covers(poly) or poly.distance(road_surface)>settings['fill_road_distance_m']: continue
+                if not safe.covers(poly) or not close_to_road(poly): continue
                 if any(poly.distance(geometries[i])<2 for i in nearby(poly)): continue
                 ident=f'fiction:inegi:{code}:{x}:{z}'; height=floor_height*rng.randint(1,3)
                 extra={'inegi_block_id':code,'height_estimated':True,'height_source':'fictional:seeded_1_to_3_floors','height_stylized':False,'source_note':'Fictional footprint; INEGI block is only a placement constraint, not a building source'}
-                add_record(encode_building(ident,'fictional',poly,height,extra,road_surface,settings),poly); count+=1; fill_total+=1
+                add_record(encode_building(ident,'fictional',poly,height,extra,close_to_road,settings),poly); count+=1; fill_total+=1
                 if count>=settings['fill_max_per_block'] or fill_total>=settings['fill_max_total']: break
             if count>=settings['fill_max_per_block'] or fill_total>=settings['fill_max_total']: break
         if fill_total>=settings['fill_max_total']: break
+    print('URBAN: infill complete',fill_total,flush=True)
     from urban_enrichment import enrich
     enrichment=enrich(buildings,project,cfg,inputs['osm_protected'][1])
     target=ROOT/'data/processed/urban'; target.mkdir(parents=True,exist_ok=True); chunk_dir=target/'chunks'; chunk_dir.mkdir(exist_ok=True)
+    print('URBAN: enrichment complete',flush=True)
     from urban_geography import surfaces, landmarks, mapped_area_ids
-    geography=surfaces(region,coast,protected,buildings,road_surface,mapped_area_ids(load_json(inputs['osm_protected'][0])))
+    visual_region=metric_region({**cfg,"active_blocks":{"visual_envelope":cfg["bbox"]}})
+    geography=surfaces(visual_region,coast,protected,buildings,road_surface,mapped_area_ids(load_json(inputs['osm_protected'][0])))
+    print('URBAN: geography complete',flush=True)
     (target/'urban_geography.json').write_text(json.dumps(geography,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
     (target/'landmarks.json').write_text(json.dumps(landmarks(enrichment),ensure_ascii=False,indent=2),encoding='utf-8')
     (target/'urban_enrichment.json').write_text(json.dumps(enrichment,ensure_ascii=False,indent=2),encoding='utf-8')

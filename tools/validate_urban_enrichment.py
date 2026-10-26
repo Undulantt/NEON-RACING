@@ -1,4 +1,5 @@
 """Validate B6 outputs independently of runtime rendering."""
+from expansion_regions import metric_region
 import json, math
 from pathlib import Path
 from shapely.geometry import Point,Polygon,shape
@@ -22,7 +23,7 @@ def validate():
     road_union=unary_union(road_polys)
     assert visual_union.intersection(road_union).area<0.01, 'Visual ground underneath asphalt'
     south,west,north,east=cfg['bbox']
-    region=Polygon([project(west,south),project(east,south),project(east,north),project(west,north)])
+    region=metric_region(cfg)
     assert region.difference(visual_union.union(road_union)).area<0.01, 'Missing visual ground'
     assert 5 <= len(landmarks) <= 10
     poi={p['id']:p for p in e['pois']}; assert len(poi)==len(e['pois'])

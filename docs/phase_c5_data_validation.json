@@ -1,0 +1,49 @@
+{
+  "urban": {
+    "passed": true,
+    "buildings": 59635,
+    "fictional": 1000,
+    "source_counts": {
+      "osm": 4820,
+      "overture": 53815,
+      "fictional": 1000
+    },
+    "roof_triangles": 399289,
+    "chunks": 519,
+    "baseline_hashes_unchanged": true,
+    "road_and_protected_overlap_m2": 0
+  },
+  "geography": {
+    "passed": true,
+    "pois": 12467,
+    "landmarks": 8,
+    "mapped_surfaces": 143,
+    "visual_ground_coverage_verified": true,
+    "visual_surface_overlap_m2": 0,
+    "water_area_m2": 8895404.951405862,
+    "water_building_overlap_m2": 0,
+    "orphan_overrides": [],
+    "statistics": {
+      "pois": 12467,
+      "records_by_source": {
+        "denue": 8822,
+        "osm": 591,
+        "overture": 3054
+      },
+      "classification_ineligible": 1368,
+      "associated": 1106,
+      "unassociated": 11361,
+      "duplicate_candidates": 552,
+      "categories": {
+        "commercial": 353,
+        "institutional": 85,
+        "unknown": 58168,
+        "cultural": 25,
+        "restaurant": 155,
+        "hotel": 33,
+        "industrial": 19,
+        "residential": 797
+      }
+    }
+  }
+}

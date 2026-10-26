@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "python_tests_passed": 39,
+  "full_offline_pipeline_passed": true,
+  "all_generated_geometry_within_red_line_clip": true,
+  "physics": {
+    "clipped_edge_collision_tested": true,
+    "excluded_ground_probes": 3,
+    "failures": [],
+    "passed": true,
+    "retained_anchor_probes": 3
+  },
+  "headless_driving_passed": true,
+  "headless_driven_distance_m": 23806.08075594902,
+  "headless_junctions_crossed": 263,
+  "rendered_snapshot_benchmark_passed": true,
+  "render_capture": "docs/evidence/phase_c5_south_cut_overview.png",
+  "hashes": {
+    "config/expansion_config.json": "f33d609e359deee242cf7e1e1484e80f7be62e0fe8ce772729872baecbb3b2df",
+    "config/map_config.json": "9e17b4d6e39cc04a8a6cc198ff5984816b41b07c75e1c6b52a4db237ba43a6a6",
+    "data/processed/la_paz_map.json": "169c83c7a6fb09eb681e0d8ddc41b782093241908c80e7165f812e9ccab1386f",
+    "data/processed/la_paz_environment.json": "2509494e9e2cc8a508ea3e0df5bc610a11785b5228d0a1092cca45c228fd3e78",
+    "data/processed/urban/city_manifest.json": "e2e4ac2be6e09f87accf04ce19a31817b12b27a90bc49be25aa4ea7b34a7bd4d",
+    "data/processed/arcade_layout.json": "6c238fd1df210d9d8ed30bb0deef03ad2299ab87b468c0a39386aab586cd1677",
+    "data/processed/expansion_manifest.json": "de06b7e1234dcfd97ce28fa39f87c32d62ca9b726027631c57ac8296976518f8"
+  },
+  "note": "Original downloaded snapshots retained as offline sources. Excluded geography is absent from current runtime manifests and meshes; polygon traced from the user image, not surveyed.",
+  "six_road_exit_and_reentry_cases_passed": true
+}

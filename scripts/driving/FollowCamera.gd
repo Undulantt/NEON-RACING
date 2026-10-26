@@ -4,6 +4,8 @@ var car: CharacterBody3D
 var arm: SpringArm3D
 var camera: Camera3D
 var initialized := false
+var close_view := false
+var turbo_blend := 0.0
 
 func _ready() -> void:
 	arm = SpringArm3D.new()
@@ -34,10 +36,18 @@ func snap() -> void:
 		return
 	global_position = car.global_position + Vector3.UP * 1.25
 	rotation.y = car.rotation.y
+	turbo_blend = 0.0
+	camera.fov = 70.0
+	camera.h_offset = 0.0
+	camera.v_offset = 0.0
 	initialized = true
 
 func _on_recovered(_reason: String) -> void:
 	snap()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("driving_camera") and not event.is_echo() and car != null and car.driving_enabled:
+		close_view = not close_view
 
 func _physics_process(delta: float) -> void:
 	if car == null:
@@ -45,4 +55,14 @@ func _physics_process(delta: float) -> void:
 	# Position follows exactly to prevent lagging into geometry; heading is smoothed.
 	global_position = car.global_position + Vector3.UP * 1.25
 	rotation.y = lerp_angle(rotation.y, car.rotation.y, 1.0 - exp(-7.0 * delta))
-	camera.fov = lerpf(camera.fov, 70.0 + minf(car.speed_mps / 32.0, 1.0) * 7.0, 3.0 * delta)
+	var mix := 1.0 - exp(-5.0 * delta)
+	turbo_blend = lerpf(turbo_blend, 1.0 if car.turbo_active else 0.0, mix)
+	var speed_ratio := clampf(car.speed_mps / float(car.config["max_forward_speed_mps"]), 0, 1)
+	var target_fov := lerpf(70.0, float(car.config["camera_speed_fov"]), speed_ratio)
+	target_fov = lerpf(target_fov, float(car.config["camera_turbo_fov"]), turbo_blend)
+	if car.drift_boost_active and not car.turbo_active:
+		target_fov += 3.0 * car.drift_boost_strength
+	camera.fov = lerpf(camera.fov, target_fov, mix)
+	arm.spring_length = lerpf(arm.spring_length, (5.3 if close_view else float(car.config["camera_distance_m"])) + turbo_blend * 1.1, mix)
+	arm.rotation.x = lerpf(arm.rotation.x, deg_to_rad(-10 if close_view else -14), mix)
+	camera.h_offset = lerpf(camera.h_offset, clampf(car.slip_angle, -0.6, 0.6) * 0.4, mix)

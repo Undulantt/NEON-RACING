@@ -1,0 +1,10 @@
+{
+  "failures": [],
+  "metrics": {
+    "drift_slip_rad": 0.487719416618347,
+    "normal_slip_rad": 0.122680269181728,
+    "normal_top_mps": 31.9998664855957,
+    "turbo_top_mps": 43.9987297058105
+  },
+  "passed": true
+}

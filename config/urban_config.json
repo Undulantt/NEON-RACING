@@ -15,6 +15,6 @@
   "chunk_size_m": 256,
   "visual_load_radius_m": 650,
   "visual_unload_radius_m": 850,
-  "collision_radius_m": 180,
+  "collision_radius_m": 240,
   "max_chunks_per_frame": 1
 }

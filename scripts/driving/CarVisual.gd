@@ -63,4 +63,10 @@ static func build(parent: Node3D) -> Dictionary:
 			wheel.add_child(hub)
 			pivots.append(pivot)
 			wheels.append(wheel)
-	return {"pivots": pivots, "wheels": wheels, "brake_material": brake}
+	var turbo_material := material(Color("49dcff"), 2.0)
+	var exhaust: Array[MeshInstance3D] = []
+	for x in [-0.62, 0.62]:
+		var flame := box(parent, Vector3(0.16, 0.16, 0.8), Vector3(x, -0.15, 2.35), turbo_material)
+		flame.visible = false
+		exhaust.append(flame)
+	return {"exhaust": exhaust, "pivots": pivots, "wheels": wheels, "brake_material": brake}

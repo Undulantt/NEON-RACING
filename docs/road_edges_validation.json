@@ -1,0 +1,63 @@
+{
+  "cases": [
+    {
+      "height_range_m": 0.00374025106430054,
+      "return_frames": 95,
+      "road": "1408135348:0",
+      "side": -1.0,
+      "source_width_m": 14.0,
+      "width_m": 22.4
+    },
+    {
+      "height_range_m": 0.00450003147125244,
+      "return_frames": 95,
+      "road": "1408135348:0",
+      "side": 1.0,
+      "source_width_m": 14.0,
+      "width_m": 22.4
+    },
+    {
+      "height_range_m": 0.00455409288406372,
+      "return_frames": 79,
+      "road": "1018608028:1",
+      "side": 1.0,
+      "source_width_m": 6.4,
+      "width_m": 12.0
+    },
+    {
+      "height_range_m": 0.00450003147125244,
+      "return_frames": 79,
+      "road": "1018611774:0",
+      "side": -1.0,
+      "source_width_m": 4.5,
+      "width_m": 12.0
+    },
+    {
+      "height_range_m": 0.0045541524887085,
+      "return_frames": 79,
+      "road": "1018611774:0",
+      "side": 1.0,
+      "source_width_m": 4.5,
+      "width_m": 12.0
+    },
+    {
+      "height_range_m": 0.00455337762832642,
+      "return_frames": 83,
+      "road": "32889072:0",
+      "side": 1.0,
+      "source_width_m": 9.0,
+      "width_m": 14.4
+    }
+  ],
+  "failures": [],
+  "layout": {
+    "arcade_asphalt_area_m2": 7060472.93016125,
+    "buildings_adjusted": 9999.0,
+    "buildings_removed": 55.0,
+    "buildings_total": 59635.0,
+    "max_adjusted_building_overlap_m2": 0.0,
+    "source_asphalt_area_m2": 4107772.94449033,
+    "triangulation_error_m2": 0.0000000316649675369263
+  },
+  "passed": true
+}

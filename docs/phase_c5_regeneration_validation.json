@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "sector_geometry_hashes_unchanged": true,
+  "sectors_compared": 137,
+  "note": "Repeated generation retained identical sector payloads; core route was rebound by stable OSM node pairs, not mutable way-segment indices.",
+  "complete_offline_pipeline_verified": true,
+  "map_environment_city_arcade_and_expansion_hashes_unchanged": true
+}

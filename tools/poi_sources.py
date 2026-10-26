@@ -1,4 +1,5 @@
 """Schema-checked, offline readers for pinned Overture Places and INEGI DENUE."""
+from shapely.geometry import Point
 import csv, io, json, math, re, unicodedata, zipfile
 from collections import Counter
 from fetch_urban_sources import ROOT, digest, load_json
@@ -46,11 +47,15 @@ def denue_rows(path):
 def read_external(cfg, settings):
     records=[]; source_meta={}; excluded=[]
     south,west,north,east=cfg['bbox']
-    def inside(lon,lat): return math.isfinite(lon) and math.isfinite(lat) and west<=lon<=east and south<=lat<=north
+    from expansion_regions import region_lonlat
+    coverage=region_lonlat(cfg)
+    def inside(lon,lat): return math.isfinite(lon) and math.isfinite(lat) and coverage.covers(Point(lon,lat))
     for kind,entry in sorted(settings.get('sources',{}).items()):
         meta=load_json(ROOT/'data/raw'/entry['metadata_file'])
         path=ROOT/'data/raw'/meta['file']
-        if meta['bbox']!=cfg['bbox'] or digest(path)!=meta['sha256']: raise ValueError('POI source hash/bbox mismatch: '+kind)
+        if digest(path)!=meta['sha256'] or (meta['bbox']!=cfg['bbox'] and not entry.get('allow_partial_coverage',False)): raise ValueError('POI source hash/bbox mismatch: '+kind)
+        if meta['bbox']!=cfg['bbox']:
+            meta={**meta,'coverage_note':'Partial source extract: only original bbox is covered','selection_bbox':cfg['bbox']}
         source_meta[kind]=meta
         provenance={'file':path.name,'sha256':meta['sha256'],'license':meta['license'],'kind':kind}
         if kind=='overture_places':

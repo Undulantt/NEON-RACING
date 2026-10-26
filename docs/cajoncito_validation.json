@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "python_tests_passed": 42,
+  "full_offline_pipeline_passed": true,
+  "critical_routes_headless_passed": true,
+  "headless_distance_m": 36559.84837913514,
+  "headless_junctions": 414,
+  "rendered_forjadores_route_passed": true,
+  "rendered_distance_m": 11614.9074759483,
+  "rendered_p95_ms": 1.658,
+  "rendered_peak_static_memory_bytes": 202482698.0,
+  "snapshot_benchmark_passed": true,
+  "geometry_preserves_red_line_clip": true,
+  "hashes": {
+    "config/expansion_config.json": "e03ea6dada703c146bb2546521e5d696b81db5efa298f5b73307ad9f630a26a6",
+    "config/map_config.json": "0478ad8360744e161f55263997c2dd4cd05106b706032f5c19df9cca01465628",
+    "data/processed/la_paz_map.json": "1f193ceac94a730853cd1c73cf6f55f83d30d82b245b42e4877037c724f6f4fb",
+    "data/processed/la_paz_environment.json": "521c68f5d27739121306547e5cb68bd7fb778b986e6245ef5e83036e30db9a80",
+    "data/processed/urban/city_manifest.json": "3c734734b6aff04b90c06b29b29d7d7195660e880def121f5d209a0e9e65b55f",
+    "data/processed/arcade_layout.json": "b9f65101e436c89a6ed24481a52d9ac7cc63570fa5cb0f3dc0351f3af3ecdc92",
+    "data/processed/expansion_manifest.json": "d95f3973d2c2597d5c3585a3a4378130e2a257d681d7b5aec24d671fa3ea9c15"
+  },
+  "limits": "Flat prototype road heights retained. Source bridge/layer tags preserved. Unnamed lower crossing 660516292 explicitly deferred; no live underpass implemented.",
+  "south_boundary_physics_regression_passed": true,
+  "six_road_reentry_cases_passed": true
+}

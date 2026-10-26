@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "phase": "C.5",
+  "active_blocks": [
+    {
+      "id": "core",
+      "name": "Centro y Malecón",
+      "bounds_xz": [
+        -1471.1079512656213,
+        -1223.144193090456,
+        1471.1079512656213,
+        1223.1441930900608
+      ],
+      "boundary_xz": [
+        [
+          -1471.1079512656213,
+          1223.1441930900608
+        ],
+        [
+          -1471.1079512656213,
+          -1223.144193090456
+        ],
+        [
+          1471.1079512656213,
+          -1223.144193090456
+        ],
+        [
+          1471.1079512656213,
+          1223.1441930900608
+        ],
+        [
+          -1471.1079512656213,
+          1223.1441930900608
+        ]
+      ],
+      "bbox": [
+        24.148,
+        -110.334,
+        24.17,
+        -110.305
+      ],
+      "neighborhoods": [
+        "Zona Centro",
+        "Malecón principal"
+      ]
+    },
+    {
+      "id": "north",
+      "name": "Corredor norte",
+      "bounds_xz": [
+        -355.09502271814443,
+        -2891.068092758505,
+        3906.045249912565,
+        -555.9746332230782
+      ],
+      "boundary_xz": [
+        [
+          -355.09502271814443,
+          -555.9746332230782
+        ],
+        [
+          -355.09502271814443,
+          -2891.068092758505
+        ],
+        [
+          3906.045249912565,
+          -2891.068092758505
+        ],
+        [
+          3906.045249912565,
+          -555.9746332230782
+        ],
+        [
+          -355.09502271814443,
+          -555.9746332230782
+        ]
+      ],
+      "bbox": [
+        24.164,
+        -110.323,
+        24.185,
+        -110.281
+      ],
+      "neighborhoods": [
+        "Esterito",
+        "Colina del Sol",
+        "Pedregal del Cortez"
+      ]
+    },
+    {
+      "id": "south",
+      "name": "Corredor sur",
+      "bounds_xz": [
+        -2282.7537174807885,
+        889.5594131563719,
+        2790.0323213665297,
+        7415.104498489346
+      ],
+      "boundary_xz": [
+        [
+          -2282.7537174807885,
+          889.5594131563719
+        ],
+        [
+          2790.0323213665297,
+          889.5594131563719
+        ],
+        [
+          2790.0323213665297,
+          4051.2319615431948
+        ],
+        [
+          2771.71901436744,
+          4051.2319615431948
+        ],
+        [
+          2258.9464183828372,
+          4400.486487236867
+        ],
+        [
+          1819.4270503960347,
+          4712.977378647349
+        ],
+        [
+          1379.9076824092322,
+          4951.941001490659
+        ],
+        [
+          1178.4613054149206,
+          5154.140990049987
+        ],
+        [
+          1160.1479984158311,
+          5246.0500757589525
+        ],
+        [
+          1233.4012264136313,
+          5852.650041437728
+        ],
+        [
+          1343.2810684096112,
+          6293.81365284076
+        ],
+        [
+          1526.4141384048328,
+          6734.977264243398
+        ],
+        [
+          1746.1738223982345,
+          6992.322704228502
+        ],
+        [
+          1617.9806734017232,
+          7176.140875646432
+        ],
+        [
+          1178.4613054149206,
+          7286.431778497189
+        ],
+        [
+          720.6286304290285,
+          7359.959047063968
+        ],
+        [
+          299.4225694413156,
+          7415.104498489346
+        ],
+        [
+          -103.47018454586583,
+          7176.140875646432
+        ],
+        [
+          -469.7363245348679,
+          6955.559069944914
+        ],
+        [
+          -1183.9552975137824,
+          6661.4499956762265
+        ],
+        [
+          -1733.3545074980063,
+          6440.8681899751045
+        ],
+        [
+          -1916.4875774917866,
+          6201.904567131795
+        ],
+        [
+          -2117.933954486098,
+          5815.886407154141
+        ],
+        [
+          -2282.7537174807885,
+          5485.013698601471
+        ],
+        [
+          -2282.7537174807885,
+          889.5594131563719
+        ]
+      ],
+      "bbox": [
+        24.09,
+        -110.342,
+        24.151,
+        -110.292
+      ],
+      "neighborhoods": [
+        "Zona UABCS",
+        "Área hospitalaria Salvatierra",
+        "Conexiones viales hacia el sur"
+      ]
+    }
+  ],
+  "map_sha256": "1f193ceac94a730853cd1c73cf6f55f83d30d82b245b42e4877037c724f6f4fb",
+  "config_sha256": "e03ea6dada703c146bb2546521e5d696b81db5efa298f5b73307ad9f630a26a6",
+  "origin_lat": 24.159,
+  "origin_lon": -110.3195,
+  "sector_size_m": 256,
+  "anchors": [
+    {
+      "id": "esterito",
+      "name": "Esterito",
+      "reference_latlon": [
+        24.1695,
+        -110.3075
+      ],
+      "node_id": "6195547350",
+      "position_xz": [
+        1211.6856732393685,
+        -1207.6880982867758
+      ],
+      "snap_distance_m": 40.55579217518298,
+      "directed_distance_from_core_m": 1667.010481777286,
+      "reference_note": "approximate sector reference, not an administrative boundary"
+    },
+    {
+      "id": "colina_del_sol",
+      "name": "Colina del Sol",
+      "reference_latlon": [
+        24.1724,
+        -110.3006
+      ],
+      "node_id": "6213088989",
+      "position_xz": [
+        1907.651626625192,
+        -1509.715758038535
+      ],
+      "snap_distance_m": 22.033758507772273,
+      "directed_distance_from_core_m": 2907.370250326291,
+      "reference_note": "approximate sector reference, not an administrative boundary"
+    },
+    {
+      "id": "pedregal_del_cortez",
+      "name": "Pedregal del Cortez",
+      "reference_latlon": [
+        24.1714,
+        -110.29025
+      ],
+      "node_id": "6198788000",
+      "position_xz": [
+        2980.2313611072736,
+        -1366.3187806377366
+      ],
+      "snap_distance_m": 17.783951110464656,
+      "directed_distance_from_core_m": 3972.0014424972214,
+      "reference_note": "approximate sector reference, not an administrative boundary"
+    },
+    {
+      "id": "hospital_salvatierra",
+      "name": "Área hospitalaria Salvatierra",
+      "reference_latlon": [
+        24.11237,
+        -110.31907
+      ],
+      "node_id": "892958879",
+      "position_xz": [
+        -24.308790698203442,
+        5156.987188428628
+      ],
+      "snap_distance_m": 73.49106666442788,
+      "directed_distance_from_core_m": 6505.78454709501,
+      "reference_note": "approximate sector reference, not an administrative boundary"
+    },
+    {
+      "id": "uabcs",
+      "name": "Zona UABCS — avenida de acceso",
+      "reference_latlon": [
+        24.1046213,
+        -110.3191762
+      ],
+      "node_id": "2740551794",
+      "position_xz": [
+        32.851362387969836,
+        6046.63555752617
+      ],
+      "snap_distance_m": 0.0,
+      "directed_distance_from_core_m": 7466.833515186851,
+      "reference_note": "approximate sector reference, not an administrative boundary"
+    },
+    {
+      "id": "conexion_sur",
+      "name": "Conexión vial sur",
+      "reference_latlon": [
+        24.096,
+        -110.314
+      ],
+      "node_id": "6184203518",
+      "position_xz": [
+        528.2393557981075,
+        6967.118279782697
+      ],
+      "snap_distance_m": 48.39862119651953,
+      "directed_distance_from_core_m": 8349.28995664755,
+      "reference_note": "approximate sector reference, not an administrative boundary"
+    },
+    {
+      "id": "costa_norte",
+      "name": "Prolongación costera norte",
+      "node_id": "6192394751",
+      "position_xz": [
+        1886.8836405823913,
+        -2888.265980607105
+      ],
+      "directed_distance_from_core_m": 3295.4693737557923,
+      "source": "OSM Carretera La Paz-Pichilingue, northernmost reachable non-clipped road node"
+    }
+  ],
+  "routes": [
+    {
+      "id": "north_coast",
+      "file": "tracks/c5_north_coast.json",
+      "sha256": "061d85eb46412ff8d176693d10cd0d1966d5404892ea2279f80dde4a622e9319",
+      "length_m": 3698.8113848204857
+    },
+    {
+      "id": "north_neighborhoods",
+      "file": "tracks/c5_north_neighborhoods.json",
+      "sha256": "2b80fea69a5c549d5da198ca51231260403d490ccf0f5fa853f4da81c083c7f1",
+      "length_m": 3972.0014424972214
+    },
+    {
+      "id": "south_hospital",
+      "file": "tracks/c5_south_hospital.json",
+      "sha256": "e25be7e028578bb5b513c80340afeafa3da3c2964ff229aa08f51a2f6f1b3585",
+      "length_m": 6505.78454709501
+    },
+    {
+      "id": "south_uabcs",
+      "file": "tracks/c5_south_uabcs.json",
+      "sha256": "36ea9dd0904c2db3cb3eecc0f89b12f3adc3fb510a519a52fefb4982d1145c1b",
+      "length_m": 9525.895429494294
+    }
+  ],
+  "statistics": {
+    "core_envelope_area_km2": 7.197508591997806,
+    "active_envelope_area_km2": 41.98068882165316,
+    "area_ratio": 5.832669497376816,
+    "reachable_nodes_from_core": 10357,
+    "total_nodes": 10597
+  },
+  "note": "Active blocks declared in expansion_config.json. Coast and height remain stylized; original coordinates and directed topology retained. Routes are fictional game candidates, not real street-racing advice.",
+  "critical_routes": [
+    {
+      "id": "cajoncito_juan_de_dios_angulo",
+      "file": "tracks/c5_cajoncito_juan_de_dios_angulo.json",
+      "sha256": "8b4e5d5714336fe545dfcb873b43b7f9ac430febfbff1bceb4c5e257bb960468",
+      "length_m": 9556.046567229254
+    },
+    {
+      "id": "cajoncito_federal_1",
+      "file": "tracks/c5_cajoncito_federal_1.json",
+      "sha256": "794ede3d7c36e31795d39fb2ee1f5c2ec815ea60a55c190399f5bf16d028eed5",
+      "length_m": 9389.480028378228
+    },
+    {
+      "id": "cajoncito_forjadores_uabcs",
+      "file": "tracks/c5_cajoncito_forjadores_uabcs.json",
+      "sha256": "76bdd21fe984d68e0cb4b914604119a2b06415933d679461ec161e0911417746",
+      "length_m": 11617.72816249792
+    },
+    {
+      "id": "cajoncito_olachea_cajoncito",
+      "file": "tracks/c5_cajoncito_olachea_cajoncito.json",
+      "sha256": "4224348817aa7ec15f2c32c1b296e76f9ab87d9ba02efce0fcd474a9f87b0043",
+      "length_m": 6008.346451039009
+    }
+  ]
+}

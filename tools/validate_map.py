@@ -23,8 +23,14 @@ def validate(data,check_source=True):
     nodes={n['id']:n for n in data['nodes']}; roads={r['id']:r for r in data['roads']}; edges={e['id']:e for e in data['edges']}
     assert len(nodes)==len(data['nodes']) and len(roads)==len(data['roads']) and len(edges)==len(data['edges'])
     assert len(roads)>50 and len(data['chunks'])>0
-    assert 1000<max(n['x'] for n in nodes.values())-min(n['x'] for n in nodes.values())<5000
-    assert 1000<max(n['z'] for n in nodes.values())-min(n['z'] for n in nodes.values())<5000
+    from expansion_regions import metric_region
+    config={**data['metadata']}
+    if not config.get('active_blocks'): config.pop('active_blocks',None)
+    region=metric_region(config)
+    x0,z0,x1,z1=region.bounds
+    assert 1000<max(n['x'] for n in nodes.values())-min(n['x'] for n in nodes.values())<=x1-x0+0.01
+    assert 1000<max(n['z'] for n in nodes.values())-min(n['z'] for n in nodes.values())<=z1-z0+0.01
+    assert all(region.buffer(1e-5).covers(Point(n['x'],n['z'])) for n in nodes.values()), 'Node outside active blocks'
     for road in roads.values():
         assert road['from'] in nodes and road['to'] in nodes and road['length_m']>0.001
         assert abs(LineString(road['points_xz']).length-road['length_m'])<1e-5
@@ -61,6 +67,9 @@ def validate(data,check_source=True):
     surface=unary_union(polygons)
     assert abs(sum(p.area for p in polygons)-surface.area)<0.01, 'Overlapping asphalt triangles'
     expected=unary_union([LineString(r['points_xz']).buffer(r['width_m']/2,quad_segs=4,cap_style='round',join_style='mitre',mitre_limit=2) for r in roads.values()])
+    from expansion_regions import metric_clip
+    user_clip=metric_clip(config)
+    if user_clip is not None: expected=expected.intersection(user_clip)
     assert surface.symmetric_difference(expected).area<0.01, 'Holes or unexpected asphalt'
     tolerant_surface=surface.buffer(0.00001)
     for road in roads.values():

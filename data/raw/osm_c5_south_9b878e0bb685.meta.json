@@ -1,0 +1,14 @@
+{
+  "file": "osm_c5_south_9b878e0bb685.osm",
+  "sha256": "bb12f2bc8e0ee4e13c972020a73b22e59d8016dafd7135672f0ed4821f1ecdf8",
+  "bbox": [
+    24.14,
+    -110.31700000000001,
+    24.153,
+    -110.3035
+  ],
+  "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.31700000000001,24.14,-110.3035,24.153",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "extracted_at_utc": "2026-10-26T06:44:31.391360+00:00"
+}

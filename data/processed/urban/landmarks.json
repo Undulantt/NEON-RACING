@@ -14,8 +14,32 @@
       "category": "cultural",
       "building_id": null,
       "source": {
-        "file": "osm_map_20261024T221536Z.osm",
-        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:137201460",
+      "poi_id": "osm:way:137201460",
+      "name": "Universidad Autónoma de Baja California Sur (UABCS)",
+      "position_xz": [
+        204.0605498653442,
+        6323.488685886111
+      ],
+      "lat": 24.1021315,
+      "lon": -110.31748867379481,
+      "category": "institutional",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -38,8 +62,8 @@
       "category": "cultural",
       "building_id": null,
       "source": {
-        "file": "osm_map_20261024T221536Z.osm",
-        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -62,8 +86,8 @@
       "category": "cultural",
       "building_id": "osm:155831064:0",
       "source": {
-        "file": "osm_map_20261024T221536Z.osm",
-        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -86,8 +110,8 @@
       "category": "cultural",
       "building_id": "osm:155831066:0",
       "source": {
-        "file": "osm_map_20261024T221536Z.osm",
-        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
         "license": "ODbL-1.0"
       },
       "priority": 1,
@@ -98,6 +122,30 @@
       "scale": 1,
       "silhouette_reference": "https://sitiosymonumentos.cultura.gob.mx/iii-estudios-monograficos/nuestra-senora-de-la-paz-catedral/",
       "dimensions_estimated": true
+    },
+    {
+      "id": "landmark:osm:way:301737276",
+      "poi_id": "osm:way:301737276",
+      "name": "Hospital General Juan María de Salvatierra",
+      "position_xz": [
+        42.841222296951685,
+        5187.121013549466
+      ],
+      "lat": 24.112351099999998,
+      "lon": -110.31907773477958,
+      "category": "institutional",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
     },
     {
       "id": "landmark:osm:way:450296320",
@@ -112,8 +160,8 @@
       "category": "commercial",
       "building_id": "overture:01326eca-6638-4e93-bf74-debbb03e33ac:0:0",
       "source": {
-        "file": "osm_map_20261024T221536Z.osm",
-        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -136,8 +184,8 @@
       "category": "commercial",
       "building_id": "overture:5ab8adc6-35b9-49ba-8f09-d6ca66e4781f:0:0",
       "source": {
-        "file": "osm_map_20261024T221536Z.osm",
-        "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+        "file": "osm_map_c5_south.osm",
+        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
         "license": "ODbL-1.0"
       },
       "priority": 2,

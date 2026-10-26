@@ -1,0 +1,148 @@
+{
+  "bbox": [
+    24.148,
+    -110.334,
+    24.185,
+    -110.281
+  ],
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "url": "https://api.openstreetmap.org/api/0.6/map",
+  "normalization": "Deterministic merge of immutable XML tiles; highest OSM version wins per type/id. Exact original responses retained.",
+  "original_file": "osm_map_c5_north.osm",
+  "original_sha256": "6656816dda76ea347a27a75ae20a543c41ff5b32f97b991b37ca9a4341235776",
+  "source_tiles": [
+    {
+      "file": "osm_map_20261024T221536Z.osm",
+      "sha256": "9a521929077062253aa3e111465ba05660f0a9b3ad441a85d5e1a03cd4257a3f",
+      "scope": "existing core snapshot"
+    },
+    {
+      "file": "osm_c5_north_1d30f93cdf1b.osm",
+      "sha256": "69afe4f55e5aa4509aeadf16888bb0e4561609c5a1912a817a9df957522cbe48",
+      "bbox": [
+        24.162000000000003,
+        -110.32499999999999,
+        24.174500000000002,
+        -110.31349999999999
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.32499999999999,24.162000000000003,-110.31349999999999,24.174500000000002",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:07.966777+00:00"
+    },
+    {
+      "file": "osm_c5_north_0a5585049508.osm",
+      "sha256": "28dda14e05e25b434beeabb6097660b3bde25205c6e11ce284d43a6bd9dd06b0",
+      "bbox": [
+        24.174500000000002,
+        -110.32499999999999,
+        24.186999999999998,
+        -110.31349999999999
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.32499999999999,24.174500000000002,-110.31349999999999,24.186999999999998",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:10.251460+00:00"
+    },
+    {
+      "file": "osm_c5_north_9b108e44e961.osm",
+      "sha256": "f568291804407d764c05115cba32fe2a811eb2c30af60f6a0a20d6cc4d1c1a70",
+      "bbox": [
+        24.162000000000003,
+        -110.31349999999999,
+        24.174500000000002,
+        -110.30199999999999
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.31349999999999,24.162000000000003,-110.30199999999999,24.174500000000002",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:12.782424+00:00"
+    },
+    {
+      "file": "osm_c5_north_a369d32373b9.osm",
+      "sha256": "367b7f430879fcf0a47b985d285bc2d922f6f6cda585f6bb6de7779686c7fcae",
+      "bbox": [
+        24.174500000000002,
+        -110.31349999999999,
+        24.186999999999998,
+        -110.30199999999999
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.31349999999999,24.174500000000002,-110.30199999999999,24.186999999999998",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:15.333781+00:00"
+    },
+    {
+      "file": "osm_c5_north_f61ed95ab068.osm",
+      "sha256": "6b806f0119f41f8c7d933605450d12e55683bf642fe495df3894621cdfc1b5c8",
+      "bbox": [
+        24.162000000000003,
+        -110.30199999999999,
+        24.174500000000002,
+        -110.29050000000001
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.30199999999999,24.162000000000003,-110.29050000000001,24.174500000000002",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:17.777483+00:00"
+    },
+    {
+      "file": "osm_c5_north_97e321732281.osm",
+      "sha256": "e6c7469116b27b3cd414a8ed1c6058a7671373883d22cf5d8adaedf379a1e296",
+      "bbox": [
+        24.174500000000002,
+        -110.30199999999999,
+        24.186999999999998,
+        -110.29050000000001
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.30199999999999,24.174500000000002,-110.29050000000001,24.186999999999998",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:20.258562+00:00"
+    },
+    {
+      "file": "osm_c5_north_2f2d4663b2f2.osm",
+      "sha256": "18d5c177aeb38955b4c3bfbc2551dfe701632c98c7234bf555a90692f6c76efc",
+      "bbox": [
+        24.162000000000003,
+        -110.29050000000001,
+        24.174500000000002,
+        -110.27900000000001
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.29050000000001,24.162000000000003,-110.27900000000001,24.174500000000002",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:22.631829+00:00"
+    },
+    {
+      "file": "osm_c5_north_217a406bb71a.osm",
+      "sha256": "8473083d938939a68a60a282af73c7bfb496bbf2bd667558656bdc48514b30bd",
+      "bbox": [
+        24.174500000000002,
+        -110.29050000000001,
+        24.186999999999998,
+        -110.27900000000001
+      ],
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.29050000000001,24.174500000000002,-110.27900000000001,24.186999999999998",
+      "source": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "extracted_at_utc": "2026-10-25T22:39:24.259133+00:00"
+    }
+  ],
+  "file": "la_paz_roads_c5_north.json",
+  "sha256": "f4204eb6625c6c532a66955c672d4569aef2d2a0d50fcf3f8e103cb5fc5d4239",
+  "kind": "roads",
+  "highways": [
+    "primary",
+    "primary_link",
+    "secondary",
+    "secondary_link",
+    "tertiary",
+    "tertiary_link",
+    "residential",
+    "unclassified",
+    "living_street",
+    "service"
+  ]
+}

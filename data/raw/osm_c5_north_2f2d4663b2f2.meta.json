@@ -1,0 +1,14 @@
+{
+  "file": "osm_c5_north_2f2d4663b2f2.osm",
+  "sha256": "18d5c177aeb38955b4c3bfbc2551dfe701632c98c7234bf555a90692f6c76efc",
+  "bbox": [
+    24.162000000000003,
+    -110.29050000000001,
+    24.174500000000002,
+    -110.27900000000001
+  ],
+  "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.29050000000001,24.162000000000003,-110.27900000000001,24.174500000000002",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "extracted_at_utc": "2026-10-25T22:39:22.631829+00:00"
+}

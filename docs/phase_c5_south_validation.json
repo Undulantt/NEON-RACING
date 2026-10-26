@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "python_tests_passed": 38,
+  "headless_and_rendered_driving_passed": true,
+  "arcade_drift_and_road_reentry_regressions_passed": true,
+  "snapshot_benchmark_passed": true,
+  "geography_passed": true,
+  "active_blocks": [
+    "core",
+    "north",
+    "south"
+  ],
+  "urban_sectors": 593,
+  "facade_override_sectors": 543,
+  "driven_distance_m": 23937.74342036248,
+  "junctions_crossed": 266,
+  "max_rendered_p95_ms": 1.717,
+  "max_rendered_frame_ms": 69.994,
+  "peak_rendered_static_memory_bytes": 216520185.0,
+  "max_loaded_urban_sectors": 43,
+  "hashes": {
+    "config/expansion_config.json": "9798bd3582f98f26db7e48c44e8052d6e3b924365f78fa501d509ffb27aa16ed",
+    "config/map_config.json": "a427139fc4e6dc16d53dc2383be7c314302ac04495a8a127b26be07c551cac3b",
+    "data/processed/la_paz_map.json": "28c51cdc43df2a0f91af716c0cdc858bd700ed70b6b477c92ebfb6abea2adf59",
+    "data/processed/la_paz_environment.json": "9188b1ee3ad2cc7144fc594f2fa3990ec674a73edc08563926c0c533baf753bc",
+    "data/processed/urban/city_manifest.json": "c0e62cf35803abec7692e6a641276934296835d3994483e6541d134fd4abbee9",
+    "data/processed/arcade_layout.json": "d63adbdac58444dea1d397299feb132ed1339921c8c7b9ac1b8a4ee31e95a0bd",
+    "data/processed/expansion_manifest.json": "ce281f53a92defabc514faa3b4e3df703abe3a82f18ab94291ac61e3ebd7e45a"
+  },
+  "note": "Measurements are local to this PC; static memory is not total system memory or VRAM. Historical northern benchmark retained. Terrain remains flat and building heights estimated."
+}

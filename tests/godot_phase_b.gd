@@ -11,6 +11,8 @@ var route_progress := 0.0
 var route_index := 0
 var visualize := false
 var test_frames := 0
+var route_frame_limit := 20000
+var facade_min_length := 12.0
 
 func _initialize() -> void:
 	visualize = "--visual-test" in OS.get_cmdline_user_args()
@@ -33,6 +35,7 @@ func place(p: Vector3, forward: Vector3) -> void:
 	car.speed_mps = 0
 	car.signed_speed = 0
 	car.steering = 0
+	car.clear_drift_reward()
 	car.set_controls(0, 0)
 	world.follow_camera.snap()
 
@@ -207,7 +210,7 @@ func drive_route() -> void:
 	var unsupported_frames := 0
 	var max_deviation := 0.0
 	var captures := 0
-	while route_progress < lengths[-1] - 3 and frames < 20000:
+	while route_progress < lengths[-1] - 3 and frames < route_frame_limit:
 		var best := INF
 		var point := Vector3(car.position.x, 0, car.position.z)
 		for i in range(maxi(0, route_index - 2), mini(points.size() - 1, route_index + 8)):
@@ -277,7 +280,7 @@ func facade_and_camera() -> void:
 		for i in range(ring.size()):
 			var a := Vector3(ring[i][0], 0, ring[i][1])
 			var b := Vector3(ring[(i + 1) % ring.size()][0], 0, ring[(i + 1) % ring.size()][1])
-			if a.distance_to(b) < 12:
+			if a.distance_to(b) < facade_min_length:
 				continue
 			var side := (b - a).normalized()
 			var normal := Vector3(side.z, 0, -side.x)
@@ -323,6 +326,10 @@ func boundaries() -> void:
 func finish() -> void:
 	var report := {"passed": failures.is_empty(), "failures": failures, "metrics": metrics, "physics_frames": test_frames, "world": world.stats, "city_streaming": world.city_manager.status() if world.city_manager != null else {}}
 	var prefix := "res://docs/phase_b5_driving_validation" if world.city_manager != null else "res://docs/phase_b_validation"
+	if "--phase-c-regression" in OS.get_cmdline_user_args():
+		prefix = "res://docs/phase_c_route_validation"
+	if "--road-regression" in OS.get_cmdline_user_args():
+		prefix = "res://docs/road_width_route_validation"
 	var file := FileAccess.open(prefix + ("_render.json" if visualize else ".json"), FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(report, "  "))

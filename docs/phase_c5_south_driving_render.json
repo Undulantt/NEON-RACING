@@ -1,0 +1,289 @@
+{
+  "anchor_facade_tests": {
+    "colina_del_sol": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05217480659485
+    },
+    "conexion_sur": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05226850509644
+    },
+    "costa_norte": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05207252502441
+    },
+    "esterito": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 1,
+      "facade_distance_after_impact_m": 2.05491328239441
+    },
+    "hospital_salvatierra": {
+      "camera_arm_at_facade_m": 2.8326416015625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05258989334106
+    },
+    "pedregal_del_cortez": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.0521936416626
+    },
+    "uabcs": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05174255371094
+    }
+  },
+  "failures": [],
+  "passed": true,
+  "physics_frames": 131611,
+  "rendered": true,
+  "routes": {
+    "north_coast": {
+      "driving": {
+        "route_distance_m": 3695.97621905804,
+        "route_expected_m": 3698.81132304668,
+        "route_frames": 19295,
+        "route_junctions_crossed": 31,
+        "route_max_deviation_m": 1.75294613838196,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "Calle Francisco I. Madero",
+          "Calle Heroico Colegio Militar",
+          "Calle Vicente Guerrero",
+          "Carretera La Paz-Pichilingue",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 22.577,
+      "mean_frame_ms": 1.14802785399948,
+      "p95_frame_ms": 1.486,
+      "peak_nodes": 453.0,
+      "peak_static_memory_bytes": 205652401.0,
+      "road_streaming": {
+        "chunk_loads": 95,
+        "chunk_unloads": 57,
+        "loaded_chunks": 38,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 66,
+        "total_chunks": 611
+      },
+      "urban_streaming": {
+        "chunk_loads": 62,
+        "chunk_unloads": 46,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 391,
+        "loaded_chunks": 16,
+        "max_chunk_build_ms": 22,
+        "max_loaded_chunks": 27
+      }
+    },
+    "north_neighborhoods": {
+      "driving": {
+        "route_distance_m": 3969.1191996336,
+        "route_expected_m": 3972.00161540508,
+        "route_frames": 21319,
+        "route_junctions_crossed": 35,
+        "route_max_deviation_m": 2.26745820045471,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Andador Refugio A. Cota",
+          "Avenida Pedregal del Cortés",
+          "Calle Colina Capristano",
+          "Calle Colina de Mocuzari",
+          "Calle Colina del Sol",
+          "Calle Conquistadores de California",
+          "Calle Escritores",
+          "Calle Mar Bermejo",
+          "Calle Misioneros Jesuitas",
+          "Calle Márqués de Villapuente",
+          "Calle Navegantes",
+          "Carretera La Paz-Pichilingue",
+          "Paseo Álvaro Obregón",
+          "Privada Colina del Sol"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 56.374,
+      "mean_frame_ms": 1.17233325522543,
+      "p95_frame_ms": 1.503,
+      "peak_nodes": 565.0,
+      "peak_static_memory_bytes": 207391177.0,
+      "road_streaming": {
+        "chunk_loads": 200,
+        "chunk_unloads": 137,
+        "loaded_chunks": 63,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 80,
+        "total_chunks": 611
+      },
+      "urban_streaming": {
+        "chunk_loads": 138,
+        "chunk_unloads": 110,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 2416,
+        "loaded_chunks": 28,
+        "max_chunk_build_ms": 22,
+        "max_loaded_chunks": 39
+      }
+    },
+    "south_hospital": {
+      "driving": {
+        "route_distance_m": 6502.79301595688,
+        "route_expected_m": 6505.78470563889,
+        "route_frames": 35768,
+        "route_junctions_crossed": 83,
+        "route_max_deviation_m": 2.85135746002197,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Boulevard 5 de Febrero",
+          "Boulevard Forjadores de Sudcalifornia",
+          "Boulevard General Francisco J. Mujica",
+          "Boulevard General Francisco José Mujica",
+          "Calle 5 de Febrero",
+          "Calle Antonio Navarro",
+          "Calle Aquiles Serdán",
+          "Calle Carabineros",
+          "Calle General Manuel Márquez de León",
+          "Calle Héroes de Independencia",
+          "Calle Ignacio Allende",
+          "Calle Ignacio Ramírez",
+          "Calle Miguel L. de Legaspy",
+          "Calle Profesor Marcelo Rubio Ruiz",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 63.628,
+      "mean_frame_ms": 1.27150375834801,
+      "p95_frame_ms": 1.714,
+      "peak_nodes": 681.0,
+      "peak_static_memory_bytes": 216036049.0,
+      "road_streaming": {
+        "chunk_loads": 458,
+        "chunk_unloads": 361,
+        "loaded_chunks": 97,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 105,
+        "total_chunks": 611
+      },
+      "urban_streaming": {
+        "chunk_loads": 296,
+        "chunk_unloads": 260,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 5379,
+        "loaded_chunks": 36,
+        "max_chunk_build_ms": 33,
+        "max_loaded_chunks": 43
+      }
+    },
+    "south_uabcs": {
+      "driving": {
+        "route_distance_m": 9769.85498571396,
+        "route_expected_m": 9772.8027472496,
+        "route_frames": 53109,
+        "route_junctions_crossed": 117,
+        "route_max_deviation_m": 4.55451726913452,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Avenida Tecnológico",
+          "Avenida Universidad",
+          "Avenida Universidad Autónoma de Baja California Sur",
+          "Boulevard 5 de Febrero",
+          "Boulevard Forjadores de Sudcalifornia",
+          "Boulevard General Francisco J. Mujica",
+          "Boulevard General Francisco José Mujica",
+          "Calle 5 de Febrero",
+          "Calle Antonio Martínez S.",
+          "Calle Antonio Navarro",
+          "Calle Aquiles Serdán",
+          "Calle Arroyo",
+          "Calle Carabineros",
+          "Calle General Manuel Márquez de León",
+          "Calle Héroes de Independencia",
+          "Calle Ignacio Allende",
+          "Calle Ignacio Ramírez",
+          "Calle Miguel L. de Legaspy",
+          "Calle Profesor Marcelo Rubio Ruiz",
+          "Calle Rubi",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 69.994,
+      "mean_frame_ms": 1.26639581764797,
+      "p95_frame_ms": 1.717,
+      "peak_nodes": 681.0,
+      "peak_static_memory_bytes": 216520185.0,
+      "road_streaming": {
+        "chunk_loads": 794,
+        "chunk_unloads": 728,
+        "loaded_chunks": 66,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 105,
+        "total_chunks": 611
+      },
+      "urban_streaming": {
+        "chunk_loads": 512,
+        "chunk_unloads": 486,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 3067,
+        "loaded_chunks": 26,
+        "max_chunk_build_ms": 38,
+        "max_loaded_chunks": 43
+      }
+    }
+  },
+  "viewport_px": [
+    1280,
+    720
+  ],
+  "world": {
+    "arcade_layout": {
+      "arcade_asphalt_area_m2": 7820094.79255868,
+      "buildings_adjusted": 11560.0,
+      "buildings_removed": 74.0,
+      "buildings_total": 68524.0,
+      "max_adjusted_building_overlap_m2": 0.0,
+      "source_asphalt_area_m2": 4551083.28283009,
+      "triangulation_error_m2": 0.0000000605359673500061
+    },
+    "build_ms": 1347,
+    "buildings": 68524.0,
+    "chunks": 611,
+    "collision_buildings": 66287.0,
+    "eligible_infill_blocks": 1869.0,
+    "excluded_buildings": 23543.0,
+    "fictional_buildings": 1000.0,
+    "height_estimated": 68524.0,
+    "inegi_blocks_in_bbox": 2900.0,
+    "overture_downloaded": 84824.0,
+    "protected_features": 503.0,
+    "real_buildings": 67524.0,
+    "source_counts": {
+      "fictional": 1000.0,
+      "osm": 6059.0,
+      "overture": 61465.0
+    },
+    "triangles": 63236,
+    "urban_chunks": 593
+  }
+}

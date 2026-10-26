@@ -23,6 +23,13 @@ def allowed(tags):
     access = next((tags[k] for k in ('motorcar','motor_vehicle','vehicle','access') if k in tags), 'yes')
     return access not in ('no','private','agricultural','forestry') and tags.get('area') != 'yes' and tags.get('bridge','no') == 'no' and tags.get('tunnel','no') == 'no' and tags.get('layer','0') == '0' and tags.get('indoor','no') != 'yes'
 
+def allowed_way(tags, cfg, way_id):
+    if allowed(tags):
+        return True
+    reviewed = cfg.get('road_import_policy', {}).get('approved_flat_bridge_way_ids', [])
+    return str(way_id) in reviewed and tags.get('bridge') == 'yes' and tags.get('layer') == '1' and allowed({**tags, 'bridge':'no', 'layer':'0'})
+
+
 def attributes(tags, cfg):
     explicit_width = number(tags.get('width',''))
     lanes = number(tags.get('lanes',''))
@@ -84,10 +91,13 @@ def convert(raw,cfg,provenance):
     nodes={}; roads=[]; edges=[]; exclusions=[]
     south,west,north,east=cfg['bbox']; lat0=cfg['origin_lat']; lon0=cfg['origin_lon']
     minx,maxz=gps_to_local(south,west,lat0,lon0); maxx,minz=gps_to_local(north,east,lat0,lon0)
-    bounds=box(minx,minz,maxx,maxz)
+    from expansion_regions import metric_region
+    bounds=metric_region(cfg)
     for way in sorted((e for e in raw['elements'] if e['type']=='way'),key=lambda e:e['id']):
         tags=way.get('tags',{})
-        if tags.get('highway') not in cfg['highways'] or not allowed(tags) or any(k in tags for k in ('oneway:conditional','motor_vehicle:conditional','access:conditional')):
+        if str(way['id']) in cfg.get('road_import_policy', {}).get('deferred_lower_crossing_way_ids', []):
+            exclusions.append({'way_id':str(way['id']),'reason':'deferred lower-level crossing: flat prototype cannot represent the reviewed Forjadores embankment and its underpass simultaneously','tags':tags}); continue
+        if tags.get('highway') not in cfg['highways'] or not allowed_way(tags,cfg,way['id']) or any(k in tags for k in ('oneway:conditional','motor_vehicle:conditional','access:conditional')):
             exclusions.append({'way_id':str(way['id']),'reason':'access, level, area or conditional restriction','tags':tags}); continue
         try:
             attrs=attributes(tags,cfg)
@@ -100,26 +110,36 @@ def convert(raw,cfg,provenance):
             pa=gps_to_local(a['lat'],a['lon'],lat0,lon0); pb=gps_to_local(b['lat'],b['lon'],lat0,lon0)
             if math.dist(pa,pb) < 0.001:
                 continue
-            clipped=LineString([pa,pb]).intersection(bounds)
-            if clipped.is_empty or clipped.geom_type != 'LineString' or clipped.length < 0.01:
-                continue
-            pts=[list(p) for p in clipped.coords]
-            ids=[]
-            for side,(p,original,original_p) in enumerate(zip(pts,(str(aid),str(bid)),(pa,pb))):
-                original_match=math.dist(p,original_p)<1e-6
-                key=original if original_match else f'clip:{way["id"]}:{i}:{side}'
-                nodes[key]={'id':key,'x':p[0],'z':p[1],'osm_node_id':original if original_match else None,'boundary_generated':not original_match}
-                ids.append(key)
-            if attrs['reversed']:
-                pts.reverse(); ids.reverse()
-            road={'id':f'{way["id"]}:{i}','osm_way_id':str(way['id']),'osm_node_ids':[str(aid),str(bid)],'from':ids[0],'to':ids[1],'points_xz':pts,'length_m':clipped.length,'osm_tags':tags,**attrs}
-            roads.append(road)
-            for reverse in ([False] if attrs['oneway'] else [False,True]):
-                edges.append({'id':road['id']+(':reverse' if reverse else ':forward'),'road_id':road['id'],'from':ids[1] if reverse else ids[0],'to':ids[0] if reverse else ids[1],'length_m':clipped.length,'reverse':reverse})
+            clipped_area=LineString([pa,pb]).intersection(bounds)
+            parts=[clipped_area] if clipped_area.geom_type=='LineString' else [g for g in getattr(clipped_area,'geoms',[]) if g.geom_type=='LineString']
+            for part_index,clipped in enumerate(parts):
+                if clipped.is_empty or clipped.length<0.01:
+                    continue
+                pts=[list(p) for p in clipped.coords]
+                ids=[]
+                for side,(p,original,original_p) in enumerate(zip(pts,(str(aid),str(bid)),(pa,pb))):
+                    original_match=math.dist(p,original_p)<1e-6
+                    key=original if original_match else f'clip:{way["id"]}:{i}:{part_index}:{side}'
+                    nodes[key]={'id':key,'x':p[0],'z':p[1],'osm_node_id':original if original_match else None,'boundary_generated':not original_match}
+                    ids.append(key)
+                if attrs['reversed']:
+                    pts.reverse(); ids.reverse()
+                road={'id':f'{way["id"]}:{i}'+(f':part{part_index}' if len(parts)>1 else ''),'osm_way_id':str(way['id']),'osm_node_ids':[str(aid),str(bid)],'from':ids[0],'to':ids[1],'points_xz':pts,'length_m':clipped.length,'osm_tags':tags,**attrs}
+                if str(way['id']) in cfg.get('road_import_policy',{}).get('approved_flat_bridge_way_ids',[]):
+                    road['elevation_treatment']='reviewed source bridge rendered at flat prototype height; source tags retained'
+                roads.append(road)
+                for reverse in ([False] if attrs['oneway'] else [False,True]):
+                    edges.append({'id':road['id']+(':reverse' if reverse else ':forward'),'road_id':road['id'],'from':ids[1] if reverse else ids[0],'to':ids[0] if reverse else ids[1],'length_m':clipped.length,'reverse':reverse})
     data={'schema_version':1,'metadata':{'source':'OpenStreetMap contributors','license':'ODbL-1.0','origin_lat':lat0,'origin_lon':lon0,'bbox':cfg['bbox'],'units':'meters','axes':'+X=east,-Z=north,+Y=up','flat_y_m':0,'elevation_estimated':True,'provenance':provenance,'boundary_policy':'clip centerlines; generated boundary nodes explicitly marked; asphalt extends half-width beyond boundary','topology_policy':'one edge per consecutive OSM node pair; no geometric crossing connections','turn_restrictions':'Not imported; route is a topology probe, not validated legal navigation.'},'nodes':sorted(nodes.values(),key=lambda n:n['id']),'roads':roads,'edges':edges,'exclusions':exclusions,'buildings':[]}
+    data['metadata']['active_blocks']=cfg.get('active_blocks',{})
+    data['metadata']['road_import_policy']=cfg.get('road_import_policy',{})
+    if cfg.get('clip_polygon_lonlat'): data['metadata']['clip_polygon_lonlat']=cfg['clip_polygon_lonlat']
     data['verification_route']=verification_route(data)
     # True planar union removes overlap, including intersections and curved joins.
     asphalt=unary_union([LineString(r['points_xz']).buffer(r['width_m']/2,quad_segs=4,cap_style='round',join_style='mitre',mitre_limit=2) for r in roads])
+    from expansion_regions import metric_clip
+    user_clip=metric_clip(cfg)
+    if user_clip is not None: asphalt=asphalt.intersection(user_clip)
     chunks=[]; size=cfg['chunk_size_m']; x0,z0,x1,z1=asphalt.bounds
     for cx in range(math.floor(x0/size),math.floor(x1/size)+1):
         for cz in range(math.floor(z0/size),math.floor(z1/size)+1):

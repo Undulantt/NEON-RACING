@@ -16,10 +16,12 @@
   "overture_min_confidence": 0.6,
   "sources": {
     "overture_places": {
-      "metadata_file": "overture_places_20261021.meta.json"
+      "metadata_file": "overture_places_20261021.meta.json",
+      "allow_partial_coverage": true,
+      "coverage_note": "Existing core extract only. Northern and southern POIs use verified OSM tiles and statewide DENUE."
     },
     "denue": {
-      "metadata_file": "denue_03_csv.meta.json"
+      "metadata_file": "denue_c5_cajoncito.meta.json"
     }
   }
 }

@@ -28,6 +28,7 @@ def surfaces(region, coast, protected, buildings, roads, area_ids=None):
         if triangles: records.append({'id':identifier,'kind':kind,'color':color,'y':y,'triangles_xz':triangles})
     add('osm:sea',sea.difference(roads),'water','397f99',-0.04)
     used=sea
+    open_surface_road_mask=roads.buffer(0.1)
     for identifier,geom,tags in sorted(protected,key=lambda r:r[0]):
         if area_ids is not None and identifier not in area_ids: continue
         kind=None
@@ -38,7 +39,7 @@ def surfaces(region, coast, protected, buildings, roads, area_ids=None):
         elif tags.get('place')=='square' or tags.get('highway')=='pedestrian': kind='plaza'
         # Node buffers and line buffers in the old exclusion mask are not mapped extents.
         if kind is None or identifier.startswith('node:'): continue
-        geom=geom.intersection(region).difference(roads.buffer(0.1)).difference(used)
+        geom=geom.intersection(region).difference(open_surface_road_mask).difference(used)
         add(identifier,geom,kind,{'water':'397f99','beach':'decba3','park':'92ad78','parking':'a19d92','plaza':'d4bb9b'}[kind],-0.035)
         used=used.union(geom)
     # Partition the visual ground; the original safety collider remains intact.
@@ -48,7 +49,7 @@ def surfaces(region, coast, protected, buildings, roads, area_ids=None):
 
 
 def landmarks(enrichment):
-    selected=['osm:way:155831056','osm:way:155831064','osm:way:155831066','osm:way:450296320','osm:way:450296505','osm:node:958717770']
+    selected=['osm:way:155831056','osm:way:155831064','osm:way:155831066','osm:way:450296320','osm:way:450296505','osm:node:958717770','osm:way:137201460','osm:way:301737276']
     result=[]
     for p in enrichment['pois']:
         if p['id'] in selected:

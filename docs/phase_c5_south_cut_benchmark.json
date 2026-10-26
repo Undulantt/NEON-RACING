@@ -1,0 +1,27 @@
+{
+  "average_fps": 1277.45181558939,
+  "max_frame_ms": 8.63,
+  "mean_frame_ms": 0.782808390732624,
+  "mean_frame_ratio": 1.02515110632751,
+  "p95_ms": 0.97,
+  "passed": true,
+  "peak_nodes": 381.0,
+  "peak_static_memory_bytes": 188246677.0,
+  "scenario": "Same core spawn and camera; VSync off; 2s warmup plus 5s render sample; not a traversal benchmark",
+  "startup_ms": 1303.054,
+  "static_memory_ratio": 1.42146430412839,
+  "streaming": {
+    "chunk_loads": 17,
+    "chunk_unloads": 0,
+    "enabled": true,
+    "failed_chunks": [],
+    "loaded_buildings": 1511,
+    "loaded_chunks": 17,
+    "max_chunk_build_ms": 23,
+    "max_loaded_chunks": 17
+  },
+  "viewport_px": [
+    1280,
+    720
+  ]
+}

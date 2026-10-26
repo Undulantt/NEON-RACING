@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (3130538 spike-08.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <bounds minlat="24.1745000" minlon="-110.2905000" maxlat="24.1870000" maxlon="-110.2790000"/>
+ <node id="313419694" visible="true" version="6" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1737584" lon="-110.2913074"/>
+ <node id="9060044335" visible="true" version="1" changeset="110674092" timestamp="2021-09-03T11:33:53Z" user="Bluemlisalp" uid="10652956" lat="24.1760732" lon="-110.2901607"/>
+ <node id="9060044336" visible="true" version="1" changeset="110674092" timestamp="2021-09-03T11:33:53Z" user="Bluemlisalp" uid="10652956" lat="24.1760144" lon="-110.2900574"/>
+ <node id="9060044337" visible="true" version="1" changeset="110674092" timestamp="2021-09-03T11:33:53Z" user="Bluemlisalp" uid="10652956" lat="24.1761192" lon="-110.2899858"/>
+ <node id="9060044338" visible="true" version="1" changeset="110674092" timestamp="2021-09-03T11:33:53Z" user="Bluemlisalp" uid="10652956" lat="24.1761779" lon="-110.2900891"/>
+ <node id="10241213980" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1742202" lon="-110.2910967"/>
+ <node id="10241213981" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1740841" lon="-110.2913061"/>
+ <node id="10241213982" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1741386" lon="-110.2912788"/>
+ <node id="10241213983" visible="true" version="2" changeset="129759829" timestamp="2022-12-05T23:06:12Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1742072" lon="-110.2912113"/>
+ <node id="10241213984" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1756917" lon="-110.2891748"/>
+ <node id="10241213985" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1741822" lon="-110.2903825"/>
+ <node id="10241213986" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1739143" lon="-110.2898839"/>
+ <node id="10241213987" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1753388" lon="-110.2887694"/>
+ <node id="10241213988" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1753874" lon="-110.2887525"/>
+ <node id="10241213989" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1754349" lon="-110.2887801"/>
+ <node id="10241213990" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1759829" lon="-110.2896224"/>
+ <node id="10241213991" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1759740" lon="-110.2896534"/>
+ <node id="10241213992" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1742486" lon="-110.2910493"/>
+ <node id="10241213993" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980" lat="24.1759686" lon="-110.2896804"/>
+ <way id="979300749" visible="true" version="1" changeset="110674092" timestamp="2021-09-03T11:33:53Z" user="Bluemlisalp" uid="10652956">
+  <nd ref="9060044338"/>
+  <nd ref="9060044337"/>
+  <nd ref="9060044336"/>
+  <nd ref="9060044335"/>
+  <nd ref="9060044338"/>
+  <tag k="building" v="yes"/>
+ </way>
+ <way id="1119715834" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980">
+  <nd ref="10241213985"/>
+  <nd ref="10241213984"/>
+  <tag k="highway" v="residential"/>
+ </way>
+ <way id="1119715835" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980">
+  <nd ref="10241213990"/>
+  <nd ref="10241213984"/>
+  <nd ref="10241213989"/>
+  <tag k="highway" v="residential"/>
+ </way>
+ <way id="1119715836" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980">
+  <nd ref="10241213989"/>
+  <nd ref="10241213988"/>
+  <nd ref="10241213987"/>
+  <nd ref="10241213986"/>
+  <tag k="highway" v="residential"/>
+ </way>
+ <way id="1119715837" visible="true" version="1" changeset="129759812" timestamp="2022-12-05T23:05:18Z" user="NittyGrittyInTheCity" uid="15652980">
+  <nd ref="10241213990"/>
+  <nd ref="10241213991"/>
+  <nd ref="10241213993"/>
+  <nd ref="10241213992"/>
+  <nd ref="10241213980"/>
+  <nd ref="10241213983"/>
+  <nd ref="10241213982"/>
+  <nd ref="10241213981"/>
+  <nd ref="313419694"/>
+  <tag k="highway" v="residential"/>
+ </way>
+</osm>

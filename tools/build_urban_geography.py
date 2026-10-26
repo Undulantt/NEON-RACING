@@ -1,4 +1,5 @@
 """Refresh only B6 visual geography from verified existing city and source snapshots."""
+from expansion_regions import metric_region
 import json
 from shapely.geometry import box, Polygon
 from shapely.ops import transform, unary_union
@@ -22,7 +23,7 @@ def build():
     if not found or found[1]!=manifest['metadata']['sources']['osm_protected']: raise ValueError('Source changed; regenerate full city')
     raw=load_json(found[0]); project=projector(cfg)
     protected,coast=protected_shapes(raw,project)
-    south,west,north,east=cfg['bbox']; region=transform(project,box(west,south,east,north))
+    south,west,north,east=cfg['bbox']; region=metric_region({**cfg,"active_blocks":{"visual_envelope":cfg["bbox"]}})
     roads=unary_union([Polygon([(p[0]+c['origin_xz'][0],p[1]+c['origin_xz'][1]) for p in tri]) for c in data['chunks'] for tri in c['triangles_xz']])
     geography=surfaces(region,coast,protected,buildings,roads,mapped_area_ids(raw))
     path=target/'urban_geography.json'

@@ -1,4 +1,5 @@
 """Phase B: genuine OSM building footprints, simple extrusions and test routes."""
+from expansion_regions import metric_region
 import json,math,hashlib
 from pathlib import Path
 from shapely.geometry import Polygon,LineString,box
@@ -13,7 +14,7 @@ def build():
     found=cache(cfg)
     if not found: raise SystemExit('Run tools/fetch_buildings.py first. No fabricated building fallback.')
     raw_path,meta=found; raw=json.loads(raw_path.read_bytes()); nodes={n['id']:n for n in raw['elements'] if n['type']=='node'}
-    south,west,north,east=cfg['bbox']; x0,z1=gps_to_local(south,west,cfg['origin_lat'],cfg['origin_lon']); x1,z0=gps_to_local(north,east,cfg['origin_lat'],cfg['origin_lon']); region=box(x0,z0,x1,z1)
+    south,west,north,east=cfg['bbox']; x0,z1=gps_to_local(south,west,cfg['origin_lat'],cfg['origin_lon']); x1,z0=gps_to_local(north,east,cfg['origin_lat'],cfg['origin_lon']); region=metric_region(cfg)
     asphalt=unary_union([LineString(r['points_xz']).buffer(r['width_m']/2,quad_segs=4) for r in data['roads']]); clearance=asphalt.buffer(1.0)
     buildings=[]; excluded=[]
     for way in sorted((e for e in raw['elements'] if e['type']=='way'),key=lambda e:e['id']):
@@ -37,6 +38,10 @@ def build():
     # Spawn inside the verified corridor, away from clipped endpoints.
     corridor=LineString(data['verification_route']['points_xz']); at=min(900,corridor.length/2); p=corridor.interpolate(at); q=corridor.interpolate(at+5)
     spawn={'position_xz':[p.x,p.y],'forward_xz':[(q.x-p.x)/p.distance(q),(q.y-p.y)/p.distance(q)],'source':'interpolated on verified OSM corridor','distance_on_phase_a_route_m':at}
+    expansion_path=ROOT/'config/expansion_config.json'
+    expansion=json.loads(expansion_path.read_text(encoding='utf-8')) if cfg.get('active_blocks') and expansion_path.exists() else {}
+    if expansion:
+        spawn=expansion['core_spawn']
     # A separate test traversal visiting distinct streets. Still only a test, not a race.
     roads={r['id']:r for r in data['roads']}; best=None
     for start in data['verification_route']['road_node_sequence'][::max(1,len(data['verification_route']['road_node_sequence'])//10)]:
@@ -54,7 +59,27 @@ def build():
                 if cosine<0.8: bends+=1
             score=(min(len(names),5),min(bends,4),-abs(length-1200))
             if best is None or score>best[0]: best=(score,{'purpose':'phase_b_automated_driving_test_only','edge_ids':[e['id'] for e in seq],'node_ids':[start]+[e['to'] for e in seq],'points_xz':points,'length_m':length,'street_names':sorted(names),'turns_over_36_degrees':bends})
+    if expansion:
+        core_route=expansion['core_driving_test_route']
+        pair_lookup={(e['from'],e['to']):e for e in data['edges']}
+        pairs=list(zip(core_route['node_ids'],core_route['node_ids'][1:]))
+        if any(pair not in pair_lookup for pair in pairs):
+            raise ValueError('Core route lost an OSM node connection; review before publishing C.5')
+        road_lookup={r['id']:r for r in data['roads']}
+        selected=[pair_lookup[pair] for pair in pairs]
+        points=[]
+        for edge in selected:
+            p=road_lookup[edge['road_id']]['points_xz']
+            if edge['reverse']: p=list(reversed(p))
+            points.extend(p if not points else p[1:])
+        core_route={**core_route,'edge_ids':[e['id'] for e in selected],'points_xz':points,'length_m':sum(e['length_m'] for e in selected),'node_ids':[selected[0]['from']]+[e['to'] for e in selected]}
+        best=(None,core_route)
     output={'schema_version':1,'map_sha256':hashlib.sha256(mp.read_bytes()).hexdigest(),'metadata':{'source':'OpenStreetMap contributors','license':'ODbL-1.0','building_provenance':meta,'buildings_note':'Real simple-way footprints; generic facades and estimated/stylized heights. Multipolygon relations are not imported.','ground_note':'Neutral flat safety platform for the prototype, not mapped land or coastline.'},'bounds_xz':[x0-30,z0-30,x1+30,z1+30],'spawn':spawn,'buildings':buildings,'excluded_buildings':excluded,'driving_test_route':best[1]}
+    if cfg.get('clip_polygon_lonlat'):
+        from expansion_regions import metric_clip
+        safety=box(x0-30,z0-30,x1+30,z1+30).intersection(metric_clip(cfg))
+        output['playable_boundary_xz']=[list(p) for p in list(safety.exterior.coords)[:-1]]
+        output['safety_triangles_xz']=[[list(p) for p in list(t.exterior.coords)[:3]] for t in constrained_delaunay_triangles(safety).geoms]
     target=ROOT/'data/processed/la_paz_environment.json'; target.write_text(json.dumps(output,ensure_ascii=False,separators=(',',':'),allow_nan=False),encoding='utf-8')
     print('Environment:',len(buildings),'buildings;',len(excluded),'excluded'); print('Driving test:',best[1]['length_m'],'m',best[1]['street_names'])
     return output

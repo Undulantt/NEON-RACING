@@ -1,40 +1,179 @@
 {
   "bbox": [
-	24.148,
-	-110.334,
-	24.17,
-	-110.305
+    24.09,
+    -110.342,
+    24.185,
+    -110.281
   ],
   "origin_lat": 24.159,
   "origin_lon": -110.3195,
   "chunk_size_m": 256,
   "overpass_urls": [
-	"https://overpass-api.de/api/interpreter",
-    "https://overpass.kumi.systems/api/interpreter"
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.private.coffee/api/interpreter"
   ],
   "highways": [
-	"primary",
-	"primary_link",
-	"secondary",
-	"secondary_link",
-	"tertiary",
-	"tertiary_link",
-	"residential",
-	"unclassified",
-	"living_street",
+    "trunk",
+    "trunk_link",
+    "primary",
+    "primary_link",
+    "secondary",
+    "secondary_link",
+    "tertiary",
+    "tertiary_link",
+    "residential",
+    "unclassified",
+    "living_street",
     "service"
   ],
   "widths_m": {
-	"primary": 12,
-	"primary_link": 7,
-	"secondary": 11,
-	"secondary_link": 7,
-	"tertiary": 9,
-	"tertiary_link": 6,
-	"residential": 7,
-	"unclassified": 6,
-	"living_street": 6,
-	"service": 4.5
+    "primary": 12,
+    "primary_link": 7,
+    "secondary": 11,
+    "secondary_link": 7,
+    "tertiary": 9,
+    "tertiary_link": 6,
+    "residential": 7,
+    "unclassified": 6,
+    "living_street": 6,
+    "service": 4.5,
+    "trunk": 14,
+    "trunk_link": 7
   },
-  "default_speed_kph": 40
+  "default_speed_kph": 40,
+  "active_blocks": {
+    "core": [
+      24.148,
+      -110.334,
+      24.17,
+      -110.305
+    ],
+    "north": [
+      24.164,
+      -110.323,
+      24.185,
+      -110.281
+    ],
+    "south": [
+      24.09,
+      -110.342,
+      24.151,
+      -110.292
+    ]
+  },
+  "clip_polygon_lonlat": [
+    [
+      -111,
+      25
+    ],
+    [
+      -110,
+      25
+    ],
+    [
+      -110,
+      24.122566395663956
+    ],
+    [
+      -110.29218050541516,
+      24.122566395663956
+    ],
+    [
+      -110.29723465703971,
+      24.119425474254744
+    ],
+    [
+      -110.30156678700361,
+      24.11661517615176
+    ],
+    [
+      -110.30589891696751,
+      24.114466124661245
+    ],
+    [
+      -110.3078844765343,
+      24.112647696476966
+    ],
+    [
+      -110.30806498194946,
+      24.111821138211383
+    ],
+    [
+      -110.3073429602888,
+      24.106365853658538
+    ],
+    [
+      -110.30625992779784,
+      24.10239837398374
+    ],
+    [
+      -110.30445487364621,
+      24.098430894308944
+    ],
+    [
+      -110.30228880866426,
+      24.09611653116531
+    ],
+    [
+      -110.3035523465704,
+      24.094463414634145
+    ],
+    [
+      -110.3078844765343,
+      24.093471544715445
+    ],
+    [
+      -110.31239711191336,
+      24.092810298102982
+    ],
+    [
+      -110.3165487364621,
+      24.092314363143633
+    ],
+    [
+      -110.32051985559566,
+      24.094463414634145
+    ],
+    [
+      -110.32412996389891,
+      24.096447154471544
+    ],
+    [
+      -110.33116967509025,
+      24.09909214092141
+    ],
+    [
+      -110.33658483754513,
+      24.101075880758806
+    ],
+    [
+      -110.33838989169675,
+      24.103224932249322
+    ],
+    [
+      -110.34037545126354,
+      24.10669647696477
+    ],
+    [
+      -110.34218050541516,
+      24.1100027100271
+    ],
+    [
+      -111,
+      24.1100027100271
+    ]
+  ],
+  "road_import_policy": {
+    "approved_flat_bridge_way_ids": [
+      "127454232",
+      "127454233",
+      "443101245",
+      "443101250"
+    ],
+    "deferred_lower_crossing_way_ids": [
+      "660516292"
+    ],
+    "bridge_note": "Source bridge/layer tags retained. Reviewed Forjadores crossings rendered at flat prototype height. Conflicting unnamed lower crossing 660516292 deferred until multi-level roads are implemented; no invented graph intersection."
+  }
 }

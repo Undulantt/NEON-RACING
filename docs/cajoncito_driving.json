@@ -1,0 +1,277 @@
+{
+  "anchor_facade_tests": {
+    "colina_del_sol": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05217480659485
+    },
+    "conexion_sur": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 2,
+      "facade_distance_after_impact_m": 2.05182766914368
+    },
+    "costa_norte": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05207252502441
+    },
+    "esterito": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 1,
+      "facade_distance_after_impact_m": 2.05491328239441
+    },
+    "hospital_salvatierra": {
+      "camera_arm_at_facade_m": 2.8326416015625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05258989334106
+    },
+    "pedregal_del_cortez": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.0521936416626
+    },
+    "uabcs": {
+      "camera_arm_at_facade_m": 2.83447265625,
+      "facade_contacts": 124,
+      "facade_distance_after_impact_m": 2.05174255371094
+    }
+  },
+  "failures": [],
+  "passed": true,
+  "physics_frames": 194064,
+  "rendered": false,
+  "routes": {
+    "cajoncito_federal_1": {
+      "driving": {
+        "route_distance_m": 9386.60306429863,
+        "route_expected_m": 9389.47993159294,
+        "route_frames": 48798,
+        "route_junctions_crossed": 103,
+        "route_max_deviation_m": 3.53290677070618,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Boulevard General Augustín Olachea Avilés",
+          "Boulevard General Augustín Olachea Áviles",
+          "Calle Aquiles Serdán",
+          "Calle Guillermo Prieto",
+          "Calle Ignacio Allende",
+          "Calle Mixtecos",
+          "Calle Tenochtitlán",
+          "Libramiento Daniel Roldán Zimbrón",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 103.32,
+      "mean_frame_ms": 0.501203244704813,
+      "p95_frame_ms": 0.807,
+      "peak_nodes": 696.0,
+      "peak_static_memory_bytes": 214960096.0,
+      "road_streaming": {
+        "chunk_loads": 647,
+        "chunk_unloads": 568,
+        "loaded_chunks": 79,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 105,
+        "total_chunks": 537
+      },
+      "urban_streaming": {
+        "chunk_loads": 424,
+        "chunk_unloads": 398,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 2246,
+        "loaded_chunks": 26,
+        "max_chunk_build_ms": 58,
+        "max_loaded_chunks": 43
+      }
+    },
+    "cajoncito_forjadores_uabcs": {
+      "driving": {
+        "route_distance_m": 11614.7321791649,
+        "route_expected_m": 11617.7283415794,
+        "route_frames": 61036,
+        "route_junctions_crossed": 137,
+        "route_max_deviation_m": 1.74049782752991,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Boulevard 5 de Febrero",
+          "Boulevard Forjadores de Sudcalifornia",
+          "Calle 5 de Febrero",
+          "Calle Antonio Navarro",
+          "Calle Aquiles Serdán",
+          "Calle General Manuel Márquez de León",
+          "Calle Héroes de Independencia",
+          "Calle Ignacio Allende",
+          "Calle Ignacio Ramírez",
+          "Calle Miguel L. de Legaspy",
+          "Calle Profesor Marcelo Rubio Ruiz",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 87.347,
+      "mean_frame_ms": 0.500965949292425,
+      "p95_frame_ms": 0.847,
+      "peak_nodes": 716.0,
+      "peak_static_memory_bytes": 214838164.0,
+      "road_streaming": {
+        "chunk_loads": 1036,
+        "chunk_unloads": 936,
+        "loaded_chunks": 100,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 105,
+        "total_chunks": 537
+      },
+      "urban_streaming": {
+        "chunk_loads": 671,
+        "chunk_unloads": 637,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 5320,
+        "loaded_chunks": 34,
+        "max_chunk_build_ms": 58,
+        "max_loaded_chunks": 43
+      }
+    },
+    "cajoncito_juan_de_dios_angulo": {
+      "driving": {
+        "route_distance_m": 9553.05670547485,
+        "route_expected_m": 9556.04650783539,
+        "route_frames": 50429,
+        "route_junctions_crossed": 91,
+        "route_max_deviation_m": 1.64354467391968,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Boulevard 5 de Febrero",
+          "Boulevard Forjadores de Sudcalifornia",
+          "Calle 5 de Febrero",
+          "Calle Antonio Navarro",
+          "Calle Aquiles Serdán",
+          "Calle General Manuel Márquez de León",
+          "Calle Héroes de Independencia",
+          "Calle Ignacio Allende",
+          "Calle Ignacio Ramírez",
+          "Calle Miguel L. de Legaspy",
+          "Calle Profesor Marcelo Rubio Ruiz",
+          "Libramiento Juan de Dios Angulo",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 90.558,
+      "mean_frame_ms": 0.505130408927831,
+      "p95_frame_ms": 0.875,
+      "peak_nodes": 716.0,
+      "peak_static_memory_bytes": 214760860.0,
+      "road_streaming": {
+        "chunk_loads": 346,
+        "chunk_unloads": 264,
+        "loaded_chunks": 82,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 105,
+        "total_chunks": 537
+      },
+      "urban_streaming": {
+        "chunk_loads": 217,
+        "chunk_unloads": 184,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 3492,
+        "loaded_chunks": 33,
+        "max_chunk_build_ms": 56,
+        "max_loaded_chunks": 43
+      }
+    },
+    "cajoncito_olachea_cajoncito": {
+      "driving": {
+        "route_distance_m": 6005.45643019676,
+        "route_expected_m": 6008.3462998867,
+        "route_frames": 31681,
+        "route_junctions_crossed": 83,
+        "route_max_deviation_m": 2.11968350410461,
+        "route_offroad_frames": 0,
+        "route_recoveries": 0,
+        "route_streets": [
+          "",
+          "Boulevard General Augustín Olachea Avilés",
+          "Boulevard General Augustín Olachea Áviles",
+          "Calle Aquiles Serdán",
+          "Calle Guillermo Prieto",
+          "Calle Ignacio Allende",
+          "Calle Mixtecos",
+          "Calle Tenochtitlán",
+          "Paseo Álvaro Obregón"
+        ],
+        "route_unsupported_frames": 0,
+        "route_wall_contacts": 0
+      },
+      "max_frame_ms": 91.468,
+      "mean_frame_ms": 0.510057632251348,
+      "p95_frame_ms": 0.843,
+      "peak_nodes": 696.0,
+      "peak_static_memory_bytes": 214918624.0,
+      "road_streaming": {
+        "chunk_loads": 1240,
+        "chunk_unloads": 1174,
+        "loaded_chunks": 66,
+        "max_chunk_build_ms": 2,
+        "max_loaded_chunks": 105,
+        "total_chunks": 537
+      },
+      "urban_streaming": {
+        "chunk_loads": 813,
+        "chunk_unloads": 789,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 2502,
+        "loaded_chunks": 24,
+        "max_chunk_build_ms": 58,
+        "max_loaded_chunks": 43
+      }
+    }
+  },
+  "viewport_px": [
+    1280,
+    720
+  ],
+  "world": {
+    "arcade_layout": {
+      "arcade_asphalt_area_m2": 7060472.93016125,
+      "buildings_adjusted": 9999.0,
+      "buildings_removed": 55.0,
+      "buildings_total": 59635.0,
+      "max_adjusted_building_overlap_m2": 0.0,
+      "source_asphalt_area_m2": 4107772.94449033,
+      "triangulation_error_m2": 0.0000000316649675369263
+    },
+    "build_ms": 1268,
+    "buildings": 59635.0,
+    "chunks": 537,
+    "collision_buildings": 57801.0,
+    "eligible_infill_blocks": 1637.0,
+    "excluded_buildings": 31190.0,
+    "fictional_buildings": 1000.0,
+    "height_estimated": 59635.0,
+    "inegi_blocks_in_bbox": 2554.0,
+    "overture_downloaded": 84824.0,
+    "protected_features": 503.0,
+    "real_buildings": 58635.0,
+    "source_counts": {
+      "fictional": 1000.0,
+      "osm": 4820.0,
+      "overture": 53815.0
+    },
+    "triangles": 55864,
+    "urban_chunks": 519
+  }
+}

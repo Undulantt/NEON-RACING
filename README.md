@@ -1,3 +1,43 @@
+Se restituyen las carreteras principales del Cajoncito: Juan de Dios Angulo, Federal 1, Forjadores y Olachea, conservando el límite sur recortado. [Detalles, procedencia y pruebas](docs/CAJONCITO_ROADS.md).
+
+La extensión sur se recorta ahora por el límite poligonal indicado en rojo: la franja inferior queda excluida de calles, edificios, suelo visual y físico. [Corrección del límite sur](docs/PHASE_C5_SOUTH_CUT.md).
+
+# Fase C.5 — corredor sur
+
+Se incorpora el corredor hacia **el hospital Salvatierra, UABCS y las conexiones viales al sur**, conservando Centro/Malecón y el bloque norte. La ampliación utiliza el mismo proceso de calles OSM, huellas OSM/Overture y selección INEGI/DENUE del núcleo, con calles anchas y streaming por sectores de 256 m.
+
+Abre `project.godot` y pulsa **F5**. Las fuentes están guardadas offline. El HUD identifica CORREDOR SUR al entrar en el bloque. Detalles y validación: [docs/PHASE_C5_SOUTH.md](docs/PHASE_C5_SOUTH.md).
+
+Para regenerar: `.\.venv-urban\Scripts\python.exe tools/expand_map.py`. Agrega `--fetch` solo si faltan fuentes. El contorno rojo completo sigue siendo referencia para futuras etapas.
+
+---
+
+# Fase C.5 — primer bloque norte
+
+Ya se puede conducir desde Centro/Malecón hacia **Esterito, Colina del Sol, Pedregal del Cortez y la costa norte**. La cobertura de los bloques crece de 7,2 a **15,9 km²**, con 2.836 tramos viales, unos 12.200 volúmenes urbanos y streaming de calles y edificios. Se conservan las calles anchas, derrape con recompensa y turbo. El resto de la zona roja queda para siguientes bloques.
+
+Abre `project.godot` y pulsa **F5**. No se requiere Internet para jugar. El HUD identifica el bloque actual. Hay dos recorridos preparados para futuras carreras, de **3,7 y 4,0 km**, probados con el coche de producción. Documentación, mediciones y capturas: [docs/PHASE_C5.md](docs/PHASE_C5.md).
+
+Para regenerar el estado actual con las fuentes locales: `.\.venv-urban\Scripts\python.exe tools/expand_map.py`. Para añadir un bloque se edita `config/expansion_config.json` y se utiliza el mismo comando con `--fetch` si faltan sus fuentes. La imagen roja solo define la referencia del perímetro final.
+
+Las secciones siguientes conservan el historial de las fases anteriores.
+
+---
+
+# Fase C — conducción arcade
+
+**Derrape con recompensa:** humo en las ruedas traseras y nuevo medidor naranja. Derrapa con **Espacio**, conserva velocidad y suelta para enderezar: una salida limpia entrega un impulso de 0,9 s proporcional a lo acumulado, independiente del turbo de Shift. El turbo ahora muestra líneas de velocidad más largas y visibles. Mecánica y pruebas: [docs/DRIFT_REWARDS.md](docs/DRIFT_REWARDS.md).
+
+**Corrección de calles y suelo:** calles 60 % más anchas, con mínimo de 12 m; terreno y asfalto tienen colisión a la misma altura, permitiendo salir y volver. Hay fondo visible continuo bajo el mapa. Ajustes y pruebas: [docs/ARCADE_ROADS.md](docs/ARCADE_ROADS.md). Después de regenerar el mapa o la ciudad, ejecuta `.\.venv-urban\Scripts\python.exe tools/build_arcade_layout.py` para actualizar la adaptación jugable.
+
+Aceleración y frenada más ágiles, derrape con recuperación gradual de agarre y turbo recargable. **Espacio** derrapa; **Shift** activa el turbo; **V** alterna cámara cerca/lejos; **M** silencia el sonido provisional. **C** conserva la inspección aérea. La velocidad máxima pasa de **115,2 km/h a 158,4 km/h** con turbo, con 3,5 segundos de reserva y recarga automática.
+
+El turbo añade escape cian, líneas de velocidad, apertura de campo de visión y sonido. Motor y neumáticos tienen audio sintetizado propio, sin descargas ni recursos externos. Los parámetros están en `config/driving_config.json`.
+
+Implementación, pruebas reproducibles y límites: [docs/PHASE_C.md](docs/PHASE_C.md). Pruebas automáticas de mecánicas y recorrido real aprobadas; la valoración de la sensación arcade requiere jugar. Las secciones siguientes conservan el historial de fases anteriores.
+
+---
+
 # Fase B.6 — enriquecimiento urbano
 
 Implementación y registro: [docs/PHASE_B6.md](docs/PHASE_B6.md). Conserva conducción, vías y 7.779 huellas; incorpora 5.836 registros POI (OSM, Overture Places y DENUE), con 385 edificios clasificados, categorías, fachadas, overrides, costa, espacios abiertos y seis registros de lugares. La Catedral incorpora una silueta simplificada con dimensiones estimadas. **F9** muestra nombres de lugares; **F8** conserva el control de ciudad.

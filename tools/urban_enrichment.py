@@ -52,6 +52,8 @@ def enrich(buildings, project, cfg, source):
     tree = STRtree(polys)
     pois = []; tags_by_way = {}
     south, west, north, east = cfg['bbox']
+    from expansion_regions import region_lonlat
+    coverage=region_lonlat(cfg)
     for elem in root:
         tags = {t.attrib['k']: t.attrib['v'] for t in elem.findall('tag')}
         if elem.tag == 'way': tags_by_way[elem.attrib['id']] = tags
@@ -66,7 +68,7 @@ def enrich(buildings, project, cfg, source):
             lon, lat = polygon.representative_point().coords[0]
         elif len(coords) == 1: lon, lat = coords[0]
         else: continue
-        if not (west <= lon <= east and south <= lat <= north): continue
+        if not coverage.covers(Point(lon,lat)): continue
         x, z = project(lon, lat)
         idx, confidence, reason, candidates = associate(Point(x,z), polys, tree, settings['association_max_distance_m'], settings['ambiguity_margin_m'])
         name = ' '.join(tags['name'].split())
