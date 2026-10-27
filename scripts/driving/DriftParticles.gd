@@ -55,7 +55,10 @@ func growth_curve() -> Curve:
 
 func _physics_process(_delta: float) -> void:
 	var active: bool = car.driving_enabled and car.on_asphalt and car.is_on_floor() and car.drift_amount > 0.3
-	for emitter in smoke:
+	for i in range(smoke.size()):
+		var emitter := smoke[i]
+		if car.elevation != null:
+			emitter.global_position = car.visuals["pivots"][i+2].global_position - Vector3.UP * 0.15
 		emitter.emitting = active
 		emitter.initial_velocity_max = 1.2 + car.drift_amount * 1.7
 

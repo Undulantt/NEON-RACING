@@ -31,7 +31,9 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 		if not groups.has(cell):
 			groups[cell] = {"vertices": PackedVector3Array(), "normals": PackedVector3Array(), "colors": PackedColorArray(), "physics": PackedVector3Array()}
 		var output: Dictionary = groups[cell]
-		var origin := Vector3(cell.x * 256, 0, cell.y * 256)
+		var base_y := float(building.get("base_y_m", 0))
+		var bottom_y := float(building.get("foundation_min_y_m", base_y - 0.1)) - base_y
+		var origin := Vector3(cell.x * 256, -base_y, cell.y * 256)
 		var height: float = building["height_m"]
 		var color: Color = PALETTE[int(building["palette_index"]) % PALETTE.size()]
 		var category: String = building.get("category", "unknown")
@@ -47,11 +49,11 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 			for i in range(wall_ring.size()):
 				var p: Array = wall_ring[i]
 				var q: Array = wall_ring[(i + 1) % wall_ring.size()]
-				var a := Vector3(p[0], -0.1, p[1]) - origin
-				var b := Vector3(q[0], -0.1, q[1]) - origin
+				var a := Vector3(p[0], bottom_y, p[1]) - origin
+				var b := Vector3(q[0], bottom_y, q[1]) - origin
 				var direction := (b - a).normalized()
 				var normal := Vector3(direction.z, 0, -direction.x)
-				quad(output, a, b, b + Vector3.UP * (height + 0.1), a + Vector3.UP * (height + 0.1), normal, color)
+				quad(output, a, b, b + Vector3.UP * (height - bottom_y), a + Vector3.UP * (height - bottom_y), normal, color)
 		# Static collision includes walls/roofs, never the cosmetic windows.
 		if building.get("collision_enabled", true):
 			output["physics"].append_array(output["vertices"].slice(begin))
@@ -61,7 +63,7 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 				var custom = resource.instantiate()
 				if custom is Node3D and not custom is CollisionObject3D and custom.find_children("*", "CollisionObject3D", true, false).is_empty():
 					parent.add_child(custom)
-					custom.position = Vector3(center.x, 0, center.y)
+					custom.position = Vector3(center.x, base_y, center.y)
 					custom.rotation_degrees.y = float(building.get("model_rotation_degrees", 0))
 					custom.scale = Vector3.ONE * float(building.get("model_scale", 1))
 					# Retain the validated geographic collision shell.

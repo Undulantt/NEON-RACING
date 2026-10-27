@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+RELIEF_CACHE 100
+RELIEF_CACHE 200
+RELIEF_CACHE 300
+RELIEF_CACHE 400
+RELIEF_CACHE 500
+RELIEF_CACHE 600
+RELIEF_CACHE 700
+RELIEF_CACHE 800
+RELIEF_CACHE 900
+RELIEF_CACHE 1000
+RELIEF_CACHE 1100
+RELIEF_CACHE 1200
+RELIEF_CACHE_READY { "engine": "4.7.2-stable (official)", "scenes": 1294, "bytes": 52179830, "build_ms": 25191, "note": "Derived optional runtime cache; regenerate from binary triangle sources when changing Godot version" }

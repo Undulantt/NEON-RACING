@@ -1,0 +1,83 @@
+{
+  "city_streaming": {
+    "chunk_loads": 129,
+    "chunk_unloads": 112,
+    "enabled": true,
+    "failed_chunks": [],
+    "loaded_buildings": 1511,
+    "loaded_chunks": 17,
+    "max_chunk_build_ms": 31,
+    "max_loaded_chunks": 36
+  },
+  "failures": [],
+  "metrics": {
+    "boundaries_tested": 4,
+    "braking_frames_from_max": 74,
+    "camera_arm_at_facade_m": 2.8326416015625,
+    "facade_contacts": 124,
+    "facade_distance_after_impact_m": 2.05213642120361,
+    "forward_speed_mps": 31.9993629455566,
+    "handbrake_slip_rad": 0.569506168365479,
+    "normal_slip_rad": 0.123374454677105,
+    "physical_key_events_tested": [
+      "W",
+      "Down",
+      "S",
+      "A",
+      "R",
+      "Up",
+      "Space"
+    ],
+    "recovery_count_total": 8,
+    "reverse_speed_mps": -6.99999904632568,
+    "route_distance_m": 1197.92984008789,
+    "route_expected_m": 1200.91927719116,
+    "route_frames": 7293,
+    "route_junctions_crossed": 14,
+    "route_max_deviation_m": 2.06849718093872,
+    "route_offroad_frames": 0,
+    "route_recoveries": 0,
+    "route_streets": [
+      "16 de Septiembre",
+      "Calle 16 de Septiembre",
+      "Calle Aquiles Serdán",
+      "Calle Ignacio Ramírez",
+      "Calle Melchor Ocampo",
+      "Paseo Álvaro Obregón"
+    ],
+    "route_unsupported_frames": 0,
+    "route_wall_contacts": 0
+  },
+  "passed": true,
+  "physics_frames": 9650,
+  "world": {
+    "arcade_layout": {
+      "arcade_asphalt_area_m2": 7060472.93016125,
+      "buildings_adjusted": 9999.0,
+      "buildings_removed": 55.0,
+      "buildings_total": 59635.0,
+      "max_adjusted_building_overlap_m2": 0.0,
+      "source_asphalt_area_m2": 4107772.94449033,
+      "triangulation_error_m2": 0.0000000316649675369263
+    },
+    "build_ms": 1612,
+    "buildings": 59635.0,
+    "chunks": 537,
+    "collision_buildings": 57801.0,
+    "eligible_infill_blocks": 1637.0,
+    "excluded_buildings": 31190.0,
+    "fictional_buildings": 1000.0,
+    "height_estimated": 59635.0,
+    "inegi_blocks_in_bbox": 2554.0,
+    "overture_downloaded": 84824.0,
+    "protected_features": 503.0,
+    "real_buildings": 58635.0,
+    "source_counts": {
+      "fictional": 1000.0,
+      "osm": 4820.0,
+      "overture": 53815.0
+    },
+    "triangles": 55864,
+    "urban_chunks": 519
+  }
+}

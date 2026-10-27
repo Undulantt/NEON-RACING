@@ -1,5 +1,7 @@
 # Decisiones técnicas — Fase A
 
+> Este documento conserva decisiones históricas de Fase A. La estrategia de relieve fue validada: [auditoría previa](PHASE_B7R_PROPOSAL.md) e [implementación B.7-R, pruebas y límites](PHASE_B7R.md).
+
 ## Cartografía y grafo
 
 Se usa una única respuesta original Overpass, sin editar. El archivo `.meta.json` conserva consulta, URL, bbox, SHA-256 y fechas de extracción y base OSM. El hash verificado es `a80c891a315fe1f0d1dc3f3dd74a040d41a8a68a94947925336a8754b0ee8142`. La primera instancia (`overpass-api.de`) devolvió un certificado vencido; la segunda funcionó con verificación TLS habilitada.

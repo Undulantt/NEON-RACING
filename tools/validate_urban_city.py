@@ -1,4 +1,4 @@
-"""Validate actual urban data, protected land, provenance and untouched driving files."""
+"""Validate urban data, protected land, provenance and verified driving migrations."""
 import hashlib,json,math
 from collections import Counter
 from pathlib import Path
@@ -19,8 +19,29 @@ def projection(metadata):
 def validate(manifest_path=None):
     root=ROOT/'data/processed/urban'; manifest=load_json(Path(manifest_path) if manifest_path else root/'city_manifest.json')
     assert manifest['schema_version']==1 and manifest['units']=='meters'
+    approved_migrations=[]
     for path,expected in manifest['baseline_hashes'].items():
-        assert digest(ROOT/path.replace('\\','/'))==expected, 'Baseline changed: '+path
+        current=digest(ROOT/path.replace('\\','/'))
+        if current != expected:
+            # B.7-R deliberately adds elevation-aware contact/recovery to the car.
+            # Keep historical urban data immutable and permit only the exact
+            # reviewed migration, archived original and passed behavioral report.
+            policy_path=ROOT/'config/relief_migrations.json'
+            policy=load_json(policy_path) if policy_path.exists() else {}
+            migration=policy.get(path.replace('\\','/'),{})
+            assert migration.get('previous_sha256')==expected and migration.get('current_sha256')==current, 'Baseline changed: '+path
+            assert digest(ROOT/migration['archive_file'])==expected, 'Original driving baseline archive changed'
+            report_path=ROOT/migration['regression_file']
+            assert digest(report_path)==migration['regression_sha256'], 'Driving regression evidence changed'
+            assert load_json(report_path)['passed'], 'Driving regression not passed'
+            if migration.get('physics_regression_file'):
+                physics_report=ROOT/migration['physics_regression_file']
+                assert digest(physics_report)==migration['physics_regression_sha256'], 'Physics regression evidence changed'
+                physics=load_json(physics_report)
+                assert physics['passed'], 'Slope physics regression not passed'
+                assert physics['controller_sha256']==digest(ROOT/'scripts/driving/ArcadeCar.gd'), 'Physics evidence uses another controller'
+                assert physics['driving_config_sha256']==digest(ROOT/'config/driving_config.json'), 'Physics evidence uses another driving config'
+            approved_migrations.append(path.replace('\\','/'))
     assert digest(ROOT/'data/processed/la_paz_map.json')==manifest['map_sha256']
     for kind,meta in manifest['metadata']['sources'].items():
         assert digest(ROOT/'data/raw'/meta['file'])==meta['sha256'], kind
@@ -87,7 +108,7 @@ def validate(manifest_path=None):
     for i,p in enumerate(polygons):
         for j in tree.query(p,predicate='intersects'):
             if i<int(j): assert p.intersection(polygons[int(j)]).area<0.01, f'Duplicate overlap: {city[i]["id"]}, {city[int(j)]["id"]}'
-    return {'passed':True,'buildings':len(city),'fictional':sum(by_block.values()),'source_counts':dict(Counter(b['source_kind'] for b in city)),'roof_triangles':triangle_count,'chunks':len(manifest['chunks']),'baseline_hashes_unchanged':True,'road_and_protected_overlap_m2':0}
+    return {'passed':True,'buildings':len(city),'fictional':sum(by_block.values()),'source_counts':dict(Counter(b['source_kind'] for b in city)),'roof_triangles':triangle_count,'chunks':len(manifest['chunks']),'baseline_hashes_unchanged':not approved_migrations,'approved_baseline_migrations':approved_migrations,'road_and_protected_overlap_m2':0}
 
 if __name__=='__main__':
     try:

@@ -17,6 +17,8 @@ func measure() -> void:
 	peak_nodes = maxf(peak_nodes, Performance.get_monitor(Performance.OBJECT_NODE_COUNT))
 
 func _run() -> void:
+	var controller_sha := FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd")
+	var driving_config_sha := FileAccess.get_sha256("res://config/driving_config.json")
 	route_frame_limit = 90000
 	facade_min_length = 6.0
 	root.content_scale_size = Vector2i(1280, 720)
@@ -100,10 +102,17 @@ func _run() -> void:
 	check(world.city_manager.failed_chunks.is_empty(), "No corrupt or missing streamed city sectors")
 	check(world.city_manager.max_loaded_chunks < world.city_manager.manifest["chunks"].size(), "Urban streaming must unload distant city")
 	check(world.road_root.max_loaded < world.road_root.entries.size(), "Road streaming must keep a bounded neighbourhood")
-	var report := {"passed": failures.is_empty(), "failures": failures, "rendered": DisplayServer.get_name() != "headless", "viewport_px": [root.get_texture().get_width(), root.get_texture().get_height()], "routes": results, "anchor_facade_tests": facades, "physics_frames": test_frames, "world": world.stats}
+	check(FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd")==controller_sha and FileAccess.get_sha256("res://config/driving_config.json")==driving_config_sha,"Controller/config changed while regression was running")
+	var report := {"passed": failures.is_empty(), "failures": failures, "controller_sha256":controller_sha,"driving_config_sha256":driving_config_sha,"rendered": DisplayServer.get_name() != "headless", "viewport_px": [root.get_texture().get_width(), root.get_texture().get_height()], "routes": results, "anchor_facade_tests": facades, "physics_frames": test_frames, "world": world.stats}
 	var path := "res://docs/phase_c5_south_cut_driving_render.json" if report["rendered"] else "res://docs/phase_c5_south_cut_driving.json"
 	if critical:
 		path = "res://docs/cajoncito_driving_render.json" if report["rendered"] else "res://docs/cajoncito_driving.json"
+	if "--b7r-regression" in OS.get_cmdline_user_args():
+		path = "res://docs/phase_b7r_flat_regression.json"
+	if "--b7r-default-flat-regression" in OS.get_cmdline_user_args():
+		path = "res://docs/phase_b7r_default_flat_regression.json"
+	if "--slope-regression" in OS.get_cmdline_user_args():
+		path = "res://docs/slope_flat_regression.json"
 	var output := FileAccess.open(path, FileAccess.WRITE)
 	output.store_string(JSON.stringify(report, "  "))
 	print("C5_REPORT ", JSON.stringify(report))

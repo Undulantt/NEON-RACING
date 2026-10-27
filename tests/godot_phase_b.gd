@@ -1,6 +1,6 @@
 extends SceneTree
 
-const Main = preload("res://scenes/Main.tscn")
+const Main = preload("res://scenes/FlatWorld.tscn")
 var world: Node3D
 var car: CharacterBody3D
 var failures: Array[String] = []
@@ -309,6 +309,9 @@ func facade_and_camera() -> void:
 	check(found, "No suitable real facade available for collision test")
 
 func boundaries() -> void:
+	if world.environment_data.has("playable_boundary_xz"):
+		await polygon_boundaries()
+		return
 	var bounds: Array = world.environment_data["bounds_xz"]
 	var fixtures := [
 		[Vector3(bounds[0] + 8, 0.67, bounds[1] + 15), Vector3.LEFT],
@@ -323,11 +326,50 @@ func boundaries() -> void:
 		check(car.world_bounds.has_point(Vector2(car.position.x, car.position.z)) and car.wall_contacts > before and car.speed_mps < 0.2, "World boundary %d failed" % i)
 	metrics["boundaries_tested"] = fixtures.size()
 
+func polygon_boundaries() -> void:
+	# C.5 removed the old rectangular southern corner. Test the current
+	# playable polygon instead of teleporting outside the map's physical floor.
+	var ring: Array = world.environment_data["playable_boundary_xz"]
+	var polygon := PackedVector2Array()
+	for p in ring:polygon.append(Vector2(p[0],p[1]))
+	var tested := 0
+	for i in range(ring.size()):
+		var a := Vector3(ring[i][0],0,ring[i][1])
+		var b := Vector3(ring[(i+1)%ring.size()][0],0,ring[(i+1)%ring.size()][1])
+		if a.distance_to(b)<25:continue
+		var middle := (a+b)*0.5
+		var side := (b-a).normalized()
+		var outward := Vector3(side.z,0,-side.x)
+		if Geometry2D.is_point_in_polygon(Vector2(middle.x+outward.x*3,middle.z+outward.z*3),polygon):outward=-outward
+		var start := middle-outward*8+Vector3.UP*0.67
+		place(start,outward)
+		await step(30)
+		if not car.is_on_floor() or not car.clear_of_obstacles(car.global_transform):continue
+		var clear := true
+		for distance in [4.0,5.0,6.0]:
+			var pose := car.global_transform
+			pose.origin=middle-outward*distance+Vector3.UP*0.67
+			var query:=PhysicsShapeQueryParameters3D.new()
+			query.shape=car.collision_shape
+			query.transform=pose
+			query.collision_mask=4
+			if not world.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():clear=false
+		if not clear:continue
+		var before: int=car.wall_contacts
+		await step(180,1)
+		check(Geometry2D.is_point_in_polygon(Vector2(car.position.x,car.position.z),polygon) and car.wall_contacts>before and car.speed_mps<0.2,"Playable polygon boundary failed")
+		tested+=1
+		if tested==4:break
+	check(tested==4,"Four physical polygon boundaries must be tested")
+	metrics["boundaries_tested"]=tested
+
 func finish() -> void:
 	var report := {"passed": failures.is_empty(), "failures": failures, "metrics": metrics, "physics_frames": test_frames, "world": world.stats, "city_streaming": world.city_manager.status() if world.city_manager != null else {}}
 	var prefix := "res://docs/phase_b5_driving_validation" if world.city_manager != null else "res://docs/phase_b_validation"
 	if "--phase-c-regression" in OS.get_cmdline_user_args():
 		prefix = "res://docs/phase_c_route_validation"
+	if "--slope-regression" in OS.get_cmdline_user_args():
+		prefix = "res://docs/slope_controls_validation"
 	if "--road-regression" in OS.get_cmdline_user_args():
 		prefix = "res://docs/road_width_route_validation"
 	var file := FileAccess.open(prefix + ("_render.json" if visualize else ".json"), FileAccess.WRITE)

@@ -8,7 +8,7 @@ func run() -> void:
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	root.size = Vector2i(1280, 720)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	var world := preload("res://scenes/Main.tscn").instantiate()
+	var world := preload("res://scenes/FlatWorld.tscn").instantiate()
 	var start := Time.get_ticks_usec()
 	root.add_child(world)
 	var startup_ms := float(Time.get_ticks_usec() - start) / 1000

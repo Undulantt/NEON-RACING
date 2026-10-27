@@ -6,7 +6,7 @@ func _initialize() -> void:
 func run() -> void:
 	var road_fix := "--road-fix" in OS.get_cmdline_user_args()
 	var prefix := "res://docs/evidence/road_width" if road_fix else "res://docs/evidence/phase_c"
-	var world := preload("res://scenes/Main.tscn").instantiate()
+	var world := preload("res://scenes/FlatWorld.tscn").instantiate()
 	root.add_child(world)
 	await physics_frame
 	await physics_frame

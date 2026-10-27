@@ -22,7 +22,7 @@ func pose(point: Vector3, direction: Vector3) -> Transform3D:
 	return Transform3D(Basis(Vector3.UP, atan2(-direction.x, -direction.z)), point)
 
 func run() -> void:
-	world = preload("res://scenes/Main.tscn").instantiate()
+	world = preload("res://scenes/FlatWorld.tscn").instantiate()
 	root.add_child(world)
 	await physics_frame
 	await physics_frame

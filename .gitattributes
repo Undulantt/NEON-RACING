@@ -4,3 +4,5 @@
 /config/** -text
 /scripts/driving/ArcadeCar.gd -text
 /docs/b6_baseline/** -text
+/docs/b7r_baseline/** -text
+/docs/slope_physics_baseline/** -text

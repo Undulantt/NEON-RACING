@@ -1,0 +1,24 @@
+{
+  "scripts/driving/ArcadeCar.gd": {
+    "phase": "User-authorized relief, slope physics and reversible T debug speed/acceleration multiplier",
+    "previous_sha256": "76f719c8f05d5a7ff40d38906a193104ba4d8b03a4dcbd2b0510066b3ab3fb34",
+    "current_sha256": "5b6bf7ea7d2cf69e302153202ca29351aa2c195efbfabc45effe56b148592940",
+    "archive_file": "docs/b7r_baseline/ArcadeCar.gd",
+    "regression_file": "docs/slope_flat_regression.json",
+    "regression_sha256": "de1898151d84748b6448e74d508b13d1893fcc8ab314d458964b68e231145231",
+    "prior_approved_sha256": "8962f4478da625ad032c0c9ad8975c910fa636a9e3945705536964a8cb7312a6",
+    "prior_approved_archive_file": "docs/slope_physics_baseline/ArcadeCar.gd",
+    "physics_regression_file": "docs/slope_physics_validation.json",
+    "physics_regression_sha256": "668037dbcc173dbae42032fdb23bdcdfc55e348a847c146c137e470e2001ef31"
+  },
+  "config/driving_config.json": {
+    "phase": "User-authorized slope physics tuning",
+    "previous_sha256": "d709a69b5b059487b3345552b7722d5fea5fa6a816512582cee62f03ab5f8ca4",
+    "current_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
+    "archive_file": "docs/slope_physics_baseline/driving_config.json",
+    "regression_file": "docs/slope_flat_regression.json",
+    "regression_sha256": "de1898151d84748b6448e74d508b13d1893fcc8ab314d458964b68e231145231",
+    "physics_regression_file": "docs/slope_physics_validation.json",
+    "physics_regression_sha256": "668037dbcc173dbae42032fdb23bdcdfc55e348a847c146c137e470e2001ef31"
+  }
+}

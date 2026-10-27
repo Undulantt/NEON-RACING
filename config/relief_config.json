@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "grid_step_m": 8,
+  "smoothing_sigma_m": 20,
+  "pilot_bounds_xz": [1536, -2048, 2304, -1280],
+  "pilot_road_id": "1018664009:0",
+  "max_road_grade": 0.42,
+  "sea_level_m": 0,
+  "vertical_origin_m": 0,
+  "source_file": "data/raw/elevation/cem4_la_paz.tif"
+}

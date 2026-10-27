@@ -3,7 +3,7 @@
   "max_reverse_speed_mps": 7.0,
   "acceleration_mps2": 13.0,
   "braking_mps2": 26.0,
-  "coast_deceleration_mps2": 4.0,
+  "coast_deceleration_mps2": 0.6,
   "wheelbase_m": 2.65,
   "max_steer_radians": 0.55,
   "steering_sensitivity": 1.0,
@@ -31,5 +31,12 @@
   "drift_min_duration_s": 0.4,
   "drift_bonus_mps": 3.0,
   "drift_bonus_duration_s": 0.9,
-  "drift_exit_timeout_s": 1.5
+  "drift_exit_timeout_s": 1.5,
+  "air_steering_multiplier": 0.1,
+  "crest_min_speed_mps": 14.0,
+  "crest_min_rise_mps": 1.2,
+  "crest_prediction_s": 0.14,
+  "crest_min_clearance_m": 0.08,
+  "crest_max_vertical_speed_mps": 6.0,
+  "crest_cooldown_s": 0.3
 }

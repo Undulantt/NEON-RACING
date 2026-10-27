@@ -1,0 +1,32 @@
+{
+  "source": "INEGI Continuo de Elevaciones Mexicano 4.0",
+  "version": {
+    "id": 2,
+    "version": "4.0",
+    "urlBase": "https://gaia.inegi.org.mx/geoserver/cem4_hs/wms?",
+    "capa": "cem4_hs:hs",
+    "urlWCS": "https://gaia.inegi.org.mx/geoserver/wcs?",
+    "capaDownload": "cem4_hs:hs_download"
+  },
+  "resolution": {
+    "id": 1,
+    "resolucion": "15m",
+    "opcion": 15,
+    "capaWCS": "cem4_workespace:cem15m_3857"
+  },
+  "url": "https://gaia.inegi.org.mx/geoserver/wcs?request=GetCoverage&service=WCS&version=1.0.0&coverage=cem4_workespace%3Acem15m_3857&crs=epsg%3A4326&bbox=-110.347%2C24.085%2C-110.27600000000001%2C24.189999999999998&resx=0.0001388889&resy=0.0001388889&format=GeoTIFF",
+  "bbox_lonlat": [
+    -110.347,
+    24.085,
+    -110.27600000000001,
+    24.189999999999998
+  ],
+  "fetched_utc": "2026-10-26T23:41:25.423266+00:00",
+  "bytes": 786852,
+  "sha256": "cd41d14bbf80ef21664c568200c1c8c483c939bfa7a5373a49bd6947e3240020",
+  "license_url": "https://www.inegi.org.mx/inegi/terminos.html",
+  "attribution": "Fuente: INEGI, Continuo de Elevaciones Mexicano 4.0.",
+  "vertical_reference": "Metres above mean sea level per official product description; specific geoid not confirmed",
+  "vertical_accuracy_m": null,
+  "product_url": "https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=794551151600"
+}

@@ -131,7 +131,7 @@ func run() -> void:
 	# Runtime integration against actual production city and HUD.
 	level.queue_free()
 	await process_frame
-	var world := preload("res://scenes/Main.tscn").instantiate()
+	var world := preload("res://scenes/FlatWorld.tscn").instantiate()
 	root.add_child(world)
 	await physics_frame
 	await physics_frame

@@ -1,6 +1,6 @@
 extends SceneTree
 
-const Main = preload("res://scenes/Main.tscn")
+const Main = preload("res://scenes/FlatWorld.tscn")
 var world: Node3D
 var car: CharacterBody3D
 var failures: Array[String] = []

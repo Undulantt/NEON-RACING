@@ -1,0 +1,74 @@
+{
+  "status": "Validated for user-authorized commit and push to origin/master",
+  "controller_sha256": "5b6bf7ea7d2cf69e302153202ca29351aa2c195efbfabc45effe56b148592940",
+  "driving_config_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
+  "controls": {
+    "T": "Toggle maximum speeds and engine acceleration x2; starts disabled; repeated key events ignored; second press restores defaults",
+    "normal_forward_max_mps": 32,
+    "debug_forward_max_mps": 64,
+    "normal_acceleration_mps2": 13,
+    "debug_acceleration_mps2": 26,
+    "gravity_and_braking_unchanged": true
+  },
+  "godot_reports": [
+    {
+      "file": "docs/debug_speed_validation.json",
+      "passed": true,
+      "sha256": "f7c5ff263a7aa73f6761a9c34f3b1f03dc00e0171386fdb693c9eabc8889d12b"
+    },
+    {
+      "file": "docs/slope_physics_validation.json",
+      "passed": true,
+      "sha256": "668037dbcc173dbae42032fdb23bdcdfc55e348a847c146c137e470e2001ef31"
+    },
+    {
+      "file": "docs/slope_real_crest_validation.json",
+      "passed": true,
+      "sha256": "a5e2425896cecaa37fb7f5a9ca0fc03fe4fde64e02152d59514e237a97132fac"
+    },
+    {
+      "file": "docs/slope_controls_validation.json",
+      "passed": true,
+      "sha256": "9cf7f1019f72f9681831cd8265de63af2d48cfa2342a1c98c924e04958300b9f"
+    },
+    {
+      "file": "docs/slope_drift_validation.json",
+      "passed": true,
+      "sha256": "a96699097c0bbdf0b190c7a934d5dfbebe6a67e5f2ce11844e4f554acb006525"
+    },
+    {
+      "file": "docs/slope_flat_regression.json",
+      "passed": true,
+      "sha256": "de1898151d84748b6448e74d508b13d1893fcc8ab314d458964b68e231145231"
+    },
+    {
+      "file": "docs/phase_b7r_default_integration.json",
+      "passed": true,
+      "sha256": "08f53ad01786b5baf9430d33dce27219038d2a6773f1149c2df6caf60800b2ac"
+    },
+    {
+      "file": "docs/phase_b7r_pilot_physics.json",
+      "passed": true,
+      "sha256": "dfb8b0cf96ca446daa7a8b511e9d45e3071269aea41c730a8c80afec73ed5ba3"
+    }
+  ],
+  "python_tests": {
+    "passed": true,
+    "count": 47,
+    "log": "docs/debug_speed_python_validation.log"
+  },
+  "editor_import": {
+    "passed": true,
+    "log": "docs/debug_speed_import.log",
+    "note": "Editor profile redirected to ignored workspace directory to respect sandbox filesystem permissions"
+  },
+  "real_relief_distance_m": 23690.8061902523,
+  "flat_distance_m": 23690.7817351818,
+  "regression_mode": "Fixed physics timestep; route tests run at normal speed with debug multiplier disabled",
+  "performance_note": "Current concurrent headless regression timings are not a new rendering benchmark. Existing B.7-R baseline comparisons remain documented.",
+  "limitations": [
+    "Full-map driving at x2 speed requires manual playtesting; synthetic fixture verifies x2 caps and acceleration",
+    "Existing B.7-R geodetic, grade-separated crossing and large-foundation limitations remain documented in PHASE_B7R.md"
+  ],
+  "publication_authorized_by_user": true
+}

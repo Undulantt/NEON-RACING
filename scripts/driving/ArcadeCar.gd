@@ -4,6 +4,7 @@ signal recovered(reason: String)
 const VisualBuilder = preload("res://scripts/driving/CarVisual.gd")
 var config: Dictionary
 var driving_enabled := true
+var debug_speed_enabled := false
 var external_control := false
 var command_throttle := 0.0
 var command_steer := 0.0
@@ -45,6 +46,70 @@ var road_cells: Dictionary = {}
 var world_bounds := Rect2()
 var visuals: Dictionary
 var visual_root: Node3D
+var elevation: RefCounted
+var ground_vertical_speed := 0.0
+var takeoff_cooldown := 0.0
+var airborne_time := 0.0
+var crest_takeoffs := 0
+var slope_acceleration := 0.0
+var previous_motion_position := Vector3.ZERO
+var crest_release_remaining := 0.0
+var crest_launch_velocity := 0.0
+
+func drive_test_multiplier() -> float:
+	return 2.0 if debug_speed_enabled else 1.0
+
+func _unhandled_input(event: InputEvent) -> void:
+	if driving_enabled and not get_tree().paused and event.is_action_pressed("debug_speed_toggle") and not event.is_echo():
+		debug_speed_enabled = not debug_speed_enabled
+		get_viewport().set_input_as_handled()
+
+func reset_surface_motion() -> void:
+	ground_vertical_speed = 0.0
+	takeoff_cooldown = 0.2
+	airborne_time = 0.0
+	crest_release_remaining = 0.0
+	crest_launch_velocity = 0.0
+	floor_snap_length = 0.35
+	previous_motion_position = global_position
+
+func predicted_support_height(at: Vector3) -> float:
+	# Query the physical surface, including ramps/bridges, rather than assuming
+	# every drivable surface is the geographic DEM. Upright chassis support uses
+	# its four corners; the ray excludes cars, buildings and boundary walls.
+	var height := -INF
+	for local in [Vector3(-0.9,0,-2.05), Vector3(0.9,0,-2.05), Vector3(-0.9,0,2.05), Vector3(0.9,0,2.05)]:
+		var p: Vector3 = at + global_basis * local
+		var query := PhysicsRayQueryParameters3D.create(p + Vector3.UP * 3, p - Vector3.UP * 8, 3)
+		var hit := get_world_3d().direct_space_state.intersect_ray(query)
+		if hit.is_empty():
+			return NAN
+		height = maxf(height, hit["position"].y)
+	return height + collision_shape.size.y * 0.5 + safe_margin
+
+func should_leave_crest(horizontal: Vector3, gravity: float) -> bool:
+	if takeoff_cooldown > 0 or horizontal.length() < float(config["crest_min_speed_mps"]) or ground_vertical_speed < float(config["crest_min_rise_mps"]):
+		return false
+	var time: float = config["crest_prediction_s"]
+	var future := global_position + horizontal * time
+	var support := predicted_support_height(future)
+	if not is_finite(support):
+		return false
+	var rise := minf(ground_vertical_speed, float(config["crest_max_vertical_speed_mps"]))
+	var ballistic_y := global_position.y + rise * time - 0.5 * gravity * time * time
+	return ballistic_y - support > float(config["crest_min_clearance_m"])
+
+func surface_height(x: float, z: float) -> float:
+	return elevation.get_height_at(x, z) if elevation != null else 0.0
+
+func supported_pose_height(x: float, z: float, yaw: float) -> float:
+	var height := surface_height(x, z)
+	if elevation != null:
+		var basis := Basis(Vector3.UP, yaw)
+		for local in [Vector3(-0.9, 0, -2.05), Vector3(0.9, 0, -2.05), Vector3(-0.9, 0, 2.05), Vector3(0.9, 0, 2.05)]:
+			var p: Vector3 = basis * local + Vector3(x, 0, z)
+			height = maxf(height, surface_height(p.x, p.z))
+	return height + 0.67
 
 func _ready() -> void:
 	config = JSON.parse_string(FileAccess.get_file_as_string("res://config/driving_config.json"))
@@ -89,9 +154,10 @@ func configure(map_data: Dictionary, environment: Dictionary) -> void:
 	var p: Array = environment["spawn"]["position_xz"]
 	var f: Array = environment["spawn"]["forward_xz"]
 	var yaw := atan2(-float(f[0]), -float(f[1]))
-	spawn_transform = Transform3D(Basis(Vector3.UP, yaw), Vector3(p[0], 0.67, p[1]))
+	spawn_transform = Transform3D(Basis(Vector3.UP, yaw), Vector3(p[0], supported_pose_height(p[0], p[1], yaw), p[1]))
 	safe_transform = spawn_transform
 	global_transform = spawn_transform
+	reset_surface_motion()
 
 func set_controls(throttle: float, steer: float, handbrake: bool = false, turbo: bool = false) -> void:
 	command_throttle = clampf(throttle, -1, 1)
@@ -100,7 +166,8 @@ func set_controls(throttle: float, steer: float, handbrake: bool = false, turbo:
 	command_turbo = turbo
 
 func road_hit(p: Vector3) -> bool:
-	var query := PhysicsRayQueryParameters3D.create(Vector3(p.x, 1.8, p.z), Vector3(p.x, -0.5, p.z), 1)
+	var depth := 2.5 if elevation != null else 1.17
+	var query := PhysicsRayQueryParameters3D.create(p + Vector3.UP * 1.13, p - Vector3.UP * depth, 1)
 	return not get_world_3d().direct_space_state.intersect_ray(query).is_empty()
 
 func clear_of_obstacles(at: Transform3D) -> bool:
@@ -134,7 +201,11 @@ func update_safe_position() -> void:
 			var direction := Vector3(b.x - a.x, 0, b.y - a.y).normalized()
 			if not road["oneway"] and direction.dot(-global_basis.z) < 0:
 				direction = -direction
-			candidate = Transform3D(Basis(Vector3.UP, atan2(-direction.x, -direction.z)), Vector3(closest.x, 0.67, closest.y))
+			var height := surface_height(closest.x, closest.y)
+			if not is_finite(height):
+				continue
+			var yaw := atan2(-direction.x, -direction.z)
+			candidate = Transform3D(Basis(Vector3.UP, yaw), Vector3(closest.x, supported_pose_height(closest.x, closest.y, yaw), closest.y))
 			street_name = road["street_name"]
 			found = true
 	if found and on_asphalt and is_on_floor() and best < 4.0 and safe_road_transform(candidate):
@@ -148,6 +219,7 @@ func recover(reason: String = "manual") -> void:
 		push_error("Recovery rejected: no clear, fully supported road pose")
 		return
 	global_transform = target
+	reset_surface_motion()
 	velocity = Vector3.ZERO
 	speed_mps = 0.0
 	signed_speed = 0.0
@@ -166,6 +238,10 @@ func recover(reason: String = "manual") -> void:
 func _physics_process(delta: float) -> void:
 	if road_segments.is_empty():
 		return
+	if global_position.distance_squared_to(previous_motion_position) > 9.0:
+		reset_surface_motion()
+	takeoff_cooldown = maxf(0.0, takeoff_cooldown - delta)
+	crest_release_remaining = maxf(0.0, crest_release_remaining - delta)
 	if driving_enabled and Input.is_action_just_pressed("recover") and not external_control:
 		recover()
 	var throttle := command_throttle if external_control else Input.get_axis("brake_reverse", "accelerate")
@@ -181,6 +257,12 @@ func _physics_process(delta: float) -> void:
 	var horizontal := Vector3(velocity.x, 0, velocity.z)
 	var longitudinal := horizontal.dot(forward)
 	var lateral := horizontal - forward * longitudinal
+	var grounded := is_on_floor()
+	var gravity: float = config["gravity_mps2"]
+	slope_acceleration = Vector3.DOWN.slide(get_floor_normal()).dot(forward) * gravity if grounded else 0.0
+	if grounded:
+		longitudinal += slope_acceleration * delta
+	var test_multiplier := drive_test_multiplier()
 	var max_speed: float = config["max_forward_speed_mps"] if on_asphalt else config["offroad_speed_mps"]
 	var turbo_requested := command_turbo if external_control else Input.is_action_pressed("turbo")
 	if not turbo_requested:
@@ -207,22 +289,28 @@ func _physics_process(delta: float) -> void:
 		max_speed = float(config["turbo_speed_mps"])
 	elif drift_boost_active:
 		max_speed += float(config["drift_bonus_mps"]) * drift_boost_strength
-	if throttle > 0:
-		longitudinal = move_toward(longitudinal, max_speed, float(config["braking_mps2"] if longitudinal < -0.1 else config["turbo_acceleration_mps2"] if turbo_active else config["acceleration_mps2"]) * throttle * delta)
-	elif throttle < 0:
-		longitudinal = move_toward(longitudinal, -float(config["max_reverse_speed_mps"]), float(config["braking_mps2"] if longitudinal > 0.1 else config["acceleration_mps2"]) * -throttle * delta)
-	else:
+	max_speed *= test_multiplier
+	if grounded and throttle > 0:
+		# Engine force must compete with gravity even when rolling backwards;
+		# do not silently substitute the stronger service brake for engine torque.
+		longitudinal = move_toward(longitudinal, max_speed, float(config["turbo_acceleration_mps2"] if turbo_active else config["acceleration_mps2"]) * test_multiplier * throttle * delta)
+	elif grounded and throttle < 0:
+		var reverse_force := float(config["braking_mps2"]) if longitudinal > 0.1 else float(config["acceleration_mps2"]) * test_multiplier
+		longitudinal = move_toward(longitudinal, -float(config["max_reverse_speed_mps"]) * test_multiplier, reverse_force * -throttle * delta)
+	elif grounded:
 		longitudinal = move_toward(longitudinal, 0, float(config["coast_deceleration_mps2"]) * delta)
 	if drift_boost_active:
-		longitudinal = minf(max_speed, longitudinal + float(config["drift_bonus_mps"]) * drift_boost_strength / float(config["drift_bonus_duration_s"]) * delta)
-	if handbrake:
+		longitudinal = minf(max_speed, longitudinal + float(config["drift_bonus_mps"]) * test_multiplier * drift_boost_strength / float(config["drift_bonus_duration_s"]) * delta)
+	if grounded and handbrake:
 		longitudinal = move_toward(longitudinal, 0, float(config["handbrake_deceleration_mps2"]) * delta)
-	if absf(longitudinal) > max_speed:
+	if grounded and absf(longitudinal) > max_speed:
 		longitudinal = move_toward(longitudinal, signf(longitudinal) * max_speed, 12.0 * delta)
 	steering = move_toward(steering, steer, float(config["steering_response_per_second"]) * delta)
-	var reduction := lerpf(1.0, 1.0 - float(config["steering_reduction_at_high_speed"]), clampf(absf(longitudinal) / float(config["max_forward_speed_mps"]), 0, 1))
+	var reduction := lerpf(1.0, 1.0 - float(config["steering_reduction_at_high_speed"]), clampf(absf(longitudinal) / (float(config["max_forward_speed_mps"]) * test_multiplier), 0, 1))
 	var angle := steering * float(config["max_steer_radians"]) * reduction * float(config["steering_sensitivity"])
 	var yaw_delta := -clampf(longitudinal / float(config["wheelbase_m"]) * tan(angle), -1.7, 1.7) * delta
+	if not grounded:
+		yaw_delta *= float(config["air_steering_multiplier"])
 	var proposed := Transform3D(Basis(Vector3.UP, rotation.y + yaw_delta), global_position)
 	if absf(yaw_delta) > 0.00001 and clear_of_obstacles(proposed):
 		rotation.y += yaw_delta
@@ -230,10 +318,32 @@ func _physics_process(delta: float) -> void:
 	var drifting := handbrake and absf(longitudinal) >= float(config["drift_min_speed_mps"])
 	grip_blend = move_toward(grip_blend, float(config["handbrake_grip_multiplier"]) if drifting else 1.0, (8.0 if drifting else float(config["drift_grip_recovery_per_second"])) * delta)
 	grip *= grip_blend
+	if not grounded:
+		grip = 0.0
 	horizontal = (forward * longitudinal + lateral).lerp(-global_basis.z * longitudinal, 1.0 - exp(-grip * delta))
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
-	velocity.y = -2.0 if is_on_floor() else velocity.y - float(config["gravity_mps2"]) * delta
+	if grounded and (handbrake or throttle < 0 or horizontal.length() < float(config["crest_min_speed_mps"])):
+		crest_release_remaining = 0.0
+	var taking_off := grounded and not handbrake and throttle >= 0 and should_leave_crest(horizontal, gravity)
+	if taking_off:
+		crest_launch_velocity = ground_vertical_speed
+		crest_release_remaining = 0.2
+		velocity.y = crest_launch_velocity
+		takeoff_cooldown = float(config["crest_cooldown_s"])
+		floor_snap_length = 0.0
+	elif grounded and crest_release_remaining > 0:
+		# Finish leaving the crest with the existing ramp momentum. Capping it
+		# below the ramp's tangent speed before separation would glue the box
+		# back to the hill. Apply the arcade cap once it is actually airborne.
+		velocity.y = crest_launch_velocity
+		floor_snap_length = 0.0
+	elif grounded:
+		velocity.y = -2.0
+		floor_snap_length = 0.35
+	else:
+		velocity.y -= gravity * delta
+		floor_snap_length = 0.0
 	move_and_slide()
 	var hit_wall := false
 	for i in range(get_slide_collision_count()):
@@ -242,6 +352,20 @@ func _physics_process(delta: float) -> void:
 			wall_contacts += 1
 			hit_wall = true
 	var actual := get_real_velocity()
+	if is_on_floor():
+		ground_vertical_speed = actual.y
+		airborne_time = 0.0
+	elif grounded and crest_release_remaining > 0:
+		velocity.y = minf(velocity.y, float(config["crest_max_vertical_speed_mps"]))
+		crest_takeoffs += 1
+		crest_release_remaining = 0.0
+		airborne_time = delta
+	elif grounded and not taking_off:
+		# Natural ledges also preserve the ramp's upward momentum.
+		velocity.y = maxf(velocity.y, minf(ground_vertical_speed, float(config["crest_max_vertical_speed_mps"])))
+	else:
+		airborne_time += delta
+	previous_motion_position = global_position
 	speed_mps = Vector2(actual.x, actual.z).length()
 	signed_speed = Vector3(velocity.x, 0, velocity.z).dot(-global_basis.z)
 	var flat_velocity := Vector3(velocity.x, 0, velocity.z)
@@ -252,9 +376,26 @@ func _physics_process(delta: float) -> void:
 	if safety_timer >= float(config["recovery_interval_s"]):
 		safety_timer = 0.0
 		update_safe_position()
-	if global_position.y < -4 or not world_bounds.grow(5).has_point(Vector2(global_position.x, global_position.z)) or global_basis.y.dot(Vector3.UP) < 0.5:
+	var ground_height := surface_height(global_position.x, global_position.z)
+	if not is_finite(ground_height) or global_position.y < ground_height - 4 or not world_bounds.grow(5).has_point(Vector2(global_position.x, global_position.z)) or global_basis.y.dot(Vector3.UP) < 0.5:
 		recover("fuera de límites")
 	visual_root.rotation.z = lerpf(visual_root.rotation.z, steering * minf(speed_mps / 32, 1) * 0.05, 8 * delta)
+	if elevation != null and is_on_floor():
+		align_visual_to_surface()
+	elif not is_on_floor():
+		# Retract wheels to their chassis mounts in flight. They must not stretch
+		# back down toward the terrain while the collision body is airborne.
+		visual_root.position.y = lerpf(visual_root.position.y, 0.0, minf(1.0, 12.0 * delta))
+		for pivot in visuals["pivots"]:
+			pivot.position.y = -0.26
+		if elevation != null:
+			var visual_lift := 0.0
+			for pivot in visuals["pivots"]:
+				var p: Vector3 = pivot.global_position
+				var h := surface_height(p.x,p.z)
+				if is_finite(h):
+					visual_lift = maxf(visual_lift,h+0.345-p.y)
+			visual_root.position.y += visual_lift
 	for i in range(visuals["pivots"].size()):
 		if i < 2:
 			visuals["pivots"][i].rotation.y = -angle
@@ -264,6 +405,25 @@ func _physics_process(delta: float) -> void:
 	for flame in visuals["exhaust"]:
 		flame.visible = turbo_active or drift_boost_active
 		flame.scale.z = (1.0 if turbo_active else 0.45) * (1.0 + sin(Time.get_ticks_msec() * 0.06) * 0.22)
+
+func align_visual_to_surface() -> void:
+	# Keep the arcade collision box upright; fit the visual chassis to axle contacts.
+	var heights: Array[float] = []
+	for local in [Vector3(-0.91,0,-1.3), Vector3(0.91,0,-1.3), Vector3(-0.91,0,1.3), Vector3(0.91,0,1.3)]:
+		var p: Vector3 = global_basis * local + global_position
+		heights.append(surface_height(p.x,p.z))
+	var front := (heights[0]+heights[1])*0.5
+	var rear := (heights[2]+heights[3])*0.5
+	var left := (heights[0]+heights[2])*0.5
+	var right := (heights[1]+heights[3])*0.5
+	visual_root.rotation.x = atan2(front-rear,2.6)
+	visual_root.rotation.z = atan2(right-left,1.82)
+	visual_root.position.y = (front+rear)*0.5 + 0.60 - global_position.y
+	for i in range(4):
+		var pivot: Node3D = visuals["pivots"][i]
+		var p := pivot.global_position
+		var local_center := visual_root.to_local(Vector3(p.x, surface_height(p.x,p.z)+0.34, p.z))
+		pivot.position.y = local_center.y
 
 func clear_drift_reward() -> void:
 	drift_charge = 0.0

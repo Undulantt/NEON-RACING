@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DEBUG_SPEED_REPORT {"controller_sha256":"5b6bf7ea7d2cf69e302153202ca29351aa2c195efbfabc45effe56b148592940","failures":[],"metrics":{"1.0":{"forward_cap_mps":32.0,"offroad_cap_mps":12.0,"reverse_cap_mps":-7.0,"speed_after_one_second_mps":12.9999904632568,"turbo_cap_mps":44.0},"2.0":{"forward_cap_mps":64.0,"offroad_cap_mps":24.0,"reverse_cap_mps":-14.0,"speed_after_one_second_mps":25.9999809265137,"turbo_cap_mps":88.0}},"passed":true}

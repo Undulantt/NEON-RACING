@@ -2,6 +2,8 @@ extends Node3D
 
 const Builder = preload("res://scripts/world/BuildingBuilder.gd")
 const DATA_ROOT := "res://data/processed/urban/"
+var data_root := DATA_ROOT
+var flatten_elevation := false
 var manifest: Dictionary = {}
 var spatial_index: Dictionary = {}
 var last_refresh_position := Vector3.ZERO
@@ -90,7 +92,7 @@ func load_chunk(entry: Dictionary) -> void:
 	var id: String = entry["id"]
 	if loaded.has(id):
 		return
-	var path := DATA_ROOT + str(entry["file"])
+	var path := data_root + str(entry["file"])
 	var bytes := FileAccess.get_file_as_bytes(path)
 	var hasher := HashingContext.new()
 	hasher.start(HashingContext.HASH_SHA256)
@@ -106,6 +108,10 @@ func load_chunk(entry: Dictionary) -> void:
 		return
 	if not apply_arcade_layout(data):
 		return
+	if flatten_elevation:
+		for building in data["buildings"]:
+			building.erase("base_y_m")
+			building.erase("foundation_min_y_m")
 	if baseline_b6:
 		data["category_facades"] = false
 		for building in data["buildings"]:
@@ -172,7 +178,7 @@ func fixture_buildings() -> Array:
 	# Test-only inspection of currently streamed data, not a global runtime load.
 	for chunk in manifest["chunks"]:
 		if loaded.has(chunk["id"]) and distance_to(chunk) < 160:
-			var data = JSON.parse_string(FileAccess.get_file_as_string(DATA_ROOT + str(chunk["file"])))
+			var data = JSON.parse_string(FileAccess.get_file_as_string(data_root + str(chunk["file"])))
 			if not apply_arcade_layout(data):
 				return []
 			var result: Array = []

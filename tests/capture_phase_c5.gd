@@ -19,7 +19,7 @@ func run() -> void:
 	root.content_scale_size = Vector2i(1280, 720)
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	root.size = Vector2i(1280, 720)
-	var world := preload("res://scenes/Main.tscn").instantiate()
+	var world := preload("res://scenes/FlatWorld.tscn").instantiate()
 	root.add_child(world)
 	await physics_frame
 	await physics_frame

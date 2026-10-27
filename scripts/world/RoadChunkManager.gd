@@ -15,6 +15,8 @@ var max_loaded := 0
 var total_loads := 0
 var total_unloads := 0
 var max_build_ms := 0
+var surface_layer := 1
+var failed_chunks: Array[String] = []
 
 func configure(data: Dictionary, initial_position: Vector3) -> Dictionary:
 	process_physics_priority = -100
@@ -23,7 +25,7 @@ func configure(data: Dictionary, initial_position: Vector3) -> Dictionary:
 	for entry in data["chunks"]:
 		var origin: Array = entry["origin_xz"]
 		entries[Vector2i(roundi(float(origin[0]) / 256), roundi(float(origin[1]) / 256))] = entry
-		triangles += entry["triangles_xz"].size()
+		triangles += int(entry.get("triangles_count", entry.get("triangles_xz", []).size()))
 	refresh(true)
 	return {"chunks": entries.size(), "triangles": triangles}
 
@@ -82,12 +84,19 @@ func ensure_recovery_support() -> void:
 					load_chunk(cell)
 
 func load_chunk(cell: Vector2i) -> void:
-	if loaded.has(cell):
+	if loaded.has(cell) or str(entries[cell]["id"]) in failed_chunks:
 		return
 	var node := Node3D.new()
 	add_child(node)
 	var start := Time.get_ticks_msec()
-	Builder.build(node, {"chunks": [entries[cell]]})
+	var result := Builder.build(node, {"chunks": [entries[cell]], "layer": surface_layer})
+	if result.has("error"):
+		failed_chunks.append(str(entries[cell]["id"]))
+		if target != null:
+			target.driving_enabled = false
+			target.velocity = Vector3.ZERO
+		node.queue_free()
+		return
 	max_build_ms = maxi(max_build_ms, Time.get_ticks_msec() - start)
 	loaded[cell] = node
 	max_loaded = maxi(max_loaded, loaded.size())
@@ -105,4 +114,4 @@ func _physics_process(delta: float) -> void:
 		load_chunk(pending.pop_front()["cell"])
 
 func status() -> Dictionary:
-	return {"loaded_chunks": loaded.size(), "total_chunks": entries.size(), "max_loaded_chunks": max_loaded, "chunk_loads": total_loads, "chunk_unloads": total_unloads, "max_chunk_build_ms": max_build_ms}
+	return {"loaded_chunks": loaded.size(), "total_chunks": entries.size(), "max_loaded_chunks": max_loaded, "chunk_loads": total_loads, "chunk_unloads": total_unloads, "max_chunk_build_ms": max_build_ms, "failed_chunks": failed_chunks}

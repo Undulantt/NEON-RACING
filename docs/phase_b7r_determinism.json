@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "files_compared": 40,
+  "changed": [],
+  "scope": "Canonical float32 triangle and height/quality binaries plus derived urban JSON; optional Godot resource identifiers excluded"
+}

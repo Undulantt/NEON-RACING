@@ -1,0 +1,29 @@
+{
+  "source": "INEGI CEM 4.0 official WCS",
+  "sha256": "cd41d14bbf80ef21664c568200c1c8c483c939bfa7a5373a49bd6947e3240020",
+  "crs": "EPSG:4326",
+  "transform": [
+    0.00013894324853227496,
+    0.0,
+    -110.347,
+    0.0,
+    -0.00013888888888888252,
+    24.189999999999998,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "width": 511,
+  "height": 756,
+  "units": "metres above mean sea level per official product description",
+  "specific_vertical_geoid": "not confirmed by returned WCS metadata",
+  "vertical_accuracy_m": null,
+  "sample_min_m": -6.0,
+  "sample_max_m": 337.0,
+  "nodata": 32767.0,
+  "nodata_samples": 27781,
+  "total_samples": 386316,
+  "wcs_resampling": "nearest neighbor default from DescribeCoverage; native service EPSG:3857 exported to EPSG:4326",
+  "license_url": "https://www.inegi.org.mx/inegi/terminos.html",
+  "horizontal_resolution_warning": "Use actual affine transform/pixel centres. 15m source posting is not vertical accuracy."
+}

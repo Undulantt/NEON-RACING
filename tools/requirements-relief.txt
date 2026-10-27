@@ -1,0 +1,5 @@
+# Offline processing only; no Python dependencies in Godot runtime.
+numpy==2.5.4
+scipy==1.18.1
+rasterio==1.5.2
+shapely==2.1.2

@@ -1,0 +1,14 @@
+{
+  "airborne_frames": 18,
+  "controller_sha256": "5b6bf7ea7d2cf69e302153202ca29351aa2c195efbfabc45effe56b148592940",
+  "failures": [],
+  "landed": true,
+  "minimum_visual_tire_clearance_m": 0.00499933638289818,
+  "osm_road_id": "28531909:0",
+  "passed": true,
+  "peak_clearance_m": 0.226974005810916,
+  "recoveries": 0,
+  "street": "Calle Miguel Hidalgo y Costilla",
+  "takeoffs": 1,
+  "wall_contacts": 0
+}

@@ -1,0 +1,147 @@
+{
+  "anchors_tested": 7,
+  "default_main_profile": "world",
+  "failures": [],
+  "passed": true,
+  "production_spawn_xz": [
+    113.035908168659,
+    -250.828991448202
+  ],
+  "road_streaming": {
+    "chunk_loads": 1026,
+    "chunk_unloads": 982,
+    "failed_chunks": [],
+    "loaded_chunks": 44,
+    "max_chunk_build_ms": 45,
+    "max_loaded_chunks": 105,
+    "total_chunks": 537
+  },
+  "routes": {
+    "north_coast": {
+      "route_distance_m": 3695.82757747173,
+      "route_expected_m": 3698.81132304668,
+      "route_frames": 19344,
+      "route_junctions_crossed": 30,
+      "route_max_deviation_m": 1.86838960647583,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "Calle Francisco I. Madero",
+        "Calle Heroico Colegio Militar",
+        "Calle Vicente Guerrero",
+        "Carretera La Paz-Pichilingue",
+        "Paseo Álvaro Obregón"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    },
+    "north_neighborhoods": {
+      "route_distance_m": 3969.14044368267,
+      "route_expected_m": 3972.00161540508,
+      "route_frames": 21505,
+      "route_junctions_crossed": 35,
+      "route_max_deviation_m": 1.85870456695557,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "",
+        "Andador Refugio A. Cota",
+        "Avenida Pedregal del Cortés",
+        "Calle Colina Capristano",
+        "Calle Colina de Mocuzari",
+        "Calle Colina del Sol",
+        "Calle Conquistadores de California",
+        "Calle Escritores",
+        "Calle Mar Bermejo",
+        "Calle Misioneros Jesuitas",
+        "Calle Márqués de Villapuente",
+        "Calle Navegantes",
+        "Carretera La Paz-Pichilingue",
+        "Paseo Álvaro Obregón",
+        "Privada Colina del Sol"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    },
+    "south_hospital": {
+      "route_distance_m": 6502.90979146957,
+      "route_expected_m": 6505.78470563889,
+      "route_frames": 35850,
+      "route_junctions_crossed": 83,
+      "route_max_deviation_m": 3.00665211677551,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "",
+        "Boulevard 5 de Febrero",
+        "Boulevard Forjadores de Sudcalifornia",
+        "Boulevard General Francisco J. Mujica",
+        "Boulevard General Francisco José Mujica",
+        "Calle 5 de Febrero",
+        "Calle Antonio Navarro",
+        "Calle Aquiles Serdán",
+        "Calle Carabineros",
+        "Calle General Manuel Márquez de León",
+        "Calle Héroes de Independencia",
+        "Calle Ignacio Allende",
+        "Calle Ignacio Ramírez",
+        "Calle Miguel L. de Legaspy",
+        "Calle Profesor Marcelo Rubio Ruiz",
+        "Paseo Álvaro Obregón"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    },
+    "south_uabcs": {
+      "route_distance_m": 9522.92837762833,
+      "route_expected_m": 9525.89665460587,
+      "route_frames": 52972,
+      "route_junctions_crossed": 138,
+      "route_max_deviation_m": 3.00576376914978,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "",
+        "Avenida Universidad Autónoma de Baja California Sur",
+        "Boulevard 5 de Febrero",
+        "Boulevard Forjadores de Sudcalifornia",
+        "Boulevard General Francisco J. Mujica",
+        "Boulevard General Francisco José Mujica",
+        "Calle 5 de Febrero",
+        "Calle Antonio Navarro",
+        "Calle Aquiles Serdán",
+        "Calle Carabineros",
+        "Calle General Manuel Márquez de León",
+        "Calle Héroes de Independencia",
+        "Calle Ignacio Allende",
+        "Calle Ignacio Ramírez",
+        "Calle Miguel L. de Legaspy",
+        "Calle Profesor Marcelo Rubio Ruiz",
+        "Calle Rubi",
+        "Paseo Álvaro Obregón"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    }
+  },
+  "static_memory_bytes": 237250277.0,
+  "terrain_streaming": {
+    "chunk_loads": 1144,
+    "chunk_unloads": 1094,
+    "failed_chunks": [],
+    "loaded_chunks": 50,
+    "max_chunk_build_ms": 42,
+    "max_loaded_chunks": 107,
+    "total_chunks": 615
+  },
+  "urban_streaming": {
+    "chunk_loads": 642,
+    "chunk_unloads": 625,
+    "enabled": true,
+    "failed_chunks": [],
+    "loaded_buildings": 1509,
+    "loaded_chunks": 17,
+    "max_chunk_build_ms": 51,
+    "max_loaded_chunks": 43
+  }
+}

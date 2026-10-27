@@ -48,7 +48,7 @@ func _ready() -> void:
 	notice = label("", Vector2(24, 170), 18, Color("ffd38f"))
 	label("W / ↑ acelerar   S / ↓ frenar y reversa   A D / ← → girar", Vector2(24, 580), 16)
 	label("ESPACIO derrape   SHIFT turbo   R recuperar   ESC pausa", Vector2(24, 610), 16)
-	label("V cámara cerca/lejos   C inspección aérea   M silenciar sonido", Vector2(24, 638), 15)
+	label("V cámara   C inspección   M silenciar   T velocidad/aceleración ×2", Vector2(24, 638), 15)
 	driving_label = label("TURBO LISTO", Vector2(24, 205), 18, Color("72e0ff"))
 	turbo_bar = ProgressBar.new()
 	turbo_bar.position = Vector2(24, 240)
@@ -209,6 +209,8 @@ func _process(delta: float) -> void:
 		else:
 			drift_label.text = "CARGANDO %d %%" % roundi(car.drift_charge * 100) if car.drift_tracking else "DERRAPA PARA CARGAR"
 	driving_label.text = "TURBO ACTIVO" if car.turbo_active else "DERRAPE · %d°" % roundi(rad_to_deg(absf(car.slip_angle))) if car.drift_amount > 0.15 else "TURBO LISTO · SHIFT" if car.turbo_charge >= float(car.config["turbo_min_charge"]) else "TURBO RECARGANDO"
+	if car.debug_speed_enabled:
+		driving_label.text += " · PRUEBA ×2 · T"
 	if car.turbo_exhausted:
 		driving_label.text += " · suelta SHIFT"
 	if car.feedback.muted:

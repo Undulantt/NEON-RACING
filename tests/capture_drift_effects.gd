@@ -8,7 +8,7 @@ func capture(path: String) -> void:
 	root.get_texture().get_image().save_png("res://docs/evidence/" + path + ".png")
 
 func run() -> void:
-	var world := preload("res://scenes/Main.tscn").instantiate()
+	var world := preload("res://scenes/FlatWorld.tscn").instantiate()
 	root.add_child(world)
 	await physics_frame
 	await physics_frame

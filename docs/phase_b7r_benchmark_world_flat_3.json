@@ -1,0 +1,42 @@
+{
+  "average_fps": 1328.53835582029,
+  "baseline": true,
+  "long_frames": [],
+  "max_frame_ms": 5.498,
+  "mean_frame_ms": 0.752706909528827,
+  "mean_physics_monitor_ms": 0.748483968086681,
+  "p95_ms": 1.002,
+  "p99_ms": 1.295,
+  "peak_collision_pairs": 0.0,
+  "peak_nodes": 419.0,
+  "peak_render_primitives": 339647.0,
+  "peak_static_memory_bytes": 191212920.0,
+  "rendered": true,
+  "road_streaming": {
+    "chunk_loads": 49,
+    "chunk_unloads": 0,
+    "failed_chunks": [],
+    "loaded_chunks": 49,
+    "max_chunk_build_ms": 1,
+    "max_loaded_chunks": 49,
+    "total_chunks": 537
+  },
+  "scenario": "Same spawn XZ, camera, buildings, streaming radii, viewport and renderer; original flat road triangles+safety platform versus CEM4 terrain and roads; static 2s warmup+5s sample",
+  "scope": "full_world",
+  "startup_ms": 1236.638,
+  "terrain_streaming": {},
+  "urban_streaming": {
+    "chunk_loads": 22,
+    "chunk_unloads": 0,
+    "enabled": true,
+    "failed_chunks": [],
+    "loaded_buildings": 1237,
+    "loaded_chunks": 22,
+    "max_chunk_build_ms": 8,
+    "max_loaded_chunks": 22
+  },
+  "viewport_px": [
+    1280,
+    720
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "failures": [],
+  "metrics": {
+    "boundary_collision_tested": true,
+    "braking_forward": {
+      "braking_frames": 75,
+      "height_change_m": -7.72867012023926,
+      "speed_before_braking_mps": 27.5713329315186
+    },
+    "braking_reverse": {
+      "braking_frames": 25,
+      "height_change_m": 1.67096138000488,
+      "speed_before_braking_mps": 11.7031240463257
+    },
+    "forward": {
+      "distance_m": 246.892979383469,
+      "expected_m": 250.863149404526,
+      "frames": 1772,
+      "height_range_m": [
+        6.67845726013184,
+        32.8563575744629
+      ],
+      "offroad_frames": 0,
+      "offroad_probes": [],
+      "recoveries": 0,
+      "sectors_crossed": 2,
+      "unsupported_frames": 0,
+      "wall_contacts": 0
+    },
+    "high_speed_slope": {
+      "maximum_speed_mps": 44.0341262817383,
+      "offroad_frames": 0,
+      "unsupported_frames": 0
+    },
+    "max_physics_height_error_m": 0.0000318998595929543,
+    "raycast_samples": 406,
+    "reverse": {
+      "distance_m": 246.969922780991,
+      "expected_m": 250.863149404526,
+      "frames": 1872,
+      "height_range_m": [
+        6.6630859375,
+        33.6791801452637
+      ],
+      "offroad_frames": 0,
+      "offroad_probes": [],
+      "recoveries": 0,
+      "sectors_crossed": 2,
+      "unsupported_frames": 0,
+      "wall_contacts": 0
+    },
+    "road_streaming": {
+      "chunk_loads": 9,
+      "chunk_unloads": 0,
+      "failed_chunks": [],
+      "loaded_chunks": 9,
+      "max_chunk_build_ms": 13,
+      "max_loaded_chunks": 9,
+      "total_chunks": 9
+    },
+    "terrain_streaming": {
+      "chunk_loads": 9,
+      "chunk_unloads": 0,
+      "failed_chunks": [],
+      "loaded_chunks": 9,
+      "max_chunk_build_ms": 16,
+      "max_loaded_chunks": 9,
+      "total_chunks": 9
+    },
+    "wheel_error_forward_m": 0.000073881379794305,
+    "wheel_error_reverse_m": 0.0000717349210754281
+  },
+  "passed": true,
+  "physics_frames": 4404
+}

@@ -4,3 +4,4 @@
 
 [node name="LaPazFreeDrive" type="Node3D"]
 script = ExtResource("1")
+relief_profile = "world"

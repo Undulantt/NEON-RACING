@@ -1,3 +1,7 @@
+El relieve real B.7-R está integrado en el mapa principal: **F5** inicia `Main.tscn` con terreno, carreteras y edificios elevados en centro, norte y sur, conservando el punto de aparición habitual. El piloto sigue en `scenes/ReliefPilot.tscn` (**F6**). Para comparar con el plano, abrir `scenes/FlatWorld.tscn` o iniciar con `--flat-world`. [Implementación, fuentes, reproducción, pruebas y límites](docs/PHASE_B7R.md); [auditoría previa](docs/PHASE_B7R_PROPOSAL.md).
+
+La conducción incorpora gravedad en pendientes, retroceso cuando falta fuerza y pequeños vuelos al coronar subidas con velocidad. **Espacio mantiene el coche frenado en una cuesta. T activa/desactiva velocidad máxima y aceleración ×2 para pruebas.** [Comportamiento, parámetros y pruebas](docs/SLOPE_PHYSICS.md).
+
 Se restituyen las carreteras principales del Cajoncito: Juan de Dios Angulo, Federal 1, Forjadores y Olachea, conservando el límite sur recortado. [Detalles, procedencia y pruebas](docs/CAJONCITO_ROADS.md).
 
 La extensión sur se recorta ahora por el límite poligonal indicado en rojo: la franja inferior queda excluida de calles, edificios, suelo visual y físico. [Corrección del límite sur](docs/PHASE_C5_SOUTH_CUT.md).

@@ -1,0 +1,7 @@
+{
+  "build_ms": 429,
+  "bytes": 841868,
+  "engine": "4.7.2-stable (official)",
+  "note": "Derived optional runtime cache; regenerate from binary triangle sources when changing Godot version",
+  "scenes": 29
+}

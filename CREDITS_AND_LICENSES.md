@@ -71,3 +71,9 @@ Nueva selección Overture Buildings 2026-10-21.0 de 84.824 registros descargados
 ## Corrección vial del Cajoncito
 
 Se reutilizan los mismos XML OSM originales verificados y se guardan nuevos agregados `*_c5_cajoncito.*`, derivados de esas respuestas sin modificarlas. Se incorporan trunk/trunk_link y cuatro cruces Forjadores revisados, con nodos, sentidos, etiquetas y atribución ODbL preservados. El tratamiento plano de los cruces y la exclusión provisional de la vía inferior 660516292 se declaran en `docs/CAJONCITO_ROADS.md` y en los metadatos de la red.
+
+## Relieve B.7-R
+
+Fuente: INEGI, Continuo de Elevaciones Mexicano 4.0. Recorte del WCS oficial de la capa `cem4_workespace:cem15m_3857`, exportado a EPSG:4326 el 26/10/2026. Ficha: https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=794551151600 . Uso bajo los términos INEGI: https://www.inegi.org.mx/inegi/terminos.html . Respuesta TIFF, metadatos, consulta y SHA-256 se conservan en `data/raw/elevation/`.
+
+Modificaciones propias para el juego: remuestreo al sistema métrico existente, suavizado de 20 m, ajuste local a cota marina del litoral OSM, limitación local de pendientes excesivas y triangulación/sectorización. Las cimentaciones, estimaciones costeras y correcciones de conducción no son mediciones ni productos certificados por INEGI. El dato de 15 m es resolución horizontal; no se afirma esa precisión vertical ni un geoide específico no publicado por el servicio. No se han utilizado datos de Copernicus ni LiDAR independientes.

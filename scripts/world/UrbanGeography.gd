@@ -41,10 +41,20 @@ func configure(manifest: Dictionary) -> bool:
 		var visual := MeshInstance3D.new()
 		visual.mesh = mesh
 		add_child(visual)
-	for landmark in datasets["landmarks.json"]["landmarks"]:
+	configure_labels(datasets["landmarks.json"]["landmarks"])
+	return true
+
+func configure_labels(landmarks: Array, elevation: RefCounted = null, bounds: Rect2 = Rect2()) -> void:
+	for landmark in landmarks:
+		var p := Vector2(landmark["position_xz"][0], landmark["position_xz"][1])
+		if bounds.has_area() and not bounds.has_point(p):
+			continue
+		var height: float = elevation.get_height_at(p.x,p.y) if elevation != null else 0.0
+		if not is_finite(height):
+			continue
 		var label := Label3D.new()
 		label.text = landmark["name"]
-		label.position = Vector3(landmark["position_xz"][0], 14, landmark["position_xz"][1])
+		label.position = Vector3(p.x, height+14, p.y)
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		label.font_size = 48
 		label.pixel_size = 0.025
@@ -52,7 +62,6 @@ func configure(manifest: Dictionary) -> bool:
 		label.visible = false
 		add_child(label)
 		labels.append(label)
-	return true
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F9:

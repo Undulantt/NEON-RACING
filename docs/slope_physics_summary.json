@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "controller_sha256": "36bd9b383561219278544f0c8236bccfacedc0abc05834750f7dd1a79ee11954",
+  "driving_config_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
+  "tests": {
+    "synthetic_physics": {
+      "file": "docs/slope_physics_validation.json",
+      "passed": true
+    },
+    "real_crest": {
+      "file": "docs/slope_real_crest_validation.json",
+      "passed": true
+    },
+    "real_crest_render": {
+      "file": "docs/slope_real_crest_render_validation.json",
+      "passed": true
+    },
+    "controls": {
+      "file": "docs/slope_controls_validation.json",
+      "passed": true
+    },
+    "drift": {
+      "file": "docs/slope_drift_validation.json",
+      "passed": true
+    },
+    "flat_routes": {
+      "file": "docs/slope_flat_regression.json",
+      "passed": true
+    },
+    "relief_routes": {
+      "file": "docs/phase_b7r_default_integration.json",
+      "passed": true
+    },
+    "pilot": {
+      "file": "docs/phase_b7r_pilot_physics.json",
+      "passed": true
+    }
+  },
+  "python_tests": 47,
+  "synthetic_metrics": {
+    "coast_uphill_final_speed_mps": -8.15620803833008,
+    "constant_uphill_airborne_frames": 0,
+    "fast_crest": {
+      "airborne_engine_gain_mps": 0.002288818359375,
+      "airborne_frames": 33,
+      "airborne_speed_change_mps": 0.002288818359375,
+      "landed": true,
+      "maximum_upward_velocity_mps": 6.0,
+      "peak_clearance_m": 0.820989127270877,
+      "takeoffs": 1
+    },
+    "flat_full_throttle_mps": 12.9999904632568,
+    "hill_hold_drift_m": 0.0,
+    "slow_crest": {
+      "airborne_engine_gain_mps": 0.0,
+      "airborne_frames": 0,
+      "airborne_speed_change_mps": 0.0,
+      "landed": false,
+      "maximum_upward_velocity_mps": 0.0,
+      "peak_clearance_m": 0.0,
+      "takeoffs": 0
+    },
+    "unbraked_downhill": {
+      "distance_m": 9.93237781524658,
+      "signed_speed_mps": 9.15049266815186
+    },
+    "uphill_full_throttle_mps": 7.82345104217529,
+    "weak_uphill_speed_mps": -4.83949279785156
+  },
+  "real_crest": {
+    "airborne_frames": 18,
+    "controller_sha256": "36bd9b383561219278544f0c8236bccfacedc0abc05834750f7dd1a79ee11954",
+    "failures": [],
+    "landed": true,
+    "minimum_visual_tire_clearance_m": 0.00499933638289818,
+    "osm_road_id": "28531909:0",
+    "passed": true,
+    "peak_clearance_m": 0.226974005810916,
+    "recoveries": 0,
+    "street": "Calle Miguel Hidalgo y Costilla",
+    "takeoffs": 1,
+    "wall_contacts": 0
+  },
+  "relief_traversal_distance_m": 23690.8061902523,
+  "flat_traversal_distance_m": 23690.7817351818,
+  "geographic_inputs_unchanged": true,
+  "limitations": [
+    "Arcade upright CharacterBody3D; no independent suspension or rollover simulation",
+    "Air steering changes heading slightly but does not supply tire traction or engine/brake force",
+    "Hop clearance depends on the terrain after the crest; the vertical-speed cap is not a cliff-height cap",
+    "Existing geographical source and large-foundation review limitations remain unchanged"
+  ],
+  "historical_snapshot_note": "Validation snapshot before T debug-speed release; latest current-controller regressions and publication authorization are in docs/debug_speed_release.json.",
+  "commits_created_at_original_phase_end": false,
+  "pushed_at_original_phase_end": false
+}
