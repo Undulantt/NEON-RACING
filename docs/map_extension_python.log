@@ -1,0 +1,54 @@
+test_fictional_ridge_keeps_sea_and_interior_clear (test_boundary_extension.BoundaryExtensionTests.test_fictional_ridge_keeps_sea_and_interior_clear) ... ok
+test_local_extensions_preserve_original_region (test_boundary_extension.BoundaryExtensionTests.test_local_extensions_preserve_original_region) ... ok
+test_all_four_corridors_and_both_forjadores_crossings_exist (test_cajoncito.CajoncitoTests.test_all_four_corridors_and_both_forjadores_crossings_exist) ... ok
+test_critical_routes_traverse_required_source_nodes_and_directed_edges (test_cajoncito.CajoncitoTests.test_critical_routes_traverse_required_source_nodes_and_directed_edges) ... ok
+test_reviewed_bridge_policy_does_not_relax_access_or_tunnels (test_cajoncito.CajoncitoTests.test_reviewed_bridge_policy_does_not_relax_access_or_tunnels) ... ok
+test_ambiguous_and_proximity_are_not_assigned (test_enrichment.EnrichmentTests.test_ambiguous_and_proximity_are_not_assigned) ... ok
+test_categories_use_evidence (test_enrichment.EnrichmentTests.test_categories_use_evidence) ... ok
+test_coast_direction_and_building_conflict (test_enrichment.EnrichmentTests.test_coast_direction_and_building_conflict) ... ok
+test_courtyard_is_not_containment (test_enrichment.EnrichmentTests.test_courtyard_is_not_containment) ... ok
+test_overrides_persist_and_orphans_are_reported (test_enrichment.EnrichmentTests.test_overrides_persist_and_orphans_are_reported) ... ok
+test_real_records_reference_existing_buildings (test_enrichment.EnrichmentTests.test_real_records_reference_existing_buildings) ... ok
+test_bound_map_and_authentic_source (test_environment.EnvironmentTests.test_bound_map_and_authentic_source) ... ok
+test_buildings_clear_roads_and_valid_roofs (test_environment.EnvironmentTests.test_buildings_clear_roads_and_valid_roofs) ... ok
+test_driving_route_is_real_and_multistreet (test_environment.EnvironmentTests.test_driving_route_is_real_and_multistreet) ... ok
+test_spawn_and_bounds (test_environment.EnvironmentTests.test_spawn_and_bounds) ... ok
+test_all_immutable_osm_tiles_verify (test_expansion.ExpansionTests.test_all_immutable_osm_tiles_verify) ... ok
+test_block_mask_does_not_open_future_southeast (test_expansion.ExpansionTests.test_block_mask_does_not_open_future_southeast) ... ok
+test_disjoint_fixture_never_invents_connector (test_expansion.ExpansionTests.test_disjoint_fixture_never_invents_connector) ... ok
+test_red_line_excludes_all_generated_surfaces_and_buildings (test_expansion.ExpansionTests.test_red_line_excludes_all_generated_surfaces_and_buildings) ... ok
+test_routes_follow_real_directed_edges_and_reach_north (test_expansion.ExpansionTests.test_routes_follow_real_directed_edges_and_reach_north) ... ok
+test_south_connects_real_hospital_and_university (test_expansion.ExpansionTests.test_south_connects_real_hospital_and_university) ... ok
+test_streamed_facades_are_hash_bound_to_their_city_sector (test_expansion.ExpansionTests.test_streamed_facades_are_hash_bound_to_their_city_sector) ... ok
+test_access_and_levels (test_map.AttributeTests.test_access_and_levels) ... ok
+test_directed_dijkstra_fixture (test_map.AttributeTests.test_directed_dijkstra_fixture) ... ok
+test_oneway_reverse_roundabout (test_map.AttributeTests.test_oneway_reverse_roundabout) ... ok
+test_reverse_way_and_boundary_fixture (test_map.AttributeTests.test_reverse_way_and_boundary_fixture) ... ok
+test_width_sources (test_map.AttributeTests.test_width_sources) ... ok
+test_origin_and_axes (test_map.ProjectionTests.test_origin_and_axes) ... ok
+test_cache_hash (test_map.RealMapTests.test_cache_hash) ... ok
+test_corrupt_direction_is_rejected (test_map.RealMapTests.test_corrupt_direction_is_rejected) ... ok
+test_deterministic_build (test_map.RealMapTests.test_deterministic_build) ... ok
+test_nan_is_rejected (test_map.RealMapTests.test_nan_is_rejected) ... ok
+test_no_hidden_example_data (test_map.RealMapTests.test_no_hidden_example_data) ... ok
+test_real_source_export_surface_and_route (test_map.RealMapTests.test_real_source_export_surface_and_route) ... ok
+test_corrupt_source_rejected (test_poi_sources.PoiSourcesTests.test_corrupt_source_rejected) ... ok
+test_current_taxonomy_and_scian_rules (test_poi_sources.PoiSourcesTests.test_current_taxonomy_and_scian_rules) ... ok
+test_low_confidence_and_closed_are_retained_for_review (test_poi_sources.PoiSourcesTests.test_low_confidence_and_closed_are_retained_for_review) ... ok
+test_observed_denue_schema_and_publication (test_poi_sources.PoiSourcesTests.test_observed_denue_schema_and_publication) ... ok
+test_canonical_triangle_interpolation (test_relief.ReliefTests.test_canonical_triangle_interpolation) ... ok
+test_level_buildings_preserve_roofs_and_courtyards (test_relief.ReliefTests.test_level_buildings_preserve_roofs_and_courtyards) ... ok
+test_partition_coverage_and_shared_sector_edges (test_relief.ReliefTests.test_partition_coverage_and_shared_sector_edges) ... ok
+test_road_and_ground_share_identical_surface (test_relief.ReliefTests.test_road_and_ground_share_identical_surface) ... ok
+test_verified_source_and_no_missing_pilot_samples (test_relief.ReliefTests.test_verified_source_and_no_missing_pilot_samples) ... ok
+test_all_source_types_are_explicit (test_urban.UrbanDataTests.test_all_source_types_are_explicit) ... ok
+test_cache_is_bound_to_requested_release_and_source (test_urban.UrbanDataTests.test_cache_is_bound_to_requested_release_and_source) ... ok
+test_full_hybrid_city_and_untouched_baseline (test_urban.UrbanDataTests.test_full_hybrid_city_and_untouched_baseline) ... ok
+test_inegi_crs_is_explicit (test_urban.UrbanDataTests.test_inegi_crs_is_explicit) ... ok
+test_same_projection_as_roads (test_urban.UrbanDataTests.test_same_projection_as_roads) ... ok
+test_water_and_coast_fixture (test_urban.UrbanDataTests.test_water_and_coast_fixture) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 176.721s
+
+OK

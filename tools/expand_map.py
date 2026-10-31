@@ -18,6 +18,9 @@ def main():
     areas=list(blocks.values())
     cfg.update(active_blocks=blocks,bbox=[min(b[0] for b in areas),min(b[1] for b in areas),max(b[2] for b in areas),max(b[3] for b in areas)],origin_lat=profile["origin_lat"],origin_lon=profile["origin_lon"])
     cfg["road_import_policy"]=profile.get("road_import_policy", {})
+    cfg["block_polygons_lonlat"]=profile.get("block_polygons_lonlat", {})
+    if profile.get("preserved_sea_file"):
+        cfg["preserved_sea_file"]=profile["preserved_sea_file"]
     if profile.get("clip_polygon_lonlat"):
         cfg["clip_polygon_lonlat"]=profile["clip_polygon_lonlat"]
     else:

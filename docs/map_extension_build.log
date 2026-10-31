@@ -1,0 +1,99 @@
+{
+  "roads": 13976,
+  "nodes": 11251,
+  "directed_edges": 23546,
+  "excluded_ways": 45,
+  "asphalt_area_m2": 4370210.6437371,
+  "chunks": 574,
+  "triangles": 65479
+}
+Route: 2494.1572310789484 m
+Environment: 5411 buildings; 2320 excluded
+Driving test: 1200.9193693625493 m ['16 de Septiembre', 'Calle 16 de Septiembre', 'Calle Aquiles Serd�n', 'Calle Ignacio Ram�rez', 'Calle Melchor Ocampo', 'Paseo �lvaro Obreg�n']
+URBAN: verified source snapshots
+URBAN: indexed exact road mask 574
+URBAN: Overture 0 / 84824
+URBAN: Overture 10000 / 84824
+URBAN: Overture 20000 / 84824
+URBAN: Overture 30000 / 84824
+URBAN: Overture 40000 / 84824
+URBAN: Overture 50000 / 84824
+URBAN: Overture 60000 / 84824
+URBAN: Overture 70000 / 84824
+URBAN: Overture 80000 / 84824
+URBAN: accepted 61465 real volumes
+URBAN: 2658 local blocks, 1740 eligible
+URBAN: infill blocks 0 / 1740 volumes 0
+URBAN: infill blocks 250 / 1740 volumes 156
+URBAN: infill blocks 500 / 1740 volumes 325
+URBAN: infill blocks 750 / 1740 volumes 649
+URBAN: infill blocks 1000 / 1740 volumes 773
+URBAN: infill blocks 1250 / 1740 volumes 834
+URBAN: infill blocks 1500 / 1740 volumes 984
+URBAN: infill complete 1000
+URBAN: enrichment complete
+URBAN: geography complete
+{
+  "overture_downloaded": 84824,
+  "source_counts": {
+    "osm": 5194,
+    "overture": 56271,
+    "fictional": 1000
+  },
+  "buildings": 62465,
+  "real_buildings": 61465,
+  "fictional_buildings": 1000,
+  "height_estimated": 62465,
+  "collision_buildings": 60437,
+  "chunks": 541,
+  "protected_features": 527,
+  "inegi_blocks_in_bbox": 2658,
+  "eligible_infill_blocks": 1740,
+  "excluded_buildings": 28733
+}
+{
+  "source_asphalt_area_m2": 4370210.6437371,
+  "arcade_asphalt_area_m2": 7513467.436140279,
+  "buildings_total": 62465,
+  "buildings_adjusted": 10230,
+  "buildings_removed": 55,
+  "max_adjusted_building_overlap_m2": 0.0,
+  "triangulation_error_m2": 4.0978193283081055e-08
+}
+{
+  "statistics": {
+    "core_envelope_area_km2": 9.039754913430482,
+    "active_envelope_area_km2": 44.152491913843164,
+    "area_ratio": 4.884257630507795,
+    "reachable_nodes_from_core": 11062,
+    "total_nodes": 11251
+  },
+  "routes": [
+    {
+      "id": "north_coast",
+      "file": "tracks/c5_north_coast.json",
+      "sha256": "061d85eb46412ff8d176693d10cd0d1966d5404892ea2279f80dde4a622e9319",
+      "length_m": 3698.8113848204857
+    },
+    {
+      "id": "north_neighborhoods",
+      "file": "tracks/c5_north_neighborhoods.json",
+      "sha256": "2b80fea69a5c549d5da198ca51231260403d490ccf0f5fa853f4da81c083c7f1",
+      "length_m": 3972.0014424972214
+    },
+    {
+      "id": "south_hospital",
+      "file": "tracks/c5_south_hospital.json",
+      "sha256": "e25be7e028578bb5b513c80340afeafa3da3c2964ff229aa08f51a2f6f1b3585",
+      "length_m": 6505.78454709501
+    },
+    {
+      "id": "south_uabcs",
+      "file": "tracks/c5_south_uabcs.json",
+      "sha256": "36ea9dd0904c2db3cb3eecc0f89b12f3adc3fb510a519a52fefb4982d1145c1b",
+      "length_m": 9525.895429494294
+    }
+  ]
+}
+PASS {'roads': 13976, 'nodes': 11251, 'directed_edges': 23546, 'excluded_ways': 45, 'asphalt_area_m2': 4370210.6437371, 'chunks': 574, 'triangles': 65479}
+C5 BUILD VERIFIED

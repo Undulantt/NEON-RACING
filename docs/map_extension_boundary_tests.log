@@ -1,0 +1,8 @@
+test_fictional_ridge_keeps_sea_and_interior_clear (test_boundary_extension.BoundaryExtensionTests.test_fictional_ridge_keeps_sea_and_interior_clear) ... ok
+test_local_extensions_preserve_original_region (test_boundary_extension.BoundaryExtensionTests.test_local_extensions_preserve_original_region) ... ok
+test_sea_geometry_is_preserved_exactly (test_boundary_extension.BoundaryExtensionTests.test_sea_geometry_is_preserved_exactly) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.636s
+
+OK

@@ -1,12 +1,13 @@
 extends CanvasLayer
 
+var instruments: Control
+var help_label: Label
+var credits_label: Label
 var car: CharacterBody3D
 var world: Node3D
 var speed_label: Label
 var street_label: Label
 var notice: Label
-var city_label: Label
-var heading_label: Label
 var pause_panel: PanelContainer
 var pause_label: Label
 var toast_time := 0.0
@@ -31,42 +32,28 @@ func label(text_value: String, at: Vector2, size: int, color: Color = Color.WHIT
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	for rect in [Rect2(12, 12, 470, 268), Rect2(12, 566, 850, 145)]:
-		var background := ColorRect.new()
-		background.position = rect.position
-		background.size = rect.size
-		background.color = Color(0.035, 0.065, 0.085, 0.82)
-		background.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		add_child(background)
-	heading_label = label("LA PAZ / CONDUCCIÓN LIBRE", Vector2(24, 20), 24)
-	street_label = label("Paseo Álvaro Obregón", Vector2(24, 54), 18, Color("e2dcc9"))
-	street_label.size = Vector2(446, 26)
+	instruments = Control.new()
+	instruments.set_script(preload("res://scripts/ui/DrivingInstruments.gd"))
+	instruments.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(instruments)
+	street_label = label("Sector de La Paz", Vector2(24, 244), 17)
+	street_label.size = Vector2(260, 28)
 	street_label.clip_text = true
 	street_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	city_label = label("Ciudad B.6", Vector2(24, 86), 14, Color("d7d5ce"))
-	speed_label = label("000 km/h", Vector2(24, 110), 42)
-	notice = label("", Vector2(24, 170), 18, Color("ffd38f"))
-	label("W / ↑ acelerar   S / ↓ frenar y reversa   A D / ← → girar", Vector2(24, 580), 16)
-	label("ESPACIO derrape   SHIFT turbo   R recuperar   ESC pausa", Vector2(24, 610), 16)
-	label("V cámara   C inspección   M silenciar   T velocidad/aceleración ×2", Vector2(24, 638), 15)
-	driving_label = label("TURBO LISTO", Vector2(24, 205), 18, Color("72e0ff"))
+	notice = label("", Vector2(24, 280), 16, Color("ffd38f"))
+	speed_label = label("000", Vector2.ZERO, 46)
+	driving_label = label("TURBO LISTO · SHIFT", Vector2.ZERO, 14, Color("36c5e2"))
+	drift_label = label("ESPACIO · DERRAPE", Vector2.ZERO, 14, Color("ffd17a"))
 	turbo_bar = ProgressBar.new()
-	turbo_bar.position = Vector2(24, 240)
-	turbo_bar.size = Vector2(320, 12)
 	turbo_bar.max_value = 1.0
-	turbo_bar.show_percentage = false
-	turbo_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color("55d9ff")
-	fill.corner_radius_top_left = 4
-	fill.corner_radius_bottom_left = 4
-	fill.corner_radius_top_right = 4
-	fill.corner_radius_bottom_right = 4
-	turbo_bar.add_theme_stylebox_override("fill", fill)
+	turbo_bar.hide()
 	add_child(turbo_bar)
-	build_drift_meter()
-	label("© OpenStreetMap contributors · Overture Maps Foundation · INEGI", Vector2(24, 666), 13, Color("d7d5ce"))
-	label("C · conducción arcade · alturas estimadas · datos abiertos · fuentes y licencias en créditos", Vector2(24, 690), 13, Color("d7d5ce"))
+	drift_bar = ProgressBar.new()
+	drift_bar.max_value = 1.0
+	drift_bar.hide()
+	add_child(drift_bar)
+	help_label = label("WASD / flechas conducir   ESPACIO derrape   SHIFT turbo   R recuperar   ESC pausa", Vector2.ZERO, 13, Color("c5ced2"))
+	credits_label = label("© OpenStreetMap · Overture Maps Foundation · INEGI | Fuentes y licencias en créditos", Vector2.ZERO, 11, Color("b1bcc2"))
 	pause_panel = PanelContainer.new()
 	pause_panel.position = Vector2(430, 190)
 	pause_panel.custom_minimum_size = Vector2(420, 290)
@@ -83,6 +70,10 @@ func _ready() -> void:
 	pause_label.text = "PAUSA"
 	pause_label.add_theme_font_size_override("font_size", 28)
 	column.add_child(pause_label)
+	var controls := Label.new()
+	controls.text = "V cámara · C inspección · M sonido\nT prueba de velocidad ×2 · F8 ciudad\nF9 lugares · R recuperar vehículo"
+	controls.add_theme_font_size_override("font_size", 14)
+	column.add_child(controls)
 	for entry in [["Continuar conduciendo", "resume"], ["Recuperar vehículo", "recover"], ["Volver al menú", "menu"]]:
 		var button := Button.new()
 		button.text = entry[0]
@@ -94,56 +85,10 @@ func _ready() -> void:
 	add_child(pause_panel)
 	pause_panel.hide()
 
-func build_drift_meter() -> void:
-	var panel := PanelContainer.new()
-	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
-	panel.offset_left = -370
-	panel.offset_right = -12
-	panel.offset_top = 12
-	panel.offset_bottom = 150
-	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.035, 0.065, 0.085, 0.9)
-	style.content_margin_left = 16
-	style.content_margin_right = 16
-	style.content_margin_top = 12
-	style.content_margin_bottom = 12
-	panel.add_theme_stylebox_override("panel", style)
-	var column := VBoxContainer.new()
-	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	column.add_theme_constant_override("separation", 6)
-	var title := Label.new()
-	title.text = "DERRAPE → IMPULSO"
-	title.add_theme_font_size_override("font_size", 18)
-	title.add_theme_color_override("font_color", Color("ffd17a"))
-	column.add_child(title)
-	drift_label = Label.new()
-	drift_label.add_theme_font_size_override("font_size", 18)
-	column.add_child(drift_label)
-	drift_bar = ProgressBar.new()
-	drift_bar.max_value = 1.0
-	drift_bar.show_percentage = false
-	drift_bar.custom_minimum_size = Vector2(320, 16)
-	drift_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color("ffbb55")
-	drift_bar.add_theme_stylebox_override("fill", fill)
-	var track := StyleBoxFlat.new()
-	track.bg_color = Color("263743")
-	track.border_color = Color("7d6444")
-	track.set_border_width_all(1)
-	drift_bar.add_theme_stylebox_override("background", track)
-	column.add_child(drift_bar)
-	var hint := Label.new()
-	hint.text = "Sostén el derrape y endereza al salir"
-	hint.add_theme_font_size_override("font_size", 14)
-	column.add_child(hint)
-	panel.add_child(column)
-	add_child(panel)
-
 func attach(target: CharacterBody3D, level: Node3D) -> void:
 	car = target
 	world = level
+	instruments.car = car
 	var effects := Control.new()
 	effects.set_script(preload("res://scripts/ui/SpeedEffects.gd"))
 	effects.car = car
@@ -192,20 +137,23 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if car == null:
 		return
-	if world != null and world.city_manager != null:
-		city_label.text = "Ciudad: %s · %d/%d sectores · F8 · F9 lugares" % ["ACTIVA" if world.city_manager.city_enabled else "DESACTIVADA", world.city_manager.loaded.size(), world.city_manager.manifest["chunks"].size()]
-	else:
-		city_label.text = "Ciudad: referencia de fase B"
-	heading_label.text = "LA PAZ / " + world.current_block_name()
-	speed_label.text = "%03d km/h%s" % [roundi(car.speed_mps * 3.6), "  R" if car.signed_speed < -0.2 else ""]
+	var viewport_size := get_viewport().get_visible_rect().size
+	var right := viewport_size.x - 330.0
+	speed_label.position = Vector2(right + 122, viewport_size.y - 72)
+	driving_label.position = Vector2(right + 40, viewport_size.y - 366)
+	drift_label.position = Vector2(right + 40, viewport_size.y - 318)
+	help_label.position = Vector2(24, viewport_size.y - 53)
+	credits_label.position = Vector2(24, viewport_size.y - 30)
+	pause_panel.position = (viewport_size - pause_panel.size) * 0.5
+	speed_label.text = "%03d" % roundi(car.speed_mps * 3.6)
 	turbo_bar.value = car.turbo_charge
 	if car.drift_boost_active:
-		drift_label.text = "IMPULSO DE SALIDA · +%.1f km/h" % (float(car.config["drift_bonus_mps"]) * car.drift_boost_strength * 3.6)
+		drift_label.text = "IMPULSO · +%.1f km/h" % (float(car.config["drift_bonus_mps"]) * car.drift_boost_strength * 3.6)
 		drift_bar.value = car.drift_boost_strength * car.drift_boost_time / float(car.config["drift_bonus_duration_s"])
 	else:
 		drift_bar.value = car.drift_charge
 		if car.drift_charge >= float(car.config["drift_min_charge"]):
-			drift_label.text = "LISTO %d %% · +%.1f km/h" % [roundi(car.drift_charge * 100), float(car.config["drift_bonus_mps"]) * car.drift_charge * 3.6]
+			drift_label.text = "LISTO %d%% · +%.1f km/h" % [roundi(car.drift_charge * 100), float(car.config["drift_bonus_mps"]) * car.drift_charge * 3.6]
 		else:
 			drift_label.text = "CARGANDO %d %%" % roundi(car.drift_charge * 100) if car.drift_tracking else "DERRAPA PARA CARGAR"
 	driving_label.text = "TURBO ACTIVO" if car.turbo_active else "DERRAPE · %d°" % roundi(rad_to_deg(absf(car.slip_angle))) if car.drift_amount > 0.15 else "TURBO LISTO · SHIFT" if car.turbo_charge >= float(car.config["turbo_min_charge"]) else "TURBO RECARGANDO"
@@ -219,4 +167,4 @@ func _process(delta: float) -> void:
 	if not get_tree().paused:
 		toast_time = maxf(0, toast_time - delta)
 		if toast_time <= 0:
-			notice.text = "Superficie de prueba · velocidad reducida" if not car.on_asphalt else ""
+			notice.text = ""

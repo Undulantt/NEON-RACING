@@ -131,11 +131,11 @@ func run() -> void:
 	car.velocity = Vector3(0, 0, -26)
 	await step(90, 1, 1, true)
 	check(car.drift_charge == 0 and not car.drift_boost_active, "Slow spin cannot preserve or earn charge")
-	# Cancellation on road departure and on actual wall contact.
+	# Surface transitions retain drift charge; actual wall contacts cancel it.
 	await charge()
 	ground.collision_layer = 2
 	await step(4, 1)
-	check(car.drift_charge == 0 and not car.drift_boost_active, "Offroad cancels earned charge")
+	check(not car.on_asphalt and (car.drift_charge > 0 or car.drift_boost_active), "Offroad preserves earned charge")
 	ground.collision_layer = 1
 	await charge()
 	var wall := StaticBody3D.new()

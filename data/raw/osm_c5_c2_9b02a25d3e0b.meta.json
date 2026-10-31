@@ -1,0 +1,14 @@
+{
+  "file": "osm_c5_c2_9b02a25d3e0b.osm",
+  "sha256": "4690dd2a8cbd06b3878c8f774b0892a0229f91e1bada2e69509c7c44aac1a710",
+  "bbox": [
+    24.146,
+    -110.30799999999999,
+    24.15625,
+    -110.30075
+  ],
+  "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-110.30799999999999,24.146,-110.30075,24.15625",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "extracted_at_utc": "2026-10-31T07:53:33.611277+00:00"
+}

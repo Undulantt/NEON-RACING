@@ -27,9 +27,12 @@ def fetch(offline=False):
     if digest(core) != core_meta["original_sha256"]:
         raise ValueError("Core XML source hash mismatch")
     snapshots.append({"file": core.name, "sha256": digest(core), "scope": "existing core snapshot"})
-    for key in expansion["active_blocks"]:
-        if key == "core": continue
-        south, west, north, east = expansion["blocks"][key]["bbox"]
+    if expansion.get("source_base_selection"):
+        prior = read(RAW / ("la_paz_roads_" + expansion["source_base_selection"] + ".meta.json"))
+        snapshots.append({"file":prior["original_file"],"sha256":prior["original_sha256"],"scope":"verified previous complete extract; unchanged original retained"})
+    requests = expansion.get("source_patch_bboxes", {key:expansion["blocks"][key]["bbox"] for key in expansion["active_blocks"] if key != "core"})
+    for key, requested in requests.items():
+        south, west, north, east = requested
         # Small overlap avoids incomplete ways at the active-block boundary.
         south -= .002; west -= .002; north += .002; east += .002
         limit = expansion["max_osm_tile_degrees"]

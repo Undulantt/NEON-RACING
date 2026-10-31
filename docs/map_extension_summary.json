@@ -1,0 +1,194 @@
+{
+  "passed": true,
+  "areas": [
+    "C2",
+    "A4",
+    "A5"
+  ],
+  "area": {
+    "previous_area_km2": 41.98068882165314,
+    "current_area_km2": 44.152491913843164,
+    "added_area_km2": 2.171803092190051,
+    "removed_area_m2": 1.5442141679379334e-08,
+    "sea_geometry_difference_m2": 0.0,
+    "contour_reference": "Approximate user silhouette; localized C2/A4/A5 extensions; southern cut retained"
+  },
+  "controller_sha256": "6bb87ab297455661e2a90683dfef599022a0e6b2796b8924a1b882101a6bfcc2",
+  "driving_config_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
+  "manifest_sha256": "a3691384e45769c37c4675c6baca07f1cf9a361b131656f1f4c0a0b24a51dd72",
+  "python_tests": {
+    "count": 50,
+    "passed": true,
+    "log": "docs/map_extension_python_final.log"
+  },
+  "godot_and_geometry_reports": [
+    {
+      "file": "docs/map_extension_physics.json",
+      "passed": true,
+      "sha256": "623d3bad33c800a68d5f89e8f7c1f07dc51876e28c1265b61c5060defcb807b4"
+    },
+    {
+      "file": "docs/phase_b7r_default_integration.json",
+      "passed": true,
+      "sha256": "1d8c9a31610c28a924c72364655e23f7b29679c2627038b3807a2cf01942214a"
+    },
+    {
+      "file": "docs/map_extension_seam_validation.json",
+      "passed": true,
+      "sha256": "7f5929d760eadf9fc8fb626ed0cf9285855de401a1188a419db7b3111163e7e7"
+    },
+    {
+      "file": "docs/debug_speed_validation.json",
+      "passed": true,
+      "sha256": "a8f4769e782017f918db82db238c4c8b6c1f6c21bd3f3dbcf7e5ed050e9f43f7"
+    },
+    {
+      "file": "docs/slope_physics_validation.json",
+      "passed": true,
+      "sha256": "b3d3ad0cc9225d931f80b5dc1b11375ac0c59681d3eb5f25241a4006b1f8bf42"
+    },
+    {
+      "file": "docs/slope_real_crest_validation.json",
+      "passed": true,
+      "sha256": "e23f0aea0d53e12d7d99181a1cd96e88386111a58e9bbd772c80df917f046628"
+    },
+    {
+      "file": "docs/slope_flat_regression.json",
+      "passed": true,
+      "sha256": "5b86205b1fbd77f10e5474efad14670f76e1cfdd64329792c8ca45a9306b91b4"
+    },
+    {
+      "file": "docs/phase_b7r_pilot_physics.json",
+      "passed": true,
+      "sha256": "0f0bec280662d361ae1ad265568e6f37745492fcb8b154f3b3c56243f416cd2f"
+    },
+    {
+      "file": "docs/phase_b7r_world_geometry.json",
+      "passed": true,
+      "sha256": "e0ec8fb448fbac43fc9a48233535c7ae15169f80e0c0fe2a95b0c2df441bae9d"
+    }
+  ],
+  "old_routes_distance_m": 23690.86527800559,
+  "new_routes_distance_m": 12239.01135551929,
+  "new_routes_collisions_or_recoveries": 0,
+  "mountain_impact_tests": [
+    {
+      "approach_mps": 88,
+      "edge": 1,
+      "furthest_outside_m": -1.83758187294006,
+      "peak_y": 50.4444007873535,
+      "recoveries": 0,
+      "wall_contacts": 9
+    },
+    {
+      "approach_mps": 88,
+      "edge": 2,
+      "furthest_outside_m": -1.5750230550766,
+      "peak_y": 46.5975189208984,
+      "recoveries": 0,
+      "wall_contacts": 22
+    },
+    {
+      "approach_mps": 88,
+      "edge": 3,
+      "furthest_outside_m": -1.73716056346893,
+      "peak_y": 44.630973815918,
+      "recoveries": 0,
+      "wall_contacts": 17
+    }
+  ],
+  "streaming": {
+    "boundary": {
+      "chunk_loads": 90,
+      "chunk_unloads": 70,
+      "failed_chunks": [],
+      "loaded_chunks": 20,
+      "max_chunk_build_ms": 7,
+      "max_loaded_chunks": 20,
+      "total_chunks": 141
+    },
+    "terrain": {
+      "chunk_loads": 1159,
+      "chunk_unloads": 1109,
+      "failed_chunks": [],
+      "loaded_chunks": 50,
+      "max_chunk_build_ms": 93,
+      "max_loaded_chunks": 107,
+      "total_chunks": 662
+    },
+    "roads": {
+      "chunk_loads": 1041,
+      "chunk_unloads": 997,
+      "failed_chunks": [],
+      "loaded_chunks": 44,
+      "max_chunk_build_ms": 279,
+      "max_loaded_chunks": 105,
+      "total_chunks": 574
+    },
+    "urban": {
+      "chunk_loads": 642,
+      "chunk_unloads": 625,
+      "enabled": true,
+      "failed_chunks": [],
+      "loaded_buildings": 1509,
+      "loaded_chunks": 17,
+      "max_chunk_build_ms": 48,
+      "max_loaded_chunks": 43
+    }
+  },
+  "costs_before": {
+    "triangles": 1776750,
+    "road_sectors": 537,
+    "terrain_sectors": 615,
+    "boundary_sectors": 142,
+    "native_scenes": 1294,
+    "native_cache_bytes": 52179830,
+    "buildings": 59580
+  },
+  "costs_after": {
+    "triangles": 1905237,
+    "road_sectors": 574,
+    "terrain_sectors": 662,
+    "boundary_sectors": 141,
+    "native_scenes": 1377,
+    "native_cache_bytes": 55941397,
+    "buildings": 62410
+  },
+  "triangle_increase_percent": 7.23157450401013,
+  "native_cache_increase_percent": 7.208852539381594,
+  "performance_note": "Geometry/cache counts measured; concurrent headless regression timings are not a controlled rendered FPS comparison. No FPS improvement claimed.",
+  "source_notes": [
+    "Existing raw snapshots unchanged; new OSM patch extracts retained with metadata and checksums",
+    "Overture original release and coverage preserved; west extension outside it uses verified OSM footprints; STAC certificate expired, TLS verification retained",
+    "Existing local INEGI CEM4 covers all new real terrain; mountains are explicitly fictional geometry independent of DEM",
+    "Sea geometry unchanged exactly; original maritime collision behaviour preserved"
+  ],
+  "regression_fix": {
+    "initial_failure": "One frame of road classification loss during full hospital traversal; no support loss, collision or recovery",
+    "cause": "Central ray misses shared float32 triangle edge at X=144m",
+    "proof": "docs/map_extension_seam_validation.json",
+    "fix": "Only on central-ray miss, retry four offsets at 1mm; no force/gravity tuning",
+    "previous_controller_archive": "docs/c6_baseline/ArcadeCar.gd"
+  },
+  "limitations": [
+    "Approximate silhouette interpretation; final visual review of extension shape remains subjective",
+    "Large-foundation spreads above 6m increase from 20 to 25 and retain manual-review requirement",
+    "Existing vertical datum/local accuracy and grade-separated crossing limitations remain",
+    "Mountains intentionally fictitious and steep; no protection against teleportation or controller cheats",
+    "Godot emitted an OpenGL initialization diagnostic in capture logs; both aerial and detail PNGs completed and were visually inspected"
+  ],
+  "captures": {
+    "clean": "docs/evidence/la_paz_boundary_extension.png",
+    "grid": "docs/evidence/la_paz_boundary_extension_grid.png",
+    "detail": "docs/evidence/la_paz_boundary_mountains_detail.png"
+  },
+  "original_raw_snapshots_unchanged": true,
+  "commits_created_for_this_change": 0,
+  "pushed_for_this_change": false,
+  "editor_import": {
+    "passed": true,
+    "log": "docs/map_extension_editor_import.log"
+  },
+  "superseded_by": "docs/coast_fix_summary.json",
+  "historical_snapshot_note": "C6 extension validation before the subsequent user-directed northwest sea correction and Centre/South setback."
+}

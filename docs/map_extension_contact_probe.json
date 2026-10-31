@@ -1,0 +1,33 @@
+{
+  "metrics": {
+    "route_distance_m": 6502.97607755661,
+    "route_expected_m": 6505.78470563889,
+    "route_frames": 35850,
+    "route_junctions_crossed": 83,
+    "route_max_deviation_m": 3.00682926177979,
+    "route_offroad_frames": 0,
+    "route_recoveries": 0,
+    "route_streets": [
+      "",
+      "Boulevard 5 de Febrero",
+      "Boulevard Forjadores de Sudcalifornia",
+      "Boulevard General Francisco J. Mujica",
+      "Boulevard General Francisco José Mujica",
+      "Calle 5 de Febrero",
+      "Calle Antonio Navarro",
+      "Calle Aquiles Serdán",
+      "Calle Carabineros",
+      "Calle General Manuel Márquez de León",
+      "Calle Héroes de Independencia",
+      "Calle Ignacio Allende",
+      "Calle Ignacio Ramírez",
+      "Calle Miguel L. de Legaspy",
+      "Calle Profesor Marcelo Rubio Ruiz",
+      "Paseo Álvaro Obregón"
+    ],
+    "route_unsupported_frames": 0,
+    "route_wall_contacts": 0
+  },
+  "misses": [],
+  "passed": true
+}

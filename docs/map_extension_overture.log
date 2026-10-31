@@ -1,0 +1,105 @@
+Traceback (most recent call last):
+  File "C:\Python313\Lib\urllib\request.py", line 1319, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\http\client.py", line 1338, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\http\client.py", line 1384, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\http\client.py", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\http\client.py", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Python313\Lib\http\client.py", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\http\client.py", line 1479, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                          server_hostname=server_hostname)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1032)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\overturemaps\core.py", line 47, in _get_stac_catalog
+    with urlopen(STAC_CATALOG_URL) as response:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Python313\Lib\urllib\request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\urllib\request.py", line 1322, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1032)>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\overturemaps\__main__.py", line 4, in <module>
+    cli()
+    ~~~^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 1552, in main
+    rv = self.invoke(ctx)
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 2030, in invoke
+    sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 1362, in make_context
+    self.parse_args(ctx, args)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 1373, in parse_args
+    _, args = param.handle_parse_result(ctx, opts, args)
+              ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 2778, in handle_parse_result
+    value = self.process_value(ctx, value)
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 3660, in process_value
+    return super().process_value(ctx, value)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\click\core.py", line 2640, in process_value
+    value = self.callback(ctx, self, value)
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\overturemaps\cli.py", line 109, in validate_release
+    available_releases, _ = get_available_releases()
+                            ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\overturemaps\core.py", line 68, in get_available_releases
+    catalog = _get_stac_catalog()
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\.venv-urban\Lib\site-packages\overturemaps\core.py", line 55, in _get_stac_catalog
+    raise Exception(f"Could not fetch STAC catalog: {e}") from e
+Exception: Could not fetch STAC catalog: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1032)>

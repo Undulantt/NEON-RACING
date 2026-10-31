@@ -1,5 +1,7 @@
 # Decisiones técnicas — Fase A
 
+Actualización de límites: [C.6: ampliaciones C2/A4/A5, mar conservado y montañas ficticias](PHASE_C6_BOUNDARIES.md). Reutiliza proyección y streaming; distingue relieve real de barreras de juego.
+
 > Este documento conserva decisiones históricas de Fase A. La estrategia de relieve fue validada: [auditoría previa](PHASE_B7R_PROPOSAL.md) e [implementación B.7-R, pruebas y límites](PHASE_B7R.md).
 
 ## Cartografía y grafo

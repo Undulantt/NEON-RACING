@@ -1,0 +1,9 @@
+test_concave_join_has_no_crossed_or_overlapping_faces (test_boundary_extension.BoundaryExtensionTests.test_concave_join_has_no_crossed_or_overlapping_faces) ... ok
+test_fictional_ridge_keeps_sea_and_interior_clear (test_boundary_extension.BoundaryExtensionTests.test_fictional_ridge_keeps_sea_and_interior_clear) ... ok
+test_local_extensions_preserve_original_region (test_boundary_extension.BoundaryExtensionTests.test_local_extensions_preserve_original_region) ... ok
+test_sea_geometry_changes_only_in_user_approved_cells (test_boundary_extension.BoundaryExtensionTests.test_sea_geometry_changes_only_in_user_approved_cells) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.481s
+
+OK

@@ -15,7 +15,7 @@
         24.148,
         -110.334,
         24.17,
-        -110.305
+        -110.2968
       ],
       "neighborhoods": [
         "Zona Centro",
@@ -41,7 +41,7 @@
       "name": "Corredor sur",
       "bbox": [
         24.09,
-        -110.342,
+        -110.3455,
         24.151,
         -110.292
       ],
@@ -50,7 +50,7 @@
         "Área hospitalaria Salvatierra",
         "Conexiones viales hacia el sur"
       ],
-      "note": "Southern extent clipped to the user-provided red line; cached source envelope retained only for offline data reuse."
+      "note": "West edge expanded around A4/A5; previous southern clipping contour retained"
     }
   },
   "core_spawn": {
@@ -290,8 +290,8 @@
     "max_p95_frame_ms": 33.3,
     "max_static_memory_mb": 256
   },
-  "reference_image": "Future city target only; active delivery includes core, north and southern corridor.",
-  "source_selection": "c5_cajoncito",
+  "reference_image": "User cropped La Paz silhouette 2026-10-31, codex-clipboard-219d9ec4-4f86-43d2-a0ac-7723cdac07c0.png; approximate local C2/A4/A5 extensions, previous coast and south cut retained",
+  "source_selection": "c6_boundary_expansion",
   "clip_polygon_lonlat": [
     [
       -111,
@@ -784,5 +784,99 @@
         ]
       ]
     }
-  ]
+  ],
+  "source_base_selection": "c5_cajoncito",
+  "source_patch_bboxes": {
+    "c2": [
+      24.148,
+      -110.306,
+      24.1645,
+      -110.2955
+    ],
+    "a4_a5": [
+      24.113,
+      -110.3457,
+      24.147,
+      -110.34
+    ]
+  },
+  "block_polygons_lonlat": {
+    "core": [
+      [
+        -110.334,
+        24.148
+      ],
+      [
+        -110.2975,
+        24.148
+      ],
+      [
+        -110.2968,
+        24.152
+      ],
+      [
+        -110.2976,
+        24.156
+      ],
+      [
+        -110.2995,
+        24.16
+      ],
+      [
+        -110.299,
+        24.162
+      ],
+      [
+        -110.2968,
+        24.164
+      ],
+      [
+        -110.2968,
+        24.17
+      ],
+      [
+        -110.334,
+        24.17
+      ]
+    ],
+    "south": [
+      [
+        -110.342,
+        24.151
+      ],
+      [
+        -110.345,
+        24.143
+      ],
+      [
+        -110.3455,
+        24.134
+      ],
+      [
+        -110.3453,
+        24.125
+      ],
+      [
+        -110.344,
+        24.116
+      ],
+      [
+        -110.342,
+        24.11
+      ],
+      [
+        -110.342,
+        24.09
+      ],
+      [
+        -110.292,
+        24.09
+      ],
+      [
+        -110.292,
+        24.151
+      ]
+    ]
+  },
+  "preserved_sea_file": "data/reference/sea_c6_coastal_fix.geojson"
 }

@@ -107,7 +107,7 @@ func run() -> void:
 	check(not car.turbo_active and car.turbo_charge == 1, "Handbrake prevents boost consumption")
 	ground.collision_layer = 2
 	await step(10, 1, 0, false, true)
-	check(not car.on_asphalt and not car.turbo_active and car.turbo_charge == 1, "Offroad prevents boost consumption")
+	check(not car.on_asphalt and car.turbo_active and car.turbo_charge < 1, "Offroad allows turbo and consumes reserve")
 	ground.collision_layer = 1
 	var slips: Array[float] = []
 	for brake in [false, true]:

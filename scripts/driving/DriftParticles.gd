@@ -26,7 +26,7 @@ func attach(target: CharacterBody3D) -> void:
 	fade.colors = PackedColorArray([Color(0.75, 0.77, 0.8, 0), Color(0.75, 0.77, 0.8, 0.85), Color(0.65, 0.68, 0.72, 0.45), Color(0.6, 0.63, 0.67, 0)])
 	for x in [-0.9, 0.9]:
 		var emitter := CPUParticles3D.new()
-		emitter.position = Vector3(x, -0.43, 1.3)
+		emitter.position = Vector3(x, -0.43, 1.3) * car.vehicle_scale
 		emitter.amount = 48
 		emitter.lifetime = 0.85
 		emitter.local_coords = false
@@ -54,11 +54,11 @@ func growth_curve() -> Curve:
 	return curve
 
 func _physics_process(_delta: float) -> void:
-	var active: bool = car.driving_enabled and car.on_asphalt and car.is_on_floor() and car.drift_amount > 0.3
+	var active: bool = car.driving_enabled and car.is_on_floor() and car.drift_amount > 0.3
 	for i in range(smoke.size()):
 		var emitter := smoke[i]
 		if car.elevation != null:
-			emitter.global_position = car.visuals["pivots"][i+2].global_position - Vector3.UP * 0.15
+			emitter.global_position = car.visuals["pivots"][i+2].global_position - Vector3.UP * 0.15 * car.vehicle_scale
 		emitter.emitting = active
 		emitter.initial_velocity_max = 1.2 + car.drift_amount * 1.7
 

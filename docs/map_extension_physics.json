@@ -1,0 +1,108 @@
+{
+  "boundary_streaming": {
+    "chunk_loads": 133,
+    "chunk_unloads": 102,
+    "failed_chunks": [],
+    "loaded_chunks": 31,
+    "max_chunk_build_ms": 10,
+    "max_loaded_chunks": 33,
+    "total_chunks": 238
+  },
+  "failures": [],
+  "mountain_collisions": [
+    {
+      "approach_mps": 88,
+      "edge": 1,
+      "furthest_outside_m": -1.9143590927124,
+      "peak_y": 58.2770843505859,
+      "recoveries": 0,
+      "wall_contacts": 3
+    },
+    {
+      "approach_mps": 88,
+      "edge": 2,
+      "furthest_outside_m": -1.868727684021,
+      "peak_y": 71.1338348388672,
+      "recoveries": 0,
+      "wall_contacts": 6
+    },
+    {
+      "approach_mps": 88,
+      "edge": 3,
+      "furthest_outside_m": -1.83029365539551,
+      "peak_y": 48.6858139038086,
+      "recoveries": 0,
+      "wall_contacts": 10
+    }
+  ],
+  "passed": true,
+  "routes": {
+    "A4": {
+      "route_distance_m": 4265.79949069023,
+      "route_expected_m": 4268.63089632988,
+      "route_frames": 22559,
+      "route_junctions_crossed": 52,
+      "route_max_deviation_m": 1.72381556034088,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "Calle Barcaza",
+        "Calle Carabela",
+        "Calle Dunas",
+        "Calle Mangle",
+        "Calle Mar Caribe",
+        "Calle Mariano Abasolo",
+        "Calle Océano Pacífico",
+        "Carretera Transpeninsular",
+        "Constituyentes de 1975",
+        "Mar Mediterraneo",
+        "Paseo Álvaro Obregón"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    },
+    "A5": {
+      "route_distance_m": 5598.81678962708,
+      "route_expected_m": 5601.65025520325,
+      "route_frames": 28259,
+      "route_junctions_crossed": 56,
+      "route_max_deviation_m": 2.14751267433167,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "Calle Constituyentes de 1975",
+        "Calle Mariano Abasolo",
+        "Carretera Transpeninsular",
+        "Constituyentes de 1975",
+        "Libramiento Daniel Roldán Zimbrón",
+        "Paseo Álvaro Obregón"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    },
+    "C2": {
+      "route_distance_m": 2374.39084470272,
+      "route_expected_m": 2377.3684142828,
+      "route_frames": 12143,
+      "route_junctions_crossed": 21,
+      "route_max_deviation_m": 0.848608434200287,
+      "route_offroad_frames": 0,
+      "route_recoveries": 0,
+      "route_streets": [
+        "Calle Miguel Hidalgo y Costilla",
+        "Paseo Álvaro Obregón"
+      ],
+      "route_unsupported_frames": 0,
+      "route_wall_contacts": 0
+    }
+  },
+  "terrain_streaming": {
+    "chunk_loads": 517,
+    "chunk_unloads": 429,
+    "failed_chunks": [],
+    "loaded_chunks": 88,
+    "max_chunk_build_ms": 12,
+    "max_loaded_chunks": 98,
+    "total_chunks": 660
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "passed": true,
+  "requested_sea_cells": [
+    "A1",
+    "A2",
+    "B1",
+    "A3 coastal part"
+  ],
+  "marine_reference": "data/reference/sea_c6_coastal_fix.geojson",
+  "fictional_water_explicitly_user_authorized": true,
+  "urban_A3_preserved": true,
+  "before_land_converted_to_sea_m2": 118986.23860078055,
+  "existing_sea_removed_m2": 0.0,
+  "terrain_added_for_setback_m2": 20558.245902362272,
+  "original_contour_area_removed_m2": 6.4168718208736694e-12,
+  "local_boundary_outsets": [
+    {
+      "center_xz": [
+        2285.29,
+        889.56
+      ],
+      "id": "core_south_join",
+      "note": "User-directed gradual mountain setback outside the Centre/South join",
+      "outset_m": 60.0,
+      "radius_m": 400.0
+    }
+  ],
+  "mountain_method": "Non-overlapping exterior distance bands; 16m cells; 6m steep front; same visible/physical faces",
+  "join_physics": {
+    "A2_terrain_absent": true,
+    "boundary_distance_along_diagonal_m": 93.7952728271484,
+    "failures": [],
+    "join_mountain_collision_distance_m": 100.315246582031,
+    "manifest_sha256": "ec8a52d15c606373df477538021d44eeab809f8ed50c3141ed3385a04ac2814a",
+    "normal_setback_m": 55.0361061096191,
+    "passed": true,
+    "terrain_before_mountain_supported": true
+  },
+  "python_regression": {
+    "passed": true,
+    "tests": 54,
+    "log": "docs/coast_fix_python_final.log"
+  },
+  "post_meshing_targeted_tests": {
+    "passed": true,
+    "tests": 4,
+    "log": "docs/coast_fix_boundary_tests.log",
+    "includes_nonoverlap_concave_join": true
+  },
+  "proof_reports": [
+    {
+      "file": "docs/coast_fix_physics.json",
+      "passed": true,
+      "sha256": "556f0617c96f204c03731a02ff022f321645c54dc3fa3ee2523d76c1327e2036"
+    },
+    {
+      "file": "docs/phase_b7r_default_integration.json",
+      "passed": true,
+      "sha256": "76b1176f847f45ea47375cf224af8b77be2d25bd12e571be172c840dbf491f6d"
+    },
+    {
+      "file": "docs/map_extension_physics.json",
+      "passed": true,
+      "sha256": "5efc8be8c9ecf4004bf10aaab86ea2ea29a4652453607aba680fc5fca07f075d"
+    },
+    {
+      "file": "docs/phase_b7r_world_geometry.json",
+      "passed": true,
+      "sha256": "a44b233d8fad5baf1e007dd14793535bbde456d2ebfb16d49f2c852dd6fee869"
+    }
+  ],
+  "driving_distance_m": 35929.8700236082,
+  "mountain_impacts": [
+    {
+      "approach_mps": 88,
+      "edge": 1,
+      "furthest_outside_m": -1.9143590927124,
+      "peak_y": 58.2770843505859,
+      "recoveries": 0,
+      "wall_contacts": 3
+    },
+    {
+      "approach_mps": 88,
+      "edge": 2,
+      "furthest_outside_m": -1.868727684021,
+      "peak_y": 71.1338348388672,
+      "recoveries": 0,
+      "wall_contacts": 6
+    },
+    {
+      "approach_mps": 88,
+      "edge": 3,
+      "furthest_outside_m": -1.83029365539551,
+      "peak_y": 48.6858139038086,
+      "recoveries": 0,
+      "wall_contacts": 10
+    }
+  ],
+  "cost_before": {
+    "road_chunks": 574,
+    "terrain_chunks": 662,
+    "boundary_chunks": 141,
+    "total_triangles": 1905237,
+    "cached_scenes": 1377,
+    "native_cache_bytes": 55941397,
+    "buildings": 62410
+  },
+  "cost_after": {
+    "road_chunks": 574,
+    "terrain_chunks": 660,
+    "boundary_chunks": 238,
+    "total_triangles": 1937147,
+    "cached_scenes": 1472,
+    "native_cache_bytes": 56912457,
+    "buildings": 62410
+  },
+  "performance_note": "Geometry/cache costs measured; no controlled rendered FPS comparison performed",
+  "manifest_sha256": "ec8a52d15c606373df477538021d44eeab809f8ed50c3141ed3385a04ac2814a",
+  "controller_sha256": "6bb87ab297455661e2a90683dfef599022a0e6b2796b8924a1b882101a6bfcc2",
+  "driving_config_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
+  "raw_source_snapshots_unchanged": true,
+  "captures": {
+    "map": "docs/evidence/la_paz_coast_fix_grid.png",
+    "clean": "docs/evidence/la_paz_coast_fix.png",
+    "join": "docs/evidence/la_paz_core_south_setback.png"
+  },
+  "limitations": [
+    "A3 correction retains its urban part; only the coastal side is flooded",
+    "Sea and boundary mountains are game-design geometry, not geographically exact",
+    "Existing vertical datum, large foundations and grade-separated crossing limitations remain",
+    "OpenGL initialization diagnostic persists in renderer logs; captures completed and were visually inspected"
+  ],
+  "commits_created_for_this_revision": 0,
+  "pushed_for_this_revision": false,
+  "post_meshing_tests": {
+    "passed": true,
+    "count": 4,
+    "log": "docs/coast_fix_boundary_tests.log",
+    "includes_nonoverlap_concave_join": true
+  },
+  "editor_import": {
+    "passed": true,
+    "log": "docs/coast_fix_editor_import.log"
+  }
+}

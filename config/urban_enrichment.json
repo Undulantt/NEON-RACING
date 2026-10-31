@@ -21,7 +21,7 @@
       "coverage_note": "Existing core extract only. Northern and southern POIs use verified OSM tiles and statewide DENUE."
     },
     "denue": {
-      "metadata_file": "denue_c5_cajoncito.meta.json"
+      "metadata_file": "denue_c6_boundary_expansion.meta.json"
     }
   }
 }

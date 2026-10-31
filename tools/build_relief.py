@@ -11,6 +11,7 @@ from shapely.prepared import prep
 
 from expansion_regions import metric_region
 from relief_limits import bake_limits
+from relief_regions import apply_boundary_outsets
 from relief_core import Elevation, HeightField, binary_faces, digest, read, triangulate, write, fair_road_grades, write_heightfield, constrain_coast
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,6 +38,8 @@ def build(mode='pilot'):
     region = full_region
     if mode == 'pilot':
         region = region.intersection(box(*cfg['pilot_bounds_xz']))
+    else:
+        region = apply_boundary_outsets(region,cfg.get('local_boundary_outsets',[]))
     out = ROOT / 'data/processed/relief' / mode
     dem_path = ROOT / cfg['source_file']
     meta = read(dem_path.with_suffix('.meta.json'))
@@ -150,7 +153,9 @@ def build(mode='pilot'):
     derived_city['statistics']={**city['statistics'],'buildings':sum(e['building_count'] for e in urban_entries)}
     write(out/'urban/city_manifest.json',derived_city)
     write(out/'foundation_review.json',foundation_review)
-    water_faces=triangulate(sea.intersection(region).difference(asphalt))
+    # The production sea includes the explicitly requested offshore quadrants;
+    # the isolated pilot keeps its original small capture envelope.
+    water_faces=triangulate((sea if mode=='world' else sea.intersection(region)).difference(asphalt))
     write(out/'water.json',{'surfaces':[{'kind':'water','color':'397f99','y':cfg['sea_level_m'],'triangles_xz':water_faces}]})
     route_region=prep(region.buffer(-20))
     roads=[r for r in data['roads'] if all(route_region.covers(Point(p)) for p in r['points_xz'])]
@@ -174,12 +179,16 @@ def build(mode='pilot'):
         heightfield_file=(out/'heightfield.json').relative_to(ROOT).as_posix(),heightfield_sha256=digest(out/'heightfield.json'),
         city_root=(out/'urban').relative_to(ROOT).as_posix()+'/',city_sha256=digest(out/'urban/city_manifest.json'),
         water_file=(out/'water.json').relative_to(ROOT).as_posix(),water_sha256=digest(out/'water.json'),
-        roads=road_entries,terrain=terrain_entries,limits=bake_limits(out,region,field,ROOT),road_ids=[r['id'] for r in roads],
+        roads=road_entries,terrain=terrain_entries,limits=bake_limits(out,region,field,ROOT,sea,cfg.get('fictional_boundary_mountains') if mode=='world' else None),road_ids=[r['id'] for r in roads],
+        fictional_boundary_mountains=cfg.get('fictional_boundary_mountains',{}) if mode=='world' else {},
+        local_boundary_outsets=cfg.get('local_boundary_outsets',[]) if mode=='world' else [],
         spawn={'position_xz':spawn,'forward_xz':[(q[0]-p[0])/length,(q[1]-p[1])/length]},route_xz=route,statistics=stats,
         source_metadata=meta,notes=['Gaussian 20m smoothing is a declared gameplay adjustment, not higher resolution or surveyed road profiles.',
         'Common triangulated field resolves same-level junctions; no independent per-vertex road draping.',
         'Specific vertical geoid and local vertical accuracy not confirmed; no mixing of DEM datums.',
         'Pilot excludes all multi-level bridges.'])
+    if geo.get('preserved_sea_file'):
+        manifest['sources'][geo['preserved_sea_file']]=digest(ROOT/geo['preserved_sea_file'])
     if max_grade>cfg['max_road_grade']:
         raise ValueError(f'Road grade requires review: {max_grade}')
     write(out/'manifest.json',manifest)

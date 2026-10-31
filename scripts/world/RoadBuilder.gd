@@ -6,6 +6,8 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 	var material := StandardMaterial3D.new()
 	material.albedo_color = Color("343c47") if int(data.get("layer", 1)) == 1 else Color("b4a386")
 	material.roughness = 0.96
+	if int(data.get("layer", 1)) == 8:
+		material.albedo_color = Color("80674e")
 	var count := 0
 	for chunk in data["chunks"]:
 		if chunk.has("scene_file"):
@@ -48,11 +50,14 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 			normals.append_array(PackedVector3Array([Vector3.UP, Vector3.UP, Vector3.UP]))
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
+		# Coast walls retain physics but are omitted from the mountain visuals.
+		var visible_count := int(chunk.get("visible_triangles_count", vertices.size() / 3)) * 3
+		arrays[Mesh.ARRAY_VERTEX] = vertices.slice(0, visible_count)
+		arrays[Mesh.ARRAY_NORMAL] = normals.slice(0, visible_count)
 		var mesh := ArrayMesh.new()
-		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		mesh.surface_set_material(0, material)
+		if visible_count > 0:
+			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+			mesh.surface_set_material(0, material)
 		var body := StaticBody3D.new()
 		body.name = "Road_" + str(chunk["id"])
 		body.collision_layer = int(data.get("layer", 1))
@@ -60,7 +65,10 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 		body.position = Vector3(chunk["origin_xz"][0], 0.0, chunk["origin_xz"][1])
 		var instance := MeshInstance3D.new()
 		instance.mesh = mesh
-		body.add_child(instance)
+		if visible_count > 0:
+			body.add_child(instance)
+		else:
+			instance.free()
 		var shape := ConcavePolygonShape3D.new()
 		shape.set_faces(vertices)
 		shape.backface_collision = true

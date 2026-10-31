@@ -1,8 +1,8 @@
 {
-  "bake_seconds": 2.84144180000294,
-  "manifest_sha256": "6578ef61aed7deea60faad4dec7848d67b4d5a30e00575079eee6a63759b1301",
+  "bake_seconds": 4.3929935000001,
+  "manifest_sha256": "d6353485904e968e6c53051985b1815964dce72b06942d94be5d7d01c15d58f3",
   "passed": true,
-  "published_manifest_sha256": "bdef3717d7b331cd69cb99ff38a2c17f5fc69d28e5d3cc1980de61a73dd89683",
+  "published_manifest_sha256": "9b3b2bdb39dc0e20ed038a76be8c36d45a24a288aaeff78e9d2af86374961ec5",
   "statistics": {
     "buildings": 346.0,
     "coast_adjustment": {

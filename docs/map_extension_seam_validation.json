@@ -1,0 +1,9 @@
+{
+  "controller_sha256": "6bb87ab297455661e2a90683dfef599022a0e6b2796b8924a1b882101a6bfcc2",
+  "failures": [],
+  "fallback_radius_m": 0.001,
+  "passed": true,
+  "raw_central_ray_misses": 41,
+  "samples": 123,
+  "seam_x": 144
+}

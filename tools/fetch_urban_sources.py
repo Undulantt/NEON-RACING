@@ -12,7 +12,7 @@ def cached(kind,bbox,release=None,url=None):
         meta=load_json(mp); p=mp.with_name(meta['file'])
         compatible=(release is None or meta.get('release')==release) and (url is None or meta.get('url')==url)
         original_ok=not meta.get('original_file') or ((mp.parent/meta['original_file']).exists() and digest(mp.parent/meta['original_file'])==meta.get('original_sha256'))
-        if compatible and original_ok and meta.get('bbox')==bbox and p.exists() and digest(p)==meta.get('sha256'):
+        if compatible and original_ok and meta.get('selection_bbox',meta.get('bbox'))==bbox and p.exists() and digest(p)==meta.get('sha256'):
             return p,meta
     return None
 

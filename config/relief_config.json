@@ -2,10 +2,34 @@
   "schema_version": 1,
   "grid_step_m": 8,
   "smoothing_sigma_m": 20,
-  "pilot_bounds_xz": [1536, -2048, 2304, -1280],
+  "pilot_bounds_xz": [
+    1536,
+    -2048,
+    2304,
+    -1280
+  ],
   "pilot_road_id": "1018664009:0",
   "max_road_grade": 0.42,
   "sea_level_m": 0,
   "vertical_origin_m": 0,
-  "source_file": "data/raw/elevation/cem4_la_paz.tif"
+  "source_file": "data/raw/elevation/cem4_la_paz.tif",
+  "fictional_boundary_mountains": {
+    "enabled": true,
+    "height_m": 120,
+    "width_m": 220,
+    "shore_clearance_m": 40,
+    "note": "Fictional unscalable exterior boundary, independent of real DEM. Original invisible sea boundary retained."
+  },
+  "local_boundary_outsets": [
+    {
+      "id": "core_south_join",
+      "center_xz": [
+        2285.29,
+        889.56
+      ],
+      "radius_m": 400,
+      "outset_m": 60,
+      "note": "User-directed gradual mountain setback outside the Centre/South join"
+    }
+  ]
 }

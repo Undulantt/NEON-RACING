@@ -2,6 +2,8 @@ El relieve real B.7-R está integrado en el mapa principal: **F5** inicia `Main.
 
 La conducción incorpora gravedad en pendientes, retroceso cuando falta fuerza y pequeños vuelos al coronar subidas con velocidad. **Espacio mantiene el coche frenado en una cuesta. T activa/desactiva velocidad máxima y aceleración ×2 para pruebas.** [Comportamiento, parámetros y pruebas](docs/SLOPE_PHYSICS.md).
 
+Las zonas **C2, A4 y A5** se amplían siguiendo el recorte del usuario. Los bordes terrestres incorporan montañas ficticias infranqueables. Después se ajustó el mar de **A1, A2, B1 y la parte costera de A3**, y se retranqueó la montaña Centro–Sur. [Corrección del mar y límites](docs/COAST_FIX.md) · [Ampliación C.6](docs/PHASE_C6_BOUNDARIES.md).
+
 Se restituyen las carreteras principales del Cajoncito: Juan de Dios Angulo, Federal 1, Forjadores y Olachea, conservando el límite sur recortado. [Detalles, procedencia y pruebas](docs/CAJONCITO_ROADS.md).
 
 La extensión sur se recorta ahora por el límite poligonal indicado en rojo: la franja inferior queda excluida de calles, edificios, suelo visual y físico. [Corrección del límite sur](docs/PHASE_C5_SOUTH_CUT.md).

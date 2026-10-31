@@ -216,7 +216,10 @@ def build():
     print('URBAN: enrichment complete',flush=True)
     from urban_geography import surfaces, landmarks, mapped_area_ids
     visual_region=metric_region({**cfg,"active_blocks":{"visual_envelope":cfg["bbox"]}})
-    geography=surfaces(visual_region,coast,protected,buildings,road_surface,mapped_area_ids(load_json(inputs['osm_protected'][0])))
+    preserved_sea=None
+    if cfg.get('preserved_sea_file'):
+        preserved_sea=shape(load_json(ROOT/cfg['preserved_sea_file'])['geometry'])
+    geography=surfaces(visual_region,coast,protected,buildings,road_surface,mapped_area_ids(load_json(inputs['osm_protected'][0])),preserved_sea)
     print('URBAN: geography complete',flush=True)
     (target/'urban_geography.json').write_text(json.dumps(geography,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
     (target/'landmarks.json').write_text(json.dumps(landmarks(enrichment),ensure_ascii=False,indent=2),encoding='utf-8')

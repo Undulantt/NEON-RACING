@@ -3,6 +3,7 @@ import hashlib
 import json
 import math
 import struct
+import time
 from pathlib import Path
 
 import numpy as np
@@ -22,17 +23,36 @@ def digest(path):
 
 
 def write(path, data):
+    write_bytes(path,json.dumps(data,ensure_ascii=False,separators=(',', ':'),allow_nan=False).encode('utf-8'))
+
+
+def write_bytes(path, content):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':'), allow_nan=False), encoding='utf-8')
+    if path.exists() and path.read_bytes()==content:
+        return
+    # File watchers on Windows can briefly hold a generated JSON file open.
+    # Preserve the previous valid snapshot until the replacement is complete.
+    pending=path.with_name(path.name+'.writing')
+    try:
+        for attempt in range(5):
+            try:
+                pending.write_bytes(content)
+                pending.replace(path)
+                return
+            except OSError:
+                if attempt==4:raise
+                time.sleep(.1*(attempt+1))
+    finally:
+        if pending.exists():pending.unlink()
 
 
 def write_heightfield(out,field,root):
     out=Path(out)
     out.mkdir(parents=True,exist_ok=True)
     heights=out/'heights.bin';quality=out/'quality.bin'
-    heights.write_bytes(field.values.astype('<f4').tobytes())
-    quality.write_bytes(field.quality.tobytes())
+    write_bytes(heights,field.values.astype('<f4').tobytes())
+    write_bytes(quality,field.quality.tobytes())
     record=field.record()
     record.pop('heights');record.pop('estimated')
     record.update(heights_file=heights.relative_to(root).as_posix(),heights_sha256=digest(heights),
@@ -87,13 +107,14 @@ class HeightField:
         self.values = np.empty((self.nz, self.nx))
         self.quality = np.zeros((self.nz, self.nx), dtype=np.uint8)
         from shapely.geometry import Point
+        support_region = region.buffer(step*2) if region is not None else None
         for iz in range(self.nz):
             for ix in range(self.nx):
                 x, z = self.x0 + ix * step, self.z0 + iz * step
                 h = dem.sample(x, z)
                 if h is None:
                     point = Point(x,z)
-                    if region is not None and not region.buffer(step*2).covers(point):
+                    if support_region is not None and not support_region.covers(point):
                         h = 0.0
                         self.quality[iz,ix] = 2  # Unused outside playable support, not terrain data.
                     elif sea is not None and (sea.covers(point) or (region is not None and not region.covers(point) and sea.distance(point) <= step*2)):
@@ -218,6 +239,6 @@ def binary_faces(path, faces, field, origin):
     omitted_area=float((horizontal_area2[~keep]*.5).sum())
     content=quantized[keep].tobytes()
     Path(path).parent.mkdir(parents=True, exist_ok=True)
-    Path(path).write_bytes(content)
+    write_bytes(path,content)
     return dict(file=str(path), sha256=hashlib.sha256(content).hexdigest(), triangles_count=int(keep.sum()),
         max_grade=max_grade,omitted_submillimetre_faces=int((~keep).sum()),omitted_area_m2=omitted_area)

@@ -15,7 +15,8 @@ def clip_lonlat(cfg):
 
 def region_lonlat(cfg):
     areas = cfg.get("active_blocks", {"default": cfg["bbox"]})
-    region = unary_union([box(b[1], b[0], b[3], b[2]) for b in areas.values()])
+    polygons = cfg.get("block_polygons_lonlat", {})
+    region = unary_union([Polygon(polygons[key]) if key in polygons else box(b[1], b[0], b[3], b[2]) for key,b in areas.items()])
     clip = clip_lonlat(cfg)
     return region.intersection(clip) if clip is not None else region
 

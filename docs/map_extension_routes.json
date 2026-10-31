@@ -1,0 +1,34 @@
+{
+  "routes": [
+    {
+      "area": "C2",
+      "file": "tracks/extension_C2.json",
+      "length_m": 2377.368400147231,
+      "target_xz": [
+        1945.7989776376119,
+        335.8642759296777
+      ],
+      "target_osm_node": "13711598804"
+    },
+    {
+      "area": "A4",
+      "file": "tracks/extension_A4.json",
+      "length_m": 4268.631189608124,
+      "target_xz": [
+        -2472.344022896966,
+        2780.262348357269
+      ],
+      "target_osm_node": "6218221504"
+    },
+    {
+      "area": "A5",
+      "file": "tracks/extension_A5.json",
+      "length_m": 5601.650163821389,
+      "target_xz": [
+        -2399.417650802356,
+        4400.906165216198
+      ],
+      "target_osm_node": "6184233316"
+    }
+  ]
+}

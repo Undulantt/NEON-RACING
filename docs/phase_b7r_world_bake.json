@@ -1,54 +1,54 @@
 {
+  "bake_seconds": 228.9506059,
+  "manifest_sha256": "549274ddffff89a6826000fbef0d57022ff688a78f679f4838c92cfb55b23831",
   "passed": true,
+  "published_manifest_sha256": "ec8a52d15c606373df477538021d44eeab809f8ed50c3141ed3385a04ac2814a",
   "statistics": {
-    "road_chunks": 537,
-    "terrain_chunks": 615,
-    "road_triangles": 545210,
-    "terrain_triangles": 1222974,
-    "buildings": 59580,
-    "max_road_grade": 0.3818717247364825,
-    "max_foundation_spread_m": 13.364146151788251,
-    "foundation_over_6m": 20,
+    "buildings": 62410.0,
+    "coast_adjustment": {
+      "adjusted_nodes": 20696.0,
+      "max_adjustment_m": 16.7777059473698,
+      "method": "OSM shoreline at Y=0; smoothstep transition to CEM; no bathymetry inferred",
+      "transition_end_m": 64.0,
+      "zero_band_m": 16.0
+    },
+    "coastal_estimated_samples": 37.0,
+    "foundation_over_6m": 25.0,
+    "grid_estimated_samples": 59441.0,
+    "height_max_m": 274.610370571769,
+    "height_min_m": -3.80958915810904,
+    "max_foundation_spread_m": 13.3641461517883,
+    "max_road_grade": 0.381871724736483,
+    "omitted_submillimetre_area_m2": 0.447571326090237,
+    "road_chunks": 574.0,
+    "road_fairing": {
+      "iterations": 15.0,
+      "max_adjustment_m": 4.91437942459061,
+      "method": "Alternating local triangle gradient projections; shoreline anchors fixed; original slopes below limit unchanged",
+      "nodes_adjusted_over_10cm": 298.0,
+      "projected_road_cells": 1210.0,
+      "target_grade": 0.38
+    },
+    "road_triangles": 579705.0,
     "source_profile": {
       "crs": "EPSG:4326",
-      "width": 511,
-      "height": 756,
+      "height": 756.0,
+      "nodata": 32767.0,
+      "pixel_interpretation": "Area",
       "transform": [
-        0.00013894324853227496,
+        0.00013894324853227,
         0.0,
         -110.347,
         0.0,
-        -0.00013888888888888252,
-        24.189999999999998,
+        -0.00013888888888888,
+        24.19,
         0.0,
         0.0,
         1.0
       ],
-      "nodata": 32767.0,
-      "pixel_interpretation": "Area"
+      "width": 511.0
     },
-    "height_min_m": -3.0830547283495,
-    "height_max_m": 274.6103705717691,
-    "grid_estimated_samples": 53897,
-    "coastal_estimated_samples": 37,
-    "road_fairing": {
-      "iterations": 15,
-      "projected_road_cells": 1210,
-      "max_adjustment_m": 4.9143794245906065,
-      "nodes_adjusted_over_10cm": 298,
-      "target_grade": 0.38,
-      "method": "Alternating local triangle gradient projections; shoreline anchors fixed; original slopes below limit unchanged"
-    },
-    "omitted_submillimetre_area_m2": 0.43924391667618634,
-    "coast_adjustment": {
-      "adjusted_nodes": 20079,
-      "max_adjustment_m": 16.777705947369764,
-      "zero_band_m": 16,
-      "transition_end_m": 64,
-      "method": "OSM shoreline at Y=0; smoothstep transition to CEM; no bathymetry inferred"
-    }
-  },
-  "bake_seconds": 182.80506579999928,
-  "manifest_sha256": "3ce8c24d7980e8d2c1438cd718fc070745321171b4bd16062bae503247da239e",
-  "published_manifest_sha256": "86089e3021158a6492d114e4be9fe27937d69fc4da4d389443bff27d0a234934"
+    "terrain_chunks": 660.0,
+    "terrain_triangles": 1293560.0
+  }
 }

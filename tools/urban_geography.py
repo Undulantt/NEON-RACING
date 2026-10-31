@@ -4,7 +4,7 @@ from shapely.ops import unary_union, polygonize
 from shapely import constrained_delaunay_triangles
 
 
-def surfaces(region, coast, protected, buildings, roads, area_ids=None):
+def surfaces(region, coast, protected, buildings, roads, area_ids=None, preserved_sea=None):
     segments=[(a,b,LineString([a,b])) for line in coast for a,b in zip(line.coords,list(line.coords)[1:]) if a!=b]
     cells=list(polygonize(unary_union([region.boundary]+[line.intersection(region) for line in coast])))
     water=[]
@@ -16,6 +16,10 @@ def surfaces(region, coast, protected, buildings, roads, area_ids=None):
         # OSM water on right in lon/lat; the local Z axis reverses latitude.
         if cross>0: water.append(cell)
     sea=unary_union(water)
+    if preserved_sea is not None:
+        # Explicit game-design water may extend offshore beyond the acquisition
+        # envelope. It must remain continuous with the sea drawn inside it.
+        sea=preserved_sea
     overlap=sum(Polygon(b['footprint_xz'],b.get('holes_xz',[])).intersection(sea).area for b in buildings)
     if overlap>0.01: raise ValueError(f'Coast conflicts with buildings: {overlap} m2; review required')
     records=[]

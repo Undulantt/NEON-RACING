@@ -1,0 +1,29 @@
+Road fairing {'iterations': 15, 'projected_road_cells': 1210, 'max_adjustment_m': 4.9143794245906065, 'nodes_adjusted_over_10cm': 298, 'target_grade': 0.38, 'method': 'Alternating local triangle gradient projections; shoreline anchors fixed; original slopes below limit unchanged'}
+Prepared column -11; roads=827, ground=5011
+Prepared column -10; roads=18618, ground=37043
+Prepared column -9; roads=39749, ground=74570
+Prepared column -8; roads=60503, ground=117509
+Prepared column -7; roads=78436, ground=164971
+Prepared column -6; roads=104286, ground=215732
+Prepared column -5; roads=130605, ground=271899
+Prepared column -4; roads=154916, ground=328380
+Prepared column -3; roads=182421, ground=385223
+Prepared column -2; roads=213521, ground=443271
+Prepared column -1; roads=247204, ground=504820
+Prepared column 0; roads=279248, ground=571789
+Prepared column 1; roads=315456, ground=643020
+Prepared column 2; roads=351577, ground=714720
+Prepared column 3; roads=388103, ground=787946
+Prepared column 4; roads=420138, ground=859327
+Prepared column 5; roads=449204, ground=924293
+Prepared column 6; roads=479990, ground=990102
+Prepared column 7; roads=506513, ground=1055099
+Prepared column 8; roads=530705, ground=1113253
+Prepared column 9; roads=553575, ground=1164447
+Prepared column 10; roads=571163, ground=1210804
+Prepared column 11; roads=576584, ground=1231217
+Prepared column 12; roads=579004, ground=1250706
+Prepared column 13; roads=580148, ground=1269786
+Prepared column 14; roads=580619, ground=1288721
+Prepared column 15; roads=580619, ground=1294303
+{'road_chunks': 574, 'terrain_chunks': 660, 'road_triangles': 579705, 'terrain_triangles': 1293560, 'buildings': 62410, 'max_road_grade': 0.3818717247364825, 'max_foundation_spread_m': 13.364146151788251, 'foundation_over_6m': 25, 'source_profile': {'crs': 'EPSG:4326', 'width': 511, 'height': 756, 'transform': [0.00013894324853227496, 0.0, -110.347, 0.0, -0.00013888888888888252, 24.189999999999998, 0.0, 0.0, 1.0], 'nodata': 32767.0, 'pixel_interpretation': 'Area'}, 'height_min_m': -3.809589158109037, 'height_max_m': 274.6103705717691, 'grid_estimated_samples': 59441, 'coastal_estimated_samples': 37, 'road_fairing': {'iterations': 15, 'projected_road_cells': 1210, 'max_adjustment_m': 4.9143794245906065, 'nodes_adjusted_over_10cm': 298, 'target_grade': 0.38, 'method': 'Alternating local triangle gradient projections; shoreline anchors fixed; original slopes below limit unchanged'}, 'omitted_submillimetre_area_m2': 0.447571326090237, 'coast_adjustment': {'adjusted_nodes': 20696, 'max_adjustment_m': 16.777705947369764, 'zero_band_m': 16, 'transition_end_m': 64, 'method': 'OSM shoreline at Y=0; smoothstep transition to CEM; no bathymetry inferred'}}

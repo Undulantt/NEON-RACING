@@ -1,0 +1,23 @@
+{
+  "bounds_xz": [
+    -2637.84874020037,
+    -2891.0680927585,
+    3906.04524991256,
+    7415.10449848935
+  ],
+  "buildings": 62410,
+  "clean": "res://docs/evidence/la_paz_coast_fix.png",
+  "grid": "res://docs/evidence/la_paz_coast_fix_grid.png",
+  "north_up": true,
+  "profile": "world",
+  "roads_loaded": 574,
+  "roads_total": 574,
+  "size_px": [
+    2560,
+    3840
+  ],
+  "terrain_loaded": 660,
+  "terrain_total": 660,
+  "urban_loaded": 541,
+  "urban_total": 541
+}

@@ -1,0 +1,10 @@
+{
+  "A2_terrain_absent": true,
+  "boundary_distance_along_diagonal_m": 93.7952728271484,
+  "failures": [],
+  "join_mountain_collision_distance_m": 100.315246582031,
+  "manifest_sha256": "ec8a52d15c606373df477538021d44eeab809f8ed50c3141ed3385a04ac2814a",
+  "normal_setback_m": 55.0361061096191,
+  "passed": true,
+  "terrain_before_mountain_supported": true
+}

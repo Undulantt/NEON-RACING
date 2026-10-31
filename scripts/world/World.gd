@@ -272,7 +272,7 @@ func build_relief_limits() -> void:
 		limit_root.name = "BoundaryChunks"
 		limit_root.set_script(Roads)
 		limit_root.surface_layer = 8
-		limit_root.visible = false
+		limit_root.visible = relief_manifest.get("fictional_boundary_mountains", {}).get("enabled", false)
 		add_child(limit_root)
 		var spawn: Array = environment_data["spawn"]["position_xz"]
 		limit_root.configure({"chunks":relief_manifest["limits"]}, Vector3(spawn[0],0,spawn[1]))

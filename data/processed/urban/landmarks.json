@@ -14,8 +14,8 @@
       "category": "cultural",
       "building_id": null,
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -38,8 +38,8 @@
       "category": "institutional",
       "building_id": null,
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -62,8 +62,8 @@
       "category": "cultural",
       "building_id": null,
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -86,8 +86,8 @@
       "category": "cultural",
       "building_id": "osm:155831064:0",
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -110,8 +110,8 @@
       "category": "cultural",
       "building_id": "osm:155831066:0",
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 1,
@@ -136,8 +136,8 @@
       "category": "institutional",
       "building_id": null,
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -160,8 +160,8 @@
       "category": "commercial",
       "building_id": "overture:01326eca-6638-4e93-bf74-debbb03e33ac:0:0",
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
@@ -184,8 +184,8 @@
       "category": "commercial",
       "building_id": "overture:5ab8adc6-35b9-49ba-8f09-d6ca66e4781f:0:0",
       "source": {
-        "file": "osm_map_c5_south.osm",
-        "sha256": "142922bfd72c1e2a8891a68c75522f49fb55cd78a1a6550fdc5696e9e45f817e",
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
         "license": "ODbL-1.0"
       },
       "priority": 2,
