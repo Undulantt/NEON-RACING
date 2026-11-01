@@ -187,17 +187,7 @@ func refresh() -> void:
 				var p := Vector3(a.x,base+minf(3,height-0.4),a.y)+tangent*0.6+normal*0.085
 				var color := Color("ff2cd8") if sign_count%2 == 0 else Color("30f4ff")
 				Builder.quad(lit,p,p+tangent*minf(7,length-1.2),p+tangent*minf(7,length-1.2)+Vector3.UP*0.18,p+Vector3.UP*0.18,normal,color)
-				if sign_count < 3:
-					var label := Label3D.new()
-					label.text = ["BAHÍA  ·  24H","CAFÉ / LA PAZ","NOCHE AZUL"][sign_count]
-					label.font_size = 48
-					label.pixel_size = 0.025
-					label.modulate = color
-					label.no_depth_test = false
-					label.position = p+tangent*3.0+Vector3.UP*0.8+normal*0.02
-					pilot.add_child(label)
-					label.look_at(label.global_position+normal)
-					label.visibility_range_end = 160
+
 				sign_count += 1
 	mesh(pilot,lit,emission)
 	mesh(pilot,storefronts,solid)

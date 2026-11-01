@@ -32,6 +32,11 @@ func run() -> void:
 	check(trail.history.size()<=trail.MAX_SAMPLES,"History budget exceeded")
 	check(trail.mesh.get_surface_count()==1,"Expected one batched ribbon surface")
 	var peak_samples: int=trail.history.size()
+	var look=trail.get_parent()
+	check(look.blur_amount>0.9,"Turbo peripheral blur not engaged")
+	check(world.night_style.pilot.find_children("*","Label3D",true,false).is_empty(),"Invented business labels remain")
+	var borders=world.road_root.loaded[Vector2i(0,-1)].find_children("RoadEdgeNeon","MeshInstance3D",true,false)
+	check(not borders.is_empty(),"Missing elevated road borders")
 	var screen=trail.screen_effects
 	check(screen.retro_profile,"Existing speed overlay should use retro profile")
 	check(world.night_style.storefront_count>0,"No commercial facade modules")
@@ -44,6 +49,7 @@ func run() -> void:
 	car.set_controls(0,0)
 	await frames(35)
 	check(trail.history.is_empty(),"Released boost must fade out")
+	check(look.blur_amount<0.02,"Released boost blur must fade")
 	car.set_controls(1,0,false,true)
 	await frames(12)
 	car.position+=Vector3(20,0,0)
@@ -60,7 +66,7 @@ func run() -> void:
 		check(is_equal_approx(trail.strength,expected),"F4 strength cycle")
 		if expected==0:
 			check(trail.history.is_empty() and not car.visuals["exhaust"][0].visible,"Disabled effects remain visible")
-	var report:={"passed":failures.is_empty(),"failures":failures,"peak_samples":peak_samples,"storefronts":world.night_style.storefront_count,"checks":["turbo emission","bounded mesh","pause","fade","teleport","recovery","F4 modes"]}
+	var report:={"passed":failures.is_empty(),"failures":failures,"peak_samples":peak_samples,"storefronts":world.night_style.storefront_count,"checks":["turbo emission","bounded mesh","pause","fade","teleport","recovery","F4 modes","peripheral blur","no invented labels","elevated borders"]}
 	FileAccess.open("res://docs/phase_e_motion_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PHASE_E_MOTION ",JSON.stringify(report))
 	world.queue_free()

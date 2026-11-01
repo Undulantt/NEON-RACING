@@ -1,16 +1,16 @@
 {
-  "mean_ratio": 0.967830887718822,
+  "mean_ratio": 1.10135141469553,
   "passed": true,
   "results": {
     "false": {
       "boost_frames": 420,
-      "fps": 350.284736083155,
-      "max_ms": 6.862,
-      "mean_ms": 2.85482037037037,
+      "fps": 374.997526057988,
+      "max_ms": 4.725,
+      "mean_ms": 2.66668425925926,
       "offroad_frames": 0,
-      "p95_ms": 4.584,
+      "p95_ms": 3.708,
       "peak_nodes": 541.0,
-      "peak_static_memory": 214339691.0,
+      "peak_static_memory": 214373014.0,
       "streaming": {
         "chunk_loads": 20,
         "chunk_unloads": 0,
@@ -18,19 +18,19 @@
         "failed_chunks": [],
         "loaded_buildings": 1869,
         "loaded_chunks": 20,
-        "max_chunk_build_ms": 24,
+        "max_chunk_build_ms": 30,
         "max_loaded_chunks": 20
       }
     },
     "true": {
       "boost_frames": 420,
-      "fps": 361.927626538946,
-      "max_ms": 39.562,
-      "mean_ms": 2.76298333333333,
+      "fps": 340.488531684192,
+      "max_ms": 40.973,
+      "mean_ms": 2.93695648148148,
       "offroad_frames": 0,
-      "p95_ms": 3.935,
-      "peak_nodes": 608.0,
-      "peak_static_memory": 217473331.0,
+      "p95_ms": 4.11,
+      "peak_nodes": 606.0,
+      "peak_static_memory": 217192107.0,
       "streaming": {
         "chunk_loads": 20,
         "chunk_unloads": 0,
@@ -38,7 +38,7 @@
         "failed_chunks": [],
         "loaded_buildings": 1869,
         "loaded_chunks": 20,
-        "max_chunk_build_ms": 10,
+        "max_chunk_build_ms": 11,
         "max_loaded_chunks": 20
       }
     }

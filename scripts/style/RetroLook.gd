@@ -2,6 +2,8 @@ extends Node
 var world: Node3D
 var road_material: ShaderMaterial
 var timer := 0.0
+var post: ShaderMaterial
+var blur_amount := 0.0
 var pilot_cell := Vector2i.ZERO
 var turbo_trail: Node3D
 func configure(target: Node3D) -> void:
@@ -40,7 +42,7 @@ func configure(target: Node3D) -> void:
 	var layer := CanvasLayer.new();layer.layer=0;add_child(layer)
 	var rect := ColorRect.new();rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	rect.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	var post := ShaderMaterial.new();post.shader=load("res://shaders/retro_bloom.gdshader")
+	post=ShaderMaterial.new();post.shader=load("res://shaders/retro_bloom.gdshader")
 	rect.material=post;layer.add_child(rect)
 	preload("res://scripts/style/RetroCar.gd").build(world.player)
 	world.follow_camera.close_view=true
@@ -59,7 +61,13 @@ func refresh() -> void:
 			chunk.set_meta("retro_road",true)
 			for visual in chunk.find_children("*","MeshInstance3D",true,false):
 				visual.material_override=road_material
+				preload("res://scripts/style/RoadNeon.gd").build(visual)
 func _process(delta: float) -> void:
+	var goal := 0.0
+	if is_instance_valid(turbo_trail) and world.player.driving_enabled and world.player.turbo_active:
+		goal=turbo_trail.strength
+	blur_amount=lerpf(blur_amount,goal,1.0-exp(-8.0*delta))
+	post.set_shader_parameter("turbo_blur",blur_amount)
 	timer+=delta
 	if timer>0.25:
 		timer=0

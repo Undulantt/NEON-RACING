@@ -1,5 +1,18 @@
 # Fase E — refinamiento de movimiento y contraste
 
+## Corrección posterior — relieve, velocidad y rótulos
+
+- Los bordes cian ahora se generan desde las aristas externas de la malla vial elevada (`RoadNeon.gd`), con un pequeño desplazamiento de 1,8 cm para evitar parpadeo por superposición. Se eliminan aristas compartidas y cortes artificiales de sector. Se conserva la malla física. La aplicación sigue limitada al sector piloto; no se ha extendido el estilo al mapa completo.
+- Las líneas periféricas pasan de 1,25 a 1,8 px, aumentan moderadamente su longitud y su opacidad máxima de 0,48 a 0,68. Conservan las zonas de exclusión de carretera y HUD.
+- Turbo añade desenfoque lateral gradual con mipmaps en el posprocesado existente. El centro permanece enfocado y los instrumentos se dibujan después. F4 también regula este efecto; al soltar turbo se desvanece.
+- `CAFÉ / LA PAZ`, `BAHÍA · 24H` y `NOCHE AZUL` eran textos decorativos inventados, sin procedencia geográfica. Se retiran los tres. Los acentos geométricos de neón permanecen sin nombres; futuros rótulos comerciales deberán tener fuente y correspondencia verificable con el edificio.
+- `phase_e_road_neon.gd`: PASS en superficie inclinada, cuatro bordes exteriores y ninguna diagonal interna; desviación respecto al plano y separación prevista menor de 0,000001 m. Verificación de exclusión del corte entre sectores.
+- `phase_e_motion.gd`: PASS incluyendo activación/desaparición del desenfoque, ausencia de rótulos inventados y presencia de bordes elevados. `phase_e_retro.gd`: PASS, misma trayectoria, F8 y recarga. Capturas reales de conducción y sector actualizadas y revisadas.
+
+Rendimiento: primera medición con lectura adicional de pantalla, +18,33 % sobre la escena diurna (fuera del margen de 15 %); se conserva en `phase_e_blur_initial_benchmark.json`. Tras reutilizar el mip del resplandor existente, la medición final con turbo dio 2,937 ms frente a 2,667 ms (+10,14 %, PASS), p95 4,110 ms y pico aislado 40,973 ms. No garantiza ausencia de tirones ni rendimiento equivalente en toda la ciudad.
+
+Las cifras de la sección original siguiente son históricas; el informe de turbo se actualiza con esta revisión.
+
 ## Alcance y dirección
 
 Prioridad del usuario: refinar estela de turbo y líneas dinámicas; posponer el modelo del coche para Blender. Se conservan controlador, cámara, geografía, colisiones, streaming y carrocería de la revisión anterior. Música fuera de este trabajo.

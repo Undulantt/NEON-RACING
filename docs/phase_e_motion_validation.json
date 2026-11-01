@@ -6,7 +6,10 @@
     "fade",
     "teleport",
     "recovery",
-    "F4 modes"
+    "F4 modes",
+    "peripheral blur",
+    "no invented labels",
+    "elevated borders"
   ],
   "failures": [],
   "passed": true,

@@ -20,7 +20,6 @@ void fragment(){
   if(d<distance_to_axis){distance_to_axis=d;half_width=widths[i]*0.5;}
  }
  float grain=mix(hash(floor(p*60.0)),0.5,clamp(length(fwidth(p))*40.0,0.0,1.0));
- float edge=exp(-abs(distance_to_axis-half_width)*2.1);
  float reflected=exp(-abs(distance_to_axis-half_width)*0.38)*(0.35+0.65*pow(max(sin(p.y*0.22+p.x*0.07),0.0),8.0));
  float center=(1.0-smoothstep(0.07,0.13,abs(distance_to_axis-0.13)));
  float dash=(1.0-smoothstep(0.06,0.13,abs(distance_to_axis-half_width*0.48)))*step(0.45,fract(p.y/8.0));
@@ -31,5 +30,5 @@ void fragment(){
  vec3 purple=vec3(0.065,0.045,0.11);
  ALBEDO=purple*(0.75+grain*0.25)*(0.9+wet*0.12);
  METALLIC=0.22;ROUGHNESS=mix(0.65,0.28,wet)+grain*0.08;SPECULAR=0.7;
- EMISSION=mask*(pool*(0.35+wet*0.65)*vec3(0.35,0.012,0.23)+fresnel*vec3(0.09,0.015,0.12)+vec3(0.025,0.035,0.10)+reflected*wet*vec3(0.24,0.018,0.19)+edge*vec3(0.0,0.38,0.48)+(center+dash)*vec3(0.44,0.49,0.57));
+ EMISSION=mask*(pool*(0.35+wet*0.65)*vec3(0.35,0.012,0.23)+fresnel*vec3(0.09,0.015,0.12)+vec3(0.025,0.035,0.10)+reflected*wet*vec3(0.24,0.018,0.19)+(center+dash)*vec3(0.44,0.49,0.57));
 }

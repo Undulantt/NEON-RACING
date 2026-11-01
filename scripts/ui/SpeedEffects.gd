@@ -71,7 +71,7 @@ func retro_segments(viewport: Vector2) -> Array:
 			var phase := fposmod(elapsed*(0.8+gain*0.75)+float(i)*0.618+float(side)*0.13,1.0)
 			var head := focus.lerp(edge,0.78+phase*0.34)
 			var direction := (edge-focus).normalized()
-			var tail := head-direction*viewport.y*(0.025+phase*0.045)*gain
+			var tail := head-direction*viewport.y*(0.035+phase*0.055)*gain
 			if head.y > viewport.y-60 or tail.y > viewport.y-60:
 				continue
 			var blocked := false
@@ -80,12 +80,12 @@ func retro_segments(viewport: Vector2) -> Array:
 				if protected.intersects(Rect2(head.min(tail),head.max(tail)-head.min(tail)).grow(4)):
 					blocked = true
 			if not blocked:
-				result.append({"head":head,"tail":tail,"alpha":sin(phase*PI)*gain*0.48,"accent":i%4==0})
+				result.append({"head":head,"tail":tail,"alpha":sin(phase*PI)*gain*0.68,"accent":i%4==0})
 	return result
 
 func draw_retro() -> void:
 	for streak in retro_segments(get_viewport_rect().size):
 		var color := Color("ed80d5") if streak["accent"] else Color("92ecff")
 		color=color.lerp(Color("bba4ff"),drift_tint*0.5)
-		draw_line(streak["head"],streak["tail"],Color(color,streak["alpha"]*0.13),5.0,true)
-		draw_line(streak["head"],streak["tail"],Color(color.lerp(Color.WHITE,0.4),streak["alpha"]),1.25,true)
+		draw_line(streak["head"],streak["tail"],Color(color,streak["alpha"]*0.18),5.0,true)
+		draw_line(streak["head"],streak["tail"],Color(color.lerp(Color.WHITE,0.4),streak["alpha"]),1.8,true)
