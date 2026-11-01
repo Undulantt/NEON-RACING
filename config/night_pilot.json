@@ -1,0 +1,19 @@
+{
+  "sector": "0_-1",
+  "spawn_xz": [
+    50,
+    -89
+  ],
+  "heading_radians": -0.366,
+  "lamp_limit": 6,
+  "music": {
+    "free_drive": "res://assets/audio/malecon_night_demo.wav",
+    "race": "res://assets/audio/malecon_night_demo.wav"
+  },
+  "default_volumes": {
+    "Music": 0.45,
+    "Engine": 0.8,
+    "Effects": 0.7
+  },
+  "promenade_way_id": "54672938"
+}

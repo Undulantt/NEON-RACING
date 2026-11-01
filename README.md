@@ -1,3 +1,11 @@
+# Fase E — demostración nocturna del Malecón
+
+Abre `scenes/NightPilot.tscn` y pulsa **F6** en Godot. Un sector con cielo nocturno, ventanas iluminadas, neón comercial, farolas, palmeras estilizadas, faros y audio original de prueba. **F7** abre la mezcla de música, motor y efectos. Se reutilizan conducción, turbo, derrape y cámara de C.6.
+
+[Dirección artística, pruebas, rendimiento y límites](docs/PHASE_E.md). La escena principal y los datos geográficos se conservan.
+
+---
+
 El relieve real B.7-R está integrado en el mapa principal: **F5** inicia `Main.tscn` con terreno, carreteras y edificios elevados en centro, norte y sur, conservando el punto de aparición habitual. El piloto sigue en `scenes/ReliefPilot.tscn` (**F6**). Para comparar con el plano, abrir `scenes/FlatWorld.tscn` o iniciar con `--flat-world`. [Implementación, fuentes, reproducción, pruebas y límites](docs/PHASE_B7R.md); [auditoría previa](docs/PHASE_B7R_PROPOSAL.md).
 
 La conducción incorpora gravedad en pendientes, retroceso cuando falta fuerza y pequeños vuelos al coronar subidas con velocidad. **Espacio mantiene el coche frenado en una cuesta. T activa/desactiva velocidad máxima y aceleración ×2 para pruebas.** [Comportamiento, parámetros y pruebas](docs/SLOPE_PHYSICS.md).

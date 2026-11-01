@@ -1,0 +1,8 @@
+{
+  "scripts/driving/ArcadeCar.gd": "0862f0bdc42bb3139ae6ed00e47c400dfeb9dae66aaded8cb8bbabd25e29d93b",
+  "scripts/driving/FollowCamera.gd": "65aefc8d30dfd36ec5c0ae9586bda827590e62bc5660831cbc5ba5a51797be59",
+  "config/driving_config.json": "24fa18a6185a2fda3652556316a76b0e378f0a40b3425749e042c8dc5acc1e8d",
+  "data/processed/la_paz_map.json": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+  "data/processed/relief/world/manifest.json": "ec8a52d15c606373df477538021d44eeab809f8ed50c3141ed3385a04ac2814a",
+  "data/processed/relief/world/urban/city_manifest.json": "2cc73e9be2dd95ead766f84e163513586007bf5bd668e465d45c6d88f3df7920"
+}
