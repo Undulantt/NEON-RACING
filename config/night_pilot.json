@@ -5,7 +5,7 @@
     -89
   ],
   "heading_radians": -0.366,
-  "lamp_limit": 6,
+  "lamp_limit": 10,
   "music": {
     "free_drive": "res://assets/audio/malecon_night_demo.wav",
     "race": "res://assets/audio/malecon_night_demo.wav"

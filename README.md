@@ -1,3 +1,9 @@
+# Revisión visual — La Paz / Neon Coast
+
+Abre `scenes/NightPilot.tscn` y pulsa **F6**: horizonte synthwave, asfalto estilizado, bordes cian, palmeras y carrocería arcade. Música detenida por defecto. [Capturas, pruebas y límites de esta revisión](docs/PHASE_E_RETRO.md).
+
+---
+
 # Fase E — demostración nocturna del Malecón
 
 Abre `scenes/NightPilot.tscn` y pulsa **F6** en Godot. Un sector con cielo nocturno, ventanas iluminadas, neón comercial, farolas, palmeras estilizadas, faros y audio original de prueba. **F7** abre la mezcla de música, motor y efectos. Se reutilizan conducción, turbo, derrape y cámara de C.6.

@@ -1,0 +1,30 @@
+{
+  "failures": [],
+  "passed": true,
+  "results": {
+    "decoration": {
+      "lamp_fixtures": 10,
+      "neon_accents": 8,
+      "reloads": 2,
+      "windows": 548
+    },
+    "false": {
+      "offroad_frames": 0,
+      "position": [
+        70.2628555297852,
+        0.544516205787659,
+        -141.954055786133
+      ],
+      "speed": 32.0088348388672
+    },
+    "true": {
+      "offroad_frames": 0,
+      "position": [
+        70.2628555297852,
+        0.544516205787659,
+        -141.954055786133
+      ],
+      "speed": 32.0088348388672
+    }
+  }
+}

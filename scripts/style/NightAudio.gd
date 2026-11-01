@@ -44,7 +44,7 @@ func configure(world: Node3D, settings: Dictionary) -> void:
 	ambience.finished.connect(func(): ambience.play())
 	ambience.play()
 	var hint := Label.new()
-	hint.text = "MALECÓN / NOCHE   ·   F7 audio"
+	hint.text = "LA PAZ / NEON COAST"
 	hint.position = Vector2(270,24)
 	hint.add_theme_color_override("font_color",Color("67e5ef"))
 	add_child(hint)

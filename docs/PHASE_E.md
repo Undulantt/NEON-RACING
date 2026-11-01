@@ -1,3 +1,5 @@
+> Revisión posterior: [dirección visual basada en referencias](PHASE_E_RETRO.md). Este documento conserva el primer piloto y sus mediciones.
+
 # Fase E — piloto nocturno del Malecón
 
 ## Auditoría y dirección inicial (31/10/2026)

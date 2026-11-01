@@ -34,15 +34,7 @@ func configure(target: Node3D, config: Dictionary) -> void:
 			env.background_color = Color("070d24")
 			env.ambient_light_color = Color("839ed8")
 			env.ambient_light_energy = 0.28
-			var sky := Sky.new()
-			var sky_material := ProceduralSkyMaterial.new()
-			sky_material.sky_top_color = Color("030718")
-			sky_material.sky_horizon_color = Color("202746")
-			sky_material.ground_bottom_color = Color("070b1a")
-			sky_material.ground_horizon_color = Color("202746")
-			sky.sky_material = sky_material
-			env.sky = sky
-			env.background_mode = Environment.BG_SKY
+
 		if node is DirectionalLight3D:
 			node.light_color = Color("8aafff")
 			node.light_energy = 0.24
@@ -62,6 +54,10 @@ func configure(target: Node3D, config: Dictionary) -> void:
 	audio = preload("res://scripts/style/NightAudio.gd").new()
 	add_child(audio)
 	audio.configure(world,settings)
+	audio.music.stop()
+	var retro := preload("res://scripts/style/RetroLook.gd").new()
+	add_child(retro)
+	retro.configure(world)
 	refresh()
 
 func geometry() -> Dictionary:
@@ -124,7 +120,7 @@ func refresh() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(entry["source"]["file"])))
 	manager.apply_arcade_layout(data)
 	var lit := geometry()
-	var tint := material(Color("7284aa"))
+	var tint := material(Color("8460a8"))
 	for visual in chunk.find_children("*","MeshInstance3D",true,false):
 		visual.material_override = tint
 	nearby_roads.clear()
@@ -158,17 +154,20 @@ func refresh() -> void:
 			var base := float(b.get("base_y_m",0))
 			var category: String = b.get("category","unknown")
 			var commercial := category in ["commercial","restaurant","hotel","cultural"]
+			if length > 8:
+				var cornice := Vector3(a.x,base+height-0.2,a.y)+normal*0.07
+				Builder.quad(lit,cornice,cornice+tangent*length,cornice+tangent*length+Vector3.UP*0.10,cornice+Vector3.UP*0.10,normal,Color("6854b9"))
 			for floor_index in range(mini(3,maxi(1,floori(height/3)))):
 				for i in range(count):
 					if (i+floor_index+int(b["palette_index"]))%3 == 0:
 						continue
 					var p := Vector3(a.x,base+1.1+floor_index*3,a.y)+tangent*(1.0+i*length/maxi(count,1))+normal*0.065
-					var color := Color("ffc27a") if not commercial or i%2 == 0 else Color("70dbe7")
+					var color := Color("ff80d3") if not commercial or i%2 == 0 else Color("70f5ff")
 					Builder.quad(lit,p,p+tangent*1.1,p+tangent*1.1+Vector3.UP,p+Vector3.UP,normal,color)
 					window_count += 1
 			if commercial and length > 5 and sign_count < 8:
 				var p := Vector3(a.x,base+minf(3,height-0.4),a.y)+tangent*0.6+normal*0.085
-				var color := Color("f65eac") if sign_count%2 == 0 else Color("3bdcfa")
+				var color := Color("ff2cd8") if sign_count%2 == 0 else Color("30f4ff")
 				Builder.quad(lit,p,p+tangent*minf(7,length-1.2),p+tangent*minf(7,length-1.2)+Vector3.UP*0.18,p+Vector3.UP*0.18,normal,color)
 				if sign_count < 3:
 					var label := Label3D.new()
@@ -200,44 +199,65 @@ func street_furniture() -> void:
 		var direction := (b-a).normalized()
 		var side := Vector2(direction.y,-direction.x)
 		var half_width := float(road["width_m"])*0.5
-		for index in range(maxi(1,ceili(a.distance_to(b)/30))):
-			var center := a.lerp(b,(float(index)+0.5)/maxi(1,ceili(a.distance_to(b)/30)))
+		for index in range(maxi(1,ceili(a.distance_to(b)/24))):
+			var center := a.lerp(b,(float(index)+0.5)/maxi(1,ceili(a.distance_to(b)/24)))
 			var point := center+side*(half_width+1.4)
 			if area.has_point(point) and positions.size()<int(settings["lamp_limit"]):
 				positions.append(point)
-		for index in range(maxi(1,ceili(a.distance_to(b)/8))):
-			var center := a.lerp(b,(float(index)+0.5)/maxi(1,ceili(a.distance_to(b)/8)))
+		for index in range(maxi(1,ceili(a.distance_to(b)/2))):
+			var center := a.lerp(b,(float(index)+0.5)/maxi(1,ceili(a.distance_to(b)/2)))
 			if not area.has_point(center):
 				continue
 			for sign in [-1,1]:
-				var point: Vector2 = center+side*(half_width-0.2)*sign
+				var point: Vector2 = center+side*(half_width-0.05)*sign
 				var pos := Vector3(point.x,ground(point)+0.05,point.y)
-				var along := Vector3(direction.x,0,direction.y)*0.7
-				var across := Vector3(side.x,0,side.y)*0.09
-				Builder.quad(lights,pos-along-across,pos+along-across,pos+along+across,pos-along+across,Vector3.UP,Color("63b6c2"))
+				var along := Vector3(direction.x,0,direction.y)*1.05
+				var across := Vector3(side.x,0,side.y)*0.16
+				Builder.quad(lights,pos-along-across,pos+along-across,pos+along+across,pos-along+across,Vector3.UP,Color("3ceeff"))
 	for p in positions:
 		var y := ground(p)
 		var foot := Vector3(p.x,y,p.y)
-		Builder.quad(poles,foot-Vector3.RIGHT*0.09,foot+Vector3.RIGHT*0.09,foot+Vector3.RIGHT*0.09+Vector3.UP*6,foot-Vector3.RIGHT*0.09+Vector3.UP*6,Vector3.FORWARD,Color("53708a"))
+		Builder.quad(poles,foot-Vector3.RIGHT*0.16,foot+Vector3.RIGHT*0.16,foot+Vector3.RIGHT*0.16+Vector3.UP*6,foot-Vector3.RIGHT*0.16+Vector3.UP*6,Vector3.FORWARD,Color("53708a"))
 		var top := foot+Vector3.UP*6
-		Builder.quad(lights,top-Vector3(0.5,0,0.3),top+Vector3(0.5,0,-0.3),top+Vector3(0.5,0,0.3),top+Vector3(-0.5,0,0.3),Vector3.DOWN,Color("ffe0a3"))
+		var elbow := top+Vector3(0.8,1.1,0)
+		var end := elbow+Vector3(1.6,0,0)
+		Builder.quad(poles,top,top+Vector3(0.16,0,0),elbow+Vector3(0.16,0,0),elbow,Vector3.FORWARD,Color("503054"))
+		Builder.quad(poles,elbow,end,end+Vector3.UP*0.16,elbow+Vector3.UP*0.16,Vector3.FORWARD,Color("503054"))
+		top=end
+		Builder.quad(lights,top-Vector3(0.5,0,0.3),top+Vector3(0.5,0,-0.3),top+Vector3(0.5,0,0.3),top+Vector3(-0.5,0,0.3),Vector3.DOWN,Color("ff66e5"))
 		var lamp := OmniLight3D.new()
 		lamp.position = top
-		lamp.light_color = Color("ffc888")
-		lamp.light_energy = 1.4
+		lamp.light_color = Color("ff39cf")
+		lamp.light_energy = 2.2
 		lamp.omni_range = 24
 		lamp.omni_attenuation = 1.3
 		lamp.shadow_enabled = false
 		lamp.visible = false
 		pilot.add_child(lamp)
 		lamps.append(lamp)
-		# Stylized promenade palms, explicitly decorative rather than surveyed trees.
+		# Original curved low-poly palm; no external texture or model.
 		var trunk := foot-Vector3(3,0,1)
-		Builder.quad(poles,trunk-Vector3.RIGHT*0.2,trunk+Vector3.RIGHT*0.2,trunk+Vector3(0.2,7,0),trunk+Vector3(-0.2,7,0),Vector3.FORWARD,Color("846854"))
-		for leaf in range(6):
-			var d := Vector3(cos(leaf*TAU/6),0,sin(leaf*TAU/6))
-			var side := Vector3(-d.z,0,d.x)*0.6
-			Builder.triangle(poles,trunk+Vector3.UP*7+side,trunk+Vector3.UP*7-side,trunk+Vector3.UP*5.7+d*3.3,Vector3.UP,Color("307b78"))
+		for level in range(8):
+			var low := trunk+Vector3(0.035*level*level,level*1.15,0)
+			var high := trunk+Vector3(0.035*(level+1)*(level+1),(level+1)*1.15,0)
+			var r := 0.22-level*0.012
+			for face in range(6):
+				var d := Vector3(cos(face*TAU/6),0,sin(face*TAU/6))*r
+				var e := Vector3(cos((face+1)*TAU/6),0,sin((face+1)*TAU/6))*r
+				Builder.quad(poles,low+d,low+e,high+e*0.92,high+d*0.92,d.normalized(),Color("503054"))
+		var crown := trunk+Vector3(2.24,9.2,0)
+		for leaf in range(10):
+			var d := Vector3(cos(leaf*TAU/10),0,sin(leaf*TAU/10))
+			var across := Vector3(-d.z,0,d.x)
+			for part in range(8):
+				var t := float(part)/8
+				var u := float(part+1)/8
+				var p0 := crown+d*t*4.4+Vector3.UP*(sin(t*PI)*0.9-t*t*2)
+				var p1 := crown+d*u*4.4+Vector3.UP*(sin(u*PI)*0.9-u*u*2)
+				var span := sin((t*0.8+0.1)*PI)*(1-t)*0.9
+				for side in [-1,1]:
+					Builder.triangle(poles,p0,p1,p0+across*span*side-d*0.45,Vector3.UP,Color("183e4b"))
+
 	mesh(pilot,poles,solid)
 	mesh(pilot,lights,emission)
 

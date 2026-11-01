@@ -81,3 +81,5 @@ Modificaciones propias para el juego: remuestreo al sistema métrico existente, 
 ## Fase E — piloto nocturno
 
 Ventanas, letreros ficticios, palmeras, farolas y materiales nocturnos son geometría/código originales. No se usan fotos ni marcas comerciales. Los sonidos `assets/audio/malecon_night_demo.wav` y `malecon_surf.wav` se sintetizan con `tools/build_night_audio.py`, sin muestras externas ni copia de una composición: estudio musical original a 160 BPM y ambiente de oleaje artificial. Se incorporan como recursos originales del proyecto, no como música comercial licenciada. El sistema permite reemplazarlos por pistas cuya licencia autorice el uso y distribución en el juego. Permanecen todas las atribuciones geográficas anteriores.
+
+Revisión Neon Coast: shaders de cielo/asfalto/resplandor, palmeras y carrocería procedural originales. Las tres imágenes aportadas por el usuario se usan exclusivamente como referencias visuales; no se incorporan sus píxeles, modelos ni marcas al proyecto.
