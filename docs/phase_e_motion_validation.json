@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "turbo emission",
+    "bounded mesh",
+    "pause",
+    "fade",
+    "teleport",
+    "recovery",
+    "F4 modes"
+  ],
+  "failures": [],
+  "passed": true,
+  "peak_samples": 13,
+  "storefronts": 5
+}

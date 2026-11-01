@@ -1,5 +1,7 @@
 # Revisión visual — La Paz / Neon Coast
 
+Estelas de turbo ahusadas, líneas periféricas más discretas y ajuste de contraste del piloto. **F4** alterna efectos completos, sutiles o desactivados. [Progreso, capturas y pruebas](docs/PHASE_E_MOTION.md).
+
 Abre `scenes/NightPilot.tscn` y pulsa **F6**: horizonte synthwave, asfalto estilizado, bordes cian, palmeras y carrocería arcade. Música detenida por defecto. [Capturas, pruebas y límites de esta revisión](docs/PHASE_E_RETRO.md).
 
 ---

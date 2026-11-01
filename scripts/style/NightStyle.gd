@@ -7,6 +7,7 @@ var timer := 0.0
 var decorated := 0
 var window_count := 0
 var sign_count := 0
+var storefront_count := 0
 var lamps: Array[Light3D] = []
 var audio: CanvasLayer
 var pilot: Node3D
@@ -113,6 +114,7 @@ func refresh() -> void:
 	decorated += 1
 	window_count = 0
 	sign_count = 0
+	storefront_count = 0
 	lamps.clear()
 	pilot = Node3D.new()
 	pilot.name = "NightPilotDecor"
@@ -120,6 +122,7 @@ func refresh() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(entry["source"]["file"])))
 	manager.apply_arcade_layout(data)
 	var lit := geometry()
+	var storefronts := geometry()
 	var tint := material(Color("8460a8"))
 	for visual in chunk.find_children("*","MeshInstance3D",true,false):
 		visual.material_override = tint
@@ -154,6 +157,21 @@ func refresh() -> void:
 			var base := float(b.get("base_y_m",0))
 			var category: String = b.get("category","unknown")
 			var commercial := category in ["commercial","restaurant","hotel","cultural"]
+			if commercial and edge == edges[0] and length > 6 and storefront_count < 10:
+				var start := Vector3(a.x,base,a.y)+tangent*0.5+normal*0.10
+				var span := minf(6.0,length-1.0)
+				var top := minf(2.6,height-0.3)
+				Builder.quad(storefronts,start,start+tangent*span,start+tangent*span+Vector3.UP*top,start+Vector3.UP*top,normal,Color("162c3b"))
+				# One door, glazed bay, mullions and shallow awning; cosmetics only.
+				var door := start+tangent*0.12+normal*0.02
+				Builder.quad(storefronts,door,door+tangent*0.95,door+tangent*0.95+Vector3.UP*(top-0.15),door+Vector3.UP*(top-0.15),normal,Color("0c1526"))
+				for column in range(1,4):
+					var frame := start+tangent*(span*column/4)+normal*0.025
+					Builder.quad(storefronts,frame,frame+tangent*0.07,frame+tangent*0.07+Vector3.UP*top,frame+Vector3.UP*top,normal,Color("71949e"))
+				var canopy := start+Vector3.UP*(top+0.12)
+				Builder.quad(storefronts,canopy,canopy+tangent*span,canopy+tangent*span+normal*0.6,canopy+normal*0.6,Vector3.UP,Color("67587e"))
+				Builder.quad(storefronts,canopy+normal*0.6,canopy+tangent*span+normal*0.6,canopy+tangent*span+normal*0.6-Vector3.UP*0.18,canopy+normal*0.6-Vector3.UP*0.18,normal,Color("67587e"))
+				storefront_count += 1
 			if length > 8:
 				var cornice := Vector3(a.x,base+height-0.2,a.y)+normal*0.07
 				Builder.quad(lit,cornice,cornice+tangent*length,cornice+tangent*length+Vector3.UP*0.10,cornice+Vector3.UP*0.10,normal,Color("6854b9"))
@@ -162,7 +180,7 @@ func refresh() -> void:
 					if (i+floor_index+int(b["palette_index"]))%3 == 0:
 						continue
 					var p := Vector3(a.x,base+1.1+floor_index*3,a.y)+tangent*(1.0+i*length/maxi(count,1))+normal*0.065
-					var color := Color("ff80d3") if not commercial or i%2 == 0 else Color("70f5ff")
+					var color := Color("dcb080") if not commercial else Color("e6a3c9") if i%2 == 0 else Color("70cad6")
 					Builder.quad(lit,p,p+tangent*1.1,p+tangent*1.1+Vector3.UP,p+Vector3.UP,normal,color)
 					window_count += 1
 			if commercial and length > 5 and sign_count < 8:
@@ -182,6 +200,7 @@ func refresh() -> void:
 					label.visibility_range_end = 160
 				sign_count += 1
 	mesh(pilot,lit,emission)
+	mesh(pilot,storefronts,solid)
 	street_furniture()
 
 func street_furniture() -> void:

@@ -1,0 +1,48 @@
+{
+  "mean_ratio": 0.967830887718822,
+  "passed": true,
+  "results": {
+    "false": {
+      "boost_frames": 420,
+      "fps": 350.284736083155,
+      "max_ms": 6.862,
+      "mean_ms": 2.85482037037037,
+      "offroad_frames": 0,
+      "p95_ms": 4.584,
+      "peak_nodes": 541.0,
+      "peak_static_memory": 214339691.0,
+      "streaming": {
+        "chunk_loads": 20,
+        "chunk_unloads": 0,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 1869,
+        "loaded_chunks": 20,
+        "max_chunk_build_ms": 24,
+        "max_loaded_chunks": 20
+      }
+    },
+    "true": {
+      "boost_frames": 420,
+      "fps": 361.927626538946,
+      "max_ms": 39.562,
+      "mean_ms": 2.76298333333333,
+      "offroad_frames": 0,
+      "p95_ms": 3.935,
+      "peak_nodes": 608.0,
+      "peak_static_memory": 217473331.0,
+      "streaming": {
+        "chunk_loads": 20,
+        "chunk_unloads": 0,
+        "enabled": true,
+        "failed_chunks": [],
+        "loaded_buildings": 1869,
+        "loaded_chunks": 20,
+        "max_chunk_build_ms": 10,
+        "max_loaded_chunks": 20
+      }
+    }
+  },
+  "scenario": "1280x720 Compatibility, VSync off, fixed simulation 60 Hz; same short acceleration repeated six times, 1080 rendered frames per mode; no city-wide traversal",
+  "turbo_test": true
+}

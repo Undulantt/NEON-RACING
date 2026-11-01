@@ -3,6 +3,7 @@ var world: Node3D
 var road_material: ShaderMaterial
 var timer := 0.0
 var pilot_cell := Vector2i.ZERO
+var turbo_trail: Node3D
 func configure(target: Node3D) -> void:
 	world=target
 	var parts: PackedStringArray = world.night_config["sector"].split("_")
@@ -14,11 +15,11 @@ func configure(target: Node3D) -> void:
 			sky.sky_material=mat
 			node.environment.sky=sky
 			node.environment.background_mode=Environment.BG_SKY
-			node.environment.ambient_light_color=Color("bd84e8")
-			node.environment.ambient_light_energy=0.55
+			node.environment.ambient_light_color=Color("9ca7db")
+			node.environment.ambient_light_energy=0.48
 		if node is DirectionalLight3D:
-			node.light_color=Color("ff67cf")
-			node.light_energy=0.55
+			node.light_color=Color("ed9bd1")
+			node.light_energy=0.42
 	road_material=ShaderMaterial.new()
 	road_material.shader=load("res://shaders/retro_road.gdshader")
 	var segments := PackedVector4Array()
@@ -43,6 +44,12 @@ func configure(target: Node3D) -> void:
 	rect.material=post;layer.add_child(rect)
 	preload("res://scripts/style/RetroCar.gd").build(world.player)
 	world.follow_camera.close_view=true
+	for effect in world.hud.get_children():
+		if effect.get_script()==preload("res://scripts/ui/SpeedEffects.gd"):
+			effect.retro_profile=true
+			turbo_trail=preload("res://scripts/style/TurboTrail.gd").new()
+			add_child(turbo_trail)
+			turbo_trail.attach(world.player,effect,world.hud)
 	refresh()
 func refresh() -> void:
 	var cell := pilot_cell

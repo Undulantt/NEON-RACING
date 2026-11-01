@@ -1,3 +1,5 @@
+> Revisión posterior: [movimiento y contraste](PHASE_E_MOTION.md). Las cifras siguientes corresponden a la revisión anterior; los informes y capturas actuales se describen en ese registro.
+
 # Fase E — revisión visual a partir de referencias
 
 ## Dirección y alcance
