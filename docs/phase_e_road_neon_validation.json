@@ -1,0 +1,11 @@
+{
+  "failures": [],
+  "max_surface_error_m": 0.000000923156737924619,
+  "passed": true,
+  "scenarios": [
+    "inclined plane",
+    "successive slope reversals",
+    "border continuity",
+    "chunk seam"
+  ]
+}

@@ -1,5 +1,13 @@
 # Fase E — refinamiento de movimiento y contraste
 
+## Corrección de picos en las uniones del neón
+
+La captura del usuario reveló un defecto que la prueba de una sola pendiente no cubría: los rectángulos independientes podían sobresalir de su triángulo y cruzar una superficie con otra inclinación.
+
+`RoadNeon.gd` ahora recorta una franja de anchura constante contra los triángulos reales de la carretera. Cada vértice obtiene su altura por interpolación de la superficie que lo sostiene, con separación vertical de 1,8 cm. Las uniones redondeadas cubren los extremos sin generar puntas. Una cuadrícula espacial limita los recortes a la zona próxima al borde; el trabajo se realiza al construir la decoración, no en cada cuadro. No cambia la geometría vial ni las colisiones.
+
+Verificación acotada, atendiendo a la petición de reducir pruebas: prueba de pendientes consecutivas, continuidad y exclusión de cortes de sector (`phase_e_road_neon_validation.json`, PASS), más una ejecución renderizada del piloto mirando en sentido contrario al inicio. Captura revisada: [borde corregido](evidence/phase_e_neon_relief_fixed.png). No se repitió el benchmark general; las cifras de rendimiento siguientes corresponden a la revisión anterior.
+
 ## Corrección posterior — relieve, velocidad y rótulos
 
 - Los bordes cian ahora se generan desde las aristas externas de la malla vial elevada (`RoadNeon.gd`), con un pequeño desplazamiento de 1,8 cm para evitar parpadeo por superposición. Se eliminan aristas compartidas y cortes artificiales de sector. Se conserva la malla física. La aplicación sigue limitada al sector piloto; no se ha extendido el estilo al mapa completo.
