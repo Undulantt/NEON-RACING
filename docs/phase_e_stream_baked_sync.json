@@ -1,0 +1,28 @@
+{
+  "F8_disables_collision": true,
+  "baked_neon_loads": 54,
+  "car_collision_hits": {
+    "lamp": true,
+    "palm": true,
+    "tree": true
+  },
+  "collision_passed": true,
+  "distance_m": 246.396203398705,
+  "frames": 1500,
+  "furniture_ray_hits": {
+    "lamp": true,
+    "palm": true,
+    "tree": true
+  },
+  "max_city_chunk_build_ms": 26,
+  "max_ms": 146.452,
+  "max_road_chunk_build_ms": 6,
+  "max_terrain_chunk_build_ms": 7,
+  "mean_ms": 3.76107066666667,
+  "over_16_ms": 21,
+  "over_33_ms": 6,
+  "p95_ms": 6.777,
+  "p99_ms": 18.363,
+  "runtime_neon_builds": 0,
+  "scenario": "1280x720 Compatibility, VSync off, fixed 60 simulation, real route controller, 1500 render frames; short streaming run, not city-wide guarantee"
+}

@@ -49,6 +49,11 @@ static func build(road: MeshInstance3D, budget_ms: float = 0.0) -> void:
 	var caps := {}
 	var boundary_count := 0
 	for edge in edges.values():
+		if budget_ms>0 and Time.get_ticks_usec()-slice_start>budget_ms*1000:
+			max_slice=maxf(max_slice,(Time.get_ticks_usec()-slice_start)/1000.0)
+			await road.get_tree().process_frame
+			if not is_instance_valid(road) or road.is_queued_for_deletion(): return
+			slice_start=Time.get_ticks_usec()
 		if edge["count"]!=1:
 			continue
 		var a: Vector3=edge["a"];var b: Vector3=edge["b"]

@@ -134,6 +134,8 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 	var material := StandardMaterial3D.new()
 	material.vertex_color_use_as_albedo = true
 	material.roughness = 0.9
+	if data.get("night_visuals",false):
+		material.albedo_color=Color("8460a8");material.roughness=0.78
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	var triangle_count := 0
 	for cell in groups:

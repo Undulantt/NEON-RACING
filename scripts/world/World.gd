@@ -1,6 +1,7 @@
 extends Node3D
 
 @export_enum("flat", "pilot", "world") var relief_profile := "flat"
+var night_visuals := false
 
 const Loader = preload("res://scripts/world/MapLoader.gd")
 const Roads = preload("res://scripts/world/RoadChunkManager.gd")
@@ -95,6 +96,10 @@ func _ready() -> void:
 	road_root = Node3D.new()
 	road_root.name = "RoadChunks"
 	road_root.set_script(Roads)
+	if night_visuals:
+		var night_road:=ShaderMaterial.new()
+		night_road.shader=load("res://shaders/retro_road.gdshader")
+		road_root.visual_material=night_road
 	add_child(road_root)
 	var spawn: Array = environment_data["spawn"]["position_xz"]
 	stats = road_root.configure(map_data, Vector3(spawn[0], 0.67, spawn[1]))
@@ -137,6 +142,11 @@ func _ready() -> void:
 	settings.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	settings.ambient_light_color = Color("c5d8e5")
 	settings.ambient_light_energy = 0.45
+	if night_visuals:
+		settings.background_mode=Environment.BG_SKY
+		var sky:=Sky.new();var sky_material:=ShaderMaterial.new()
+		sky_material.shader=load("res://shaders/retro_sky.gdshader");sky.sky_material=sky_material
+		settings.sky=sky;settings.ambient_light_color=Color("9ca7db");settings.ambient_light_energy=0.48
 	environment.environment = settings
 	add_child(environment)
 	var sun := DirectionalLight3D.new()
@@ -145,6 +155,9 @@ func _ready() -> void:
 	sun.light_energy = 0.75
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 160.0
+	if night_visuals:
+		sun.light_color=Color("ed9bd1");sun.light_energy=0.42
+		sun.shadow_enabled=false;sun.rotation_degrees=Vector3(-48,-22,0)
 	add_child(sun)
 	player = PlayerScene.instantiate()
 	add_child(player)
@@ -166,6 +179,7 @@ func _ready() -> void:
 		city_manager.set_script(UrbanManager)
 		add_child(city_manager)
 		city_manager.baseline_b6 = baseline_b6
+		city_manager.night_visuals=night_visuals
 		if relief_manifest.is_empty():
 			city_manager.building_overrides = arcade_layout.get("building_overrides", {})
 			city_manager.chunk_overrides = arcade_layout.get("chunk_overrides", {})

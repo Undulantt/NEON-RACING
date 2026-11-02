@@ -1,3 +1,5 @@
+> Actualización: [optimización, colisiones y arranque nocturno directo](PHASE_E_STREAMING_FIX.md). Sustituye las luces dinámicas de farolas por iluminación estilizada y añade colisiones a postes y troncos. Las cifras siguientes describen la expansión inicial.
+
 # Fase E — expansión a la ciudad
 
 ## Implementación

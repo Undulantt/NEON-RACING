@@ -8,6 +8,7 @@ var manifest: Dictionary = {}
 var spatial_index: Dictionary = {}
 var last_refresh_position := Vector3.ZERO
 var baseline_b6 := false
+var night_visuals := false
 var building_overrides: Dictionary = {}
 var chunk_overrides: Dictionary = {}
 var target: CharacterBody3D
@@ -119,6 +120,10 @@ func load_chunk(entry: Dictionary) -> void:
 			building.erase("model_path")
 			if building.has("automatic_height_m"):
 				building["height_m"] = building["automatic_height_m"]
+	if night_visuals:
+		data["category_facades"]=false
+		data["detail_windows"]=false
+		data["night_visuals"]=true
 	var start := Time.get_ticks_msec()
 	var node := Node3D.new()
 	node.name = "Urban_" + id

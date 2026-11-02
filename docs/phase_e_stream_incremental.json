@@ -1,0 +1,11 @@
+{
+  "distance_m": 246.396203398705,
+  "frames": 1500,
+  "max_ms": 180.923,
+  "mean_ms": 6.25604466666667,
+  "over_16_ms": 33,
+  "over_33_ms": 8,
+  "p95_ms": 8.28,
+  "p99_ms": 22.927,
+  "scenario": "1280x720 Compatibility, VSync off, fixed 60 simulation, real route controller, 1500 render frames; short streaming run, not city-wide guarantee"
+}

@@ -16,6 +16,7 @@ var total_loads := 0
 var total_unloads := 0
 var max_build_ms := 0
 var surface_layer := 1
+var visual_material: Material
 var failed_chunks: Array[String] = []
 
 func configure(data: Dictionary, initial_position: Vector3) -> Dictionary:
@@ -97,6 +98,8 @@ func load_chunk(cell: Vector2i) -> void:
 			target.velocity = Vector3.ZERO
 		node.queue_free()
 		return
+	if visual_material!=null:
+		for visual in node.find_children("*","MeshInstance3D",true,false): visual.material_override=visual_material
 	max_build_ms = maxi(max_build_ms, Time.get_ticks_msec() - start)
 	loaded[cell] = node
 	max_loaded = maxi(max_loaded, loaded.size())

@@ -6,8 +6,10 @@ var roads := {}
 var building_cache := {}
 var assets := {}
 var sectors := {}
-var lights: Array[OmniLight3D]=[]
+var lights: Array[OmniLight3D]=[] # No per-street dynamic lights; kept for diagnostic compatibility.
+var street_pools:=PackedVector4Array()
 var placed := {}
+var collision_shapes := {}
 
 func configure(target: Node3D) -> void:
 	world=target
@@ -20,11 +22,12 @@ func configure(target: Node3D) -> void:
 				if not roads.has(cell): roads[cell]=[]
 				roads[cell].append(road)
 	for kind in ["lamp","palm","tree"]: assets[kind]=make_asset(kind)
-	for i in range(4):
-		var light:=OmniLight3D.new()
-		light.omni_range=20;light.light_energy=1.4
-		light.light_color=Color("f0a2db");light.shadow_enabled=false;light.visible=false
-		world.night_style.add_child(light);lights.append(light)
+	for kind in ["lamp","tree","palm"]:
+		var shape:=CapsuleShape3D.new()
+		shape.radius=0.16 if kind=="lamp" else 0.27
+		shape.height=6.0 if kind=="lamp" else 3.5 if kind=="tree" else 4.2
+		collision_shapes[kind]=shape
+	street_pools.resize(4)
 
 func point(p: Array) -> Vector2: return Vector2(p[0],p[1])
 func roads_for(cell: Vector2i) -> Array: return roads.get(cell,[])
@@ -77,7 +80,8 @@ func make_asset(kind: String) -> ArrayMesh:
 	var mesh:=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
 	var mat:=StandardMaterial3D.new();mat.vertex_color_use_as_albedo=true
 	mat.roughness=0.85;mat.cull_mode=BaseMaterial3D.CULL_DISABLED
-	if kind=="lamp": mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
+	if kind!="lamp": mat.albedo_color=Color(0.5,0.6,0.7)
 	mesh.surface_set_material(0,mat)
 	return mesh
 
@@ -88,17 +92,10 @@ func building_clear(p: Vector2, radius: float) -> bool:
 		for z in range(floori((p.y-radius)/256),floori((p.y+radius)/256)+1):
 			for entry in manager.spatial_index.get(Vector2i(x,z),[]): seen[entry["id"]]=entry
 	for id in seen:
-		if not building_cache.has(id):
-			var data=JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(seen[id]["file"])))
-			manager.apply_arcade_layout(data)
-			var rings: Array=[]
-			for building in data["buildings"]:
-				if building.get("disabled",false): continue
-				var polygon:=PackedVector2Array()
-				for vertex in building["footprint_xz"]: polygon.append(point(vertex))
-				rings.append(polygon)
-			building_cache[id]=rings
-		for polygon in building_cache[id]:
+		cache_buildings(str(id),seen[id])
+		for item in building_cache[id]:
+			if not item["bounds"].grow(radius).has_point(p): continue
+			var polygon: PackedVector2Array=item["polygon"]
 			if Geometry2D.is_point_in_polygon(p,polygon): return false
 			for i in range(polygon.size()):
 				if p.distance_to(Geometry2D.get_closest_point_to_segment(p,polygon[i],polygon[(i+1)%polygon.size()]))<radius: return false
@@ -121,7 +118,18 @@ func support(p: Vector2, radius: float, nearby: Array) -> float:
 	return hit["position"].y
 
 func build(parent: Node3D, id: String) -> void:
+	var slice_start:=Time.get_ticks_usec()
 	var cell:=Vector2i(int(id.split("_")[0]),int(id.split("_")[1]))
+	var entries:={}
+	for dx in range(-1,2):
+		for dz in range(-1,2):
+			for entry in world.city_manager.spatial_index.get(cell+Vector2i(dx,dz),[]): entries[entry["id"]]=entry
+	for key in entries:
+		if building_cache.has(key): continue
+		cache_buildings(str(key),entries[key])
+		await parent.get_tree().process_frame
+		if not is_instance_valid(parent) or parent.is_queued_for_deletion(): return
+	slice_start=Time.get_ticks_usec()
 	var area:=Rect2(Vector2(cell)*256,Vector2(256,256))
 	var nearby:=roads_for(cell)
 	var transforms:={"lamp":[],"palm":[],"tree":[]}
@@ -141,6 +149,11 @@ func build(parent: Node3D, id: String) -> void:
 			var center:=a.lerp(b,(index+0.5)/count)
 			if center.distance_to(a)<margin or center.distance_to(b)<margin: continue
 			for kind in ["lamp","vegetation"]:
+				if Time.get_ticks_usec()-slice_start>1500:
+					world.night_style.record_work("fixture_slice",slice_start)
+					await parent.get_tree().process_frame
+					if not is_instance_valid(parent) or parent.is_queued_for_deletion(): return
+					slice_start=Time.get_ticks_usec()
 				if transforms["lamp"].size()>=24 and kind=="lamp": continue
 				if transforms["palm"].size()+transforms["tree"].size()>=14 and kind=="vegetation": continue
 				var seed:=absi((str(road["id"])+str(index)).hash())
@@ -170,7 +183,22 @@ func build(parent: Node3D, id: String) -> void:
 				transforms[type].append(Transform3D(Basis(Vector3.UP,yaw),foot))
 				if type=="lamp": light_positions.append(foot+Vector3.UP*6.8+Vector3(inward.x,0,inward.y)*1.6)
 				occupied.append(p);placed[slot]={"owner":weakref(parent),"point":p}
+	# Direct child of the urban chunk: existing distance/F8 collision management applies.
+	var uploading:=Time.get_ticks_usec()
+	var body:=StaticBody3D.new();body.name="StreetFurnitureCollision"
+	body.collision_layer=0;body.collision_mask=0
+	body.set_meta("street_furniture",true)
+	parent.get_parent().add_child(body)
 	for kind in transforms:
+		for pose in transforms[kind]:
+			for section in range(2 if kind=="palm" else 1):
+				var collision:=CollisionShape3D.new()
+				collision.shape=collision_shapes[kind]
+				var offset:=Vector3(0,3.0 if kind=="lamp" else 1.75,0)
+				if kind=="palm": offset=Vector3(0.08 if section==0 else 0.34,2.0+section*4.0,0)
+				collision.transform=pose*Transform3D(Basis.IDENTITY,offset)
+				collision.set_meta("fixture_kind",kind)
+				body.add_child(collision)
 		if transforms[kind].is_empty(): continue
 		var batch:=MultiMesh.new();batch.transform_format=MultiMesh.TRANSFORM_3D
 		batch.mesh=assets[kind];batch.instance_count=transforms[kind].size()
@@ -180,8 +208,12 @@ func build(parent: Node3D, id: String) -> void:
 		visual.visibility_range_end=360 if kind=="lamp" else 280
 		parent.add_child(visual)
 	parent.set_meta("furniture_counts",{"lamps":transforms["lamp"].size(),"palms":transforms["palm"].size(),"trees":transforms["tree"].size()})
+	world.night_style.record_work("fixtures_upload",uploading)
 	sectors[id]={"owner":weakref(parent),"lights":light_positions}
-	if building_cache.size()>48: building_cache.clear()
+	var manager=world.city_manager
+	if manager.loaded.has(id):
+		manager.set_collisions(parent.get_parent(),manager.city_enabled and manager.distance_to(manager.loaded[id]["source"])<=float(manager.manifest["settings"]["collision_radius_m"]))
+	while building_cache.size()>96: building_cache.erase(building_cache.keys()[0])
 
 func update_lights() -> void:
 	var positions: Array[Vector3]=[]
@@ -190,8 +222,27 @@ func update_lights() -> void:
 		for p in sectors[id]["lights"]:
 			if p.distance_squared_to(world.player.position)<70*70: positions.append(p)
 	positions.sort_custom(func(a,b): return a.distance_squared_to(world.player.position)<b.distance_squared_to(world.player.position))
-	for i in range(lights.size()):
-		lights[i].visible=world.city_manager.city_enabled and i<positions.size()
-		if i<positions.size(): lights[i].position=positions[i]
+	for i in range(4):
+		street_pools[i]=Vector4.ZERO
+		if world.city_manager.city_enabled and not "--no-street-lights" in OS.get_cmdline_user_args() and i<positions.size():
+			var p:=positions[i]
+			street_pools[i]=Vector4(p.x,p.y,p.z,1)
 	for slot in placed.keys():
 		if not is_instance_valid(placed[slot]["owner"].get_ref()): placed.erase(slot)
+
+func cache_buildings(id: String, entry: Dictionary) -> void:
+	if building_cache.has(id): return
+	var manager=world.city_manager
+	var reading:=Time.get_ticks_usec()
+	var data=JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(entry["file"])))
+	manager.apply_arcade_layout(data)
+	var rings: Array=[]
+	for building in data["buildings"]:
+		if building.get("disabled",false): continue
+		var polygon:=PackedVector2Array()
+		for vertex in building["footprint_xz"]: polygon.append(point(vertex))
+		var bounds:=Rect2(polygon[0],Vector2.ZERO)
+		for vertex in polygon: bounds=bounds.expand(vertex)
+		rings.append({"polygon":polygon,"bounds":bounds})
+	building_cache[id]=rings
+	world.night_style.record_work("building_index",reading)

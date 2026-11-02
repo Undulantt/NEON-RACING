@@ -1,6 +1,8 @@
+**Actualización de rendimiento:** F5 arranca directamente de noche, sin generar primero los detalles diurnos. Bordes neón precalculados, carga incremental y colisiones de postes y troncos. [Resultados y límites](docs/PHASE_E_STREAMING_FIX.md).
+
 # Ciudad nocturna — expansión de la estética
 
-**F5** abre la ciudad con la estética retrofuturista, farolas orientadas a las calles, palmeras y árboles de copa facetada. Decoración por sectores y un máximo global de cuatro farolas con luz real. [Implementación, reglas de colocación y verificación](docs/PHASE_E_CITY.md).
+**F5** abre la ciudad con la estética retrofuturista, farolas orientadas a las calles, palmeras y árboles de copa facetada. Decoración por sectores y manchas de luz estilizadas para las farolas. [Implementación, reglas de colocación y verificación](docs/PHASE_E_CITY.md).
 
 # Revisión visual — La Paz / Neon Coast
 

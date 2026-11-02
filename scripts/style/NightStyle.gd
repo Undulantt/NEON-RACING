@@ -5,6 +5,9 @@ var world: Node3D
 var settings: Dictionary
 var timer := 0.0
 var decorated := 0
+var decorating := false
+var work_log: Array=[]
+var facade_material: StandardMaterial3D
 var window_count := 0
 var sign_count := 0
 var storefront_count := 0
@@ -33,7 +36,9 @@ func configure(target: Node3D, config: Dictionary) -> void:
 		furniture.configure(world)
 	emission = material(Color.WHITE,true)
 	solid = material(Color("687c98"))
+	facade_material=material(Color("8460a8"))
 	for node in world.get_children():
+		if world.night_visuals: continue
 		if node is WorldEnvironment:
 			var env: Environment = node.environment
 			env.background_color = Color("070d24")
@@ -84,21 +89,26 @@ func mesh(parent: Node3D, data: Dictionary, mat: Material) -> void:
 	parent.add_child(instance)
 
 func facade_edge(ring: Array) -> int:
-	var best := INF
-	var chosen := 0
+	# Cosmetic facade choice is bounded even for very complex footprints.
+	var candidates: Array=[];var center:=Vector2.ZERO
 	for index in range(ring.size()):
-		var a := Vector2(ring[index][0],ring[index][1])
-		var b := Vector2(ring[(index+1)%ring.size()][0],ring[(index+1)%ring.size()][1])
-		if a.distance_to(b) < 4:
-			continue
-		var midpoint := (a+b)*0.5
-		for road in nearby_roads:
-			var p := Vector2(road["points_xz"][0][0],road["points_xz"][0][1])
-			var q := Vector2(road["points_xz"][-1][0],road["points_xz"][-1][1])
-			var distance := midpoint.distance_to(Geometry2D.get_closest_point_to_segment(midpoint,p,q))
-			if distance < best:
-				best = distance
-				chosen = index
+		var a:=Vector2(ring[index][0],ring[index][1])
+		var b:=Vector2(ring[(index+1)%ring.size()][0],ring[(index+1)%ring.size()][1])
+		center+=a
+		if a.distance_squared_to(b)>=16: candidates.append({"index":index,"mid":(a+b)*0.5,"length":a.distance_squared_to(b)})
+	center/=maxi(1,ring.size())
+	candidates.sort_custom(func(a,b): return a["length"]>b["length"])
+	var streets: Array=[]
+	for road in nearby_roads:
+		var p:=Vector2(road["points_xz"][0][0],road["points_xz"][0][1])
+		var q:=Vector2(road["points_xz"][-1][0],road["points_xz"][-1][1])
+		streets.append({"p":p,"q":q,"distance":center.distance_squared_to(Geometry2D.get_closest_point_to_segment(center,p,q))})
+	streets.sort_custom(func(a,b): return a["distance"]<b["distance"])
+	var best:=INF;var chosen:=0
+	for edge in candidates.slice(0,24):
+		for road in streets.slice(0,16):
+			var distance: float=edge["mid"].distance_squared_to(Geometry2D.get_closest_point_to_segment(edge["mid"],road["p"],road["q"]))
+			if distance<best: best=distance;chosen=edge["index"]
 	return chosen
 
 var nearby_roads: Array = []
@@ -106,12 +116,15 @@ func ground(p: Vector2) -> float:
 	return world.player.surface_height(p.x,p.y)
 
 func refresh() -> void:
+	if decorating: return
 	if settings.get("citywide",false):
 		var ids: Array=world.city_manager.loaded.keys()
 		ids.sort_custom(func(a,b): return world.city_manager.distance_to(world.city_manager.loaded[a]["source"])<world.city_manager.distance_to(world.city_manager.loaded[b]["source"]))
 		for id in ids:
 			if not world.city_manager.loaded[id]["node"].has_meta("night_decorated"):
-				decorate(str(id))
+				decorating=true
+				await decorate(str(id))
+				decorating=false
 				break
 	else:
 		decorate(str(settings["sector"]))
@@ -133,13 +146,16 @@ func decorate(id: String) -> void:
 	pilot = Node3D.new()
 	pilot.name = "NightPilotDecor"
 	chunk.add_child(pilot)
+	var reading:=Time.get_ticks_usec()
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(entry["source"]["file"])))
 	manager.apply_arcade_layout(data)
+	record_work("facade_data",reading)
 	var lit := geometry()
 	var storefronts := geometry()
-	var tint := material(Color("8460a8"))
-	for visual in chunk.find_children("*","MeshInstance3D",true,false):
-		visual.material_override = tint
+	var tint := facade_material
+	if not world.night_visuals:
+		for visual in chunk.find_children("*","MeshInstance3D",true,false):
+			visual.material_override = tint
 	nearby_roads=[]
 	var cell := Vector2(float(id.split("_")[0]),float(id.split("_")[1]))*256
 	if furniture!=null:
@@ -149,7 +165,13 @@ func decorate(id: String) -> void:
 		for road in world.map_data["roads"]:
 			var p := Vector2(road["points_xz"][0][0],road["points_xz"][0][1])
 			if area.has_point(p): nearby_roads.append(road)
+	var slice_start:=Time.get_ticks_usec()
 	for b in data["buildings"]:
+		if furniture!=null and Time.get_ticks_usec()-slice_start>1500:
+			record_work("facade_slice",slice_start)
+			await get_tree().process_frame
+			if not is_instance_valid(chunk) or chunk.is_queued_for_deletion(): return
+			slice_start=Time.get_ticks_usec()
 		if b.get("disabled",false):
 			continue
 		var ring: Array = b["footprint_xz"]
@@ -205,14 +227,20 @@ func decorate(id: String) -> void:
 				Builder.quad(lit,p,p+tangent*minf(7,length-1.2),p+tangent*minf(7,length-1.2)+Vector3.UP*0.18,p+Vector3.UP*0.18,normal,color)
 
 				sign_count += 1
+	var uploading:=Time.get_ticks_usec()
 	mesh(pilot,lit,emission)
 	mesh(pilot,storefronts,solid)
+	record_work("facade_upload",uploading)
 	if furniture!=null:
-		furniture.build(pilot,id)
+		await furniture.build(pilot,id)
 	else:
 		street_furniture()
 
 func street_furniture() -> void:
+	var body:=StaticBody3D.new();body.name="StreetFurnitureCollision"
+	body.collision_layer=4;body.collision_mask=0
+	body.set_meta("street_furniture",true)
+	pilot.get_parent().add_child(body)
 	var poles := geometry()
 	var lights := geometry()
 	var positions: Array[Vector2] = []
@@ -245,6 +273,11 @@ func street_furniture() -> void:
 	for p in positions:
 		var y := ground(p)
 		var foot := Vector3(p.x,y,p.y)
+		add_fixture_capsule(body,foot+Vector3.UP*3,0.16,6,"lamp")
+		for section in range(3):
+			var level:=float(section)*2.66+1.33
+			var at:=foot-Vector3(3,0,1)+Vector3(0.035*level*level,level*1.15,0)
+			add_fixture_capsule(body,at,0.3,3.4,"palm")
 		Builder.quad(poles,foot-Vector3.RIGHT*0.16,foot+Vector3.RIGHT*0.16,foot+Vector3.RIGHT*0.16+Vector3.UP*6,foot-Vector3.RIGHT*0.16+Vector3.UP*6,Vector3.FORWARD,Color("53708a"))
 		var top := foot+Vector3.UP*6
 		var elbow := top+Vector3(0.8,1.1,0)
@@ -305,3 +338,14 @@ func _process(delta: float) -> void:
 		if furniture!=null: furniture.update_lights()
 		if audio != null and audio.ambience != null:
 			audio.ambience.volume_db = -28 if nearby else -60
+
+func add_fixture_capsule(body: StaticBody3D, at: Vector3, radius: float, height: float, kind: String) -> void:
+	var shape:=CapsuleShape3D.new();shape.radius=radius;shape.height=height
+	var collision:=CollisionShape3D.new();collision.shape=shape;collision.position=at
+	collision.set_meta("fixture_kind",kind);body.add_child(collision)
+
+func record_work(stage: String, started: int) -> void:
+	var elapsed:=(Time.get_ticks_usec()-started)/1000.0
+	if elapsed>4:
+		work_log.append({"stage":stage,"ms":elapsed})
+		if work_log.size()>32: work_log.pop_front()
