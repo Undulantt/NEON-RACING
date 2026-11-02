@@ -1,3 +1,5 @@
+> La estética se ha extendido a la escena principal: [registro de expansión urbana](PHASE_E_CITY.md).
+
 # Fase E — refinamiento de movimiento y contraste
 
 ## Corrección de picos en las uniones del neón

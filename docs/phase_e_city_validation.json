@@ -1,0 +1,162 @@
+{
+  "coast": {
+    "active_lights": 3,
+    "decorated": 17,
+    "lamps": 260,
+    "max_neon_build_ms": 2503.661,
+    "max_neon_slice_ms": 12.822,
+    "palms": 19,
+    "trees": 97
+  },
+  "failures": [],
+  "inland": {
+    "active_lights": 4,
+    "decorated": 31,
+    "lamps": 628,
+    "max_neon_build_ms": 2503.661,
+    "max_neon_slice_ms": 12.822,
+    "palms": 0,
+    "trees": 243
+  },
+  "live_lights": 3,
+  "passed": true,
+  "sectors": [
+    {
+      "counts": {
+        "lamps": 10,
+        "palms": 5,
+        "trees": 3
+      },
+      "id": "0_-2"
+    },
+    {
+      "counts": {
+        "lamps": 13,
+        "palms": 4,
+        "trees": 6
+      },
+      "id": "0_-1"
+    },
+    {
+      "counts": {
+        "lamps": 14,
+        "palms": 1,
+        "trees": 10
+      },
+      "id": "1_-2"
+    },
+    {
+      "counts": {
+        "lamps": 15,
+        "palms": 0,
+        "trees": 9
+      },
+      "id": "1_-1"
+    },
+    {
+      "counts": {
+        "lamps": 17,
+        "palms": 1,
+        "trees": 7
+      },
+      "id": "0_0"
+    },
+    {
+      "counts": {
+        "lamps": 14,
+        "palms": 0,
+        "trees": 6
+      },
+      "id": "1_0"
+    },
+    {
+      "counts": {
+        "lamps": 5,
+        "palms": 5,
+        "trees": 1
+      },
+      "id": "1_-3"
+    },
+    {
+      "counts": {
+        "lamps": 16,
+        "palms": 0,
+        "trees": 2
+      },
+      "id": "2_-1"
+    },
+    {
+      "counts": {
+        "lamps": 17,
+        "palms": 0,
+        "trees": 11
+      },
+      "id": "2_-2"
+    },
+    {
+      "counts": {
+        "lamps": 4,
+        "palms": 3,
+        "trees": 2
+      },
+      "id": "-1_0"
+    },
+    {
+      "counts": {
+        "lamps": 18,
+        "palms": 0,
+        "trees": 5
+      },
+      "id": "2_0"
+    },
+    {
+      "counts": {
+        "lamps": 19,
+        "palms": 0,
+        "trees": 4
+      },
+      "id": "2_-3"
+    },
+    {
+      "counts": {
+        "lamps": 18,
+        "palms": 0,
+        "trees": 3
+      },
+      "id": "0_1"
+    },
+    {
+      "counts": {
+        "lamps": 20,
+        "palms": 0,
+        "trees": 10
+      },
+      "id": "1_1"
+    },
+    {
+      "counts": {
+        "lamps": 24,
+        "palms": 0,
+        "trees": 6
+      },
+      "id": "-1_1"
+    },
+    {
+      "counts": {
+        "lamps": 17,
+        "palms": 0,
+        "trees": 4
+      },
+      "id": "2_1"
+    },
+    {
+      "counts": {
+        "lamps": 19,
+        "palms": 0,
+        "trees": 8
+      },
+      "id": "3_-1"
+    }
+  ],
+  "unloaded_sectors": 16
+}

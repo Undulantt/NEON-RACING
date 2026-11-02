@@ -12,6 +12,7 @@ var lamps: Array[Light3D] = []
 var audio: CanvasLayer
 var pilot: Node3D
 var emission: StandardMaterial3D
+var furniture: RefCounted
 var solid: StandardMaterial3D
 
 func material(color: Color, luminous := false) -> StandardMaterial3D:
@@ -27,6 +28,9 @@ func material(color: Color, luminous := false) -> StandardMaterial3D:
 func configure(target: Node3D, config: Dictionary) -> void:
 	world = target
 	settings = config
+	if settings.get("citywide",false):
+		furniture=preload("res://scripts/style/CityFurniture.gd").new()
+		furniture.configure(world)
 	emission = material(Color.WHITE,true)
 	solid = material(Color("687c98"))
 	for node in world.get_children():
@@ -102,8 +106,18 @@ func ground(p: Vector2) -> float:
 	return world.player.surface_height(p.x,p.y)
 
 func refresh() -> void:
+	if settings.get("citywide",false):
+		var ids: Array=world.city_manager.loaded.keys()
+		ids.sort_custom(func(a,b): return world.city_manager.distance_to(world.city_manager.loaded[a]["source"])<world.city_manager.distance_to(world.city_manager.loaded[b]["source"]))
+		for id in ids:
+			if not world.city_manager.loaded[id]["node"].has_meta("night_decorated"):
+				decorate(str(id))
+				break
+	else:
+		decorate(str(settings["sector"]))
+
+func decorate(id: String) -> void:
 	var manager = world.city_manager
-	var id: String = settings["sector"]
 	if not manager.loaded.has(id):
 		return
 	var entry: Dictionary = manager.loaded[id]
@@ -115,7 +129,7 @@ func refresh() -> void:
 	window_count = 0
 	sign_count = 0
 	storefront_count = 0
-	lamps.clear()
+	if not settings.get("citywide",false): lamps.clear()
 	pilot = Node3D.new()
 	pilot.name = "NightPilotDecor"
 	chunk.add_child(pilot)
@@ -126,18 +140,20 @@ func refresh() -> void:
 	var tint := material(Color("8460a8"))
 	for visual in chunk.find_children("*","MeshInstance3D",true,false):
 		visual.material_override = tint
-	nearby_roads.clear()
+	nearby_roads=[]
 	var cell := Vector2(float(id.split("_")[0]),float(id.split("_")[1]))*256
-	var area := Rect2(cell,Vector2(256,256)).grow(40)
-	for road in world.map_data["roads"]:
-		var p := Vector2(road["points_xz"][0][0],road["points_xz"][0][1])
-		if area.has_point(p):
-			nearby_roads.append(road)
+	if furniture!=null:
+		nearby_roads=furniture.roads_for(Vector2i(cell/256))
+	else:
+		var area := Rect2(cell,Vector2(256,256)).grow(40)
+		for road in world.map_data["roads"]:
+			var p := Vector2(road["points_xz"][0][0],road["points_xz"][0][1])
+			if area.has_point(p): nearby_roads.append(road)
 	for b in data["buildings"]:
 		if b.get("disabled",false):
 			continue
 		var ring: Array = b["footprint_xz"]
-		var edges: Array[int] = [int(b.get("facade_edge_index",facade_edge(ring)))]
+		var edges: Array[int] = [int(b["facade_edge_index"]) if b.has("facade_edge_index") else facade_edge(ring)]
 		for index in range(ring.size()):
 			if edges.size() >= 3:
 				break
@@ -191,7 +207,10 @@ func refresh() -> void:
 				sign_count += 1
 	mesh(pilot,lit,emission)
 	mesh(pilot,storefronts,solid)
-	street_furniture()
+	if furniture!=null:
+		furniture.build(pilot,id)
+	else:
+		street_furniture()
 
 func street_furniture() -> void:
 	var poles := geometry()
@@ -283,5 +302,6 @@ func _process(delta: float) -> void:
 		active.sort_custom(func(a: Light3D,b: Light3D): return a.global_position.distance_squared_to(world.player.position)<b.global_position.distance_squared_to(world.player.position))
 		for index in range(active.size()):
 			active[index].visible = index < 2 and nearby and world.city_manager.city_enabled
+		if furniture!=null: furniture.update_lights()
 		if audio != null and audio.ambience != null:
 			audio.ambience.volume_db = -28 if nearby else -60

@@ -35,7 +35,7 @@ func run() -> void:
 		var road:=MeshInstance3D.new();root.add_child(road)
 		var arrays:=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=source
 		var mesh:=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays);road.mesh=mesh
-		Neon.build(road)
+		await Neon.build(road)
 		var neon=road.get_node("RoadEdgeNeon")
 		check(neon.get_meta("boundary_segments")==4 if source==sources[0] else neon.get_meta("boundary_segments")==10,"Unexpected boundary edges")
 		var output: PackedVector3Array=neon.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]

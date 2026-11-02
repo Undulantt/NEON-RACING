@@ -1,7 +1,7 @@
 shader_type spatial;
 render_mode cull_disabled;
-uniform vec4 segments[16];
-uniform float widths[16];
+uniform vec4 segments[64];
+uniform float widths[64];
 uniform int segment_count = 0;
 varying vec3 world_pos;
 void vertex(){world_pos=(MODEL_MATRIX*vec4(VERTEX,1.0)).xyz;}
@@ -12,7 +12,7 @@ float noise(vec2 p){
 }
 void fragment(){
  vec2 p=world_pos.xz; float distance_to_axis=10000.0; float half_width=10.0;
- for(int i=0;i<16;i++){
+ for(int i=0;i<64;i++){
   if(i>=segment_count){break;}
   vec2 a=segments[i].xy;vec2 v=segments[i].zw-a;
   float t=clamp(dot(p-a,v)/max(dot(v,v),0.001),0.0,1.0);

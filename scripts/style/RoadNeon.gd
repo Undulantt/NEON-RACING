@@ -13,7 +13,9 @@ static func chunk_cut(a: Vector3, b: Vector3) -> bool:
 			return true
 	return false
 
-static func build(road: MeshInstance3D) -> void:
+static func build(road: MeshInstance3D, budget_ms: float = 0.0) -> void:
+	var slice_start:=Time.get_ticks_usec()
+	var max_slice:=0.0
 	var edges := {}
 	for surface in range(road.mesh.get_surface_count()):
 		var arrays := road.mesh.surface_get_arrays(surface)
@@ -25,6 +27,11 @@ static func build(road: MeshInstance3D) -> void:
 			for i in range(vertices.size()):
 				indices.append(i)
 		for i in range(0,indices.size(),3):
+			if budget_ms>0 and (Time.get_ticks_usec()-slice_start)>budget_ms*1000:
+				max_slice=maxf(max_slice,(Time.get_ticks_usec()-slice_start)/1000.0)
+				await road.get_tree().process_frame
+				if not is_instance_valid(road) or road.is_queued_for_deletion(): return
+				slice_start=Time.get_ticks_usec()
 			for side in range(3):
 				var a := vertices[indices[i+side]]
 				var b := vertices[indices[i+(side+1)%3]]
@@ -69,6 +76,11 @@ static func build(road: MeshInstance3D) -> void:
 		if indices.is_empty():
 			for i in range(vertices.size()): indices.append(i)
 		for i in range(0,indices.size(),3):
+			if budget_ms>0 and (Time.get_ticks_usec()-slice_start)>budget_ms*1000:
+				max_slice=maxf(max_slice,(Time.get_ticks_usec()-slice_start)/1000.0)
+				await road.get_tree().process_frame
+				if not is_instance_valid(road) or road.is_queued_for_deletion(): return
+				slice_start=Time.get_ticks_usec()
 			var a := vertices[indices[i]];var b := vertices[indices[i+1]];var c := vertices[indices[i+2]]
 			var triangle := PackedVector2Array([Vector2(a.x,a.z),Vector2(b.x,b.z),Vector2(c.x,c.z)])
 			var denominator := (triangle[1]-triangle[0]).cross(triangle[2]-triangle[0])
@@ -99,6 +111,7 @@ static func build(road: MeshInstance3D) -> void:
 	result.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	result.set_meta("boundary_segments",boundary_count)
 	road.add_child(result)
+	road.set_meta("neon_max_slice_ms",maxf(max_slice,(Time.get_ticks_usec()-slice_start)/1000.0))
 
 static func cells(polygon: PackedVector2Array) -> Array[Vector2i]:
 	var low := polygon[0];var high := polygon[0]

@@ -1,3 +1,7 @@
+# Ciudad nocturna — expansión de la estética
+
+**F5** abre la ciudad con la estética retrofuturista, farolas orientadas a las calles, palmeras y árboles de copa facetada. Decoración por sectores y un máximo global de cuatro farolas con luz real. [Implementación, reglas de colocación y verificación](docs/PHASE_E_CITY.md).
+
 # Revisión visual — La Paz / Neon Coast
 
 Estelas de turbo ahusadas, líneas periféricas más discretas y ajuste de contraste del piloto. **F4** alterna efectos completos, sutiles o desactivados. [Progreso, capturas y pruebas](docs/PHASE_E_MOTION.md).
