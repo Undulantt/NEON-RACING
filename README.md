@@ -1,3 +1,5 @@
+**Señalización corregida:** las líneas se preparan por calles conectadas y se cargan con el sector vial, sin el límite anterior de 64 tramos. [Detalle, capturas de Forjadores y verificación](docs/PHASE_E_ROAD_MARKINGS.md).
+
 **Actualización de rendimiento:** F5 arranca directamente de noche, sin generar primero los detalles diurnos. Bordes neón precalculados, carga incremental y colisiones de postes y troncos. [Resultados y límites](docs/PHASE_E_STREAMING_FIX.md).
 
 # Ciudad nocturna — expansión de la estética

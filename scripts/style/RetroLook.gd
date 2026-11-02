@@ -35,23 +35,8 @@ func configure(target: Node3D) -> void:
 		if node is DirectionalLight3D:
 			node.light_color=Color("ed9bd1")
 			node.light_energy=0.42
-	road_material=ShaderMaterial.new()
+	road_material=world.road_root.visual_material if world.road_root.visual_material is ShaderMaterial else ShaderMaterial.new()
 	road_material.shader=load("res://shaders/retro_road.gdshader")
-	var segments := PackedVector4Array()
-	var widths := PackedFloat32Array()
-	for road in world.map_data["roads"]:
-		if str(road["osm_way_id"]) != str(world.night_config["promenade_way_id"]):
-			continue
-		var a: Array=road["points_xz"][0];var b: Array=road["points_xz"][-1]
-		if minf(a[1],b[1]) < pilot_cell.y*256-24 or maxf(a[1],b[1]) > (pilot_cell.y+1)*256+20:
-			continue
-		if segments.size() >= 64:
-			break
-		segments.append(Vector4(a[0],a[1],b[0],b[1]));widths.append(float(road["width_m"]))
-	road_material.set_shader_parameter("segment_count",segments.size())
-	segments.resize(64);widths.resize(64)
-	road_material.set_shader_parameter("segments",segments)
-	road_material.set_shader_parameter("widths",widths)
 	var layer := CanvasLayer.new();layer.layer=0;add_child(layer)
 	var rect := ColorRect.new();rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	rect.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -82,20 +67,6 @@ func refresh() -> void:
 		if not baked_ready(cell): continue
 		chunk.set_meta("retro_road",true)
 		var mat:=road_material
-		if world.night_config.get("citywide",false):
-			mat=road_material.duplicate()
-			# Local widened road axes; never project the pilot avenue across town.
-			var local_roads: Array=world.night_style.furniture.roads_for(cell).duplicate()
-			var center:=Vector2(cell)*256+Vector2(128,128)
-			local_roads.sort_custom(func(a,b): return world.night_style.furniture.point(a["points_xz"][0]).distance_squared_to(center)<world.night_style.furniture.point(b["points_xz"][0]).distance_squared_to(center))
-			var lines:=PackedVector4Array();var sizes:=PackedFloat32Array()
-			for road in local_roads:
-				var a: Array=road["points_xz"][0];var b: Array=road["points_xz"][-1]
-				lines.append(Vector4(a[0],a[1],b[0],b[1]));sizes.append(float(road["width_m"]))
-				if lines.size()==64: break
-			mat.set_shader_parameter("segment_count",lines.size())
-			lines.resize(64);sizes.resize(64)
-			mat.set_shader_parameter("segments",lines);mat.set_shader_parameter("widths",sizes)
 		road_busy=true
 		var visual_index:=0
 		for visual in chunk.find_children("*","MeshInstance3D",true,false):
@@ -135,10 +106,7 @@ func _process(delta: float) -> void:
 		timer=0
 		refresh()
 		if world.night_config.get("citywide",false):
-			for chunk in world.road_root.loaded.values():
-				for visual in chunk.find_children("*","MeshInstance3D",true,false):
-					if visual.material_override is ShaderMaterial:
-						visual.material_override.set_shader_parameter("street_pools",world.night_style.furniture.street_pools)
+			road_material.set_shader_parameter("street_pools",world.night_style.furniture.street_pools)
 
 func restore_baked(visual: MeshInstance3D, cell: Vector2i, index: int) -> bool:
 	var id:=str(cell.x)+"_"+str(cell.y)

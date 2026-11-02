@@ -100,6 +100,12 @@ func _ready() -> void:
 		var night_road:=ShaderMaterial.new()
 		night_road.shader=load("res://shaders/retro_road.gdshader")
 		road_root.visual_material=night_road
+		var baked_path:="res://data/processed/night_roads/manifest.json"
+		if FileAccess.file_exists(baked_path):
+			var baked=JSON.parse_string(FileAccess.get_file_as_string(baked_path))
+			var marks: Dictionary=baked.get("markings",{})
+			if marks.get("map_sha256","")==environment_data["map_sha256"] and marks.get("layout_sha256","")==FileAccess.get_sha256("res://data/processed/arcade_layout.json"):
+				road_root.baked_visuals=baked.get("entries",{})
 	add_child(road_root)
 	var spawn: Array = environment_data["spawn"]["position_xz"]
 	stats = road_root.configure(map_data, Vector3(spawn[0], 0.67, spawn[1]))

@@ -1,3 +1,5 @@
+> Revisión posterior: [señalización continua y carga junto con la carretera](PHASE_E_ROAD_MARKINGS.md). Los recursos actuales incluyen bordes y marcas; para regenerarlos hay que seguir ambos pasos de esa guía.
+
 # Fase E — tirones, colisiones y arranque nocturno
 
 ## Diagnóstico y resultado

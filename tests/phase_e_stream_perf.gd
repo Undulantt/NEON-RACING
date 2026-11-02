@@ -70,13 +70,36 @@ func run() -> void:
 		report["collision_passed"]=move_hits.has("lamp") and move_hits.has("palm") and move_hits.has("tree") and disabled
 		for node in world.night_style.get_children():
 			if node.get_script()==load("res://scripts/style/RetroLook.gd"):
-				report["baked_neon_loads"]=node.baked_loads;report["runtime_neon_builds"]=node.runtime_builds
+				report["baked_neon_loads"]=node.baked_loads+world.road_root.baked_loads;report["runtime_neon_builds"]=node.runtime_builds
 		report["max_city_chunk_build_ms"]=world.city_manager.max_chunk_build_ms
 		report["max_road_chunk_build_ms"]=world.road_root.max_build_ms
 		report["max_terrain_chunk_build_ms"]=world.terrain_root.max_build_ms
-	var suffix:="no_lamps" if "--no-street-lights" in OS.get_cmdline_user_args() else "day" if world.night_style==null else "before" if "--before" in OS.get_cmdline_user_args() else "after"
+	var suffix:="markings" if "--markings" in OS.get_cmdline_user_args() else "no_lamps" if "--no-street-lights" in OS.get_cmdline_user_args() else "day" if world.night_style==null else "before" if "--before" in OS.get_cmdline_user_args() else "after"
 	FileAccess.open("res://docs/phase_e_stream_"+suffix+".json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("STREAM_PERF ",JSON.stringify(report))
+	if "--markings" in OS.get_cmdline_user_args():
+		world.city_manager.set_city_enabled(true)
+		var selected: Dictionary={};var best:=INF;var at:=Vector2.ZERO
+		for road in world.map_data["roads"]:
+			if not "Forjadores" in str(road.get("street_name","")): continue
+			var a:=Vector2(road["points_xz"][0][0],road["points_xz"][0][1])
+			var b:=Vector2(road["points_xz"][-1][0],road["points_xz"][-1][1])
+			if floori(a.y/256)==floori(b.y/256): continue
+			var distance:=a.lerp(b,0.5).distance_squared_to(Vector2(1100,1100))
+			if distance<best: best=distance;selected=road;at=a.lerp(b,0.5)
+		if not selected.is_empty():
+			var a:=Vector2(selected["points_xz"][0][0],selected["points_xz"][0][1])
+			var b:=Vector2(selected["points_xz"][-1][0],selected["points_xz"][-1][1])
+			var direction:=(b-a).normalized()
+			if direction.y>0: direction=-direction
+			car.rotation.y=atan2(-direction.x,-direction.y)
+			car.position=Vector3(at.x,car.supported_pose_height(at.x,at.y,car.rotation.y),at.y)
+			car.velocity=Vector3.ZERO;car.set_controls(0,0,true);car.reset_surface_motion();world.follow_camera.snap()
+			for i in range(300): await physics_frame
+			await RenderingServer.frame_post_draw
+			root.get_texture().get_image().save_png("res://docs/evidence/phase_e_forjadores_markings.png")
+			var cell:=Vector2i(floori(at.x/256),floori(at.y/256))
+			print("FORJADORES_CAPTURE road=",selected["id"]," cell=",cell," position=",at)
 	world.queue_free()
 	for i in range(8): await process_frame
 	quit(0 if report.get("collision_passed",true) else 1)

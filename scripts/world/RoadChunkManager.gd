@@ -17,6 +17,9 @@ var total_unloads := 0
 var max_build_ms := 0
 var surface_layer := 1
 var visual_material: Material
+var baked_visuals: Dictionary={}
+var pending_visuals: Dictionary={}
+var baked_loads := 0
 var failed_chunks: Array[String] = []
 
 func configure(data: Dictionary, initial_position: Vector3) -> Dictionary:
@@ -55,6 +58,7 @@ func refresh(prime: bool = false) -> void:
 			if distance <= LOAD_RADIUS:
 				pending.append({"cell": cell, "distance": distance})
 	pending.sort_custom(func(a: Dictionary, b: Dictionary): return a["distance"] < b["distance"])
+	prefetch_visuals()
 	if prime:
 		var immediate: Array = pending.duplicate()
 		for entry in immediate:
@@ -99,7 +103,21 @@ func load_chunk(cell: Vector2i) -> void:
 		node.queue_free()
 		return
 	if visual_material!=null:
-		for visual in node.find_children("*","MeshInstance3D",true,false): visual.material_override=visual_material
+		var visuals:=node.find_children("*","MeshInstance3D",true,false)
+		for visual in visuals: visual.material_override=visual_material
+		var baked: Dictionary=baked_visuals.get(str(entries[cell]["id"]),{})
+		if not baked.is_empty() and baked.get("scene_sha256","")==entries[cell].get("scene_sha256",""):
+			var complete: bool=baked["files"].size()==visuals.size()
+			for i in range(mini(visuals.size(),baked["files"].size())):
+				var path: String=baked["files"][i]
+				if path.is_empty(): continue
+				var mesh=ResourceLoader.load_threaded_get(path) if pending_visuals.has(path) else load(path)
+				pending_visuals.erase(path)
+				if not mesh is ArrayMesh: complete=false;continue
+				var overlay:=MeshInstance3D.new();overlay.name="RoadEdgeNeon"
+				overlay.mesh=mesh;overlay.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+				visuals[i].add_child(overlay);baked_loads+=1
+			if complete: node.set_meta("retro_road",true)
 	max_build_ms = maxi(max_build_ms, Time.get_ticks_msec() - start)
 	loaded[cell] = node
 	max_loaded = maxi(max_loaded, loaded.size())
@@ -118,3 +136,19 @@ func _physics_process(delta: float) -> void:
 
 func status() -> Dictionary:
 	return {"loaded_chunks": loaded.size(), "total_chunks": entries.size(), "max_loaded_chunks": max_loaded, "chunk_loads": total_loads, "chunk_unloads": total_unloads, "max_chunk_build_ms": max_build_ms, "failed_chunks": failed_chunks}
+
+func prefetch_visuals() -> void:
+	if baked_visuals.is_empty(): return
+	var wanted:={}
+	for candidate in pending.slice(0,8):
+		var entry: Dictionary=entries[candidate["cell"]]
+		var baked: Dictionary=baked_visuals.get(str(entry["id"]),{})
+		if baked.get("scene_sha256","")!=entry.get("scene_sha256",""): continue
+		for path in baked.get("files",[]):
+			if str(path).is_empty(): continue
+			wanted[path]=true
+			if not pending_visuals.has(path) and ResourceLoader.load_threaded_request(path,"ArrayMesh")==OK: pending_visuals[path]=true
+	for path in pending_visuals.keys():
+		if not wanted.has(path) and ResourceLoader.load_threaded_get_status(path)==ResourceLoader.THREAD_LOAD_LOADED:
+			ResourceLoader.load_threaded_get(path)
+			pending_visuals.erase(path)
