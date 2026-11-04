@@ -22,7 +22,8 @@ func configure(world: Node3D, settings: Dictionary) -> void:
 		set_gain(bus,gains[bus],false)
 	var feedback = world.player.feedback
 	if feedback.engine != null:
-		feedback.engine.bus = "Engine"
+		for voice in feedback.engine_players():
+			voice.bus = "Engine"
 		feedback.tires.bus = "Effects"
 		feedback.boost.bus = "Effects"
 	music = AudioStreamPlayer.new()

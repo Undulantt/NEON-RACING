@@ -1,0 +1,26 @@
+{
+  "bonus": 0.0806666666666666,
+  "countdown": [
+    {
+      "arming_time": 0.0333333333333333,
+      "label": "3",
+      "number": 3
+    },
+    {
+      "arming_time": 1.01666666666667,
+      "label": "2",
+      "number": 2
+    },
+    {
+      "arming_time": 2.01666666666666,
+      "label": "1",
+      "number": 1
+    }
+  ],
+  "fov": 93.8134536743164,
+  "ground_marks": 110,
+  "mode": "Production Main.tscn; actual standing start on C2; frozen pose for close inspection of the grounded flame trail",
+  "passed": true,
+  "rendered_pink_fire_samples": 4717,
+  "speed_kmh": 199.765612792969
+}

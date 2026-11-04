@@ -47,7 +47,9 @@ func run() -> void:
 			for pivot in car.visuals["pivots"]:
 				var p: Vector3=pivot.global_position
 				var h: float=world.elevation.get_height_at(p.x,p.z)
-				min_visual_clearance=minf(min_visual_clearance,p.y-0.34-h)
+				var wheel: MeshInstance3D = pivot.get_child(0)
+				var tire_radius: float = wheel.mesh.top_radius * pivot.global_basis.get_scale().x
+				min_visual_clearance=minf(min_visual_clearance,p.y-tire_radius-h)
 			var support: float=car.predicted_support_height(car.position)
 			if is_finite(support):peak=maxf(peak,car.position.y-support)
 		elif previous_airborne:

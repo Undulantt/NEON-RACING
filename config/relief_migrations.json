@@ -1,26 +1,32 @@
 {
   "scripts/driving/ArcadeCar.gd": {
-    "phase": "C6 numerical road triangle-edge contact robustness; no force or gravity changes",
+    "phase": "User-authorized BURST and vehicle profiles, plus shared automatic seven-speed RPM telemetry for tachometer and engine audio; CharacterBody3D and slope support retained",
     "previous_sha256": "5b6bf7ea7d2cf69e302153202ca29351aa2c195efbfabc45effe56b148592940",
-    "current_sha256": "6bb87ab297455661e2a90683dfef599022a0e6b2796b8924a1b882101a6bfcc2",
+    "current_sha256": "ee256161b18c2e5edce0d5504418335a5ed4860db568077caeb0123cd5a6bfff",
     "archive_file": "docs/c6_baseline/ArcadeCar.gd",
-    "regression_file": "docs/slope_flat_regression.json",
-    "regression_sha256": "5b86205b1fbd77f10e5474efad14670f76e1cfdd64329792c8ca45a9306b91b4",
+    "regression_file": "docs/burst_validation.json",
+    "regression_sha256": "67ed64859c10e3ab2686fba9df18531d4428beae697dfacdd2cecc2a185b133d",
     "prior_approved_sha256": "8962f4478da625ad032c0c9ad8975c910fa636a9e3945705536964a8cb7312a6",
     "prior_approved_archive_file": "docs/slope_physics_baseline/ArcadeCar.gd",
     "physics_regression_file": "docs/slope_physics_validation.json",
-    "physics_regression_sha256": "b3d3ad0cc9225d931f80b5dc1b11375ac0c59681d3eb5f25241a4006b1f8bf42",
+    "physics_regression_sha256": "cefb55c698d1d6725f6a48795c6674e3bb53d0efab8aee8820300d1cd997f9d1",
     "seam_regression_file": "docs/map_extension_seam_validation.json",
-    "seam_regression_sha256": "7f5929d760eadf9fc8fb626ed0cf9285855de401a1188a419db7b3111163e7e7"
+    "seam_regression_sha256": "7f5929d760eadf9fc8fb626ed0cf9285855de401a1188a419db7b3111163e7e7",
+    "preceding_phase_archive_file": "docs/burst_baseline/ArcadeCar.gd",
+    "preceding_phase_sha256": "0862f0bdc42bb3139ae6ed00e47c400dfeb9dae66aaded8cb8bbabd25e29d93b",
+    "powertrain_predecessor_archive_file": "docs/powertrain_baseline/ArcadeCar.gd",
+    "powertrain_predecessor_sha256": "86fcf0333e5f1c9686e0b98062e39bbc5b003ba5fb61c1e83893ff0a0782d452"
   },
   "config/driving_config.json": {
-    "phase": "User-authorized slope physics tuning",
-    "previous_sha256": "d709a69b5b059487b3345552b7722d5fea5fa6a816512582cee62f03ab5f8ca4",
-    "current_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
-    "archive_file": "docs/slope_physics_baseline/driving_config.json",
-    "regression_file": "docs/slope_flat_regression.json",
-    "regression_sha256": "5b86205b1fbd77f10e5474efad14670f76e1cfdd64329792c8ca45a9306b91b4",
+    "phase": "User-authorized BURST and vehicle profiles, plus shared automatic seven-speed RPM telemetry for tachometer and engine audio; CharacterBody3D and slope support retained",
+    "previous_sha256": "29c37a32bcdd774794f1b499d2e3c27674df46738a3706880bb0a3aec0c6ae61",
+    "current_sha256": "6384800a32afe34dd8e991930998081b63e0a7d503eff254cd78ce4ec4e71d3d",
+    "archive_file": "docs/burst_baseline/urban_driving_config.json",
+    "regression_file": "docs/burst_validation.json",
+    "regression_sha256": "67ed64859c10e3ab2686fba9df18531d4428beae697dfacdd2cecc2a185b133d",
     "physics_regression_file": "docs/slope_physics_validation.json",
-    "physics_regression_sha256": "b3d3ad0cc9225d931f80b5dc1b11375ac0c59681d3eb5f25241a4006b1f8bf42"
+    "physics_regression_sha256": "cefb55c698d1d6725f6a48795c6674e3bb53d0efab8aee8820300d1cd997f9d1",
+    "preceding_phase_archive_file": "docs/burst_baseline/driving_config.json",
+    "preceding_phase_sha256": "24fa18a6185a2fda3652556316a76b0e378f0a40b3425749e042c8dc5acc1e8d"
   }
 }

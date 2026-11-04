@@ -1,0 +1,46 @@
+{
+  "additional_draw_calls": 2.0,
+  "burst_overhead_ms": 1.00575833333333,
+  "burst_overhead_percent": 48.3949353282641,
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "passed": true,
+  "samples": [
+    {
+      "burst": false,
+      "draw_calls": 148.0,
+      "max_flames": 0,
+      "mean_ms": 1.86411388888889,
+      "median_ms": 1.74,
+      "name": "normal_A",
+      "p95_ms": 2.533
+    },
+    {
+      "burst": true,
+      "draw_calls": 150.0,
+      "max_flames": 128,
+      "mean_ms": 3.54188611111111,
+      "median_ms": 3.318,
+      "name": "burst_A",
+      "p95_ms": 5.406
+    },
+    {
+      "burst": true,
+      "draw_calls": 150.0,
+      "max_flames": 128,
+      "mean_ms": 2.62609166666667,
+      "median_ms": 2.409,
+      "name": "burst_B",
+      "p95_ms": 4.05
+    },
+    {
+      "burst": false,
+      "draw_calls": 148.0,
+      "max_flames": 0,
+      "mean_ms": 2.29234722222222,
+      "median_ms": 2.121,
+      "name": "normal_B",
+      "p95_ms": 3.481
+    }
+  ],
+  "scenario": "1280x720 Compatibility / VSync off; static NightPilot geometry and fixed 95-degree FOV; 128 stressed wheel-track segments; 150 warmup and 360 rendered samples per stage; normal/BURST/BURST/normal comparison; timing includes test harness and is not city-traversal FPS"
+}

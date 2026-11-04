@@ -18,7 +18,7 @@ func check(value: bool, message: String) -> void:
 func step(frames: int, throttle: float = 0, steer: float = 0, handbrake: bool = false, turbo: bool = false) -> void:
 	car.set_controls(throttle, steer, handbrake, turbo)
 	for i in range(frames):
-		await physics_frame
+		await car.physics_updated
 
 func reset() -> void:
 	car.global_transform = Transform3D(Basis.IDENTITY, Vector3(0, 0.67, 0))
@@ -26,6 +26,7 @@ func reset() -> void:
 	car.steering = 0
 	car.grip_blend = 1
 	car.driving_enabled = true
+	car.abilities.reset("test")
 	car.clear_drift_reward()
 	car.drift_particles.clear_trail()
 	car.turbo_active = false
@@ -109,14 +110,14 @@ func run() -> void:
 	car.velocity = Vector3(0, 0, -26)
 	for code in [KEY_W, KEY_D, KEY_SPACE]:
 		physical_key(code, true)
-	for i in range(44):
-		await physics_frame
+	for i in range(70):
+		await car.physics_updated
 	metrics["digital_drift_charge"] = car.drift_charge
 	physical_key(KEY_D, false)
 	physical_key(KEY_SPACE, false)
 	before = car.drift_rewards
 	for i in range(65):
-		await physics_frame
+		await car.physics_updated
 	check(car.drift_rewards == before + 1, "Physical W/D/Space drift can earn an exit bonus")
 	physical_key(KEY_W, false)
 	car.external_control = true
@@ -126,11 +127,13 @@ func run() -> void:
 		if car.drift_boost_active:
 			break
 	await step(2, 1, 0, false, true)
-	check(car.turbo_active and not car.drift_boost_active and car.speed_mps <= 44.1, "Shift supersedes drift bonus without stacking")
+	check(car.turbo_active and car.drift_boost_active and car.signed_speed <= car.current_speed_cap + 0.1, "Independent turbo and drift acceleration obey the common cap")
 	await reset()
 	car.velocity = Vector3(0, 0, -26)
-	await step(90, 1, 1, true)
-	check(car.drift_charge == 0 and not car.drift_boost_active, "Slow spin cannot preserve or earn charge")
+	await step(60, 1, 0.5, true)
+	car.slip_angle = deg_to_rad(85)
+	car.update_drift_reward(1.0/60, true, false)
+	check(car.drift_charge == 0 and not car.drift_boost_active, "Uncontrolled spin cannot preserve or earn charge")
 	# Surface transitions retain drift charge; actual wall contacts cancel it.
 	await charge()
 	ground.collision_layer = 2

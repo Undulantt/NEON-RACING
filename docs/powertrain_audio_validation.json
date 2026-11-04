@@ -1,0 +1,143 @@
+{
+  "passed": true,
+  "audio_source": "Real Engine bus through AudioEffectCapture; preview is resampled and gain-normalized only",
+  "duration_s": 27.39954648526077,
+  "sample_rate": 44100,
+  "rms": 0.021214994963836987,
+  "peak": 0.044464111328125,
+  "preview_gain_db": 17.549540992982433,
+  "shifts": [
+    {
+      "t": 3.28333333333333,
+      "from": 1,
+      "to": 2,
+      "rpm_before": 7274.06389576866,
+      "minimum_rpm": 5528.63539153371,
+      "maximum_rpm": 7274.06389576866,
+      "pitch_before": 2.35956072251879,
+      "minimum_pitch": 1.91751882055168,
+      "maximum_pitch": 2.38891872440896
+    },
+    {
+      "t": 4.56666666666666,
+      "from": 2,
+      "to": 3,
+      "rpm_before": 7295.7201797712,
+      "minimum_rpm": 5863.22489422716,
+      "maximum_rpm": 7295.7201797712,
+      "pitch_before": 2.37774507888053,
+      "minimum_pitch": 2.01985964105359,
+      "maximum_pitch": 2.40211480919706
+    },
+    {
+      "t": 5.83333333333332,
+      "from": 3,
+      "to": 4,
+      "rpm_before": 7285.23034343994,
+      "minimum_rpm": 5874.77622226058,
+      "maximum_rpm": 7285.23034343994,
+      "pitch_before": 2.39977359065675,
+      "minimum_pitch": 2.00065921556948,
+      "maximum_pitch": 2.41159230459673
+    },
+    {
+      "t": 7.83333333333331,
+      "from": 4,
+      "to": 5,
+      "rpm_before": 7298.88028204514,
+      "minimum_rpm": 6080.75636216083,
+      "maximum_rpm": 7298.88028204514,
+      "pitch_before": 2.41140716671609,
+      "minimum_pitch": 2.06091999071362,
+      "maximum_pitch": 2.42003761964423
+    },
+    {
+      "t": 10.0500000000001,
+      "from": 5,
+      "to": 6,
+      "rpm_before": 7298.78224534712,
+      "minimum_rpm": 6141.54572224251,
+      "maximum_rpm": 7298.78224534712,
+      "pitch_before": 2.4195189693808,
+      "minimum_pitch": 2.07328817819282,
+      "maximum_pitch": 2.42451892894915
+    },
+    {
+      "t": 16.0333333333337,
+      "from": 6,
+      "to": 7,
+      "rpm_before": 7297.2167754748,
+      "minimum_rpm": 6181.33366765203,
+      "maximum_rpm": 7297.2167754748,
+      "pitch_before": 2.42527826175711,
+      "minimum_pitch": 2.07820851628958,
+      "maximum_pitch": 2.42793599578532
+    },
+    {
+      "t": 25.2166666666665,
+      "from": 7,
+      "to": 6,
+      "rpm_before": 3061.19413358671,
+      "minimum_rpm": 3061.19413358671,
+      "maximum_rpm": 3947.11091456522,
+      "pitch_before": 1.05138796575423,
+      "minimum_pitch": 1.0372938514951,
+      "maximum_pitch": 1.24485515817553
+    },
+    {
+      "t": 25.6333333333332,
+      "from": 6,
+      "to": 5,
+      "rpm_before": 3064.31337217708,
+      "minimum_rpm": 3064.31337217708,
+      "maximum_rpm": 3950.23015315559,
+      "pitch_before": 1.07390163307371,
+      "minimum_pitch": 1.04976974967468,
+      "maximum_pitch": 1.24748909890495
+    },
+    {
+      "t": 26.0166666666665,
+      "from": 5,
+      "to": 4,
+      "rpm_before": 3054.42219784581,
+      "minimum_rpm": 3001.29219762943,
+      "maximum_rpm": 3940.33897882432,
+      "pitch_before": 1.08979677759761,
+      "minimum_pitch": 1.05314232093866,
+      "maximum_pitch": 1.24371894636356
+    },
+    {
+      "t": 26.3999999999998,
+      "from": 4,
+      "to": 3,
+      "rpm_before": 2967.48184787406,
+      "minimum_rpm": 2838.98884392667,
+      "maximum_rpm": 3853.39862885257,
+      "pitch_before": 1.07071324538221,
+      "minimum_pitch": 1.02805678327043,
+      "maximum_pitch": 1.21528283428399
+    },
+    {
+      "t": 26.7833333333331,
+      "from": 3,
+      "to": 2,
+      "rpm_before": 2795.78469231148,
+      "minimum_rpm": 2446.56855432489,
+      "maximum_rpm": 3691.02538204217,
+      "pitch_before": 1.02704584785707,
+      "minimum_pitch": 0.945621939479792,
+      "maximum_pitch": 1.15939988203676
+    },
+    {
+      "t": 27.1666666666664,
+      "from": 2,
+      "to": 1,
+      "rpm_before": 2389.59781116368,
+      "minimum_rpm": 1601.0677329287,
+      "maximum_rpm": 3351.86362966341,
+      "pitch_before": 0.91854696184898,
+      "minimum_pitch": 0.720710507760826,
+      "maximum_pitch": 1.03799940605447
+    }
+  ]
+}

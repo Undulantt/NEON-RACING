@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "reports": {
+    "core": true,
+    "render30": true,
+    "render120": true,
+    "balance": true,
+    "synthetic_balance": true,
+    "slopes": true,
+    "real_crest": true,
+    "hud": true,
+    "night_effects": true,
+    "drift": true,
+    "driving": true,
+    "debug_speed": true,
+    "terrain": true
+  },
+  "render_rate_invariance": "Identical 0-100 times and 30-second BURST speed at fixed render deltas 30/60/120; physics 60 Hz",
+  "source_hashes": {
+    "config/driving_config.json": "6384800a32afe34dd8e991930998081b63e0a7d503eff254cd78ce4ec4e71d3d",
+    "config/vehicles/apex.json": "7a834fcee46778910262e7d94e1dc5cbc8b915b5820b128e7061961cb68a01d0",
+    "config/vehicles/comet.json": "a488a55bbe65bf1ab21d5fe8b58207ef3678385b96367deb4d89fc67ab1ca46e",
+    "config/vehicles/vector.json": "99e076ee2f06385f9bbfe5d954e5fa4ecca128301dc28c1fe32f94c64cb1b4a2",
+    "scripts/driving/ArcadeCar.gd": "86fcf0333e5f1c9686e0b98062e39bbc5b003ba5fb61c1e83893ff0a0782d452",
+    "scripts/driving/DrivingAbilities.gd": "9b4229469a2a2a21957c465d4c7dbaa47b34b44dfcebf5f09680d9c1b980550c",
+    "scripts/driving/DrivingInput.gd": "496f160d8785ff4dbfd6cb11eb3482762d142adba46bce6a6e231cc70ae51122",
+    "scripts/driving/VehicleProfiles.gd": "29cc5f0eb08296adad6f5f2adcd51d304d2b661e1c4e6f697c6b4069ce2a5798"
+  },
+  "real_route_distance_per_profile_m": 17020.801072835922,
+  "known_limits": [
+    "Gamepad input is injected through production InputEventJoypadMotion bindings; physical hardware feel still needs playtesting.",
+    "APEX leads this urban pilot benchmark; COMET wins the 2 km flat straight. VECTOR stays close on short straights and the corner course.",
+    "Automated pilot uses steering and braking, not an optimized drift racing policy.",
+    "The early long route bake emitted a non-fatal Jolt job-pool warning; route assertions passed. The OpenGL capture logged the existing shader cache initialization warning and rendered successfully.",
+    "Editor import completed class registration without script errors, but logged Safe save failed at startup; final source hashes and runtime validations passed. See burst_editor_import.log."
+  ]
+}

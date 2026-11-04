@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "physics_sources_unchanged": true,
+  "negative_filter_removed": true,
+  "two_continuous_wheel_fire_tracks": true,
+  "source_hashes": {
+    "scripts/driving/BurstPresentation.gd": "b39d9e047c7a87b26ee5b323d511649f492d676f7a488dd370b1c2cc61225c69",
+    "scripts/driving/BurstGroundFlames.gd": "6ddade08c2d21ae9ba129f589ed66e212f73a3d8b65d7754acd08bf39c58a0e5",
+    "scripts/driving/FollowCamera.gd": "c1436db177f74c74f5d13d0985c82b6e397da2baace2bac3bb5852b319600f93",
+    "scripts/ui/DrivingHUD.gd": "3334661ada20d802c06661093a1a6cbc78eeec9aa2ad7225d9ee0003f1ee7d0f",
+    "scripts/ui/SpeedEffects.gd": "62d5f0ce61855b4188b41a61ac6358d514fbf9bdc955251414e6363da90acecd",
+    "shaders/burst_ground_flames.gdshader": "36916309932385e9e16ddaa6058098edd01d6b50683890568e74730c280cfbb6",
+    "config/burst_effects.json": "17c72d626ad89103ef3d3bc5337e087220e86871f74833d973435d5a7aed850a"
+  },
+  "reports": [
+    "burst_vfx_validation.json",
+    "burst_vfx_render_validation.json",
+    "burst_vfx_benchmark.json"
+  ],
+  "burst_overhead_ms": 1.00575833333333,
+  "additional_draw_calls": 2.0
+}

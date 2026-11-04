@@ -1,0 +1,28 @@
+{
+  "idle_rpm": 900.0,
+  "redline_rpm": 8000.0,
+  "warning_rpm": 6500.0,
+  "upshift_rpm": 7300.0,
+  "downshift_rpm": 2800.0,
+  "loaded_downshift_rpm": 4200.0,
+  "top_gear_rpm_at_burst_cap": 7600.0,
+  "ratios": [
+    3.1,
+    2.2,
+    1.66,
+    1.3,
+    1.06,
+    0.88,
+    0.74
+  ],
+  "reverse_ratio": 3.0,
+  "wheel_radius_m": 0.34,
+  "shift_duration_s": 0.18,
+  "shift_cooldown_s": 0.38,
+  "rpm_rise_per_second": 11500.0,
+  "rpm_fall_per_second": 16000.0,
+  "launch_slip_rpm": 2200.0,
+  "audio_reference_rpm": 3000.0,
+  "downshift_blip_rpm": 900.0,
+  "rev_match_duration_s": 0.28
+}

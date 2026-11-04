@@ -1,0 +1,27 @@
+{
+  "id": "APEX",
+  "role": "derrapes",
+  "physics": {
+    "max_forward_speed_mps": 48.61111111111111,
+    "acceleration_mps2": 5.668934240362812,
+    "target_0_100_s": 4.9,
+    "braking_mps2": 11.5,
+    "steering_sensitivity": 1.25,
+    "steering_response_per_second": 7,
+    "lateral_grip_per_second": 13,
+    "handbrake_grip_multiplier": 0.27,
+    "drift_grip_recovery_per_second": 4.2,
+    "handbrake_deceleration_mps2": 3.8,
+    "max_yaw_rate_radians": 1.65,
+    "engine_high_speed_multiplier": 0.65
+  },
+  "abilities": {
+    "burst_arming_time_s": 2.5,
+    "burst_growth_per_second": 0.055,
+    "burst_max_bonus": 0.3,
+    "turbo_duration_s": 4,
+    "turbo_extra_acceleration_mps2": 2.1,
+    "drift_extra_acceleration_mps2": 4,
+    "drift_bonus_duration_s": 1.25
+  }
+}

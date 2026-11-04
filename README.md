@@ -1,3 +1,9 @@
+**Velocímetro y motor:** aguja por RPM, siete marchas automáticas, turbo integrado y sonido sincronizado con las subidas y reducciones. [Capturas, audio y verificación](docs/POWERTRAIN_TACHOMETER.md).
+
+**Efectos BURST:** cuenta 3–2–1, dos huellas continuas de fuego neón rosa dejadas por las ruedas, partículas intensificadas y FOV gradual. [Capturas, controles, coste medido y cómo cambiar de perfil desde el Inspector](docs/BURST_PRESENTATION.md).
+
+**Conducción BURST y perfiles de vehículos:** VECTOR, COMET y APEX comparten controlador con límites base de 185/205/175 km/h. Turbo y Drift Boost añaden aceleración; BURST amplía el límite al sostener velocidad. Soltar el acelerador o frenar lo cancela inmediatamente, con pérdida gradual del exceso de velocidad. [Implementación, controles, perfiles y balance medido](docs/PHASE_C_BURST.md).
+
 **Versión del 3 de noviembre de 2026:** [Novedades desde la fase C.6](docs/RELEASE_2026-11-03.md).
 
 **Señalización corregida:** las líneas se preparan por calles conectadas y se cargan con el sector vial, sin el límite anterior de 64 tramos. [Detalle, capturas de Forjadores y verificación](docs/PHASE_E_ROAD_MARKINGS.md).

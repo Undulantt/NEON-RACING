@@ -1,20 +1,20 @@
 {
-  "controller_sha256": "6bb87ab297455661e2a90683dfef599022a0e6b2796b8924a1b882101a6bfcc2",
+  "controller_sha256": "5514dd2c74b3bf6ed9e7ced4d90311233f6cd3f1aceab9c7743fb9d6dcf953c3",
   "failures": [],
   "metrics": {
     "1.0": {
-      "forward_cap_mps": 32.0,
-      "offroad_cap_mps": 12.0,
+      "forward_cap_mps": 51.3888893127441,
+      "offroad_cap_mps": 46.25,
       "reverse_cap_mps": -7.0,
-      "speed_after_one_second_mps": 12.9999904632568,
-      "turbo_cap_mps": 44.0
+      "speed_after_one_second_mps": 5.24108934402466,
+      "turbo_cap_mps": 51.3888893127441
     },
     "2.0": {
-      "forward_cap_mps": 64.0,
-      "offroad_cap_mps": 24.0,
+      "forward_cap_mps": 102.777778625488,
+      "offroad_cap_mps": 92.5,
       "reverse_cap_mps": -14.0,
-      "speed_after_one_second_mps": 25.9999809265137,
-      "turbo_cap_mps": 88.0
+      "speed_after_one_second_mps": 10.4821786880493,
+      "turbo_cap_mps": 102.777778625488
     }
   },
   "passed": true

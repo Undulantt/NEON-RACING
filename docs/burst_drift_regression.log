@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DRIFT_REWARDS_REPORT {"failures":[],"metrics":{"controlled_drift_charge":0.777966925152981,"digital_drift_charge":0.839885153340586,"earned_strength":0.777966925152981,"exit_bonus_speed_mps":30.9079875946045,"exit_frames_until_reward":14,"measured_gain_mps":1.06949615478516,"same_exit_without_bonus_mps":29.8384914398193,"shorter_drift_charge":0.193035885562547},"passed":true}

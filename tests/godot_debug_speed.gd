@@ -54,6 +54,7 @@ func run() -> void:
 	level.add_child(car)
 	car.configure({"roads":[{"points_xz":[[0,4900],[0,-4900]],"oneway":false,"street_name":"DEBUG SPEED FIXTURE"}]}, {"bounds_xz":[-45,-4950,45,4950],"spawn":{"position_xz":[0,0],"forward_xz":[0,-1]}})
 	car.external_control = true
+	car.config["burst_arming_time_s"] = 1000.0
 	var original_config: Dictionary = car.config.duplicate(true)
 	var source_hash := FileAccess.get_sha256("res://config/driving_config.json")
 	check(not car.debug_speed_enabled, "Test mode must start disabled")
@@ -67,9 +68,9 @@ func run() -> void:
 		await reset()
 		await step(60, 1)
 		var acceleration_speed: float = car.signed_speed
-		check(absf(acceleration_speed - 13 * factor) < 0.6, "Engine acceleration must scale by selected multiplier")
-		await step(240, 1)
-		check(absf(car.signed_speed - 32 * factor) < 0.1, "Forward cap must scale by selected multiplier")
+		check(absf(acceleration_speed - float(car.config["acceleration_mps2"]) * factor) < 0.6, "Engine acceleration must scale by selected multiplier")
+		await step(840, 1)
+		check(absf(car.signed_speed - float(car.config["max_forward_speed_mps"]) * factor) < 0.1, "Forward cap must scale by selected multiplier")
 		metrics[str(factor)] = {"speed_after_one_second_mps":acceleration_speed,"forward_cap_mps":car.signed_speed}
 		await reset()
 		await step(120, -1)
@@ -80,14 +81,15 @@ func run() -> void:
 		car.turbo_exhausted = false
 		car.velocity = Vector3(0, 0, -10 * factor)
 		await step(60, 1, true)
-		check(absf(car.signed_speed - 29 * factor) < 0.8, "Turbo acceleration must scale by selected multiplier")
-		await step(60, 1, true)
-		check(car.turbo_active and absf(car.signed_speed - 44 * factor) < 0.1, "Turbo cap must scale by selected multiplier")
+		check(absf(car.signed_speed - (10 + float(car.config["acceleration_mps2"]) + float(car.config["turbo_extra_acceleration_mps2"])) * factor) < 0.8, "Turbo acceleration must scale by selected multiplier")
+		car.velocity = Vector3(0, 0, -float(car.config["max_forward_speed_mps"]) * factor)
+		await step(2, 1, true)
+		check(car.turbo_active and absf(car.signed_speed - float(car.config["max_forward_speed_mps"]) * factor) < 0.1, "Turbo respects scaled base cap")
 		metrics[str(factor)]["turbo_cap_mps"] = car.signed_speed
 		ground.collision_layer = 2
 		await reset()
-		await step(180, 1)
-		check(absf(car.signed_speed - 12 * factor) < 0.1, "Offroad cap must scale by selected multiplier")
+		await step(900, 1)
+		check(absf(car.signed_speed - float(car.config["max_forward_speed_mps"]) * float(car.config["offroad_speed_multiplier"]) * factor) < 0.1, "Offroad cap must scale by selected multiplier")
 		metrics[str(factor)]["offroad_cap_mps"] = car.signed_speed
 		ground.collision_layer = 1
 	await reset()
@@ -96,7 +98,7 @@ func run() -> void:
 	await key_t()
 	check(not car.debug_speed_enabled and car.speed_mps > 55, "Disabling T must restore mode without instant velocity reset")
 	await step(240, 1)
-	check(absf(car.signed_speed - 32) < 0.1, "Normal speed limit must return after disabling T")
+	check(absf(car.signed_speed - float(car.config["max_forward_speed_mps"])) < 0.1, "Normal speed limit must return after disabling T")
 	check(car.config == original_config and FileAccess.get_sha256("res://config/driving_config.json") == source_hash, "Toggle must not mutate baseline configuration")
 	check(car.recovery_count == 0, "Test must not require recovery")
 	var report := {"passed":failures.is_empty(),"failures":failures,"metrics":metrics,"controller_sha256":FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd")}

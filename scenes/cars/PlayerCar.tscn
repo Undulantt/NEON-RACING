@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://bnpmu21hqg78w"]
 
-[ext_resource type="Script" path="res://scripts/driving/ArcadeCar.gd" id="1"]
+[ext_resource type="Script" uid="uid://bbg5v77ak4v8j" path="res://scripts/driving/ArcadeCar.gd" id="1"]
 
-[node name="PlayerCar" type="CharacterBody3D"]
+[node name="PlayerCar" type="CharacterBody3D" unique_id=317389235]
 script = ExtResource("1")
+vehicle_profile = "COMET"

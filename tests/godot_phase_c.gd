@@ -19,12 +19,13 @@ func check(value: bool, message: String) -> void:
 func step(frames: int, throttle: float = 0, steer: float = 0, handbrake: bool = false, turbo: bool = false) -> void:
 	car.set_controls(throttle, steer, handbrake, turbo)
 	for i in range(frames):
-		await physics_frame
+		await car.physics_updated
 
 func reset() -> void:
 	car.global_transform = Transform3D(Basis.IDENTITY, Vector3(0, 0.67, 0))
 	car.velocity = Vector3.ZERO
 	car.steering = 0
+	car.abilities.reset("test")
 	car.clear_drift_reward()
 	car.grip_blend = 1
 	car.turbo_active = false
@@ -52,15 +53,17 @@ func run() -> void:
 	ground.collision_layer = 1
 	var shape := CollisionShape3D.new()
 	var box := BoxShape3D.new()
-	box.size = Vector3(2000, 1, 2000)
+	box.size = Vector3(2000, 1, 20000)
 	shape.shape = box
 	ground.position.y = -0.5
 	ground.add_child(shape)
 	level.add_child(ground)
 	car = Car.instantiate()
+	car.vehicle_profile = "VECTOR"
 	level.add_child(car)
-	car.configure({"roads": [{"points_xz": [[0, 0], [0, -900]], "oneway": false, "street_name": "SYNTHETIC TEST ONLY"}]}, {"bounds_xz": [-990, -990, 990, 990], "spawn": {"position_xz": [0, 0], "forward_xz": [0, -1]}})
+	car.configure({"roads": [{"points_xz": [[0, 0], [0, -9000]], "oneway": false, "street_name": "SYNTHETIC TEST ONLY"}]}, {"bounds_xz": [-990, -9900, 990, 9900], "spawn": {"position_xz": [0, 0], "forward_xz": [0, -1]}})
 	car.external_control = true
+	car.config["burst_arming_time_s"] = 1000.0
 	follow = Node3D.new()
 	follow.set_script(Follow)
 	level.add_child(follow)
@@ -68,13 +71,13 @@ func run() -> void:
 	await reset()
 	await step(60, 0, 1)
 	check(absf(car.rotation.y) < 0.001, "No steering rotation at rest")
-	await step(240, 1)
+	await step(900, 1)
 	metrics["normal_top_mps"] = car.speed_mps
-	check(car.speed_mps > 31.9 and car.speed_mps < 32.1, "Normal speed cap")
+	check(absf(car.speed_mps - float(car.config["max_forward_speed_mps"])) < 0.1, "Normal speed cap")
 	await step(80, 1, 0, false, true)
 	metrics["turbo_top_mps"] = car.speed_mps
-	check(car.turbo_active and car.speed_mps > 43.5 and car.speed_mps < 44.1, "Turbo increases speed with bounded cap")
-	check(car.turbo_charge < 0.7 and car.turbo_charge > 0.5, "Turbo consumes reserve")
+	check(car.turbo_active and absf(car.speed_mps - car.base_speed_cap) < 0.1, "Turbo acceleration respects the base cap")
+	check(car.turbo_charge < 0.8 and car.turbo_charge > 0.7, "Turbo consumes reserve")
 	check(follow.camera.fov > 85, "Turbo widens FOV")
 	check(car.visuals["exhaust"][0].visible, "Turbo exhaust visible")
 	var reserve: float = car.turbo_charge
@@ -84,13 +87,13 @@ func run() -> void:
 		await process_frame
 	check(car.turbo_charge == reserve and car.position == position, "Pause freezes active turbo reserve and movement")
 	paused = false
-	await step(150, 1, 0, false, true)
+	await step(240, 1, 0, false, true)
 	check(not car.turbo_active and car.turbo_exhausted, "Reserve exhaustion cuts boost")
 	await step(240, 1, 0, false, true)
 	check(not car.turbo_active, "Holding exhausted turbo cannot pulse restart")
 	await step(60, 1)
-	check(car.speed_mps <= 32.1 and not car.visuals["exhaust"][0].visible, "Release restores normal cap and exhaust")
-	await step(540)
+	check(car.speed_mps <= car.base_speed_cap + 0.1 and not car.visuals["exhaust"][0].visible, "Release restores normal cap and exhaust")
+	await step(1200)
 	check(car.turbo_charge > 0.99, "Turbo recharges to full")
 	await reset()
 	await step(90, -1, 0, false, true)
@@ -135,7 +138,7 @@ func run() -> void:
 	root.add_child(world)
 	await physics_frame
 	await physics_frame
-	check(world.player != null and world.hud.turbo_bar != null, "Production world and turbo HUD load")
+	check(world.player != null and world.hud.turbo_bar != null and world.hud.burst_label != null, "Production world and turbo HUD load")
 	world.toggle_camera()
 	check(not world.player.driving_enabled and world.overhead.current, "Aerial inspection preserved")
 	world.toggle_camera()

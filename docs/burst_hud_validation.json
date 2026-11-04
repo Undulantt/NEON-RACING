@@ -1,0 +1,13 @@
+{
+  "bonus": 0.101333333333333,
+  "burst_label": "BURST ACTIVO · +10%",
+  "cap_kmh": 203.746666666667,
+  "cap_label": "VECTOR · BASE 185 / LÍMITE 204 KM/H",
+  "mode": "Real physics, same automated pilot as route balance, standing start on existing extension_C2 aligned road run",
+  "on_asphalt": true,
+  "passed": true,
+  "recoveries": 0,
+  "scene": "Main.tscn (production night city)",
+  "speed_kmh": 203.703538513184,
+  "wall_contacts": 0
+}

@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "buildings": 62465,
+  "fictional": 1000,
+  "source_counts": {
+    "osm": 5194,
+    "fictional": 1000,
+    "overture": 56271
+  },
+  "roof_triangles": 415958,
+  "chunks": 541,
+  "baseline_hashes_unchanged": false,
+  "approved_baseline_migrations": [
+    "scripts/driving/ArcadeCar.gd",
+    "config/driving_config.json"
+  ],
+  "road_and_protected_overlap_m2": 0
+}

@@ -34,6 +34,8 @@ def validate(manifest_path=None):
             report_path=ROOT/migration['regression_file']
             assert digest(report_path)==migration['regression_sha256'], 'Driving regression evidence changed'
             assert load_json(report_path)['passed'], 'Driving regression not passed'
+            for source, expected_source_hash in load_json(report_path).get('source_hashes', {}).items():
+                assert digest(ROOT/source)==expected_source_hash, 'Driving ability evidence uses another source: '+source
             if migration.get('physics_regression_file'):
                 physics_report=ROOT/migration['physics_regression_file']
                 assert digest(physics_report)==migration['physics_regression_sha256'], 'Physics regression evidence changed'

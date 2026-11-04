@@ -1,14 +1,14 @@
 {
   "failures": [],
   "metrics": {
-    "controlled_drift_charge": 1.0,
-    "digital_drift_charge": 0.53486389620201,
-    "earned_strength": 1.0,
-    "exit_bonus_speed_mps": 35.0004692077637,
-    "exit_frames_until_reward": 17,
-    "measured_gain_mps": 3.00033950805664,
-    "same_exit_without_bonus_mps": 32.000129699707,
-    "shorter_drift_charge": 0.361550170744223
+    "controlled_drift_charge": 0.777966925152981,
+    "digital_drift_charge": 0.839885153340586,
+    "earned_strength": 0.777966925152981,
+    "exit_bonus_speed_mps": 30.9079875946045,
+    "exit_frames_until_reward": 14,
+    "measured_gain_mps": 1.06949615478516,
+    "same_exit_without_bonus_mps": 29.8384914398193,
+    "shorter_drift_charge": 0.193035885562547
   },
   "passed": true
 }

@@ -1,0 +1,185 @@
+{
+  "failures": [],
+  "metrics": {
+    "APEX": {
+      "base_kmh": 175.0,
+      "burst_speed_after_30_s_kmh": 227.49608001709,
+      "maximum_burst_kmh": 227.5,
+      "measured_0_100_s": 4.9,
+      "scores": {
+        "acceleration": 8,
+        "braking": 8,
+        "burst": 6,
+        "drift": 10,
+        "drift_boost": 10,
+        "handling": 9,
+        "speed": 6,
+        "turbo": 5
+      }
+    },
+    "COMET": {
+      "base_kmh": 205.0,
+      "burst_speed_after_30_s_kmh": 297.23727722168,
+      "maximum_burst_kmh": 297.25,
+      "measured_0_100_s": 6.11666666666667,
+      "scores": {
+        "acceleration": 5,
+        "braking": 5,
+        "burst": 10,
+        "drift": 4,
+        "drift_boost": 4,
+        "handling": 4,
+        "speed": 10,
+        "turbo": 8
+      }
+    },
+    "VECTOR": {
+      "base_kmh": 185.0,
+      "burst_speed_after_30_s_kmh": 249.75,
+      "maximum_burst_kmh": 249.75,
+      "measured_0_100_s": 5.31666666666667,
+      "scores": {
+        "acceleration": 7,
+        "braking": 7,
+        "burst": 7,
+        "drift": 7,
+        "drift_boost": 6,
+        "handling": 7,
+        "speed": 7,
+        "turbo": 7
+      }
+    },
+    "asphalt_drift": [
+      {
+        "angle": 10.3122691277567,
+        "charge": 0.0,
+        "speed": 27.8491477966309,
+        "valid": 0.0
+      },
+      {
+        "angle": 17.5039272765722,
+        "charge": 0.0870673456226351,
+        "speed": 27.2837963104248,
+        "valid": 0.15
+      },
+      {
+        "angle": 21.8960377336666,
+        "charge": 0.24691889529855,
+        "speed": 26.816858291626,
+        "valid": 0.316666666666667
+      },
+      {
+        "angle": 24.7391500794613,
+        "charge": 0.413585561965216,
+        "speed": 26.5091133117676,
+        "valid": 0.483333333333333
+      },
+      {
+        "angle": 26.6619115100697,
+        "charge": 0.580252228631883,
+        "speed": 26.3352699279785,
+        "valid": 0.65
+      },
+      {
+        "angle": 28.0046652291917,
+        "charge": 0.74691889529855,
+        "speed": 26.2625598907471,
+        "valid": 0.816666666666668
+      },
+      {
+        "angle": 28.9648617604485,
+        "charge": 0.913585561965218,
+        "speed": 26.2644290924072,
+        "valid": 0.983333333333335
+      },
+      {
+        "angle": 29.6637745276484,
+        "charge": 1.0,
+        "speed": 26.3212242126465,
+        "valid": 1.15
+      },
+      {
+        "angle": 30.1795186967815,
+        "charge": 1.0,
+        "speed": 26.4186553955078,
+        "valid": 1.31666666666667
+      }
+    ],
+    "events": {
+      "burst_ended": 7,
+      "burst_started": 7,
+      "drift_boost": 3
+    },
+    "keyboard_drift_charge": 0.855075844576718,
+    "terrain_drift": [
+      {
+        "angle": 10.3122691277567,
+        "charge": 0.0,
+        "speed": 27.8491477966309,
+        "valid": 0.0
+      },
+      {
+        "angle": 17.5039272765722,
+        "charge": 0.0870673456226351,
+        "speed": 27.2837963104248,
+        "valid": 0.15
+      },
+      {
+        "angle": 21.8960377336666,
+        "charge": 0.24691889529855,
+        "speed": 26.816858291626,
+        "valid": 0.316666666666667
+      },
+      {
+        "angle": 24.7391500794613,
+        "charge": 0.413585561965216,
+        "speed": 26.5091133117676,
+        "valid": 0.483333333333333
+      },
+      {
+        "angle": 26.6619115100697,
+        "charge": 0.580252228631883,
+        "speed": 26.3352699279785,
+        "valid": 0.65
+      },
+      {
+        "angle": 28.0046652291917,
+        "charge": 0.74691889529855,
+        "speed": 26.2625598907471,
+        "valid": 0.816666666666668
+      },
+      {
+        "angle": 28.9648617604485,
+        "charge": 0.913585561965218,
+        "speed": 26.2644290924072,
+        "valid": 0.983333333333335
+      },
+      {
+        "angle": 29.6637745276484,
+        "charge": 1.0,
+        "speed": 26.3212242126465,
+        "valid": 1.15
+      },
+      {
+        "angle": 30.1795186967815,
+        "charge": 1.0,
+        "speed": 26.4186553955078,
+        "valid": 1.31666666666667
+      }
+    ]
+  },
+  "passed": true,
+  "physics_hz": 60,
+  "source_hashes": {
+    "config/driving_config.json": "6384800a32afe34dd8e991930998081b63e0a7d503eff254cd78ce4ec4e71d3d",
+    "config/powertrain_config.json": "1b8d65166478237f28663f4b0b282f817ff796f9084289ae18fce1c634d6daf2",
+    "config/vehicles/apex.json": "7a834fcee46778910262e7d94e1dc5cbc8b915b5820b128e7061961cb68a01d0",
+    "config/vehicles/comet.json": "a488a55bbe65bf1ab21d5fe8b58207ef3678385b96367deb4d89fc67ab1ca46e",
+    "config/vehicles/vector.json": "99e076ee2f06385f9bbfe5d954e5fa4ecca128301dc28c1fe32f94c64cb1b4a2",
+    "scripts/driving/ArcadeCar.gd": "ee256161b18c2e5edce0d5504418335a5ed4860db568077caeb0123cd5a6bfff",
+    "scripts/driving/AutomaticTransmission.gd": "102619f7e088c4efae21c3f3092cf7d1cd8ef783b8da7656752ced9ae7981f72",
+    "scripts/driving/DrivingAbilities.gd": "9b4229469a2a2a21957c465d4c7dbaa47b34b44dfcebf5f09680d9c1b980550c",
+    "scripts/driving/DrivingInput.gd": "496f160d8785ff4dbfd6cb11eb3482762d142adba46bce6a6e231cc70ae51122",
+    "scripts/driving/VehicleProfiles.gd": "29cc5f0eb08296adad6f5f2adcd51d304d2b661e1c4e6f697c6b4069ce2a5798"
+  }
+}

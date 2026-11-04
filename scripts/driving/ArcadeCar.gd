@@ -1,6 +1,27 @@
 extends CharacterBody3D
 
 signal recovered(reason: String)
+signal physics_updated
+signal burst_started
+signal burst_ended(reason: String)
+signal drift_boost_triggered(strength: float)
+signal turbo_changed(active: bool, charge: float)
+signal vehicle_profile_changed(id: String)
+
+const Profiles = preload("res://scripts/driving/VehicleProfiles.gd")
+const Transmission = preload("res://scripts/driving/AutomaticTransmission.gd")
+var powertrain := Transmission.new()
+const Abilities = preload("res://scripts/driving/DrivingAbilities.gd")
+@export_enum("VECTOR", "COMET", "APEX") var vehicle_profile := "VECTOR"
+var profile: Dictionary
+var abilities := Abilities.new()
+var brake_input := 0.0
+var command_brake := 0.0
+var forward_plane_speed := 0.0
+var current_speed_cap: float:
+	get: return abilities.current_speed_cap
+var base_speed_cap: float:
+	get: return abilities.base_speed_cap
 const VisualBuilder = preload("res://scripts/driving/CarVisual.gd")
 var config: Dictionary
 var vehicle_scale := 0.8
@@ -11,22 +32,50 @@ var command_throttle := 0.0
 var command_steer := 0.0
 var command_handbrake := false
 var command_turbo := false
-var turbo_charge := 1.0
-var turbo_active := false
-var turbo_exhausted := false
-var turbo_cooldown := 0.0
+var turbo_charge: float:
+	get: return abilities.turbo_charge
+	set(value): abilities.turbo_charge = value
+var turbo_active: bool:
+	get: return abilities.turbo_active
+	set(value): abilities.turbo_active = value
+var turbo_exhausted: bool:
+	get: return abilities.turbo_exhausted
+	set(value): abilities.turbo_exhausted = value
+var turbo_cooldown: float:
+	get: return abilities.turbo_cooldown
+	set(value): abilities.turbo_cooldown = value
 var drift_amount := 0.0
 var slip_angle := 0.0
-var drift_charge := 0.0
-var drift_quality := 0.0
-var drift_tracking := false
-var drift_valid_time := 0.0
-var drift_exit_time := 0.0
-var drift_settle_time := 0.0
-var drift_boost_time := 0.0
-var drift_boost_strength := 0.0
-var drift_boost_active := false
-var drift_rewards := 0
+var drift_charge: float:
+	get: return abilities.drift_charge
+	set(value): abilities.drift_charge = value
+var drift_quality: float:
+	get: return abilities.drift_quality
+	set(value): abilities.drift_quality = value
+var drift_tracking: bool:
+	get: return abilities.drift_tracking
+	set(value): abilities.drift_tracking = value
+var drift_valid_time: float:
+	get: return abilities.drift_valid_time
+	set(value): abilities.drift_valid_time = value
+var drift_exit_time: float:
+	get: return abilities.drift_exit_time
+	set(value): abilities.drift_exit_time = value
+var drift_settle_time: float:
+	get: return abilities.drift_settle_time
+	set(value): abilities.drift_settle_time = value
+var drift_boost_time: float:
+	get: return abilities.drift_boost_time
+	set(value): abilities.drift_boost_time = value
+var drift_boost_strength: float:
+	get: return abilities.drift_boost_strength
+	set(value): abilities.drift_boost_strength = value
+var drift_boost_active: bool:
+	get: return abilities.drift_boost_active
+	set(value): abilities.drift_boost_active = value
+var drift_rewards: int:
+	get: return abilities.drift_rewards
+	set(value): abilities.drift_rewards = value
 var drift_particles: Node3D
 var grip_blend := 1.0
 var throttle_input := 0.0
@@ -63,6 +112,7 @@ func drive_test_multiplier() -> float:
 func _unhandled_input(event: InputEvent) -> void:
 	if driving_enabled and not get_tree().paused and event.is_action_pressed("debug_speed_toggle") and not event.is_echo():
 		debug_speed_enabled = not debug_speed_enabled
+		abilities.cancel_burst("debug_mode", forward_plane_speed)
 		get_viewport().set_input_as_handled()
 
 func reset_surface_motion() -> void:
@@ -113,7 +163,16 @@ func supported_pose_height(x: float, z: float, yaw: float) -> float:
 	return height + 0.60 * vehicle_scale + 0.07
 
 func _ready() -> void:
-	config = JSON.parse_string(FileAccess.get_file_as_string("res://config/driving_config.json"))
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--vehicle="):
+			vehicle_profile = argument.trim_prefix("--vehicle=").to_upper()
+	if not apply_vehicle_profile(vehicle_profile):
+		apply_vehicle_profile("VECTOR")
+	preload("res://scripts/driving/DrivingInput.gd").install_gamepad_bindings()
+	abilities.burst_started.connect(func(): burst_started.emit())
+	abilities.burst_ended.connect(func(reason: String): burst_ended.emit(reason))
+	abilities.drift_boost_triggered.connect(func(strength: float): drift_boost_triggered.emit(strength))
+	abilities.turbo_changed.connect(func(active: bool, charge: float): turbo_changed.emit(active, charge))
 	collision_layer = 16
 	collision_mask = 15
 	floor_snap_length = 0.35
@@ -139,6 +198,33 @@ func _ready() -> void:
 	add_child(drift_particles)
 	drift_particles.attach(self)
 
+func apply_vehicle_profile(id: String) -> bool:
+	# The beta selector can set the exported profile before spawning or call this at rest.
+	if velocity.length() > 0.5:
+		return false
+	var next := Profiles.load_profile(id)
+	if next.is_empty():
+		return false
+	vehicle_profile = id
+	profile = next
+	config = profile["config"]
+	abilities.configure(config)
+	powertrain.configure(config)
+	turbo_charge = 1.0
+	vehicle_profile_changed.emit(id)
+	return true
+
+func measure_forward_speed(motion: Vector3) -> float:
+	var forward := -global_basis.z
+	if is_on_floor():
+		var normal := get_floor_normal()
+		forward = forward.slide(normal).normalized()
+		# Reconstruct tangent vertical motion from the post-collision planar velocity.
+		motion.y = -(normal.x * motion.x + normal.z * motion.z) / maxf(normal.y, 0.01)
+	else:
+		motion.y = 0.0
+	return motion.dot(forward)
+
 func configure(map_data: Dictionary, environment: Dictionary) -> void:
 	road_segments = map_data["roads"]
 	road_cells.clear()
@@ -160,13 +246,15 @@ func configure(map_data: Dictionary, environment: Dictionary) -> void:
 	spawn_transform = Transform3D(Basis(Vector3.UP, yaw), Vector3(p[0], supported_pose_height(p[0], p[1], yaw), p[1]))
 	safe_transform = spawn_transform
 	global_transform = spawn_transform
+	abilities.reset("spawn")
 	reset_surface_motion()
 
-func set_controls(throttle: float, steer: float, handbrake: bool = false, turbo: bool = false) -> void:
+func set_controls(throttle: float, steer: float, handbrake: bool = false, turbo: bool = false, brake: float = 0.0) -> void:
 	command_throttle = clampf(throttle, -1, 1)
 	command_steer = clampf(steer, -1, 1)
 	command_handbrake = handbrake
 	command_turbo = turbo
+	command_brake = clampf(brake, 0, 1)
 
 func road_hit(p: Vector3) -> bool:
 	var depth := 2.5 if elevation != null else 1.17
@@ -233,6 +321,8 @@ func recover(reason: String = "manual") -> void:
 		push_error("Recovery rejected: no clear, fully supported road pose")
 		return
 	global_transform = target
+	abilities.reset("recovery")
+	powertrain.reset()
 	reset_surface_motion()
 	velocity = Vector3.ZERO
 	speed_mps = 0.0
@@ -253,12 +343,21 @@ func _physics_process(delta: float) -> void:
 	if road_segments.is_empty():
 		return
 	if global_position.distance_squared_to(previous_motion_position) > 9.0:
+		abilities.reset("teleport")
+		powertrain.reset()
 		reset_surface_motion()
 	takeoff_cooldown = maxf(0.0, takeoff_cooldown - delta)
 	crest_release_remaining = maxf(0.0, crest_release_remaining - delta)
 	if driving_enabled and Input.is_action_just_pressed("recover") and not external_control:
 		recover()
-	var throttle := command_throttle if external_control else Input.get_axis("brake_reverse", "accelerate")
+	if not external_control:
+		Input.flush_buffered_events()
+	var accelerator := maxf(0.0, command_throttle) if external_control else Input.get_action_raw_strength("accelerate")
+	brake_input = maxf(command_brake, -command_throttle) if external_control else Input.get_action_raw_strength("brake_reverse")
+	if not external_control:
+		accelerator = accelerator if accelerator >= float(config["input_throttle_deadzone"]) else 0.0
+		brake_input = brake_input if brake_input > float(config["input_brake_deadzone"]) else 0.0
+	var throttle := -brake_input if brake_input > 0.0 else accelerator
 	var steer := command_steer if external_control else Input.get_axis("steer_left", "steer_right")
 	var handbrake := command_handbrake if external_control else Input.is_action_pressed("handbrake")
 	if not driving_enabled:
@@ -266,6 +365,8 @@ func _physics_process(delta: float) -> void:
 		steer = 0
 		handbrake = true
 	throttle_input = throttle
+	if not driving_enabled:
+		accelerator = 0.0
 	on_asphalt = road_hit(global_position)
 	var forward := -global_basis.z
 	var horizontal := Vector3(velocity.x, 0, velocity.z)
@@ -277,52 +378,35 @@ func _physics_process(delta: float) -> void:
 	if grounded:
 		longitudinal += slope_acceleration * delta
 	var test_multiplier := drive_test_multiplier()
-	var max_speed: float = config["max_forward_speed_mps"] if on_asphalt else config["offroad_speed_mps"]
 	var turbo_requested := command_turbo if external_control else Input.is_action_pressed("turbo")
-	if not turbo_requested:
-		turbo_exhausted = false
-	var eligible := driving_enabled and is_on_floor() and throttle > 0 and longitudinal > 2.0 and not handbrake
-	var was_active := turbo_active
-	turbo_active = turbo_requested and eligible and not turbo_exhausted and (turbo_charge > 0 if was_active else turbo_charge >= float(config["turbo_min_charge"]))
-	if turbo_active:
-		turbo_charge = maxf(0.0, turbo_charge - delta / float(config["turbo_duration_s"]))
-		turbo_cooldown = float(config["turbo_recharge_delay_s"])
-		if turbo_charge <= 0:
-			turbo_exhausted = true
-			turbo_active = false
-	else:
-		turbo_cooldown = maxf(0.0, turbo_cooldown - delta)
-		if turbo_cooldown <= 0 and driving_enabled:
-			turbo_charge = minf(1.0, turbo_charge + delta / float(config["turbo_recharge_s"]))
-	# The earned exit boost is separate from the Shift reserve and cannot stack.
-	if handbrake or turbo_active or not eligible or throttle <= 0:
-		drift_boost_time = 0.0
-	drift_boost_time = maxf(0.0, drift_boost_time - delta)
-	drift_boost_active = drift_boost_time > 0.0
-	if turbo_active:
-		max_speed = float(config["turbo_speed_mps"])
-	elif drift_boost_active:
-		max_speed += float(config["drift_bonus_mps"]) * drift_boost_strength
-	max_speed *= test_multiplier
+	forward_plane_speed = measure_forward_speed(velocity)
+	abilities.tick(delta, accelerator, brake_input, handbrake, turbo_requested, forward_plane_speed, grounded, driving_enabled, on_asphalt, test_multiplier)
+	var max_speed := current_speed_cap
+	if grounded:
+		var plane_forward := forward.slide(get_floor_normal()).normalized()
+		max_speed *= Vector2(plane_forward.x, plane_forward.z).length()
 	if grounded and throttle > 0:
-		# Engine force must compete with gravity even when rolling backwards;
-		# do not silently substitute the stronger service brake for engine torque.
-		longitudinal = move_toward(longitudinal, maxf(longitudinal, max_speed), float(config["turbo_acceleration_mps2"] if turbo_active else config["acceleration_mps2"]) * test_multiplier * throttle * delta)
+		# A bounded engine increment never deletes overspeed momentum from a hill.
+		var high_speed := clampf((longitudinal / test_multiplier - 100.0 / 3.6) / (float(config["max_forward_speed_mps"]) - 100.0 / 3.6), 0, 1)
+		var engine := float(config["acceleration_mps2"]) * lerpf(1.0, float(config["engine_high_speed_multiplier"]), high_speed)
+		engine += maxf(0.0, -slope_acceleration) * float(config["uphill_torque_compensation"])
+		var acceleration := (engine + abilities.extra_acceleration()) * test_multiplier * throttle
+		longitudinal += minf(acceleration * delta, maxf(0.0, max_speed - longitudinal))
 	elif grounded and throttle < 0:
 		var reverse_force := float(config["braking_mps2"]) if longitudinal > 0.1 else float(config["acceleration_mps2"]) * test_multiplier
 		longitudinal = move_toward(longitudinal, -float(config["max_reverse_speed_mps"]) * test_multiplier, reverse_force * -throttle * delta)
 	elif grounded:
 		longitudinal = move_toward(longitudinal, 0, float(config["coast_deceleration_mps2"]) * delta)
-	if drift_boost_active:
-		longitudinal = minf(max_speed, longitudinal + float(config["drift_bonus_mps"]) * test_multiplier * drift_boost_strength / float(config["drift_bonus_duration_s"]) * delta)
 	if grounded and handbrake:
-		longitudinal = move_toward(longitudinal, 0, float(config["handbrake_deceleration_mps2"]) * delta)
+		var handbrake_force := float(config["handbrake_deceleration_mps2"]) if absf(longitudinal) >= float(config["drift_min_speed_mps"]) else float(config["handbrake_hold_deceleration_mps2"])
+		longitudinal = move_toward(longitudinal, 0, handbrake_force * delta)
 	if grounded and absf(longitudinal) > max_speed:
-		longitudinal = move_toward(longitudinal, signf(longitudinal) * max_speed, (12.0 if on_asphalt else float(config["offroad_deceleration_mps2"])) * delta)
+		var drag := float(config["overspeed_recovery_decel_mps2"]) if on_asphalt or abilities.burst_state == Abilities.BurstState.RECOVERY else float(config["offroad_deceleration_mps2"])
+		longitudinal = move_toward(longitudinal, signf(longitudinal) * max_speed, drag * delta)
 	steering = move_toward(steering, steer, float(config["steering_response_per_second"]) * delta)
 	var reduction := lerpf(1.0, 1.0 - float(config["steering_reduction_at_high_speed"]), clampf(absf(longitudinal) / (float(config["max_forward_speed_mps"]) * test_multiplier), 0, 1))
 	var angle := steering * float(config["max_steer_radians"]) * reduction * float(config["steering_sensitivity"])
-	var yaw_delta := -clampf(longitudinal / float(config["wheelbase_m"]) * tan(angle), -1.7, 1.7) * delta
+	var yaw_delta := -clampf(longitudinal / float(config["wheelbase_m"]) * tan(angle), -float(config["max_yaw_rate_radians"]), float(config["max_yaw_rate_radians"])) * delta
 	if not grounded:
 		yaw_delta *= float(config["air_steering_multiplier"])
 	var proposed := Transform3D(Basis(Vector3.UP, rotation.y + yaw_delta), global_position)
@@ -334,7 +418,12 @@ func _physics_process(delta: float) -> void:
 	grip *= grip_blend
 	if not grounded:
 		grip = 0.0
-	horizontal = (forward * longitudinal + lateral).lerp(-global_basis.z * longitudinal, 1.0 - exp(-grip * delta))
+	var unaligned := forward * longitudinal + lateral
+	horizontal = unaligned.lerp(-global_basis.z * longitudinal, 1.0 - exp(-grip * delta))
+	if drifting and grounded and horizontal.length_squared() > 0.0001:
+		# Rotate tire traction without the artificial energy loss of a vector lerp.
+		# The handbrake still dissipates speed through its explicit braking force.
+		horizontal = horizontal.normalized() * unaligned.length()
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
 	if grounded and (handbrake or throttle < 0 or horizontal.length() < float(config["crest_min_speed_mps"])):
@@ -385,6 +474,8 @@ func _physics_process(delta: float) -> void:
 	var flat_velocity := Vector3(velocity.x, 0, velocity.z)
 	slip_angle = flat_velocity.normalized().signed_angle_to(-global_basis.z, Vector3.UP) if speed_mps > 1.0 else 0.0
 	drift_amount = clampf(absf(slip_angle) / 0.65, 0.0, 1.0) if is_on_floor() and signed_speed > float(config["drift_min_speed_mps"]) else 0.0
+	forward_plane_speed = measure_forward_speed(velocity)
+	abilities.after_motion(forward_plane_speed)
 	update_drift_reward(delta, handbrake, hit_wall)
 	safety_timer += delta
 	if safety_timer >= float(config["recovery_interval_s"]):
@@ -419,6 +510,8 @@ func _physics_process(delta: float) -> void:
 	for flame in visuals["exhaust"]:
 		flame.visible = turbo_active or drift_boost_active
 		flame.scale.z = (1.0 if turbo_active else 0.45) * (1.0 + sin(Time.get_ticks_msec() * 0.06) * 0.22)
+	powertrain.update(delta, forward_plane_speed / drive_test_multiplier(), throttle_input, brake_input, is_on_floor(), driving_enabled)
+	physics_updated.emit()
 
 func align_visual_to_surface() -> void:
 	# Keep the arcade collision box upright; fit the visual chassis to axle contacts.
@@ -440,45 +533,7 @@ func align_visual_to_surface() -> void:
 		pivot.position.y = local_center.y
 
 func clear_drift_reward() -> void:
-	drift_charge = 0.0
-	drift_quality = 0.0
-	drift_tracking = false
-	drift_valid_time = 0.0
-	drift_exit_time = 0.0
-	drift_settle_time = 0.0
-	drift_boost_time = 0.0
-	drift_boost_strength = 0.0
-	drift_boost_active = false
+	abilities.clear_drift()
 
 func update_drift_reward(delta: float, handbrake: bool, hit_wall: bool) -> void:
-	if not driving_enabled or not is_on_floor() or signed_speed < float(config["drift_min_speed_mps"]) or throttle_input < 0 or hit_wall or turbo_active:
-		clear_drift_reward()
-		return
-	var degrees := absf(rad_to_deg(slip_angle))
-	drift_quality = 0.0
-	if handbrake:
-		drift_exit_time = 0.0
-		drift_settle_time = 0.0
-		# Reward speed plus a controlled slip band, not spins or straight braking.
-		if degrees >= 8.0 and degrees <= 60.0 and absf(steering) > 0.12:
-			var angle_quality := clampf((degrees - 5.0) / 14.0, 0, 1) * clampf((70.0 - degrees) / 20.0, 0, 1)
-			var speed_quality := clampf((signed_speed - 7.0) / 16.0, 0.4, 1.0)
-			drift_quality = angle_quality * speed_quality
-			drift_tracking = true
-			drift_valid_time += delta
-			drift_charge = minf(1.0, drift_charge + drift_quality * delta / float(config["drift_charge_time_s"]))
-		elif drift_tracking:
-			drift_charge = maxf(0.0, drift_charge - delta * 0.25)
-	elif drift_tracking:
-		drift_exit_time += delta
-		drift_settle_time = drift_settle_time + delta if degrees < 12.0 else 0.0
-		if drift_settle_time >= 0.1:
-			var earned := drift_charge if drift_charge >= float(config["drift_min_charge"]) and drift_valid_time >= float(config["drift_min_duration_s"]) else 0.0
-			clear_drift_reward()
-			if earned > 0 and throttle_input > 0:
-				drift_boost_strength = earned
-				drift_boost_time = float(config["drift_bonus_duration_s"])
-				drift_boost_active = true
-				drift_rewards += 1
-		elif drift_exit_time > float(config["drift_exit_timeout_s"]):
-			clear_drift_reward()
+	abilities.update_drift(delta, handbrake, hit_wall, driving_enabled, is_on_floor(), signed_speed, throttle_input, brake_input, slip_angle, steering)

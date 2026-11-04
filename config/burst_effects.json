@@ -1,0 +1,11 @@
+{
+  "ground_flame_lifetime_s": 0.9,
+  "ground_flame_spacing_m": 0.55,
+  "ground_flame_max_marks": 128,
+  "ground_flame_width_m": 0.34,
+  "camera_preparation_fov": 86.0,
+  "camera_burst_fov": 95.0,
+  "camera_bonus_fov": 3.0,
+  "camera_transition_per_second": 2.0,
+  "ground_flame_height_m": 0.75
+}

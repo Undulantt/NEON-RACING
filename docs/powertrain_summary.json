@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "scope": "RPM tachometer, integrated turbo and seven-speed automatic presentation/audio; arcade forces unchanged",
+  "source_hashes": {
+    "scripts/driving/ArcadeCar.gd": "ee256161b18c2e5edce0d5504418335a5ed4860db568077caeb0123cd5a6bfff",
+    "scripts/driving/AutomaticTransmission.gd": "102619f7e088c4efae21c3f3092cf7d1cd8ef783b8da7656752ced9ae7981f72",
+    "scripts/driving/DrivingFeedback.gd": "e70cf779f2dfd9a4e542f2b622d506919b9cab99b827498f7b2d74bec0c032cd",
+    "scripts/style/NightAudio.gd": "f73984370f049867efe0a66fb9321c3171863444ec690389b3b58c38523fc151",
+    "scripts/ui/DrivingHUD.gd": "0e0bd3614975634d5a30fd80f62f6822cfcec3a14ac6b270b0ec2cd0e5b47a89",
+    "scripts/ui/DrivingInstruments.gd": "cb386d769b7339ea4f0768e2c91ce4b133baf1c0e71ededa2db264f1b3ef6d18",
+    "config/powertrain_config.json": "1b8d65166478237f28663f4b0b282f817ff796f9084289ae18fce1c634d6daf2"
+  },
+  "reports": {
+    "docs/powertrain_validation.json": "d6fc34dbde006df52d256e9e091c042408faffa6fabc2e35708d3b2af7437856",
+    "docs/powertrain_capture_validation.json": "5867e531a037a48bcd5a56477e14205efc907bfe3b20722d44f5e7b8d49b070d",
+    "docs/powertrain_audio_validation.json": "291c20c81a7e95d81dfd8f4a49cc794b2c3e2f53d0f059126c9c5605bbfb9ecf",
+    "docs/burst_validation.json": "67ed64859c10e3ab2686fba9df18531d4428beae697dfacdd2cecc2a185b133d",
+    "docs/slope_physics_validation.json": "cefb55c698d1d6725f6a48795c6674e3bb53d0efab8aee8820300d1cd997f9d1",
+    "docs/phase_e_motion_validation.json": "256c0a998484acd68d3f299742f11155ddd6d4668112ed542221cbc1f6f17a9d",
+    "docs/phase_c_validation.json": "cfa71062a47e9c874b6187dcb8d2e98f980e96608cab2e5e6abe36bd186e5b7e",
+    "docs/phase_b5_data_validation.json": "69ba08e4b7134409a8b08580cbb09b534a6aa5290f50fac5fb3668ea218ef637"
+  },
+  "audio_preview": "docs/evidence/engine_gear_changes_preview.wav",
+  "capture_discarded_frames": 0
+}

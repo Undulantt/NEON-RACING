@@ -1,0 +1,27 @@
+{
+  "id": "COMET",
+  "role": "rectas",
+  "physics": {
+    "max_forward_speed_mps": 56.94444444444444,
+    "acceleration_mps2": 4.553734061930784,
+    "target_0_100_s": 6.1,
+    "braking_mps2": 8.5,
+    "steering_sensitivity": 0.65,
+    "steering_response_per_second": 4,
+    "lateral_grip_per_second": 11,
+    "handbrake_grip_multiplier": 0.24,
+    "drift_grip_recovery_per_second": 1.8,
+    "handbrake_deceleration_mps2": 4.5,
+    "max_yaw_rate_radians": 1.1,
+    "engine_high_speed_multiplier": 0.7
+  },
+  "abilities": {
+    "burst_arming_time_s": 3.5,
+    "burst_growth_per_second": 0.045,
+    "burst_max_bonus": 0.45,
+    "turbo_duration_s": 6,
+    "turbo_extra_acceleration_mps2": 2.8,
+    "drift_extra_acceleration_mps2": 1.9,
+    "drift_bonus_duration_s": 0.7
+  }
+}

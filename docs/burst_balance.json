@@ -1,0 +1,226 @@
+{
+  "failures": [],
+  "passed": true,
+  "physics_hz": 60,
+  "pilot": "Shared pure-pursuit driver; profile-specific braking/steering physical parameters; no teleport corrections",
+  "real_routes": {
+    "c5_cajoncito_federal_1": {
+      "APEX": {
+        "airborne_frames": 25,
+        "burst_seconds": 31.2666666666667,
+        "completed": true,
+        "distance_m": 9345.41372776031,
+        "expected_m": 9349.98813438416,
+        "max_deviation_m": 1.87162673473358,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.3,
+        "peak_speed_kmh": 227.571940612793,
+        "recoveries": 0,
+        "time_s": 271.816666666667,
+        "wall_contacts": 0
+      },
+      "COMET": {
+        "airborne_frames": 0,
+        "burst_seconds": 6.45,
+        "completed": true,
+        "distance_m": 9345.03608417511,
+        "expected_m": 9349.98813438416,
+        "max_deviation_m": 3.75595021247864,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.289499999999999,
+        "peak_speed_kmh": 262.254885864258,
+        "recoveries": 0,
+        "time_s": 323.983333333333,
+        "wall_contacts": 0
+      },
+      "VECTOR": {
+        "airborne_frames": 44,
+        "burst_seconds": 19.8166666666667,
+        "completed": true,
+        "distance_m": 9345.13101387024,
+        "expected_m": 9349.98813438416,
+        "max_deviation_m": 1.89799499511719,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.35,
+        "peak_speed_kmh": 249.795538330078,
+        "recoveries": 0,
+        "time_s": 288.083333333333,
+        "wall_contacts": 0
+      }
+    },
+    "c5_north_coast": {
+      "APEX": {
+        "airborne_frames": 234,
+        "burst_seconds": 1.48333333333333,
+        "completed": true,
+        "distance_m": 3694.23731696606,
+        "expected_m": 3698.81132304668,
+        "max_deviation_m": 1.84841024875641,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0806666666666667,
+        "peak_speed_kmh": 189.132179260254,
+        "recoveries": 0,
+        "time_s": 141.233333333333,
+        "wall_contacts": 0
+      },
+      "COMET": {
+        "airborne_frames": 108,
+        "burst_seconds": 0.0,
+        "completed": true,
+        "distance_m": 3694.11462295055,
+        "expected_m": 3698.81132304668,
+        "max_deviation_m": 3.15301322937012,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0,
+        "peak_speed_kmh": 194.39733581543,
+        "recoveries": 0,
+        "time_s": 172.166666666667,
+        "wall_contacts": 0
+      },
+      "VECTOR": {
+        "airborne_frames": 170,
+        "burst_seconds": 0.233333333333333,
+        "completed": true,
+        "distance_m": 3694.11115252972,
+        "expected_m": 3698.81132304668,
+        "max_deviation_m": 1.8805525302887,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.00866666666666667,
+        "peak_speed_kmh": 186.626129150391,
+        "recoveries": 0,
+        "time_s": 150.816666666667,
+        "wall_contacts": 0
+      }
+    },
+    "c5_north_neighborhoods": {
+      "APEX": {
+        "airborne_frames": 53,
+        "burst_seconds": 0.0,
+        "completed": true,
+        "distance_m": 3967.34497630596,
+        "expected_m": 3972.00161540508,
+        "max_deviation_m": 1.71086227893829,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0,
+        "peak_speed_kmh": 163.394645690918,
+        "recoveries": 0,
+        "time_s": 195.35,
+        "wall_contacts": 0
+      },
+      "COMET": {
+        "airborne_frames": 0,
+        "burst_seconds": 0.0,
+        "completed": true,
+        "distance_m": 3967.07812297344,
+        "expected_m": 3972.00161540508,
+        "max_deviation_m": 4.46800899505615,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0,
+        "peak_speed_kmh": 139.975886535645,
+        "recoveries": 0,
+        "time_s": 240.0,
+        "wall_contacts": 0
+      },
+      "VECTOR": {
+        "airborne_frames": 12,
+        "burst_seconds": 0.0,
+        "completed": true,
+        "distance_m": 3967.15234172344,
+        "expected_m": 3972.00161540508,
+        "max_deviation_m": 1.74048519134521,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0,
+        "peak_speed_kmh": 154.40972442627,
+        "recoveries": 0,
+        "time_s": 209.35,
+        "wall_contacts": 0
+      }
+    }
+  },
+  "synthetic": {
+    "APEX": {
+      "right_angle_course": {
+        "airborne_frames": 0,
+        "burst_seconds": 0.35,
+        "completed": true,
+        "distance_m": 1745.37158203125,
+        "expected_m": 1750.0,
+        "max_deviation_m": 1.65737915039063,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0183333333333333,
+        "peak_speed_kmh": 178.21580657959,
+        "recoveries": 0,
+        "time_s": 67.5666666666667,
+        "wall_contacts": 0
+      },
+      "straight": {
+        "1000": {
+          "burst_bonus": 0.3,
+          "speed_kmh": 227.49608001709,
+          "time_s": 22.4333333333333
+        },
+        "500": {
+          "burst_bonus": 0.172333333333333,
+          "speed_kmh": 205.16307220459,
+          "time_s": 14.4166666666667
+        }
+      }
+    },
+    "COMET": {
+      "right_angle_course": {
+        "airborne_frames": 0,
+        "burst_seconds": 0.0,
+        "completed": true,
+        "distance_m": 1745.55212402344,
+        "expected_m": 1750.0,
+        "max_deviation_m": 2.92782592773438,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0,
+        "peak_speed_kmh": 195.88182220459,
+        "recoveries": 0,
+        "time_s": 70.7833333333333,
+        "wall_contacts": 0
+      },
+      "straight": {
+        "1000": {
+          "burst_bonus": 0.299999999999999,
+          "speed_kmh": 266.50632019043,
+          "time_s": 23.0166666666667
+        },
+        "500": {
+          "burst_bonus": 0.0,
+          "speed_kmh": 204.998277282715,
+          "time_s": 15.2333333333333
+        }
+      }
+    },
+    "VECTOR": {
+      "right_angle_course": {
+        "airborne_frames": 0,
+        "burst_seconds": 0.0,
+        "completed": true,
+        "distance_m": 1745.10827636719,
+        "expected_m": 1750.0,
+        "max_deviation_m": 1.67828369140625,
+        "offroad_frames": 0,
+        "peak_burst_bonus": 0.0,
+        "peak_speed_kmh": 185.00535736084,
+        "recoveries": 0,
+        "time_s": 68.3166666666667,
+        "wall_contacts": 0
+      },
+      "straight": {
+        "1000": {
+          "burst_bonus": 0.35,
+          "speed_kmh": 249.75,
+          "time_s": 22.6833333333333
+        },
+        "500": {
+          "burst_bonus": 0.0646666666666666,
+          "speed_kmh": 196.956285095215,
+          "time_s": 14.7333333333333
+        }
+      }
+    }
+  }
+}

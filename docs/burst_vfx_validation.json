@@ -1,0 +1,13 @@
+{
+  "failures": [],
+  "metrics": {
+    "burst_fov": 94.7236175537109,
+    "burst_streaks": 64,
+    "flame_instances": 110,
+    "ground_ray_queries": 282,
+    "maximum_fov_step_degrees": 0.100929260253906,
+    "preparation_fov": 81.8264846801758,
+    "turbo_streaks": 11
+  },
+  "passed": true
+}

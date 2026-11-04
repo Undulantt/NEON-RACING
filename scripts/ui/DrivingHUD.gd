@@ -1,11 +1,17 @@
 extends CanvasLayer
 
+const BurstPresentation = preload("res://scripts/driving/BurstPresentation.gd")
+var speed_effects: Control
+var ground_flames: Node3D
+var countdown_label: Label
+var countdown_caption: Label
 var instruments: Control
 var help_label: Label
 var credits_label: Label
 var car: CharacterBody3D
 var world: Node3D
 var speed_label: Label
+var gear_label: Label
 var street_label: Label
 var notice: Label
 var pause_panel: PanelContainer
@@ -16,6 +22,8 @@ var turbo_bar: ProgressBar
 var driving_label: Label
 var drift_bar: ProgressBar
 var drift_label: Label
+var burst_label: Label
+var cap_label: Label
 var buttons: Array[Button] = []
 
 func label(text_value: String, at: Vector2, size: int, color: Color = Color.WHITE) -> Label:
@@ -41,9 +49,24 @@ func _ready() -> void:
 	street_label.clip_text = true
 	street_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	notice = label("", Vector2(24, 280), 16, Color("ffd38f"))
-	speed_label = label("000", Vector2.ZERO, 46)
-	driving_label = label("TURBO LISTO · SHIFT", Vector2.ZERO, 14, Color("36c5e2"))
+	speed_label = label("000",Vector2.ZERO,44)
+	speed_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	speed_label.size = Vector2(110,55)
+	gear_label = label("N",Vector2.ZERO,34)
+	gear_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	gear_label.size = Vector2(34,48)
+	driving_label = label("TURBO LISTO · SHIFT", Vector2.ZERO, 12, Color("36c5e2"))
 	drift_label = label("ESPACIO · DERRAPE", Vector2.ZERO, 14, Color("ffd17a"))
+	countdown_caption = label("ENTRANDO EN BURST", Vector2.ZERO, 16, Color("ff8ade"))
+	countdown_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	countdown_label = label("", Vector2.ZERO, 96, Color("ff99df"))
+	countdown_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	countdown_label.add_theme_color_override("font_outline_color", Color("200a30"))
+	countdown_label.add_theme_constant_override("outline_size", 6)
+	countdown_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	countdown_caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	burst_label = label("BURST", Vector2.ZERO, 17, Color("f08af2"))
+	cap_label = label("", Vector2.ZERO, 13, Color("d4dce3"))
 	turbo_bar = ProgressBar.new()
 	turbo_bar.max_value = 1.0
 	turbo_bar.hide()
@@ -71,7 +94,7 @@ func _ready() -> void:
 	pause_label.add_theme_font_size_override("font_size", 28)
 	column.add_child(pause_label)
 	var controls := Label.new()
-	controls.text = "V cámara · C inspección · M sonido\nT prueba de velocidad ×2 · F8 ciudad\nF9 lugares · R recuperar vehículo"
+	controls.text = "V cámara · C inspección · M sonido\nT prueba de velocidad ×2 · F8 ciudad\nF9 lugares · R recuperar vehículo\nMando: RT acelerar · LT frenar\nStick girar · A derrape · X turbo · Start pausa"
 	controls.add_theme_font_size_override("font_size", 14)
 	column.add_child(controls)
 	for entry in [["Continuar conduciendo", "resume"], ["Recuperar vehículo", "recover"], ["Volver al menú", "menu"]]:
@@ -90,11 +113,36 @@ func attach(target: CharacterBody3D, level: Node3D) -> void:
 	world = level
 	instruments.car = car
 	var effects := Control.new()
+	speed_effects = effects
 	effects.set_script(preload("res://scripts/ui/SpeedEffects.gd"))
 	effects.car = car
 	add_child(effects)
 	move_child(effects, 0)
+	ground_flames = preload("res://scripts/driving/BurstGroundFlames.gd").new()
+	level.add_child(ground_flames)
+	ground_flames.attach(car, speed_effects)
+	car.recovered.connect(func(_reason: String): reset_burst_presentation())
+	car.vehicle_profile_changed.connect(func(_id: String): reset_burst_presentation())
 	car.recovered.connect(func(reason: String): show_notice("Vehículo recuperado · " + reason))
+
+func reset_burst_presentation() -> void:
+	countdown_label.hide()
+	countdown_caption.hide()
+
+func update_burst_presentation(_delta: float, viewport_size: Vector2) -> void:
+	var number := BurstPresentation.countdown(car)
+	var entering: bool = car.abilities.burst_state == 2 and car.abilities.burst_time < 0.7
+	countdown_label.position = Vector2(viewport_size.x * 0.5 - 160, viewport_size.y * 0.14)
+	countdown_label.size = Vector2(320, 135)
+	countdown_caption.position = countdown_label.position - Vector2(0, 20)
+	countdown_caption.size.x = 320
+	countdown_label.visible = car.driving_enabled and (number > 0 or entering)
+	countdown_caption.visible = countdown_label.visible and not entering
+	var text_value := str(number) if number > 0 else "BURST"
+	if countdown_label.text != text_value:
+		countdown_label.text = text_value
+		countdown_label.add_theme_font_size_override("font_size", 96 if number > 0 else 52)
+	world.follow_camera.burst_effect_strength = speed_effects.effect_strength
 
 func show_notice(message: String) -> void:
 	notice.text = message
@@ -138,22 +186,40 @@ func _process(delta: float) -> void:
 	if car == null:
 		return
 	var viewport_size := get_viewport().get_visible_rect().size
+	update_burst_presentation(delta, viewport_size)
 	var right := viewport_size.x - 330.0
-	speed_label.position = Vector2(right + 122, viewport_size.y - 72)
-	driving_label.position = Vector2(right + 40, viewport_size.y - 366)
-	drift_label.position = Vector2(right + 40, viewport_size.y - 318)
+	var gauge_center: Vector2 = instruments.gauge_center()
+	speed_label.position = gauge_center + Vector2(-73,-31)
+	gear_label.position = gauge_center + Vector2(48,-28)
+	gear_label.text = car.powertrain.gear_text()
+	gear_label.add_theme_color_override("font_color",Color("ffd07a") if car.powertrain.gear<0 else Color.WHITE)
+	driving_label.position = gauge_center + Vector2(-112,57)
+	driving_label.size = Vector2(224,22)
+	driving_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	driving_label.clip_text = true
+	driving_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	drift_label.position = Vector2(right+40,viewport_size.y-338)
+	burst_label.position = Vector2(right + 40, viewport_size.y - 478)
+	cap_label.position = Vector2(right + 40, viewport_size.y - 452)
+	var ability = car.abilities
+	match ability.burst_state:
+		0: burst_label.text = "BURST · ACELERA Y SOSTÉN"
+		1: burst_label.text = "BURST · PREPARANDO %d%%" % roundi(100 * ability.arming_time / float(car.config["burst_arming_time_s"]))
+		2: burst_label.text = "BURST ACTIVO · +%d%%" % roundi(100 * ability.burst_bonus)
+		3: burst_label.text = "BURST · RECUPERACIÓN"
+	cap_label.text = "%s · BASE %d / LÍMITE %d KM/H" % [car.vehicle_profile, roundi(car.base_speed_cap * 3.6), roundi(car.current_speed_cap * 3.6)]
 	help_label.position = Vector2(24, viewport_size.y - 53)
 	credits_label.position = Vector2(24, viewport_size.y - 30)
 	pause_panel.position = (viewport_size - pause_panel.size) * 0.5
 	speed_label.text = "%03d" % roundi(car.speed_mps * 3.6)
 	turbo_bar.value = car.turbo_charge
 	if car.drift_boost_active:
-		drift_label.text = "IMPULSO · +%.1f km/h" % (float(car.config["drift_bonus_mps"]) * car.drift_boost_strength * 3.6)
+		drift_label.text = "DRIFT BOOST · %.1f s" % car.drift_boost_time
 		drift_bar.value = car.drift_boost_strength * car.drift_boost_time / float(car.config["drift_bonus_duration_s"])
 	else:
 		drift_bar.value = car.drift_charge
 		if car.drift_charge >= float(car.config["drift_min_charge"]):
-			drift_label.text = "LISTO %d%% · +%.1f km/h" % [roundi(car.drift_charge * 100), float(car.config["drift_bonus_mps"]) * car.drift_charge * 3.6]
+			drift_label.text = "DRIFT BOOST LISTO · %d%%" % roundi(car.drift_charge * 100)
 		else:
 			drift_label.text = "CARGANDO %d %%" % roundi(car.drift_charge * 100) if car.drift_tracking else "DERRAPA PARA CARGAR"
 	driving_label.text = "TURBO ACTIVO" if car.turbo_active else "DERRAPE · %d°" % roundi(rad_to_deg(absf(car.slip_angle))) if car.drift_amount > 0.15 else "TURBO LISTO · SHIFT" if car.turbo_charge >= float(car.config["turbo_min_charge"]) else "TURBO RECARGANDO"
@@ -163,6 +229,7 @@ func _process(delta: float) -> void:
 		driving_label.text += " · suelta SHIFT"
 	if car.feedback.muted:
 		driving_label.text += " · M sonido apagado"
+	driving_label.tooltip_text = driving_label.text
 	street_label.text = car.street_name if not car.street_name.is_empty() else "Sector de La Paz"
 	if not get_tree().paused:
 		toast_time = maxf(0, toast_time - delta)

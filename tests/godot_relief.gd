@@ -103,7 +103,7 @@ func traverse(reverse: bool) -> void:
 		seam_cells[Vector2i(floori(car.position.x/256),floori(car.position.z/256))]=true
 		for pivot in car.visuals["pivots"]:
 			var wp: Vector3 = pivot.global_position
-			wheel_error=maxf(wheel_error,absf(wp.y-world.elevation.get_height_at(wp.x,wp.z)-0.34))
+			wheel_error=maxf(wheel_error,absf(wp.y-world.elevation.get_height_at(wp.x,wp.z)-0.34 * car.vehicle_scale))
 		if best>12 or car.recovery_count>recoveries:
 			break
 	metrics["reverse" if reverse else "forward"]={"distance_m":route_progress,"expected_m":lengths[-1],"offroad_frames":offroad,"unsupported_frames":unsupported,"wall_contacts":car.wall_contacts-contacts,"recoveries":car.recovery_count-recoveries,"height_range_m":[min_y,max_y],"sectors_crossed":seam_cells.size(),"frames":frames,"offroad_probes":offroad_probes}
