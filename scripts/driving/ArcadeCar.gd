@@ -28,6 +28,8 @@ var vehicle_scale := 0.8
 var driving_enabled := true
 var debug_speed_enabled := false
 var external_control := false
+# Optional activity routing; the vehicle keeps ownership of its physical reset.
+var recovery_handler: Callable
 var command_throttle := 0.0
 var command_steer := 0.0
 var command_handbrake := false
@@ -314,13 +316,19 @@ func update_safe_position() -> void:
 		safe_transform = candidate
 
 func recover(reason: String = "manual") -> void:
+	if recovery_handler.is_valid() and recovery_handler.call(reason): return
 	var target := safe_transform
 	if not safe_road_transform(target):
 		target = spawn_transform
 	if not safe_road_transform(target):
 		push_error("Recovery rejected: no clear, fully supported road pose")
 		return
+	apply_recovery_pose(target,reason)
+
+func apply_recovery_pose(target: Transform3D, reason: String) -> bool:
+	if not safe_road_transform(target): return false
 	global_transform = target
+	safe_transform = target
 	abilities.reset("recovery")
 	powertrain.reset()
 	reset_surface_motion()
@@ -338,6 +346,7 @@ func recover(reason: String = "manual") -> void:
 	recovery_count += 1
 	reset_physics_interpolation()
 	recovered.emit(reason)
+	return true
 
 func _physics_process(delta: float) -> void:
 	if road_segments.is_empty():
@@ -350,6 +359,7 @@ func _physics_process(delta: float) -> void:
 	crest_release_remaining = maxf(0.0, crest_release_remaining - delta)
 	if driving_enabled and Input.is_action_just_pressed("recover") and not external_control:
 		recover()
+		if not is_physics_processing(): return
 	if not external_control:
 		Input.flush_buffered_events()
 	var accelerator := maxf(0.0, command_throttle) if external_control else Input.get_action_raw_strength("accelerate")

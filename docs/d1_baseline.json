@@ -1,0 +1,12 @@
+{
+  "scripts/driving/ArcadeCar.gd": "ee256161b18c2e5edce0d5504418335a5ed4860db568077caeb0123cd5a6bfff",
+  "scripts/driving/VehicleProfiles.gd": "29cc5f0eb08296adad6f5f2adcd51d304d2b661e1c4e6f697c6b4069ce2a5798",
+  "config/driving_config.json": "6384800a32afe34dd8e991930998081b63e0a7d503eff254cd78ce4ec4e71d3d",
+  "config/vehicles/vector.json": "99e076ee2f06385f9bbfe5d954e5fa4ecca128301dc28c1fe32f94c64cb1b4a2",
+  "config/vehicles/comet.json": "a488a55bbe65bf1ab21d5fe8b58207ef3678385b96367deb4d89fc67ab1ca46e",
+  "config/vehicles/apex.json": "7a834fcee46778910262e7d94e1dc5cbc8b915b5820b128e7061961cb68a01d0",
+  "config/powertrain_config.json": "1b8d65166478237f28663f4b0b282f817ff796f9084289ae18fce1c634d6daf2",
+  "data/processed/la_paz_map.json": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+  "data/processed/la_paz_environment.json": "892bab2cd6ed3b99c948d0ecb7a842edee70c8eb8d071be9559b4fa71f61926a",
+  "scenes/Main.tscn": "9deeead9b2b77a3608d403b7117c155b821581f47cd97c394ed21a3cb3777868"
+}

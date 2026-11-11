@@ -11,6 +11,7 @@ var baseline_b6 := false
 var night_visuals := false
 var building_overrides: Dictionary = {}
 var chunk_overrides: Dictionary = {}
+var defer_prime := false
 var target: CharacterBody3D
 var loaded: Dictionary = {}
 var pending: Array = []
@@ -40,9 +41,10 @@ func configure(data: Dictionary, player: CharacterBody3D) -> void:
 	refresh(true)
 	var nearby: Array = pending.duplicate()
 	for entry in nearby:
-		if float(entry["distance"]) <= 220.0:
+		if not defer_prime and float(entry["distance"]) <= 220.0:
 			load_chunk(entry["chunk"])
 	refresh(false)
+	if defer_prime: set_physics_process(false)
 
 func rectangle(entry: Dictionary) -> Rect2:
 	var b: Array = entry["bounds_xz"]

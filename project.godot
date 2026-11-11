@@ -10,10 +10,16 @@ config_version=5
 
 [application]
 
-config/name="La Paz After Dark - Fase C.6"
-run/main_scene="res://scenes/Main.tscn"
+config/name="Neon Racing LP"
+run/main_scene="res://scenes/ui/GameShell.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Godot/app_userdata/La Paz After Dark - Fase C.6"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameFlow="*res://scripts/navigation/GameFlow.gd"
 
 [display]
 

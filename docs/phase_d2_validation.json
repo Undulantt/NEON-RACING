@@ -1,0 +1,17 @@
+{
+  "checks": 57,
+  "failures": [],
+  "metrics": {
+    "checkpoints": 47,
+    "initial_loading": {
+      "frames": 41211,
+      "max_gap_ms": 363
+    },
+    "race_distance_m": 978.838111281395,
+    "race_loading": {
+      "frames": 43071,
+      "max_gap_ms": 171
+    }
+  },
+  "passed": true
+}

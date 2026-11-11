@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": {
+    "scripts/driving/ArcadeCar.gd": true,
+    "scripts/driving/VehicleProfiles.gd": true,
+    "config/driving_config.json": true,
+    "config/vehicles/vector.json": true,
+    "config/vehicles/comet.json": true,
+    "config/vehicles/apex.json": true,
+    "config/powertrain_config.json": true,
+    "data/processed/la_paz_map.json": true,
+    "data/processed/la_paz_environment.json": true,
+    "scenes/Main.tscn": true
+  }
+}

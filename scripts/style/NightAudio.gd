@@ -7,18 +7,20 @@ var config: Dictionary
 var state := ""
 var streams: Dictionary = {}
 var gains: Dictionary = {}
+var gain_sliders: Dictionary = {}
 
 func configure(world: Node3D, settings: Dictionary) -> void:
 	config = settings
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var saved := ConfigFile.new()
 	saved.load("user://night_audio.cfg")
+	var flow := get_node_or_null("/root/GameFlow")
 	for bus in ["Music", "Engine", "Effects"]:
 		if AudioServer.get_bus_index(bus) < 0:
 			AudioServer.add_bus()
 			AudioServer.set_bus_name(AudioServer.bus_count-1,bus)
 			AudioServer.set_bus_send(AudioServer.bus_count-1,"Master")
-		gains[bus] = float(saved.get_value("volume",bus,config["default_volumes"][bus]))
+		gains[bus] = float(flow.volumes[bus]) if flow != null else float(saved.get_value("volume",bus,config["default_volumes"][bus]))
 		set_gain(bus,gains[bus],false)
 	var feedback = world.player.feedback
 	if feedback.engine != null:
@@ -68,10 +70,26 @@ func configure(world: Node3D, settings: Dictionary) -> void:
 		slider.max_value = 1
 		slider.step = 0.01
 		slider.value = gains[bus]
+		gain_sliders[bus] = slider
 		slider.value_changed.connect(func(value: float): set_gain(bus,value))
 		box.add_child(slider)
+	if flow != null and not flow.settings_changed.is_connected(_sync_from_flow):
+		flow.settings_changed.connect(_sync_from_flow)
+
+func _sync_from_flow() -> void:
+	var flow := get_node_or_null("/root/GameFlow")
+	if flow == null:
+		return
+	for bus in gains:
+		gains[bus] = flow.volumes[bus]
+		if gain_sliders.has(bus):
+			gain_sliders[bus].set_value_no_signal(gains[bus])
 
 func set_gain(bus: String, value: float, save := true) -> void:
+	var flow := get_node_or_null("/root/GameFlow")
+	if save and flow != null:
+		flow.set_volume(bus, value)
+		return
 	gains[bus] = clampf(value,0,1)
 	var index := AudioServer.get_bus_index(bus)
 	AudioServer.set_bus_volume_db(index,linear_to_db(maxf(gains[bus],0.0001)))

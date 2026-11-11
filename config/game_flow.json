@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "title": "Neon Racing LP",
+  "menu_scene": "res://scenes/ui/GameShell.tscn",
+  "world_scene": "res://scenes/Main.tscn",
+  "default_vehicle": "COMET",
+  "default_race_id": "malecon_sprint_01",
+  "free_drive_spawn": {
+    "id": "malecon",
+    "position_xz": [
+      113.03590816865876,
+      -250.82899144820217
+    ],
+    "forward_xz": [
+      0.382537699830556,
+      -0.9239398834384992
+    ],
+    "source": "Existing verified Paseo Alvaro Obregon spawn from la_paz_environment.json"
+  },
+  "credits": {
+    "project": "Neon Racing LP",
+    "description": "Prototipo arcade de carreras ambientado en La Paz, B.C.S.",
+    "contributors": [],
+    "licenses_file": "res://CREDITS_AND_LICENSES.md"
+  }
+}

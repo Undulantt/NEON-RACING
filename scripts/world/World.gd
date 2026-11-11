@@ -35,23 +35,32 @@ var elevation: RefCounted
 var terrain_root: Node3D
 var limit_root: Node3D
 var relief_flat_baseline := false
+var world_ready := false
+var staged_loading := false
+var prepared: Dictionary = {}
+var race_activity: Node3D
+var navigation: Node
 
 func _ready() -> void:
 	var start := Time.get_ticks_msec()
-	map_data = Loader.load_map()
+	var flow := get_node_or_null("/root/GameFlow")
+	var session: Dictionary = flow.pending_world_launch() if flow != null else {}
+	prepared = flow.prepared_world if flow != null else {}
+	staged_loading = not prepared.is_empty()
+	map_data = read_json("res://data/processed/la_paz_map.json") if staged_loading else Loader.load_map()
+	await loading_stage("Validando cartografía y relieve")
 	var env_path := "res://data/processed/la_paz_environment.json"
 	if map_data.is_empty() or not FileAccess.file_exists(env_path):
 		show_error("Faltan datos offline. Ejecuta tools/build_map.py y tools/build_environment.py.")
 		return
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(env_path))
+	var parsed = read_json(env_path)
 	if not parsed is Dictionary or parsed.get("schema_version") != 1:
 		show_error("Entorno inválido: se requiere schema_version=1.")
 		return
 	environment_data = parsed
-	var hashing := HashingContext.new()
-	hashing.start(HashingContext.HASH_SHA256)
-	hashing.update(FileAccess.get_file_as_bytes("res://data/processed/la_paz_map.json"))
-	if hashing.finish().hex_encode() != environment_data["map_sha256"]:
+	if not session.is_empty():
+		environment_data["spawn"] = session["spawn"].duplicate(true)
+	if read_hash("res://data/processed/la_paz_map.json") != environment_data["map_sha256"]:
 		show_error("El mapa cambió. Regenera el entorno con tools/build_environment.py.")
 		return
 	legacy_city = legacy_city or "--legacy-city" in OS.get_cmdline_user_args()
@@ -59,7 +68,7 @@ func _ready() -> void:
 		return
 	if map_data["metadata"].has("active_blocks") and not map_data["metadata"]["active_blocks"].is_empty():
 		var expansion_path := "res://data/processed/expansion_manifest.json"
-		var parsed_expansion = JSON.parse_string(FileAccess.get_file_as_string(expansion_path)) if FileAccess.file_exists(expansion_path) else null
+		var parsed_expansion = read_json(expansion_path) if FileAccess.file_exists(expansion_path) else null
 		if not parsed_expansion is Dictionary or parsed_expansion.get("map_sha256") != environment_data["map_sha256"]:
 			show_error("Falta el manifiesto de bloques. Ejecuta tools/build_expansion_routes.py.")
 			return
@@ -81,7 +90,7 @@ func _ready() -> void:
 		if not load_relief(relief_profile):
 			return
 	if "--benchmark-world" in OS.get_cmdline_user_args() and relief_manifest.is_empty():
-		var prepared = JSON.parse_string(FileAccess.get_file_as_string("res://data/processed/relief/world/manifest.json"))
+		var prepared = read_json("res://data/processed/relief/world/manifest.json")
 		environment_data["spawn"] = prepared["spawn"]
 	# Full provenance and directed graph remain in the hashed offline dataset.
 	# Runtime driving consumes segments, collision meshes and prepared tracks.
@@ -93,6 +102,7 @@ func _ready() -> void:
 	if not legacy_city:
 		environment_data.erase("buildings")
 		environment_data.erase("excluded_buildings")
+	await loading_stage("Construyendo carreteras y colisiones iniciales")
 	road_root = Node3D.new()
 	road_root.name = "RoadChunks"
 	road_root.set_script(Roads)
@@ -102,13 +112,15 @@ func _ready() -> void:
 		road_root.visual_material=night_road
 		var baked_path:="res://data/processed/night_roads/manifest.json"
 		if FileAccess.file_exists(baked_path):
-			var baked=JSON.parse_string(FileAccess.get_file_as_string(baked_path))
+			var baked=read_json(baked_path)
 			var marks: Dictionary=baked.get("markings",{})
-			if marks.get("map_sha256","")==environment_data["map_sha256"] and marks.get("layout_sha256","")==FileAccess.get_sha256("res://data/processed/arcade_layout.json"):
+			if marks.get("map_sha256","")==environment_data["map_sha256"] and marks.get("layout_sha256","")==read_hash("res://data/processed/arcade_layout.json"):
 				road_root.baked_visuals=baked.get("entries",{})
 	add_child(road_root)
 	var spawn: Array = environment_data["spawn"]["position_xz"]
+	road_root.defer_prime = staged_loading
 	stats = road_root.configure(map_data, Vector3(spawn[0], 0.67, spawn[1]))
+	if staged_loading: await prime_surface(road_root)
 	if not road_root.failed_chunks.is_empty():
 		show_error("No se pudo cargar la colisión vial del relieve")
 		return
@@ -133,7 +145,9 @@ func _ready() -> void:
 		terrain_root.set_script(Roads)
 		terrain_root.surface_layer = 2
 		add_child(terrain_root)
+		terrain_root.defer_prime = staged_loading
 		terrain_root.configure({"chunks": relief_manifest["terrain"]}, Vector3(spawn[0], 0, spawn[1]))
+		if staged_loading: await prime_surface(terrain_root)
 		if not terrain_root.failed_chunks.is_empty():
 			show_error("No se pudo cargar la colisión del terreno")
 			return
@@ -165,18 +179,31 @@ func _ready() -> void:
 		sun.light_color=Color("ed9bd1");sun.light_energy=0.42
 		sun.shadow_enabled=false;sun.rotation_degrees=Vector3(-48,-22,0)
 	add_child(sun)
+	await loading_stage("Preparando automóvil y apoyo seguro")
 	player = PlayerScene.instantiate()
+	if not session.is_empty():
+		player.vehicle_profile = session["vehicle_id"]
 	add_child(player)
+	if not session.is_empty() and player.vehicle_profile != session["vehicle_id"]:
+		player.apply_vehicle_profile(session["vehicle_id"])
 	player.elevation = elevation if not relief_flat_baseline else null
 	player.configure(map_data, environment_data)
+	player.driving_enabled = not staged_loading
+	if session.has("restore"):
+		player.global_transform = session["restore"]["pose"]
+		player.safe_transform = player.global_transform
+		player.turbo_charge = clampf(float(session["restore"].get("turbo_charge", 1.0)), 0.0, 1.0)
+		player.velocity = Vector3.ZERO
+		player.reset_surface_motion()
 	road_root.target = player
 	if terrain_root != null:
 		terrain_root.target = player
 	if limit_root != null:
 		limit_root.target = player
+	await loading_stage("Preparando edificios y colisiones próximas")
 	if not legacy_city:
 		var city_path := "res://data/processed/urban/city_manifest.json" if relief_manifest.is_empty() else "res://" + str(relief_manifest["city_root"]) + "city_manifest.json"
-		var city = JSON.parse_string(FileAccess.get_file_as_string(city_path))
+		var city = read_json(city_path)
 		if not city is Dictionary or city.get("schema_version") != 1 or city.get("map_sha256") != environment_data["map_sha256"] or city.get("units") != "meters":
 			show_error("Ciudad B.5 inválida o desactualizada. Ejecuta tools/build_urban_city.py; --legacy-city abre la fase B anterior.")
 			player.driving_enabled = false
@@ -192,14 +219,22 @@ func _ready() -> void:
 		else:
 			city_manager.data_root = "res://" + str(relief_manifest["city_root"])
 			city_manager.flatten_elevation = relief_flat_baseline
+		city_manager.defer_prime = staged_loading
 		city_manager.configure(city, player)
+		if staged_loading:
+			for candidate in city_manager.pending.duplicate():
+				if float(candidate["distance"]) <= 220.0:
+					city_manager.load_chunk(candidate["chunk"])
+					await get_tree().process_frame
+			city_manager.refresh()
+			city_manager.set_physics_process(true)
 		var geography := Node3D.new()
 		geography.set_script(Geography)
 		add_child(geography)
 		if not baseline_b6 and relief_manifest.is_empty():
 			geography.configure(city)
 		elif not relief_manifest.is_empty():
-			var landmarks = JSON.parse_string(FileAccess.get_file_as_string("res://data/processed/urban/landmarks.json"))
+			var landmarks = read_json("res://data/processed/urban/landmarks.json")
 			var bounds: Array = relief_manifest["bounds_xz"]
 			geography.configure_labels(landmarks["landmarks"], elevation, Rect2(bounds[0],bounds[1],bounds[2]-bounds[0],bounds[3]-bounds[1]))
 		stats.merge(city["statistics"])
@@ -217,6 +252,7 @@ func _ready() -> void:
 	hud.set_script(HUD)
 	add_child(hud)
 	hud.attach(player, self)
+	world_ready = true
 	stats["build_ms"] = Time.get_ticks_msec() - start
 	if not relief_manifest.is_empty():
 		stats["relief"] = relief_manifest["statistics"]
@@ -236,19 +272,19 @@ func load_relief(mode: String) -> bool:
 		show_error("El relieve requiere la ciudad actual; abre sin --legacy-city")
 		return false
 	var path := "res://data/processed/relief/" + mode + "/manifest.json"
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
+	var parsed = read_json(path)
 	if not parsed is Dictionary or parsed.get("schema_version") != 1:
 		show_error("Relieve ausente o inválido. Ejecuta tools/build_relief.py.")
 		return false
 	for source in parsed["sources"]:
-		if FileAccess.get_sha256("res://" + str(source)) != parsed["sources"][source]:
+		if read_hash("res://" + str(source)) != parsed["sources"][source]:
 			show_error("Relieve desactualizado: " + str(source))
 			return false
 	var grid_path := "res://" + str(parsed["heightfield_file"])
-	if FileAccess.get_sha256("res://" + str(parsed["water_file"])) != parsed["water_sha256"]:
+	if read_hash("res://" + str(parsed["water_file"])) != parsed["water_sha256"]:
 		show_error("Relieve: agua corrupta")
 		return false
-	if FileAccess.get_sha256(grid_path) != parsed["heightfield_sha256"] or FileAccess.get_sha256("res://" + str(parsed["city_root"]) + "city_manifest.json") != parsed["city_sha256"]:
+	if read_hash(grid_path) != parsed["heightfield_sha256"] or read_hash("res://" + str(parsed["city_root"]) + "city_manifest.json") != parsed["city_sha256"]:
 		show_error("Relieve: grilla o ciudad corruptas")
 		return false
 	relief_manifest = parsed
@@ -259,7 +295,7 @@ func load_relief(mode: String) -> bool:
 				entry.erase("scene_sha256")
 		push_warning("Relief native cache belongs to another Godot version; using verified triangle sources")
 	elevation = preload("res://scripts/world/ElevationService.gd").new()
-	if not elevation.configure(JSON.parse_string(FileAccess.get_file_as_string(grid_path))):
+	if not elevation.configure(read_json(grid_path)):
 		show_error("Relieve: muestras de altura corruptas")
 		return false
 	if relief_flat_baseline:
@@ -275,8 +311,10 @@ func load_relief(mode: String) -> bool:
 	else:
 		map_data["chunks"] = parsed["roads"]
 	var kept: Array = []
+	var allowed_roads := {}
+	for id in parsed["road_ids"]: allowed_roads[id] = true
 	for road in map_data["roads"]:
-		if road["id"] in parsed["road_ids"]:
+		if allowed_roads.has(road["id"]):
 			kept.append(road)
 	map_data["roads"] = kept
 	# Keep the production city spawn when enabling the entire map. The prepared
@@ -316,7 +354,7 @@ func build_relief_limits() -> void:
 			wall.get_child(0).visible = false
 
 func build_relief_water() -> void:
-	var data = JSON.parse_string(FileAccess.get_file_as_string("res://" + str(relief_manifest["water_file"])))
+	var data = read_json("res://" + str(relief_manifest["water_file"]))
 	var vertices := PackedVector3Array()
 	for surface in data["surfaces"]:
 		for tri in surface["triangles_xz"]:
@@ -338,17 +376,14 @@ func build_relief_water() -> void:
 
 func load_arcade_layout() -> bool:
 	var path := "res://data/processed/arcade_layout.json"
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+	var parsed = read_json(path) if FileAccess.file_exists(path) else null
 	if not parsed is Dictionary or parsed.get("schema_version") != 1:
 		show_error("Falta la adaptación arcade. Ejecuta tools/build_arcade_layout.py.")
 		return false
 	arcade_layout = parsed
 	var paths := {"map_sha256": "res://data/processed/la_paz_map.json", "city_sha256": "res://data/processed/urban/city_manifest.json", "config_sha256": "res://config/arcade_roads.json"}
 	for key in paths:
-		var hash := HashingContext.new()
-		hash.start(HashingContext.HASH_SHA256)
-		hash.update(FileAccess.get_file_as_bytes(paths[key]))
-		if hash.finish().hex_encode() != arcade_layout.get(key):
+		if read_hash(paths[key]) != arcade_layout.get(key):
 			show_error("Adaptación arcade desactualizada. Ejecuta tools/build_arcade_layout.py.")
 			return false
 	map_data["chunks"] = arcade_layout["chunks"]
@@ -396,6 +431,11 @@ func toggle_camera() -> void:
 func get_collision_test_buildings() -> Array:
 	return city_manager.fixture_buildings() if city_manager != null else environment_data["buildings"]
 
+func request_race(activity_id: String = "") -> bool:
+	# Interactive race markers in D.2 can call this without owning navigation.
+	var flow := get_node_or_null("/root/GameFlow")
+	return flow.request_race_from_free_drive(activity_id) if flow != null else false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if city_manager != null and event.is_action_pressed("debug_city_toggle"):
 		var success: bool = city_manager.set_city_enabled(not city_manager.city_enabled)
@@ -419,3 +459,86 @@ func _process(_delta: float) -> void:
 		var error := get_viewport().get_texture().get_image().save_png(capture_path)
 		print("CAPTURE ", capture_path, " result=", error)
 		get_tree().quit(error)
+
+func read_json(path: String) -> Dictionary:
+	if prepared.get("json",{}).has(path): return prepared["json"][path]
+	var value = JSON.parse_string(FileAccess.get_file_as_string(path))
+	return value if value is Dictionary else {}
+
+func read_hash(path: String) -> String:
+	return prepared.get("hashes",{}).get(path,"") if prepared.get("hashes",{}).has(path) else FileAccess.get_sha256(path)
+
+func loading_stage(message: String) -> void:
+	if staged_loading:
+		get_node("/root/GameFlow").loading_stage(message)
+		await get_tree().process_frame
+
+func prime_surface(manager: Node3D, resume := true) -> void:
+	manager.set_physics_process(false)
+	for candidate in manager.pending.duplicate():
+		if float(candidate["distance"]) <= manager.PRIME_RADIUS:
+			manager.load_chunk(candidate["cell"])
+			await get_tree().process_frame
+	manager.set_physics_process(resume)
+
+func attach_racing() -> void:
+	if race_activity != null: return
+	race_activity = preload("res://scripts/racing/RaceActivity.gd").new()
+	add_child(race_activity)
+	race_activity.configure(self)
+	navigation = preload("res://scripts/navigation/FreeDriveNavigation.gd").new()
+	add_child(navigation)
+	navigation.configure(self)
+
+func place_at(spawn: Dictionary) -> void:
+	var p: Array = spawn["position_xz"]
+	var f: Array = spawn["forward_xz"]
+	var yaw := atan2(-float(f[0]),-float(f[1]))
+	player.global_transform = Transform3D(Basis(Vector3.UP,yaw),Vector3(p[0],player.supported_pose_height(p[0],p[1],yaw),p[1]))
+	player.spawn_transform = player.global_transform
+	player.safe_transform = player.global_transform
+	player.velocity = Vector3.ZERO
+	player.reset_surface_motion()
+	if city_manager != null: city_manager.refresh()
+
+func prepare_at(spawn: Dictionary) -> void:
+	player.driving_enabled = false
+	var p: Array = spawn["position_xz"]
+	var at := Vector3(p[0],player.position.y,p[1])
+	for manager in [road_root,terrain_root,limit_root]:
+		if manager == null: continue
+		manager.set_physics_process(false)
+		manager.anchor = at
+		manager.refresh(false)
+		await prime_surface(manager,false)
+	place_at(spawn)
+	for manager in [road_root,terrain_root,limit_root]:
+		if manager != null: manager.set_physics_process(true)
+	if city_manager != null:
+		city_manager.set_physics_process(false)
+		city_manager.refresh()
+		for candidate in city_manager.pending.duplicate():
+			if float(candidate["distance"]) <= 220:
+				city_manager.load_chunk(candidate["chunk"])
+				await get_tree().process_frame
+		city_manager.set_physics_process(true)
+		if not city_manager.failed_chunks.is_empty(): runtime_error = "Falló una colisión urbana necesaria."
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	place_at(spawn)
+	if not road_root.failed_chunks.is_empty() or not player.safe_road_transform(player.global_transform): runtime_error = "No hay apoyo vial seguro en la salida."
+
+func initial_support_ready(spawn: Dictionary) -> bool:
+	var p: Array = spawn["position_xz"]
+	var at := Vector2(p[0],p[1])
+	for manager in [road_root,terrain_root,limit_root]:
+		if manager == null: continue
+		for cell in manager.entries:
+			var origin: Array = manager.entries[cell]["origin_xz"]
+			var rect := Rect2(origin[0],origin[1],256,256)
+			if at.distance_to(at.clamp(rect.position,rect.end)) <= 300 and not manager.loaded.has(cell): return false
+	if city_manager != null:
+		for entry in city_manager.manifest["chunks"]:
+			var rect: Rect2 = city_manager.rectangle(entry)
+			if at.distance_to(at.clamp(rect.position,rect.end)) <= 220 and not city_manager.loaded.has(entry["id"]): return false
+	return true

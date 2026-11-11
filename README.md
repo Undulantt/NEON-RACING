@@ -1,3 +1,21 @@
+# Neon Racing LP — Fase D.2
+
+**Navegación y presentación:** aros circulares azul neón con transparencia degradada y un cuarto del radio bajo la carretera, cinta naranja, recuperación de 3 segundos al último checkpoint, rutas/controles en minimapa y cilindro rosa de entrada. En modo libre, **Esc / Start** abre el mapa de pausa para elegir destino por las calles reales. [Controles, decisiones, capturas y pruebas](docs/RACE_NAVIGATION_UPDATE.md).
+
+**Editor actualizado:** elección de carreras **Sin vueltas** o **Con vueltas (1–99)**, cierre por la red vial, mensajes concretos y botones de guardado habilitados sólo con un trazado válido. [Guía paso a paso para crear, guardar y probar recorridos](docs/RACE_EDITOR_GUIDE.md).
+
+**F5 → Jugar → Modo carrera → vehículo:** sprint en solitario de unos 979 m sobre el Malecón, con 47 controles, cuenta regresiva y resultados. En modo libre, **E / mando B** junto al anillo de salida abre la confirmación. **Esc** permite reiniciar o abandonar. **Ctrl + Alt + E** abre el editor de recorridos únicamente durante desarrollo. Carga por etapas con actividad real y reutilización del mundo entre actividades. [Uso, arquitectura, formato, pruebas y límites de D.2](docs/PHASE_D2.md).
+
+La conducción física completa pasó sin recuperaciones; también se comprobaron los flujos desde menú y exploración. No hay rivales NPC ni Pasaporte La Paz todavía.
+
+## Flujo de menús de D.1
+
+**F5 inicia el menú principal.** Jugar permite elegir modo y comparar VECTOR, COMET y APEX antes de conducir por el Malecón. Opciones, ayuda, créditos y regreso desde la pausa están integrados. [Arquitectura original e interfaces de D.1](docs/PHASE_D1.md); su pantalla provisional de carrera ya está sustituida por el sistema de D.2.
+
+Las notas siguientes corresponden a entregas anteriores; sus referencias a F5 iniciando directamente el mundo quedan reemplazadas por el menú de D.1. Para abrir el mundo directamente durante desarrollo, usar F6 sobre scenes/Main.tscn.
+
+---
+
 **Velocímetro y motor:** aguja por RPM, siete marchas automáticas, turbo integrado y sonido sincronizado con las subidas y reducciones. [Capturas, audio y verificación](docs/POWERTRAIN_TACHOMETER.md).
 
 **Efectos BURST:** cuenta 3–2–1, dos huellas continuas de fuego neón rosa dejadas por las ruedas, partículas intensificadas y FOV gradual. [Capturas, controles, coste medido y cómo cambiar de perfil desde el Inspector](docs/BURST_PRESENTATION.md).

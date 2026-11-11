@@ -1,0 +1,10 @@
+{
+  "checks": 87,
+  "failures": [],
+  "metrics": {
+    "checkpoints_per_lap": 29,
+    "lap_distance_m": 626.097394943237
+  },
+  "passed": true,
+  "rendered": false
+}

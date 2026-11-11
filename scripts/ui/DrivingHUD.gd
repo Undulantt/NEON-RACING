@@ -16,6 +16,8 @@ var street_label: Label
 var notice: Label
 var pause_panel: PanelContainer
 var pause_label: Label
+var free_pause: CanvasLayer
+var race_recover_button: Button
 var toast_time := 0.0
 var menu_open := false
 var turbo_bar: ProgressBar
@@ -104,6 +106,13 @@ func _ready() -> void:
 		button.pressed.connect(_button.bind(entry[1]))
 		column.add_child(button)
 		buttons.append(button)
+	race_recover_button = Button.new()
+	race_recover_button.text = "Recuperar último checkpoint · 3 s"
+	race_recover_button.custom_minimum_size.y = 42
+	race_recover_button.pressed.connect(_button.bind("race_recover"))
+	column.add_child(race_recover_button)
+	column.move_child(race_recover_button,column.get_children().find(buttons[1]))
+	race_recover_button.hide()
 	pause_panel.add_child(column)
 	add_child(pause_panel)
 	pause_panel.hide()
@@ -112,6 +121,11 @@ func attach(target: CharacterBody3D, level: Node3D) -> void:
 	car = target
 	world = level
 	instruments.car = car
+	instruments.minimap.world = world
+	if world.get_property_list().any(func(p: Dictionary): return p["name"] == "navigation"):
+		free_pause = preload("res://scripts/ui/FreeDrivePause.gd").new()
+		add_child(free_pause)
+		free_pause.configure(world,self)
 	var effects := Control.new()
 	speed_effects = effects
 	effects.set_script(preload("res://scripts/ui/SpeedEffects.gd"))
@@ -150,11 +164,18 @@ func show_notice(message: String) -> void:
 
 func set_pause(active: bool) -> void:
 	get_tree().paused = active
-	pause_panel.visible = active
-	pause_label.text = "LA PAZ · MODO LIBRE" if menu_open else "PAUSA"
+	var flow := get_node_or_null("/root/GameFlow")
+	var free: bool = flow != null and flow.current_state == &"free_drive" and world.get("navigation") != null
+	pause_panel.visible = active and not free
+	if free_pause != null:
+		if active and free: free_pause.open()
+		else: free_pause.hide()
+	race_recover_button.visible = active and flow != null and flow.current_state == &"race"
+	pause_label.text = "PAUSA"
 	buttons[0].text = "Continuar conduciendo"
-	buttons[1].text = "Conducir desde inicio" if menu_open else "Recuperar vehículo"
-	buttons[2].text = "Salir del juego" if menu_open else "Volver al menú"
+	buttons[1].text = "Reiniciar carrera" if get_node("/root/GameFlow").current_state == &"race" else "Recuperar vehículo"
+	buttons[2].text = "Abandonar carrera" if get_node("/root/GameFlow").current_state == &"race" else "Volver al menú principal"
+	if active and not free: buttons[0].grab_focus()
 
 func _button(action: String) -> void:
 	match action:
@@ -162,19 +183,23 @@ func _button(action: String) -> void:
 			menu_open = false
 			set_pause(false)
 		"recover":
-			if menu_open:
-				car.safe_transform = car.spawn_transform
 			menu_open = false
+			set_pause(false)
+			if get_node("/root/GameFlow").current_state == &"race": get_node("/root/GameFlow").restart_race()
+			else: car.recover()
+		"race_recover":
 			set_pause(false)
 			car.recover()
 		"menu":
-			if menu_open:
-				get_tree().quit()
-			else:
-				menu_open = true
-				set_pause(true)
+			set_pause(false)
+			car.driving_enabled = false
+			var flow := get_node_or_null("/root/GameFlow")
+			if flow != null:
+				if flow.current_state == &"race": flow.cancel_activity()
+				else: flow.return_to_main_menu()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if get_node("/root/GameFlow").transition_busy: return
 	if event.is_action_pressed("pause"):
 		menu_open = false
 		set_pause(not get_tree().paused)

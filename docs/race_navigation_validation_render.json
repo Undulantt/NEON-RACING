@@ -1,0 +1,10 @@
+{
+  "checks": 50,
+  "failures": [],
+  "metrics": {
+    "gps_distance_m": 978.084800124168,
+    "recovery_elapsed_s": 3.06666666666666
+  },
+  "passed": true,
+  "rendered": true
+}

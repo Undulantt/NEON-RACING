@@ -1,0 +1,15 @@
+{
+  "checkpoints": 47,
+  "completed_laps": 1,
+  "driven_m": 976.490197738167,
+  "elapsed_seconds": 70.4499999999973,
+  "passed": true,
+  "peak_speed_mps": 15.0141744613647,
+  "phase": "finished",
+  "position": [
+    823.646362304688,
+    0.732860684394836,
+    -890.765258789063
+  ],
+  "recoveries": 0
+}

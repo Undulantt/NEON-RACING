@@ -1,0 +1,34 @@
+{
+  "checks": 223,
+  "failures": [],
+  "metrics": {
+    "APEX": {
+      "profile": "APEX",
+      "spawn": [
+        113.035911560059,
+        -250.828994750977
+      ],
+      "speed_after_1s_mps": 5.53261709213257
+    },
+    "COMET": {
+      "profile": "COMET",
+      "spawn": [
+        113.035911560059,
+        -250.828994750977
+      ],
+      "speed_after_1s_mps": 4.40296363830566
+    },
+    "VECTOR": {
+      "profile": "VECTOR",
+      "spawn": [
+        113.035911560059,
+        -250.828994750977
+      ],
+      "speed_after_1s_mps": 5.09876680374146
+    },
+    "free_drive_origin_and_results_return": true,
+    "user_data_dir": "C:/Users/emili/AppData/Roaming/Godot/app_userdata/La Paz After Dark - Fase C.6"
+  },
+  "passed": true,
+  "rendered": true
+}
