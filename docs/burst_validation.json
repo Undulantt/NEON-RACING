@@ -176,7 +176,7 @@
     "config/vehicles/apex.json": "7a834fcee46778910262e7d94e1dc5cbc8b915b5820b128e7061961cb68a01d0",
     "config/vehicles/comet.json": "a488a55bbe65bf1ab21d5fe8b58207ef3678385b96367deb4d89fc67ab1ca46e",
     "config/vehicles/vector.json": "99e076ee2f06385f9bbfe5d954e5fa4ecca128301dc28c1fe32f94c64cb1b4a2",
-    "scripts/driving/ArcadeCar.gd": "a01762842ed5a36593d5541df44f09d65449b9e7bab09241bff6d974a65ddc7a",
+    "scripts/driving/ArcadeCar.gd": "04b208796ec2caebe6eb4f6f875cb5f3a7c15147b8f1b36cf1a33cdc9caf3ac3",
     "scripts/driving/AutomaticTransmission.gd": "102619f7e088c4efae21c3f3092cf7d1cd8ef783b8da7656752ced9ae7981f72",
     "scripts/driving/DrivingAbilities.gd": "9b4229469a2a2a21957c465d4c7dbaa47b34b44dfcebf5f09680d9c1b980550c",
     "scripts/driving/DrivingInput.gd": "496f160d8785ff4dbfd6cb11eb3482762d142adba46bce6a6e231cc70ae51122",

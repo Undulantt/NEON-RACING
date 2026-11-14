@@ -22,6 +22,7 @@ static func box(parent: Node3D, size: Vector3, at: Vector3, mat: Material) -> Me
 
 static func build(parent: Node3D) -> Dictionary:
 	var paint := material(Color("26a99c"))
+	paint.set_meta("sf4_body",true)
 	var glass := material(Color("193342"))
 	var rubber := material(Color("17212b"))
 	var rim := material(Color("c5cbd2"))

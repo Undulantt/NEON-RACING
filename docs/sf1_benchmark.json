@@ -1,0 +1,38 @@
+{
+  "B_minus_A_ms": 0.0338900000000013,
+  "B_overhead_percent": 1.35309226899485,
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "passed": true,
+  "regression_budget": "max(1 ms, 15% of A)",
+  "samples": [
+    {
+      "camera_mean_us": 35.78,
+      "mean_ms": 2.70041,
+      "median_ms": 2.25,
+      "mode": "A",
+      "p95_ms": 4.214
+    },
+    {
+      "camera_mean_us": 58.0433333333333,
+      "mean_ms": 2.8853,
+      "median_ms": 2.679,
+      "mode": "B",
+      "p95_ms": 4.328
+    },
+    {
+      "camera_mean_us": 35.5266666666667,
+      "mean_ms": 2.19174666666667,
+      "median_ms": 2.109,
+      "mode": "B",
+      "p95_ms": 2.56
+    },
+    {
+      "camera_mean_us": 34.775,
+      "mean_ms": 2.30885666666667,
+      "median_ms": 2.221,
+      "mode": "A",
+      "p95_ms": 2.824
+    }
+  ],
+  "scenario": "1280x720, Compatibility, VSync off, existing complete city, same frozen pose and synthetic 180 km/h / half BURST telemetry; A/B/B/A, 3.5 seconds warmup and 600 rendered wall-clock samples each; NOT city-traversal FPS"
+}

@@ -1,0 +1,33 @@
+{
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "marks": 206,
+  "note": "Existing OSM avenue. VFX supplied slide telemetry for visual QA, frozen car physics; same scene current stage batches A/B/B/A. Not real driving FPS.",
+  "particles": 33,
+  "samples": [
+    {
+      "active": false,
+      "draw_calls": 258.0,
+      "median_ms": 2.265,
+      "p95_ms": 3.78
+    },
+    {
+      "active": true,
+      "draw_calls": 264.0,
+      "median_ms": 2.165,
+      "p95_ms": 2.988
+    },
+    {
+      "active": true,
+      "draw_calls": 264.0,
+      "median_ms": 2.424,
+      "p95_ms": 3.251
+    },
+    {
+      "active": false,
+      "draw_calls": 258.0,
+      "median_ms": 2.079,
+      "p95_ms": 3.001
+    }
+  ],
+  "stage": 4
+}

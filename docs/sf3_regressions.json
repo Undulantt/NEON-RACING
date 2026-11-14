@@ -1,0 +1,91 @@
+{
+  "engine": "Godot 4.7.2 stable ed1daf0bf",
+  "scope": "SF.3 only; SF.4 vehicle transformation not implemented",
+  "editor_import": "exit 0",
+  "final_log_errors_or_warnings": [],
+  "consolidated_logs": [
+    "sf3_capture.log",
+    "sf3_d1.log",
+    "sf3_drive.log",
+    "sf3_godot_sf1.log",
+    "sf3_godot_sf21.log",
+    "sf3_godot_sf3.log",
+    "sf3_import.log",
+    "sf3_native.log",
+    "sf3_navigation.log",
+    "sf3_render.log",
+    "sf3_smoke.log",
+    "sf3_validation.log"
+  ],
+  "protected_files_unchanged": {
+    "scripts/driving/ArcadeCar.gd": true,
+    "scripts/driving/DrivingAbilities.gd": true,
+    "scripts/driving/AutomaticTransmission.gd": true,
+    "scripts/driving/DrivingFeedback.gd": true,
+    "scripts/driving/DrivingInput.gd": true,
+    "scripts/driving/FollowCamera.gd": true,
+    "scripts/style/RetroLook.gd": true,
+    "scripts/style/RetroCar.gd": true,
+    "scripts/style/CityFurniture.gd": true,
+    "scripts/style/RoadNeon.gd": true,
+    "scripts/world/World.gd": true,
+    "scripts/world/RoadBuilder.gd": true,
+    "scripts/world/RoadChunkManager.gd": true,
+    "scripts/feedback/SpeedAudioController.gd": true,
+    "config/driving_config.json": true,
+    "config/powertrain_config.json": true,
+    "config/sf1_camera_experimental.json": true,
+    "config/sf11_turbo_fov.json": true,
+    "config/sf21_audio_experimental.json": true,
+    "config/vehicles/vector.json": true,
+    "config/vehicles/comet.json": true,
+    "config/vehicles/apex.json": true,
+    "data/processed/la_paz_map.json": true,
+    "data/processed/la_paz_environment.json": true,
+    "data/processed/arcade_layout.json": true,
+    "data/processed/night_roads/manifest.json": true,
+    "data/processed/relief/world/manifest.json": true
+  },
+  "reports": {
+    "sf3_validation.json": {
+      "passed": true,
+      "checks": 77,
+      "failures": []
+    },
+    "sf3_city_drive.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf3_benchmark.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf1_validation.json": {
+      "passed": true,
+      "checks": 67,
+      "failures": []
+    },
+    "sf21_validation.json": {
+      "passed": true,
+      "checks": 110,
+      "failures": []
+    },
+    "sf1_manual_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "phase_d1_validation.json": {
+      "passed": true,
+      "checks": 207,
+      "failures": []
+    },
+    "race_navigation_validation.json": {
+      "passed": true,
+      "checks": 48,
+      "failures": []
+    }
+  }
+}

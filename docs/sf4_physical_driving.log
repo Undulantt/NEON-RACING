@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SF4_PHYSICS_REPORT {"checks":15,"failures":[],"metrics":{"APEX":{"max_vfx_update_us":814,"maximum_slip_radians":0.499084562063217,"peak_marks":172,"peak_particles":29},"COMET":{"max_vfx_update_us":855,"maximum_slip_radians":0.499084562063217,"peak_marks":172,"peak_particles":28},"VECTOR":{"max_vfx_update_us":624,"maximum_slip_radians":0.498940914869308,"peak_marks":172,"peak_particles":30}},"passed":true,"scenario":"Actual accelerate/handbrake inputs, unchanged production physics, synthetic asphalt contact fixture; all three beta profiles. No injected slip/BURST state in this test."}

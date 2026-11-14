@@ -1,0 +1,6 @@
+{
+  "preexisting": true,
+  "validator": "HEAD:tools/validate_urban_city.py",
+  "failure": "Baseline changed: scripts\\driving\\ArcadeCar.gd",
+  "note": "Same legacy frozen driving-hash failure with the validator from before this change. No migration evidence rewritten."
+}

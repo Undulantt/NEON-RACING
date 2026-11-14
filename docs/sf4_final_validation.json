@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "unit_checks": 75,
+  "actual_driving_checks": 15,
+  "navigation_checks": 48,
+  "protected_source_hashes": 13,
+  "clean_godot_logs": 12,
+  "smoke_texture_reproducible": true,
+  "render_comparison": {
+    "median_increment_ms": 0.12250000000000005,
+    "p95_increment_ms": -0.2709999999999999,
+    "additional_draw_calls": 6.0,
+    "gpu": "NVIDIA GeForce RTX 4060 Ti",
+    "note": "Fixed view with supplied VFX telemetry, frozen physics and stabilized decoration. Not driving FPS."
+  }
+}

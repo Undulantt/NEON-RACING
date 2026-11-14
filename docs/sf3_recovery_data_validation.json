@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "buildings": 235,
+  "sectors": 22,
+  "by_site": {
+    "UABCS": 172,
+    "Soriana Forjadores": 1,
+    "Tec de La Paz": 62
+  },
+  "source_hashes_verified": 10,
+  "overlap_with_arcade_clearance_m2": 0,
+  "overlap_with_real_open_areas_m2": 0,
+  "duplicates": 0,
+  "road_and_car_unchanged": true
+}

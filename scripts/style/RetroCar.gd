@@ -18,6 +18,7 @@ static func build(car: CharacterBody3D) -> void:
 		if child is MeshInstance3D and child not in car.visuals["exhaust"]:
 			child.visible=false
 	var paint := V.material(Color("a697c9"));paint.metallic=0.45;paint.roughness=0.18
+	paint.set_meta("sf4_body",true)
 	var glass := V.material(Color("121b3a"));glass.metallic=0.8;glass.roughness=0.12
 	var trim := V.material(Color("151426"))
 	var cyan := V.material(Color("20eeff"),2.0)

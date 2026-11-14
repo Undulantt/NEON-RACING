@@ -1,0 +1,104 @@
+{
+  "discarded_frames": 0,
+  "failures": [],
+  "passed": true,
+  "sample_rate": 48000.0,
+  "samples": [
+    {
+      "downshifts": 6,
+      "duration_s": 29.0026666666667,
+      "frames": 1392128,
+      "mode": "A",
+      "peak": 0.0414305403828621,
+      "rms": 0.018669791314179,
+      "states": [
+        {
+          "gear_end": 0,
+          "peak_kmh": 0.0,
+          "pitch_max": 0.3,
+          "pitch_min": 0.3,
+          "rpm_end": 900.0,
+          "stage": "idle",
+          "wind_peak": 0.0
+        },
+        {
+          "gear_end": 7,
+          "peak_kmh": 235.94677734375,
+          "pitch_max": 2.42792289374106,
+          "pitch_min": 0.3,
+          "rpm_end": 7179.65442004504,
+          "stage": "acceleration",
+          "wind_peak": 1.26499336834349
+        },
+        {
+          "gear_end": 7,
+          "peak_kmh": 235.44580078125,
+          "pitch_max": 2.38845775865653,
+          "pitch_min": 1.70678826811184,
+          "rpm_end": 5613.20000175957,
+          "stage": "lift",
+          "wind_peak": 1.26644069668017
+        },
+        {
+          "gear_end": -1,
+          "peak_kmh": 183.85838470459,
+          "pitch_max": 1.70629124479294,
+          "pitch_min": 0.30081068397444,
+          "rpm_end": 2574.69012498895,
+          "stage": "braking",
+          "wind_peak": 1.01380366277128
+        }
+      ],
+      "upshifts": 6
+    },
+    {
+      "downshifts": 6,
+      "duration_s": 29.0026666666667,
+      "frames": 1392128,
+      "mode": "B",
+      "peak": 0.0953465774655342,
+      "rms": 0.031049336408436,
+      "states": [
+        {
+          "gear_end": 0,
+          "peak_kmh": 0.0,
+          "pitch_max": 0.300000000345787,
+          "pitch_min": 0.3,
+          "rpm_end": 900.0,
+          "stage": "idle",
+          "wind_peak": 1.10797792415243e-09
+        },
+        {
+          "gear_end": 7,
+          "peak_kmh": 235.94677734375,
+          "pitch_max": 2.42792265084434,
+          "pitch_min": 0.3,
+          "rpm_end": 7179.65442004504,
+          "stage": "acceleration",
+          "wind_peak": 1.264992968617
+        },
+        {
+          "gear_end": 7,
+          "peak_kmh": 235.44580078125,
+          "pitch_max": 2.3884575451564,
+          "pitch_min": 1.706788442699,
+          "rpm_end": 5613.20000175957,
+          "stage": "lift",
+          "wind_peak": 1.26644034205864
+        },
+        {
+          "gear_end": -1,
+          "peak_kmh": 183.85838470459,
+          "pitch_max": 1.70629140069972,
+          "pitch_min": 0.300810858995352,
+          "rpm_end": 2574.69012498895,
+          "stage": "braking",
+          "wind_peak": 1.0138047907936
+        }
+      ],
+      "upshifts": 6
+    }
+  ],
+  "scenario": "Real VECTOR physics at 60 Hz: idle, 20 seconds acceleration, 2 seconds lift and 6 seconds brake; A/B only affects presentation; Master bus capture without music; synthetic flat fixture, not city FPS",
+  "counter_semantics": "per-pass deltas derived from cumulative counters; pitch ranges describe experimental controller even when A is selected"
+}

@@ -60,7 +60,8 @@ def validate(manifest_path=None):
     clearance=surface.buffer(manifest['settings']['road_clearance_m'])
     protected=unary_union([shape(f['geometry_xz']) for f in audit['protected']])
     clearance_prepared=prep(clearance)
-    protected_prepared=prep(protected)
+    from urban_protection import real_building_exclusions
+    real_protected=real_building_exclusions(audit['protected'])
     eligible={b['id']:b for b in audit['eligible_blocks']}; coast=shape(audit['coast_guard_xz'])
     project=projection(manifest); ids=set(); estimates=0; triangle_count=0; by_block=Counter()
     for chunk in manifest['chunks']:
@@ -73,8 +74,9 @@ def validate(manifest_path=None):
             assert math.isfinite(b['height_m']) and 2.8<=b['height_m']<=48
             if clearance_prepared.intersects(poly):
                 assert poly.intersection(clearance).area<1e-6, 'Road intrusion: '+b['id']
-            if protected_prepared.intersects(poly):
-                assert poly.intersection(protected).area<1e-6, 'Protected intrusion: '+b['id']
+            exclusion=protected if b['fictional'] else real_protected
+            if exclusion.intersects(poly):
+                assert poly.intersection(exclusion).area<1e-6, 'Protected intrusion: '+b['id']
             roof=unary_union([Polygon(t) for t in b['roof_triangles_xz']]); assert poly.symmetric_difference(roof).area<1e-5, b['id']
             triangle_count+=len(b['roof_triangles_xz'])
             estimates+=bool(b['height_estimated'])

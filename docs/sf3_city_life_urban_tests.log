@@ -1,0 +1,17 @@
+..F...
+======================================================================
+FAIL: test_full_hybrid_city_and_untouched_baseline (test_urban.UrbanDataTests.test_full_hybrid_city_and_untouched_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\tests\test_urban.py", line 10, in test_full_hybrid_city_and_untouched_baseline
+    self.assertTrue(validate()['passed'])
+                    ~~~~~~~~^^
+  File "C:\Users\emili\Desktop\Godot_v4.7.2-stable_win64.exe\Proyectos\racing-darks-la-paz\tools\validate_urban_city.py", line 32, in validate
+    assert migration.get('previous_sha256')==expected and migration.get('current_sha256')==current, 'Baseline changed: '+path
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Baseline changed: scripts\driving\ArcadeCar.gd
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.184s
+
+FAILED (failures=1)

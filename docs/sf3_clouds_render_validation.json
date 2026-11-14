@@ -1,0 +1,38 @@
+{
+  "checks": 14,
+  "cloud_instances": 81,
+  "effective_altitude_m": 409.610370571769,
+  "failures": [],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "max_update_us": 9,
+  "mean_update_us": 0.871,
+  "passed": true,
+  "samples": [
+    {
+      "draw_calls": 244.0,
+      "enabled": false,
+      "median_ms": 1.994,
+      "p95_ms": 2.71
+    },
+    {
+      "draw_calls": 245.0,
+      "enabled": true,
+      "median_ms": 1.912,
+      "p95_ms": 2.47
+    },
+    {
+      "draw_calls": 245.0,
+      "enabled": true,
+      "median_ms": 1.855,
+      "p95_ms": 2.194
+    },
+    {
+      "draw_calls": 244.0,
+      "enabled": false,
+      "median_ms": 2.028,
+      "p95_ms": 3.546
+    }
+  ],
+  "scenario": "Existing OSM SF.1 avenue, frozen identical pose/camera, 1280x720 Compatibility, VSync off. A/B/B/A with 2s settle and 600 rendered frames per sample; not driving FPS.",
+  "triangles": 162
+}

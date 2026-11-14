@@ -1,0 +1,61 @@
+{
+  "engine": "Godot 4.7.2 stable, official ed1daf0bf",
+  "baseline_commit": "e0ffbeb6efb6d7e462fcd868102430dc3cb3d1a0",
+  "editor_import": "exit 0",
+  "final_log_errors_or_warnings": [],
+  "validated_logs": [
+    "sf1_burst.log",
+    "sf1_city.log",
+    "sf1_d1.log",
+    "sf1_import.log",
+    "sf1_manual.log",
+    "sf1_navigation.log",
+    "sf1_powertrain.log",
+    "sf1_render.log",
+    "sf1_smoke.log",
+    "sf1_test.log"
+  ],
+  "reports": {
+    "sf1_validation.json": {
+      "passed": true,
+      "checks": 67,
+      "failures": []
+    },
+    "sf1_city_drive.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf1_manual_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf1_benchmark.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "phase_d1_validation.json": {
+      "passed": true,
+      "checks": 207,
+      "failures": []
+    },
+    "race_navigation_validation.json": {
+      "passed": true,
+      "checks": 48,
+      "failures": []
+    },
+    "powertrain_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "burst_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    }
+  },
+  "note": "Raw console logs were consolidated here. Detailed metrics and reproduction commands are in the linked reports and SF1_SPEED_FEEL.md."
+}

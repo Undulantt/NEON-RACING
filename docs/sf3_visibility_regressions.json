@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "scope": "SF.3 visibility correction; static preview never simulates physics or BURST",
+  "protected_files_unchanged": 27,
+  "editor_import": "exit 0",
+  "final_errors_or_warnings": [],
+  "reports": {
+    "sf3_validation.json": {
+      "passed": true,
+      "checks": 85,
+      "failures": []
+    },
+    "sf3_visibility_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf1_validation.json": {
+      "passed": true,
+      "checks": 67,
+      "failures": []
+    },
+    "sf1_manual_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf3_benchmark.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    }
+  },
+  "consolidated_logs": [
+    "sf3_fix_benchmark.log",
+    "sf3_fix_godot_sf1.log",
+    "sf3_fix_godot_sf3.log",
+    "sf3_fix_import.log",
+    "sf3_fix_native.log",
+    "sf3_fix_render.log",
+    "sf3_fix_unit.log"
+  ]
+}

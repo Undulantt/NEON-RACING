@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "facades_enabled": true,
+  "recovery_enabled": true,
+  "recovery_manifest": "res://data/processed/urban/sf3_recovery/manifest.json",
+  "note": "Experimental cosmetic facade pass; real footprint recovery is independent. --sf3-facades-original compares the previous appearance."
+}

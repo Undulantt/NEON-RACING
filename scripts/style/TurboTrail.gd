@@ -14,6 +14,7 @@ var effect_mode := 0
 var strength := 1.0
 var flame_length := 0.0
 var visual: MeshInstance3D
+var sf4_energy_active:=false
 
 func attach(target: CharacterBody3D, screen: Control, interface: CanvasLayer) -> void:
 	car=target;screen_effects=screen;hud=interface
@@ -89,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	for emitter in car.visuals["exhaust"]:
 		emitter.visible=car.driving_enabled and flame_length>0.02 and strength>0
 		emitter.scale.z=flame_length*(0.96+sin(clock*TAU*3)*0.04)
-	if active:
+	if active and not sf4_energy_active:
 		var left: Vector3=car.visual_root.to_global(Vector3(-0.62,-0.15,2.4))
 		var right: Vector3=car.visual_root.to_global(Vector3(0.62,-0.15,2.4))
 		history.append({"time":clock,"left":left,"right":right,"side":car.global_basis.x,"drift":car.drift_boost_active and not car.turbo_active})

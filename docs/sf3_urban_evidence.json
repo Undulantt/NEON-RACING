@@ -1,0 +1,2661 @@
+{
+  "scope": "Offline audit; no new geographic downloads. Snapshot records are not field verification or completeness estimates.",
+  "bbox_south_west_north_east": [
+    24.09,
+    -110.3455,
+    24.185,
+    -110.281
+  ],
+  "domain_definition": {
+    "visual": "bbox intersect user clip (city builder)",
+    "roads": "union of active block polygons/bboxes intersect user clip (road importer)"
+  },
+  "source_sha256": {
+    "config/map_config.json": "da7ad01b8000308ebd4aae7b23dfd6957c0306d6e2aa35ae16dcde78942c501b",
+    "data/raw/osm_map_c6_boundary_expansion.osm": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+    "data/processed/urban/city_manifest.json": "d9e595414e8042bd190acc466070684dea016bd5511000e478cf39b5fe4106ab",
+    "data/processed/la_paz_map.json": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+    "data/processed/arcade_layout.json": "91284db256c96fcb221a769cba85892d0a94045eabba9ade616a8da542aab93c",
+    "data/processed/urban/urban_enrichment.json": "81a76fdb3d04da2403a60f8204b4da0ff479df0d826a111af4e96dd7bfcfc184",
+    "data/processed/urban/landmarks.json": "1e967882702d62701ff37f1de20772d642201a9ca97fdd2fa01444d17c736e03",
+    "data/raw/overture_buildings_20261026T064408Z.geojson": "bef1283309ec393bbea5e665fd59c0480d572846ca2f8abd3e08e2147fc4da6e",
+    "data/raw/inegi_blocks_20261024T220934Z.geojson": "3f421a39b699dd37abd938aac5726adfdc67eb14284394542d6b31e14d43d4f9",
+    "data/raw/overture_places_20261021.geojson": "a1ea604ea9abfd0831dd5c5b88076ec4455cf14d4d127d45f1649fd6570ec551",
+    "data/raw/denue_03_csv.zip": "51ada17868f8eeda25559d8b3350970fa2bcab792d68a63af5cad038c76c13b4",
+    "data/processed/urban/chunks/-11_10.json": "149d1387ea3b7e7d3fa83ff426425f8989d9838158dd146ed6f616129061becd",
+    "data/processed/urban/chunks/-11_11.json": "6e869ed297ffe3e4843c9d9b2b12b9ae73f94ba267098359211846d722bd55cd",
+    "data/processed/urban/chunks/-10_6.json": "e624a0e0940a69c34720a98f124c6940c0346a9301b1736655db51741a6f4351",
+    "data/processed/urban/chunks/-10_7.json": "71edae031ca6f442a1b7e6bb91ec6c238d7009cb5377ea0cb91a9f8727ef1331",
+    "data/processed/urban/chunks/-10_8.json": "a06876237ef1bcd6aec1f9a930b024b53fcb511eef40df999b95928b6b7495a0",
+    "data/processed/urban/chunks/-10_9.json": "b865bdd34667af2b13b8c02942ee55128f94ea7a8dd5fc9b76b4d0926343a760",
+    "data/processed/urban/chunks/-10_10.json": "b3873cbf80321e7afaea73437bd819973d74bdd433758dfe3b6b0533bfed715d",
+    "data/processed/urban/chunks/-10_11.json": "1cb07215cfb202676834d3b760f05e9beeac61f29bca1f4c4ff27f088010dbb2",
+    "data/processed/urban/chunks/-9_5.json": "aae173d8f11cfb5f67743be814bbe43cc393a598ce953d2f443d794567bf9bb8",
+    "data/processed/urban/chunks/-9_6.json": "4ab2832fe2ed1ca54a9f61435c95373534b6c7e4e4231a7bd789f45261847996",
+    "data/processed/urban/chunks/-9_7.json": "d2a72076d6ce501cc4734377fe0b3d229de7dc78131ef48c734976c5b061c3c4",
+    "data/processed/urban/chunks/-9_8.json": "b443ae1fb84bb1d3e50eda1c5a3c916fa523780547acbd55cfa4a1589502b90d",
+    "data/processed/urban/chunks/-9_9.json": "9301331171efd1931303033fd021f725c74022c20af5250cf98315fc1cf5fe69",
+    "data/processed/urban/chunks/-9_10.json": "14e1d014221c00728b536cd24e528a167d2cb53e4ff87e78a3a39b3834511768",
+    "data/processed/urban/chunks/-9_11.json": "8e6b6438123f750f789477382db67c03c050c5b8202f704385be9e89b00e3cac",
+    "data/processed/urban/chunks/-9_12.json": "9360e5e44143ac510363d6f3912ff6336c949d1db61cd0169e11a6c2ad63e24e",
+    "data/processed/urban/chunks/-9_13.json": "5a272e52fa96eafe5c4c875a9808754cf09e91406fa8ee21819794540b586214",
+    "data/processed/urban/chunks/-9_14.json": "62327e4eb70046bdda67b14c678b1380976570fde51f92c25d533f63d79e3138",
+    "data/processed/urban/chunks/-9_15.json": "0cfb040de8d3f84a474b14592b72602216f9e6fd8173ae546ab3ac9275669ff3",
+    "data/processed/urban/chunks/-9_17.json": "0d2bd923d65bcd7d8bac2f617cd037af1c790db45c4073e9898d268f0148d0be",
+    "data/processed/urban/chunks/-9_18.json": "f13ccaf45927a6894240d3298e46aa7593faf5914965949d27b0aba1f1441d2e",
+    "data/processed/urban/chunks/-9_19.json": "ddd184ac467fb6d2437b1580f84b6893594a61ad4596a693a83c2f579d8a2dae",
+    "data/processed/urban/chunks/-8_4.json": "8fa291870ec928123324f790298cb64b6a09b5a0149094fbf88c75a8f2cabd53",
+    "data/processed/urban/chunks/-8_5.json": "65420107b24e45f575768ec460e24e3703e4fd115ebcd033bb7757fbb9c22784",
+    "data/processed/urban/chunks/-8_6.json": "6c7849ee2fc26f8adde880ca6d77a5e96abb7b0d1a5fe1b2a3629533aafe873e",
+    "data/processed/urban/chunks/-8_7.json": "dbffb2ececf1f77517968ccc500e381eeeca6b420f37a9f3332596bec0f027cf",
+    "data/processed/urban/chunks/-8_8.json": "0b6beeeda50328d2fadcb1aaa52b8dcc5f743d5691ac6e7f1944d91c5c27b369",
+    "data/processed/urban/chunks/-8_9.json": "617608fd9c9f9ecd664bc640b31b081540bcdede1331cb47b690a10345ba4970",
+    "data/processed/urban/chunks/-8_10.json": "9520ad9d6906c5502e8e597eb902005affc246631c59ffd30a32870d2d3b26a4",
+    "data/processed/urban/chunks/-8_11.json": "44d9af66a1cf81db138cbca089e3b4ebc3a8a853e1666051f43ae03edb3afc4e",
+    "data/processed/urban/chunks/-8_12.json": "15129d57ae00a65f8dc88104a56102ecce3d73a2dcf2d72cbefa23edb00a39e5",
+    "data/processed/urban/chunks/-8_13.json": "11898b938541bdb85dfc0e45c55c2ba858b33c596ae22ab32189f0736b6e6a81",
+    "data/processed/urban/chunks/-8_14.json": "ee9b54ddd98728b662319b10db31869dab4ce2dc8f5be0825ddc759c84a8830c",
+    "data/processed/urban/chunks/-8_15.json": "bcf702396eb210951e1f016d8f8bc11de69f1275411bb44282055235397b5f87",
+    "data/processed/urban/chunks/-8_17.json": "4b5409f05fc98ebc9ee4450faba8d5197fa43bae1ba4f805de24ae510c933e9f",
+    "data/processed/urban/chunks/-8_18.json": "ae2a1334d030c0180d66f5c202d967eb99b5356f247762479008c85c013507fd",
+    "data/processed/urban/chunks/-8_22.json": "41774dfe5f2a2e103fe97030d2ac0b0c834bdec2df3339077022c7bdae36e004",
+    "data/processed/urban/chunks/-8_23.json": "c7ffac41ca1492f44450edd0bf4587ba27dcd4efcef89f59bd272309379f7cb0",
+    "data/processed/urban/chunks/-8_24.json": "abe801f4c9192508dc95db67fbf8ed214625d343c311cf7ab4afb64ba4fa1cc2",
+    "data/processed/urban/chunks/-7_3.json": "53fc53ed2e4855ac04a23f5b27a8db6f05082942c3f84700ebe2175832068c44",
+    "data/processed/urban/chunks/-7_4.json": "bba3f30e32e07dce71c7f03d39a7823e82de4a146294b01a50f2f44530007f2b",
+    "data/processed/urban/chunks/-7_5.json": "7e53578d20621cd8874c461944c30c72e0d70e63f965a4e3d38ea80909d5720e",
+    "data/processed/urban/chunks/-7_6.json": "e6b47598dbbacf8bd10e19e244916aa692d0924781afe8df3c2f6ae1ff940427",
+    "data/processed/urban/chunks/-7_7.json": "766190f42a51ee1183d8ef108336319494d097b19962528bdbbd0c37f8ddeb74",
+    "data/processed/urban/chunks/-7_8.json": "e728b4608218a30865b301b7500d8ffd806f82e26947741a73b42532dab2494a",
+    "data/processed/urban/chunks/-7_9.json": "fda55df38b1453b94e5ae43756d0e5f09c3322f8301b228bb178a02b8c1a5a02",
+    "data/processed/urban/chunks/-7_10.json": "712da1f7b4b99e07d1bd853b06258470d88b9bfe20968d13e05aed7eb5e47987",
+    "data/processed/urban/chunks/-7_11.json": "c0694b36135324dd9412da14d8cf08d2df05bd18243ddc58b39ec6b70afee45c",
+    "data/processed/urban/chunks/-7_12.json": "c256bd548d22c743508eb7cd1c259dacd4dd3b2b31ac300cb80a819843af28fc",
+    "data/processed/urban/chunks/-7_13.json": "e2af346f4c3853b3bc2d72865457970ff8b90b45ca9b7ba11a09f661b501b01a",
+    "data/processed/urban/chunks/-7_14.json": "1f54dfb1cec784ae18de7c4b020dd4be6becdb10545ad18d7f0453002702f6d3",
+    "data/processed/urban/chunks/-7_15.json": "ae8e44e52194183a70b1f4892c70cc4ab798b048eba2adbf078ff7848e9b7e23",
+    "data/processed/urban/chunks/-7_16.json": "4f4191163e7b8554e9d2d5bed508eda8bb2ef1ac60501efce03dc66c8f6606c0",
+    "data/processed/urban/chunks/-7_17.json": "ddeb9f878e8063046354d69a8f702d2974af97680c2736812973cd60a3a2bd75",
+    "data/processed/urban/chunks/-7_18.json": "a481d1bd27bf7f0f61b55e91ab2804abb685c139e5ec9fb53a7e08c2067b11f4",
+    "data/processed/urban/chunks/-7_23.json": "fbefc5037ac1ef99a9d3d9fbb2bed9a25a72cd197d24c9952c5aaae808dd9377",
+    "data/processed/urban/chunks/-7_24.json": "713cbcadc7240e24dbbe8dab757b8756e4cde7075ab597b0f77babe2d33ab7a7",
+    "data/processed/urban/chunks/-7_25.json": "c5db5996c645c892c502fac35d7daa7727846dfe0ea0a158f43beeddb1a199de",
+    "data/processed/urban/chunks/-6_3.json": "c1c0110251485915f63065b38dcbe6dd6a7f9522e85732ac653269d2bf537da9",
+    "data/processed/urban/chunks/-6_4.json": "2f50750bc7581eb6285c18ce8d819d073a2c3892ae447af1eb5d59af4eb30a55",
+    "data/processed/urban/chunks/-6_5.json": "096ee9ad29e232b9ebc62795f93af332a8f3179335b5789ec7390249e451a0f5",
+    "data/processed/urban/chunks/-6_6.json": "fbf58ab560b5fc531ead8c0e9efd19dbeba3f4e5fc5526bf31332b1447ddb360",
+    "data/processed/urban/chunks/-6_7.json": "ea3641c89e6d75fd6c9ef06f4a1b8a31c36eef50a2f2c74c9b0b1a41db3fe360",
+    "data/processed/urban/chunks/-6_8.json": "734ee316fc3ae7c99065e8b1dc90e02d6a691eb0bbf61f125b7e52b4b91ac367",
+    "data/processed/urban/chunks/-6_9.json": "d78b213c4ed0d55a4f0331f6428b9a7d6343db708ff365080ba721cfd7516a18",
+    "data/processed/urban/chunks/-6_10.json": "d4eda6a3fde1a08eb2b665ab937366edd7943d58d2a79baa16ea99d3ba66d17c",
+    "data/processed/urban/chunks/-6_11.json": "49d7e1f249b3d524769873ecff6f8fa3c5dbd7f3515b07fb2abb7e10ece71c68",
+    "data/processed/urban/chunks/-6_12.json": "00dda44a883f8b35d98bc687ed9b84cf09eecdd1ed4283a2ed978131e88c1474",
+    "data/processed/urban/chunks/-6_13.json": "06121eec5d89913376cf126751da03eac732ade609a657c77004b6efe250f67e",
+    "data/processed/urban/chunks/-6_14.json": "60671fd1cb1bcd71fee188d97ce74e5fcfc70760653a4f23335e40682caf04e2",
+    "data/processed/urban/chunks/-6_15.json": "ca16cac54c271b6948f5d2cf60f7937945e9bd0f5aebf793eae99c34f8f3d7c4",
+    "data/processed/urban/chunks/-6_16.json": "fe5d08009d436d0137995563ace63d0d82bd2394e5c036b2697bf7fdf84f1742",
+    "data/processed/urban/chunks/-6_17.json": "fd84d88b3caead52eb6f521a54829a8c6358864740c1ef3c00f1588a318f24c7",
+    "data/processed/urban/chunks/-6_18.json": "92d453efa7f1276cd6edc1126d2acd6d1bf098b0c9d376c16ef0bcdac0addb78",
+    "data/processed/urban/chunks/-6_19.json": "4d48b44b0af3ee3c0d2f56b300611b8b93518c581596474650a07fec3e4ff4fd",
+    "data/processed/urban/chunks/-6_20.json": "e98445581561b5d58f28683457de7ba14a8b499d0001278cf2ef28be97ae22a5",
+    "data/processed/urban/chunks/-6_21.json": "24757efd30a395e5ed43ae68267a411ff17fa6481359ce545e5eb129ffb25689",
+    "data/processed/urban/chunks/-6_22.json": "cbd17d969ab4f0e7a23c8fcefe42c5dff2aae9296a96b44dd753a7ab4935c537",
+    "data/processed/urban/chunks/-6_23.json": "2d3b62062c2eb2195453e1eae67e36081c8d6bbfa771708fdcdfa11216d7c387",
+    "data/processed/urban/chunks/-6_24.json": "169eee42e43f6df933016bb2d54d196f6354fd3625554c00c66b372be35632de",
+    "data/processed/urban/chunks/-6_25.json": "95c02a982455e988c3bb171435dbb2d7400c227bcd44e61b787ae81caf462e4d",
+    "data/processed/urban/chunks/-5_2.json": "5a6718db45c5d1ae279bde52a44924f5447bb59c720f3a81d21b5dd7fea6f13b",
+    "data/processed/urban/chunks/-5_3.json": "9d10ece64274981af1b943fa02d5034c98f15924bc1331246069c59566301355",
+    "data/processed/urban/chunks/-5_4.json": "7268f43decb424771e29925baf9d85a63816c9066d4c309e4d2ce88a36d8f318",
+    "data/processed/urban/chunks/-5_5.json": "7a3736c61a4ad8ae9672952365a3ee498a69fd409c4beb143edfafcdad0919d7",
+    "data/processed/urban/chunks/-5_6.json": "615286a1f27c6a065f403c5aab0e776122ab52586538971511f25cb2c206a0c6",
+    "data/processed/urban/chunks/-5_7.json": "12e034bfe8e1f3ff58f1eda6e284b13793dc496996f9121b2b83e9c76cd1b326",
+    "data/processed/urban/chunks/-5_8.json": "fd6e4f99bd02a9b20f745cbfc5b486193d279f9a561f4b32982a5731c1bb731b",
+    "data/processed/urban/chunks/-5_9.json": "47be0a2e143c0e9527bdddd73be430c1cb1f8f47c930f860c1cfffc210e54085",
+    "data/processed/urban/chunks/-5_10.json": "257a8c2bfae80a3bca89f1054bb9a40f23f2527d909fbfd76b70f13197f624aa",
+    "data/processed/urban/chunks/-5_11.json": "37b368ccf1d89703be8311172b94e4a6c7061698caee42ab1bb351d956689612",
+    "data/processed/urban/chunks/-5_12.json": "2cb597ca17d343b2e148caeba7b2feef3236426ed51771b06c7f4d36731025c7",
+    "data/processed/urban/chunks/-5_13.json": "ab6e16643396e13cdc787dedc063b43ea4cbd792e70397ad3900bf6dfe6f79e8",
+    "data/processed/urban/chunks/-5_14.json": "e4e6e00ce09845f2c4f3b95b0f08fb784d29d32ef6bdd4c1c3c93b92fd6b0030",
+    "data/processed/urban/chunks/-5_15.json": "c72850eb4ef00c433a409c32738c03a2e95e9db23a07c5c02e60ebfa14f07386",
+    "data/processed/urban/chunks/-5_16.json": "26e8b504e5dc22d9aa0f84190d21d4207ad26f618a062ecb2da206bbeae2e042",
+    "data/processed/urban/chunks/-5_17.json": "c0812e37ee7eaa37eee40d44c22c9627d52be2c53ff47cf68ef7a1a9ebacc071",
+    "data/processed/urban/chunks/-5_18.json": "51e6398cfb969dc8affb5f0218f2986679f83cbbd5ab4bc3374505d13ad308b3",
+    "data/processed/urban/chunks/-5_19.json": "3f5fc80015181674b7fad353e034d3e22810a59bdecac02c6989286d3d346289",
+    "data/processed/urban/chunks/-5_20.json": "e975f8af1178a1989827d6f170279d83431f9469ea378cbe4a240968f23660cf",
+    "data/processed/urban/chunks/-5_21.json": "6d49cc6e8cbf576bf0ac654af3c130d8458822a399bc34bfa655e8ae5a20efa3",
+    "data/processed/urban/chunks/-5_22.json": "e98de9464bc73a7061a4d80ce0f7959c9bc8abaea1238efd501e3b5498b6a6cd",
+    "data/processed/urban/chunks/-5_23.json": "31a78588091bf6326d0a2414c7d316a603152c7652e093d0fd5ed024d5e38f99",
+    "data/processed/urban/chunks/-5_24.json": "d9342e51e88261898d7fc6a44960bdaced8ca72130388434c688f55b57a28058",
+    "data/processed/urban/chunks/-5_25.json": "085e05732b322c6e5bd1e404cb844688ec64d621a668aeea83741896b42ee793",
+    "data/processed/urban/chunks/-5_26.json": "2165081db1bdaae8999924adb755c0d45eb3e2cebfd0f457326ddaf7658fe51d",
+    "data/processed/urban/chunks/-4_2.json": "cb7cbc76f24bb8dd00fe680fbd3981b1788dde10657165770e9a6feb002140c1",
+    "data/processed/urban/chunks/-4_3.json": "902d5a7033c1895930ba022e1bb2daea65ae28315f01ab3e9a9f1e267bb5e61b",
+    "data/processed/urban/chunks/-4_4.json": "724ee3e09c6f76eba159420d64140fac7010af324ffbf864983d045b83912771",
+    "data/processed/urban/chunks/-4_5.json": "4a140a2491101f07aff4c2774664021e4d765ba5c265bbe22b5c5d835cb6b3b6",
+    "data/processed/urban/chunks/-4_6.json": "77bcaa736fc0470628cd4110884f3bd5e4bf52e1bcc75bac795dd138340a4f19",
+    "data/processed/urban/chunks/-4_7.json": "42199c30450ccd5b2b46874710513d96c8654474105f8a3a8cf337efb7ed42f5",
+    "data/processed/urban/chunks/-4_8.json": "83ea50803709731dd8ca5428cafdaa4738a6d1726e6d0a959e7b0a8f4d39309a",
+    "data/processed/urban/chunks/-4_9.json": "0ead51d5ac696be5724a756c0e9fdfb0888c0508f038e122eaa5c193298239c7",
+    "data/processed/urban/chunks/-4_10.json": "6c7c24259367840e1cec179509c47a74f0b48362f37a4124d1f7ee6cdac6ca60",
+    "data/processed/urban/chunks/-4_11.json": "40a39e59415c4f24e5aa4a419ca4c7808847747d2fb5130fb646d3776f7fff19",
+    "data/processed/urban/chunks/-4_12.json": "1cd84f4b5bda2e06a4bf42f92ab229b74a52df9d19a10add66d219f95205b357",
+    "data/processed/urban/chunks/-4_13.json": "022027489846db8109e82fdc14ada99b93ccd1e3ad655283e3d25309f83f78f2",
+    "data/processed/urban/chunks/-4_14.json": "02a919a83f5c9b8916ffeda03c37b1541282a9bc94f1dba4dad2b44a014ff1dd",
+    "data/processed/urban/chunks/-4_15.json": "5e429322cab40790d341c4ddff32299745efc50fd5b5aa4e73d820f027f6ba8e",
+    "data/processed/urban/chunks/-4_16.json": "154559b52f09ab8ded325f768d1ecfd434321674328ab8b3e3b31c75a5233780",
+    "data/processed/urban/chunks/-4_17.json": "00f0f68ac29a7ab8c5174aa6a1dc23c8004b2bfeb964aeec9a19d0af65e08908",
+    "data/processed/urban/chunks/-4_18.json": "992a8e0ea6bd7f56949b7eeb5016975d13d838dd730f7ab9e85338bd51ea289a",
+    "data/processed/urban/chunks/-4_19.json": "d922193e4ff1013063a83c432a531d8c882849d07eea74e2c33c9eaad0832ca9",
+    "data/processed/urban/chunks/-4_20.json": "18244c815bc579bdb6dc6b26853eb751d0ba47e61245efe405d59d9610fed064",
+    "data/processed/urban/chunks/-4_21.json": "f98027618eeb120337ff8b1f33405c5ab62efa78374792d301ff7475162f1574",
+    "data/processed/urban/chunks/-4_23.json": "a67386dc4259910a42fe077ef5ceb3f3f600429bb3fef77cda45f0b8f4305b44",
+    "data/processed/urban/chunks/-4_24.json": "703a118c0623392ec6173eebeb342b84c047431006d73a590e3203d6172782c6",
+    "data/processed/urban/chunks/-4_25.json": "f8aeb0d34aedd58187a06b00f323267cee11367ae70c0938b952d37a2c0e23af",
+    "data/processed/urban/chunks/-4_26.json": "dc197b347b0cdfa9c4ad63cb2da202280b00e3a5c16fdf1e532fb87e088356f3",
+    "data/processed/urban/chunks/-3_1.json": "e1579d4e5665752af5191fa934d3c5548a02e22c31f9d69d10bc6f1547af7be2",
+    "data/processed/urban/chunks/-3_2.json": "6738c5bd3170c8bae99e23cdbb2387f91fc37785c2d12690ed886027a00484f2",
+    "data/processed/urban/chunks/-3_3.json": "984c8d577d58592e7f337ee0b59b10fb6f16a8772c52acd32d8003d5d3d831cc",
+    "data/processed/urban/chunks/-3_4.json": "fcaa1ebb9af74d7a3af585a46cf2242faabb5294768bdacbd84eaedee20139d6",
+    "data/processed/urban/chunks/-3_5.json": "5aad1b39f99e1b3ed345a9c9fd358b59c838f2b27e7c640f4707d9a89b0263a9",
+    "data/processed/urban/chunks/-3_6.json": "efb3188572611a5500058a4f7e4b4a4f77d7bdf19f44de7caa5ee7f50f2e71b9",
+    "data/processed/urban/chunks/-3_7.json": "4f7c49478ca09d490487457b00b8c250a5d8aeab8d35a3823ebd8776262d141d",
+    "data/processed/urban/chunks/-3_8.json": "bef55d1efd30a50109e6a844589c39356eb9d774b5571156f2280edb0ca4ef8c",
+    "data/processed/urban/chunks/-3_9.json": "a023569e1d38e7b2fdbdd9c00c7432e403608f97db52221051f9d60f1bbe9cc9",
+    "data/processed/urban/chunks/-3_10.json": "2ad877576ed748044fff1f5fc3cb6ce7dcf68f3b34d81db5fb95aaf3032094e0",
+    "data/processed/urban/chunks/-3_11.json": "0d52b54afa131f941006ce6d8e61f0b19539119c389d00eeee302f44dee2d423",
+    "data/processed/urban/chunks/-3_12.json": "e09582e933fc261e96c92b2086fb73239158f7a19bff3447eef91e27a87fe74c",
+    "data/processed/urban/chunks/-3_13.json": "282e1dc701d01490019d1f97828dac43117f4e756115814e069baba1973420a3",
+    "data/processed/urban/chunks/-3_14.json": "61b5d749298cd4c3d1b59405dc338ab4d49199606e32df7d9145c63945b8d09a",
+    "data/processed/urban/chunks/-3_15.json": "103ed78ed54a6c63bc151fbf3bdc5c3b757d73946f74e57a9d97ecb02b1ae637",
+    "data/processed/urban/chunks/-3_16.json": "880de8f5ae6845686dd8d908ca621f965faf442ee740e195c76f20551682cac1",
+    "data/processed/urban/chunks/-3_17.json": "ab627b228a33b5c3435ca22219bbf18ffb2ab3ae24c51ef5dd5aeae60152ada7",
+    "data/processed/urban/chunks/-3_18.json": "6eb3017fdb9aecd7138d7465b628260c1fdda913d45ccf833507069e042316e5",
+    "data/processed/urban/chunks/-3_19.json": "bafe9729d29997c5e44fec4882f6c9cfd25758d0882b192e8e283d64aa0ea6b7",
+    "data/processed/urban/chunks/-3_21.json": "6e6ae6a04ddc937dc1b9f5420169406db8930fd4de1b230efd7875c54e321ee0",
+    "data/processed/urban/chunks/-3_23.json": "41e2951be2956d519f76e695aea09132fc9f62a0fe56250c32ac5ba68f7a873d",
+    "data/processed/urban/chunks/-3_24.json": "60ddf582ca556f964f5a249e0b8e29405bc9048f0cf265a7dac16d6b5149dac7",
+    "data/processed/urban/chunks/-3_25.json": "5160cf6b1811f04d8bca821af71f7c5a87986810b37ed3f2c4ea784916600cd4",
+    "data/processed/urban/chunks/-3_26.json": "07556ed3802b152af7b07c781da5be06306bed14c77660090a225657ebc33d62",
+    "data/processed/urban/chunks/-3_27.json": "46d624d7e7eafcf746970c9f54f127ff6edee82885758541fd39b9d93021a33a",
+    "data/processed/urban/chunks/-2_1.json": "ee0f927cbd61966221b7ebc4775b872bb5031c5fa2a2988419ce360461945a2c",
+    "data/processed/urban/chunks/-2_2.json": "c5a66338b34fb4a41c594e067f3f514914042a4c8f8e4d9468d808a712bf1467",
+    "data/processed/urban/chunks/-2_3.json": "0aaf645f8b2161d7bd2f5aec778bd75d4c488af5b5de1236160c0b33c2a105d4",
+    "data/processed/urban/chunks/-2_4.json": "9f8b03df03eae5adfcf13711f2bee19ff49c6ccd6c22e839b5a3a974d01c459b",
+    "data/processed/urban/chunks/-2_5.json": "227e584db0213144bf7982f412c96ab4520eaef258344b843a2ee626b1ac6594",
+    "data/processed/urban/chunks/-2_6.json": "2ad0f407852702be36e283c993cca29069d911dc2a84668f9ff1d2485c0881d5",
+    "data/processed/urban/chunks/-2_7.json": "8286ab0a91c6f54bc4faee96dcb5fc26fe0d049fa85bf86dc7fee51d9d752186",
+    "data/processed/urban/chunks/-2_8.json": "168f1162b30fc5d9753ca888b94040e262b590c0dd9f0bd31a6dac93bf91bdd9",
+    "data/processed/urban/chunks/-2_9.json": "38ec03c1cef7ecde9926482e35485062e90d3ec7dd9104c2bcafe858462e2211",
+    "data/processed/urban/chunks/-2_10.json": "ca316586166f9337f1abed329e5adfdec60b0d375c9d40cd5cb8979a84b2de9d",
+    "data/processed/urban/chunks/-2_11.json": "6618bb058259ac3163df89823f9539792e215b649f225bf5fad06f0627ec6efc",
+    "data/processed/urban/chunks/-2_12.json": "8b82c6baf894879482e4770c9b3bd37be1a041a65b5d52de4e111b4eed7efaa9",
+    "data/processed/urban/chunks/-2_13.json": "505d3bb41ea47f52443798e3f2f22544b92d14785fad5740f277442c28c5394e",
+    "data/processed/urban/chunks/-2_14.json": "8839df9be9e074eea9a7a6d6cd8425548c9537b5eef73c477d87aa0c534c87a8",
+    "data/processed/urban/chunks/-2_15.json": "707e1c6d979d35a1bd45d6161b129c2a4829272bbab561af61cfa2b065f22abd",
+    "data/processed/urban/chunks/-2_16.json": "a900df0f41e6f3b009c01c96bca3a4cdb99463197eb2326a06c7ce0432724f2a",
+    "data/processed/urban/chunks/-2_17.json": "0d9521e7dee3c035e252db712665e46ab8658c5c1d69632b03e4dab4a5c5c65b",
+    "data/processed/urban/chunks/-2_18.json": "01427d930159036554504ce195ea28593bbab98ec976aac268c0bad41e877bde",
+    "data/processed/urban/chunks/-2_19.json": "5f2d69ce44f1d89e7c0a1550a884c95fa509b34c87e67e93d0115c533a1b990a",
+    "data/processed/urban/chunks/-2_20.json": "2094218d0bdf18da8defea3f5b124e52575f6800738afaafa50620fb633c1c8d",
+    "data/processed/urban/chunks/-2_21.json": "b6cc35119b50a650f12cf04ee3cea2ac5af00d56771ff9368c728cf760a18271",
+    "data/processed/urban/chunks/-2_22.json": "93e3abae4d22516b658aff5c9844ff69b77afc74c2c513282c7551de8cb2678d",
+    "data/processed/urban/chunks/-2_23.json": "ddd97e706110e24dc0115dffd59fcfae8a293153789826aaa149cc1e1c3df24a",
+    "data/processed/urban/chunks/-2_24.json": "e09acbe6035a49502d430184127a99979bb0a4a27b7809ba2f2042fa473cd25c",
+    "data/processed/urban/chunks/-2_25.json": "4bda05ada15d3fc3fac56601a05970e4f27cdc7c2fa1a03402670798e7e61c07",
+    "data/processed/urban/chunks/-2_26.json": "3211d9344be76d1bcbff5c8f5e656c0cef6821edcbd65afbb2cd3620afe54a53",
+    "data/processed/urban/chunks/-2_27.json": "dc86aa4c4d3f371e44048e3a4dd6d9d221a4c86a3691f4102231354d5dac0134",
+    "data/processed/urban/chunks/-1_0.json": "99bd5e9dc587999d44f24bb57130ce0d6d4084161f9312080bacb2b6a71f6b81",
+    "data/processed/urban/chunks/-1_1.json": "888362578f2da7b7f4c28f6233c76089bc0a1e3c21174b1629a2288a568e276d",
+    "data/processed/urban/chunks/-1_2.json": "a1fecd8671779e3750dee12731dbb31db9cc1279f967a3abb8460036532d860d",
+    "data/processed/urban/chunks/-1_3.json": "014efc6c9729d1234d9cfb2ff74ce8ed6fa70cd824f0f0f18387a8ec802ed5a6",
+    "data/processed/urban/chunks/-1_4.json": "79c03b7bc435d05e441be2155ac54a4459b1445fd855509efb43338cc3a1840c",
+    "data/processed/urban/chunks/-1_5.json": "73dc857a8bd65aa93b412b261ca2ba96f0e0c00cc02b9d8134469f955b55f441",
+    "data/processed/urban/chunks/-1_6.json": "5dfeaaf54c67acad40c9e6a6a330e7825ecabf9f87f28d320652b84aed3a73f2",
+    "data/processed/urban/chunks/-1_7.json": "1facaf9cd0688e2bf45b4339ee5cef848d9b87eb5fe13f82d6a3a1bef68e1962",
+    "data/processed/urban/chunks/-1_8.json": "d9112ac1c1eaaa3623ee27257c36c70f741f92a2539ae568fbc104ca3cb9119f",
+    "data/processed/urban/chunks/-1_9.json": "9d0f8353ae1ea7f0c8aa121f0e755dd4a19ac33dce6252da812d2642adc7d962",
+    "data/processed/urban/chunks/-1_10.json": "1659e8c98305cbe6c3fb43960a09b1b364374e02f2cc4b715ccda4cfcc09de30",
+    "data/processed/urban/chunks/-1_11.json": "4ab3dc33f955593c69d00165a30153f077ef2bcdb971aec34e5a4bcdd644cc00",
+    "data/processed/urban/chunks/-1_12.json": "ac90139fb515f48c446d44ead5aa54ad5e4a283f65a3f2d6c1b3020582aaae5c",
+    "data/processed/urban/chunks/-1_13.json": "2aa807862c906ecdb66cad495d018e1a0a137780544b74ffc51b7da81fa220b7",
+    "data/processed/urban/chunks/-1_14.json": "7e8475f0dfb8b0f93ca5e590f4e2585c871706e69d73acd0f724cea7d17387e5",
+    "data/processed/urban/chunks/-1_15.json": "184c122bad89d129cc9e83f62fb21dcba144a28a7e0d06013237c9d0d87379c6",
+    "data/processed/urban/chunks/-1_16.json": "c2b8ab5bfc499a83dfc6bc7b443bb7e26333e9800f3f8f17a0a5b4be46c337d8",
+    "data/processed/urban/chunks/-1_17.json": "2fe3e4435281ad6b555dd0b75a9101d657bd1b5be7200447404408689c89b0a5",
+    "data/processed/urban/chunks/-1_18.json": "edd4d795cf7e3ae7f43f026ea4ec711958f050e7301c0ea8f30d4d31fdecab81",
+    "data/processed/urban/chunks/-1_19.json": "af85edeb402ee06d43500d0e6ebf8aeec7499ddf16b41a65077138adf7a4069b",
+    "data/processed/urban/chunks/-1_20.json": "59068f394e0626bc171d0c08540c501f4007617d46be67cb27e56fc4a7af46f9",
+    "data/processed/urban/chunks/-1_21.json": "ce6f4c5bdea99862a9f79f23016cf37c602bbda82f91c8b3103e7ae6d5f5a0ee",
+    "data/processed/urban/chunks/-1_22.json": "d5b829c419b1dedbaab8c0f1c24d5ca86d8789f2bb3690bf2e4ea6a37ff99164",
+    "data/processed/urban/chunks/-1_23.json": "2e5c49e3a6956eff877616ed74f72697dfa292bb0a259fcbd79aaf298f76f764",
+    "data/processed/urban/chunks/-1_24.json": "9747d20d13cd469b9e68d57941d3fa2fa31585e29afddf39dff66fc68e3ad8c8",
+    "data/processed/urban/chunks/-1_25.json": "69ffdc9c83c61b2ffe6157d9da9898b7e42d42ccab740899334e02a29df5624c",
+    "data/processed/urban/chunks/-1_26.json": "bf524a6879066f611b017a0a57d42abb96fee5f3106432cccbf25f8579f00083",
+    "data/processed/urban/chunks/-1_27.json": "4db789134370bd0241472e10156c56ed2bf4c8f28396e40032a7d0fd3f464b7a",
+    "data/processed/urban/chunks/-1_28.json": "5c2067b92567dc81c5878cfe49347c96a7f3addd4302a6b46d2e6dd5504cb29a",
+    "data/processed/urban/chunks/0_-2.json": "a69b605627f45b14a33af10fd6b700b1df12619f5bb77d606aba9acfb80abb20",
+    "data/processed/urban/chunks/0_-1.json": "bacf9e9e2153c53aeefbfae635a3b2de6182a04b8958948c5097c29d3a285970",
+    "data/processed/urban/chunks/0_0.json": "dc009b61359644156dbc9f355224c8e20709db00918dee4911fd252fd629a5cb",
+    "data/processed/urban/chunks/0_1.json": "c09f166a5c7402bac9a9a1701d8e80d06c9db97069d833c03aa2b8041f76b7ba",
+    "data/processed/urban/chunks/0_2.json": "cac06bcebde0023e2ba37127b0c283facd40dc7e36dd99887b181b3037be22e7",
+    "data/processed/urban/chunks/0_3.json": "b44a5ef7206156baa1cf04ae0077d9d7d6625bb3498930689810984251f0b023",
+    "data/processed/urban/chunks/0_4.json": "c6fb29ccfb2335bd15a3b81649f244f08aa40b7ea4f195a2a06d7977b30512ed",
+    "data/processed/urban/chunks/0_5.json": "e6356c9b82ecdd821b0dfdcfb1547b8e78a713a5a51e00c1af8a41d73ca4abfa",
+    "data/processed/urban/chunks/0_6.json": "2a29527013a2e50c2b2e1722a47e61269a387fa5223cbbba3121f2251ce79ff3",
+    "data/processed/urban/chunks/0_7.json": "5254622e4eebc56c7f3bb5ecafa17cc4e9e470db54241f10b0f288bf15f03158",
+    "data/processed/urban/chunks/0_8.json": "7ecf4695a8b3a33e3927b5e809d570713f9b6a02adc8df40cd39feb965002288",
+    "data/processed/urban/chunks/0_9.json": "c1beff1b98a52c4ef400643964eed55b2de4bd16ce00e1e983e2372d5c2c4a99",
+    "data/processed/urban/chunks/0_10.json": "9c3e70815e0faedcb842b5d65111238401989fd7a5e1661f1d4b2fd33346421a",
+    "data/processed/urban/chunks/0_11.json": "c4e1a9d150161f6ecba2305c8d7760dc61116028724b026eee350cb0a9c30e6d",
+    "data/processed/urban/chunks/0_12.json": "64163d09a699f097b24eeac4268528172f368772e757335e5a53e247b9dd3568",
+    "data/processed/urban/chunks/0_13.json": "b906f856f6b6e7c08d7eb93bd443717c11f43ed8db5b296e148a03ec569e3719",
+    "data/processed/urban/chunks/0_14.json": "e541ffca6cae73c065e577fc868d74c25bf9c9d3ad6609f8171421c37fe6a33d",
+    "data/processed/urban/chunks/0_15.json": "01135e3f1f236ac6f151d564b85ba35b84ab9a247f54c2ac0c7c58d9c5d9b57c",
+    "data/processed/urban/chunks/0_16.json": "0c8453154aed1afb1307fb5ca156a1daf706d858210cbfad163cc539e82079de",
+    "data/processed/urban/chunks/0_17.json": "d7eb7cd1dce588ff61b2244165c9fb209e4dceef555eb8aea1b2e733359ccbec",
+    "data/processed/urban/chunks/0_18.json": "1e5551e8d7ed7559b9d0ccef535949d2609eaf1a377cb31da5e7a64bd6f98651",
+    "data/processed/urban/chunks/0_19.json": "7238c3a34f71d946967dd605019246dda91a2c21c72c8e8503fee48182586192",
+    "data/processed/urban/chunks/0_20.json": "6f5808fd5c24c43534627529868e15f520fd9d5993c56931597afb137114222c",
+    "data/processed/urban/chunks/0_21.json": "3d78569dcf740137dc704fa69c576dca9a1007cff04eb12aafd37c9a42af0754",
+    "data/processed/urban/chunks/0_22.json": "3dfc9e5ddc2cf11d6a5702bb8de21410bc58795217ed90256e82f19dc6e3f36f",
+    "data/processed/urban/chunks/0_23.json": "a221040275ccf3caccc94c07c245bf67cd5540abf3d08ff05f75d5372a49f6aa",
+    "data/processed/urban/chunks/0_26.json": "1328cd3e52ceed7ad3c12adcbca1bb143f377df5d9e9a00914a027b3eff21bba",
+    "data/processed/urban/chunks/0_27.json": "0e7a40e00a22411873f593e2fef727ed4f09fafde311e68f7d653df6f5387f1d",
+    "data/processed/urban/chunks/0_28.json": "d68b6cbc15b4d2b4f0e7d8dac81e608673cfe320930fd1fd2ad855084e92bb7b",
+    "data/processed/urban/chunks/1_-3.json": "4c45e2711f7dcaffca102fae5abed8c0537be79282d4cd4567fe0533f68a7f40",
+    "data/processed/urban/chunks/1_-2.json": "d54a0e20a0948f93fa73c7d3fa739d5c332800ff42e8b7dcac399532798d9817",
+    "data/processed/urban/chunks/1_-1.json": "e7dccc3a3816383c1fd201ffe06e5ef91739cc6ba98b2ce06d8a99dcaa858457",
+    "data/processed/urban/chunks/1_0.json": "d54ffd713137065a1b01cba5c89170dc1b692c2447899ef8c03fc644506b5d3d",
+    "data/processed/urban/chunks/1_1.json": "ee9d9ecd1baa4c4c955cbff451929c8f41327ea08b688b483de32a6a8b2634bc",
+    "data/processed/urban/chunks/1_2.json": "68593ba3fd2bd7334b3b35fd08a7daf1fa56bbfdcfd90cbaea480b5816f2bddf",
+    "data/processed/urban/chunks/1_3.json": "825fcbe5b59b3b62152aec176273cf401a3487411b5df20a0636831395f8959b",
+    "data/processed/urban/chunks/1_4.json": "2ea36b525632a12eb00074720acbdaffe1556f99e4d74ec54a42f5df62d384d3",
+    "data/processed/urban/chunks/1_5.json": "ba38f8093cd87dffcdd722a4d837642112ee9fee699cb3f23d87b75f622c6f4f",
+    "data/processed/urban/chunks/1_6.json": "e5f5101496e9082441c293700e82594b66b4783e02cca7606c491887c72cb498",
+    "data/processed/urban/chunks/1_7.json": "42bab3a48e4389702df64bd1736cff3325c175190145e7271263618919e41e25",
+    "data/processed/urban/chunks/1_8.json": "776e09cece64766b3df715feedc1a2acb356bcf7c3ce210858a78ee36ddaae21",
+    "data/processed/urban/chunks/1_9.json": "a9e40685e2e31dae7370ca3d7ffacaf926876f69d6501831f7fed1e05d71415a",
+    "data/processed/urban/chunks/1_10.json": "6bd5dc299d873dd87e828ef6b32c90ca95a493c9c9b336c4f07a5d083f20da78",
+    "data/processed/urban/chunks/1_11.json": "a1f9ea6837928a6c761f4b6a255e5bad355cbc67f7aca624344f1341ec110f0a",
+    "data/processed/urban/chunks/1_12.json": "f63642c3a46ac3f50499bd867a8e0b9813c6825245d2a26226ce867476caf3dd",
+    "data/processed/urban/chunks/1_13.json": "6f122e14bcf19f2a4151482e120412fff2c35e71131ce7ecbb807d2115c8de9d",
+    "data/processed/urban/chunks/1_14.json": "0ba1d8bfb74d35193df75c3c556e9d8bfb6d6b894d2373d65be1f84269c85336",
+    "data/processed/urban/chunks/1_15.json": "5e70b5384acd3ffd769ff5e9e903c236f668cd803ebfa6ea221e5343c658b242",
+    "data/processed/urban/chunks/1_16.json": "251e7d95762c5e0d825a256a241a34bbe61f67bd3cede777932e8c7531a59c69",
+    "data/processed/urban/chunks/1_17.json": "f09f0d71b1ecf96385a193ea87da87960f19c0b2275e9712b0b3edaf78403b89",
+    "data/processed/urban/chunks/1_18.json": "3ba5d9ab41bd1ebb808d1e6b92cd7b95990ac1e301caa3e4f34b8f5914db28cf",
+    "data/processed/urban/chunks/1_19.json": "010d9b5c9893b8ec7492bf73731ae5205333e13c8ae25ceb8d1b7ebe5ce48467",
+    "data/processed/urban/chunks/1_20.json": "a1f8f30823ba2a889b5c56b0c3d2716c83eada94d365b8bec2115e10fa6f61a0",
+    "data/processed/urban/chunks/1_21.json": "25a1b19ee96505ed0bb11a2297adb9a150847c288cfa0ca5a3a1a17335f7b2f5",
+    "data/processed/urban/chunks/1_22.json": "d4db67610a119248b37d2cc60e320c4c81c3dc4a222cdf3af6230dafbd531808",
+    "data/processed/urban/chunks/1_23.json": "7fd689bee6123b51bbcca882a51fbf044caae33a1d3698d08dafb54867ea210b",
+    "data/processed/urban/chunks/1_27.json": "e122347c9c05924d6532526fdf428e7f06934159a9d639e82f4af83f90d1a5a1",
+    "data/processed/urban/chunks/1_28.json": "a75baebeacee9e3d5449b40527a3a8c6dadf1f9e15931351638dda08f2dce48e",
+    "data/processed/urban/chunks/2_-4.json": "2caadbb8fdd69a76c0801e4c606df606c610f4e6e1fec22edbb285e45056732d",
+    "data/processed/urban/chunks/2_-3.json": "b60bf364dfeafcab88678cc0989155671b1522bb21527b2f1bc330830cd56c8f",
+    "data/processed/urban/chunks/2_-2.json": "b3634c8f0863b0540eef918307d95d31ac39b6282a5728b370103afa73d74e31",
+    "data/processed/urban/chunks/2_-1.json": "9fde0cdd525e35f0344ae9ea7f312e08b563026a6ed87aa83f44bdbe09ea5c05",
+    "data/processed/urban/chunks/2_0.json": "148ec44019ece42d3d0aadfdae51f2fede35e831b20e6fd319302fb16e44b193",
+    "data/processed/urban/chunks/2_1.json": "5378a8deb5676cb23f8f38a4f471107bc2e07f9d3428e9963baf295155c6fe62",
+    "data/processed/urban/chunks/2_2.json": "857648cdce917017c4e90115dddd4b63a309e34c2311e7c38e6b65a7f93d1fad",
+    "data/processed/urban/chunks/2_3.json": "07a629d7d60b38339e6d4ec3f48df50bb6ba54ab2ddcb15d4e3386dc246c1adf",
+    "data/processed/urban/chunks/2_4.json": "fffa6e4b44016921a4c6c56e44a44740b025beb2235cd5af7b324b17a3250477",
+    "data/processed/urban/chunks/2_5.json": "f9428a6f984e5bd34aa8ccb54e9ba85eb93cb3ce1086ac6ec02e7c8f00ed8cf0",
+    "data/processed/urban/chunks/2_6.json": "032236a5fdc8e6d2f894096ea9891f865eb4eeeb0af1c631a6fbe40f49def2c9",
+    "data/processed/urban/chunks/2_7.json": "764b32bff80be02bc19a41eb40441dd171c02174a744e944a48e40988821a764",
+    "data/processed/urban/chunks/2_8.json": "d4dfbca0af9f6c5d13d25af1176eb20032ab1375b07ad33138887a6037b64d55",
+    "data/processed/urban/chunks/2_9.json": "6fa4b8dc383484db6a51d71e5ad2521ac8e91a37865240137d36a00510acedf0",
+    "data/processed/urban/chunks/2_10.json": "33d827fbe7f6046e380507553f0e4d770ed8b1da236e1b9940714003a8b779e0",
+    "data/processed/urban/chunks/2_11.json": "0b7571e945913691de8dc931f33a8fc8d5784eae9c7e7bdd855da885ea12c416",
+    "data/processed/urban/chunks/2_12.json": "47caba0d87e68b510fb356f0a34ce28ec55fe1ea083371c4dd3bc228b333e294",
+    "data/processed/urban/chunks/2_13.json": "5f45bb19a2b90ce2d8beb62d0c92a770361131b31a560f9095de36995e229a57",
+    "data/processed/urban/chunks/2_14.json": "fc4e589dce6c069aa2a18af492dab022880c0525dfc318e0999392ec5acde9b1",
+    "data/processed/urban/chunks/2_17.json": "3970c13b63426b28fca9c2520e99f87fbf49da5dd610a14a4c8e9009d6beeea1",
+    "data/processed/urban/chunks/2_18.json": "3b19e44d0023853dfbe9ac398c5401cce70401df4f8cdc50fe6017715930ab24",
+    "data/processed/urban/chunks/2_19.json": "a9cb5df63769708acc8801af54ea127d0948558ef1b36151f50d2164fb2ef706",
+    "data/processed/urban/chunks/2_20.json": "8e725991b65e44a78f4d688ce5a637383f093f11a9b6a18e846ae3cc25499e10",
+    "data/processed/urban/chunks/2_21.json": "dc10be0cfcbe7294958210870d72c5a24274cc6b467c3eddf487da0a1aadce7d",
+    "data/processed/urban/chunks/2_22.json": "2b6344fc33c9436856eb8bab2e210be20ba14e1b97efb5ef162f5d0d4df612bb",
+    "data/processed/urban/chunks/2_23.json": "678768b1a528197a27e64dfeaa7743f8585e706e1e5b6332352d491034c28023",
+    "data/processed/urban/chunks/2_24.json": "f15c015f574adf570033cd2c5af4aa4d0c7b18cf843c7b38ddd4cea6fa5417f0",
+    "data/processed/urban/chunks/2_25.json": "3a3bd79aa06d3e6f5b9a708dffc1cd39b02f1851a3724ec87e23a2c34ac5ea71",
+    "data/processed/urban/chunks/2_27.json": "58d253c56bd235f117bb7ed478b43babce0f0431771a7c14c137256cb85fcd6e",
+    "data/processed/urban/chunks/2_28.json": "9d29acc6b5615a4a117c218ddf213869e52a7b36466f5232cdc9664229e51580",
+    "data/processed/urban/chunks/3_-5.json": "5d518c480f25a1d01f8a3b1063ec66bb3fd30f001e767a293ab4d32e05a80273",
+    "data/processed/urban/chunks/3_-4.json": "3b68d6c0c17cb9c2c1a1dae9c51c920b0d4ef76ce4b4242c41c1cc3fe9d8328f",
+    "data/processed/urban/chunks/3_-3.json": "ba9744955325ac3c0e2335a845b003fdb3be3188acf6b2fe4dac6a59c6aab9b9",
+    "data/processed/urban/chunks/3_-2.json": "aa3cdfb38a0ade482b3d84d95c44d6b9aa36ed22249c8f737e8a45a3176e4793",
+    "data/processed/urban/chunks/3_-1.json": "a3de22c505610dbf1a3b2f162d81f7c6850e4b3aca8fd7829b804f3d1eb30d18",
+    "data/processed/urban/chunks/3_0.json": "6c1df25ef9e3e75fda1526bb7c626461a6403558f3e3682200c4279f4ace5cdf",
+    "data/processed/urban/chunks/3_1.json": "363971ec9fcacd45a398d91cced782bcf25f92dcde8e9fbd2fbdab694c00c7c7",
+    "data/processed/urban/chunks/3_2.json": "96cbc5de8a67aa56fb7a539fef6a86a97a1df53e1ca9087c674a77a46829981c",
+    "data/processed/urban/chunks/3_3.json": "43e883eee6b9232fff0f82907636e0c5ad6fcc04891ad20114a22a6cf294b03a",
+    "data/processed/urban/chunks/3_4.json": "c16da758d3b023fe6f8e4a2439ffd293d7a96bcaafe06d1ba3b896801cd2b157",
+    "data/processed/urban/chunks/3_5.json": "83211030735027388f144ea1ff7d9c4aa71756612cc4ad7a9d28d89c11301f4b",
+    "data/processed/urban/chunks/3_6.json": "22ca7fdfa0cbf24b8469d64c1c8b4109b53713114fced063eded773e1275949e",
+    "data/processed/urban/chunks/3_7.json": "b651c35145d19646a5c7743c9115a474bb800821e3a9fc10240112f40cd32b57",
+    "data/processed/urban/chunks/3_8.json": "86ad5f8be11ff76d134f5ff6fb416050f227f40165cbfbcffbcf3af958b4d245",
+    "data/processed/urban/chunks/3_9.json": "2578561c936c7946c4f33ed2c60c95a8cdfe314553f98e3e21742863f3d7db99",
+    "data/processed/urban/chunks/3_10.json": "e4f09916b6804adb975cdc7cbd7af358a518521c7aa5af2508f0b1c8bf03c59e",
+    "data/processed/urban/chunks/3_11.json": "1c70ea6dc8f9bcd2576cc485cb980d4b7fdfdd1e3ab66c270bdaaa229997141d",
+    "data/processed/urban/chunks/3_12.json": "8cac151c0358fd3435c9efd73c7b0e8017193fc7cce02e5a742df5e4b08f9e7d",
+    "data/processed/urban/chunks/3_13.json": "6a425fba4203748c0811ee34adbb057643351f69c6d3ff7e53eacffa940c9085",
+    "data/processed/urban/chunks/3_14.json": "cfd567c9e620dc754ae46985b4da452e541421c3d580c550049766fafbfb8acd",
+    "data/processed/urban/chunks/3_15.json": "50c7699967aa3292f2614b87d850a0fb129d48aca048c2b461c8c275904688ec",
+    "data/processed/urban/chunks/3_16.json": "b4ca1179eeeea7e179dd105616f47a5287119c65279a0a57210b2ee36f8a56a3",
+    "data/processed/urban/chunks/3_17.json": "60c94371cbd16423a16812bd71bfc31f77773aaf1c30d3c2ab1d3d9b4824df00",
+    "data/processed/urban/chunks/3_18.json": "d541467df63b2f67da552a1f5cd4dad43bc699a5d3d0e945cb22bf6b1aeade77",
+    "data/processed/urban/chunks/3_19.json": "6853078d5dbbcc61df5091e83e9cded76657dcab195f2f7f3e454a9614a57673",
+    "data/processed/urban/chunks/3_20.json": "f8f393a515c1cbd3734aca608175e99a51b3f393a1f66615e53e7e16ce1e484e",
+    "data/processed/urban/chunks/3_22.json": "b2b676e1876420f47a3dcf82266752703c7ce86648902f30b1973397e64df303",
+    "data/processed/urban/chunks/3_23.json": "63a5c24f33234bad82c94411cabbabd46e93f98ad649025e5ab0d0484e23bd8f",
+    "data/processed/urban/chunks/3_24.json": "013d22c2519fa8ccc5a3e6d14887fb6aaea5ddca4ee095d5116c06397c7bf9cc",
+    "data/processed/urban/chunks/3_25.json": "eba43076dad8a636a57a923897b9c60cf8da4ca78edb51605b06097744c4bf2e",
+    "data/processed/urban/chunks/3_26.json": "92af3f1d1882a2937c82fbd06adba2d52609562e6f0c6f9e6d8be36b28a1f939",
+    "data/processed/urban/chunks/3_27.json": "eee560676a98a65b33b967b7baf3f21502005167dcbfe16060df526e3a1e103f",
+    "data/processed/urban/chunks/3_28.json": "cfd4a14d35b0006c0345ebcc65a51cae9d432408b679d0f3043308e0cfae4442",
+    "data/processed/urban/chunks/4_-6.json": "b9058799119819e98885388d467355414bff60d1988d7d53be411198b9278e5c",
+    "data/processed/urban/chunks/4_-5.json": "f077edd862b161885e3a151b1759741828d2533d4a6756204256bd63f517f080",
+    "data/processed/urban/chunks/4_-4.json": "5fe5c6b73129fc5c7af5293892db0ddffc6497b176e57d3d5f3c490f03aeab8d",
+    "data/processed/urban/chunks/4_-3.json": "7007320c4d51a4bc61978aedb01c50391266b5243a8cb23eeb28cc33a473f1e7",
+    "data/processed/urban/chunks/4_-2.json": "1122c8cacd2ac0b49a7a808f72ed8a2601384ed3c0af743c4d7b9ce7ea122915",
+    "data/processed/urban/chunks/4_-1.json": "66c64f84a8fd8b12ce90fecfe36bd4686c24ac197675859745da4099c19c8449",
+    "data/processed/urban/chunks/4_0.json": "54312173f547572abd806ae1ae64f1a97f3d896d05866be789dca9dcf22524d3",
+    "data/processed/urban/chunks/4_1.json": "4d056270497b376b4dbaa32d3fcc427b22a3fbe4edc917a77a18be464fab1ae3",
+    "data/processed/urban/chunks/4_2.json": "1f96c61975c310db17153910d8e7e0efb85ce874f4f531bf35b12c7536c7e970",
+    "data/processed/urban/chunks/4_3.json": "8057b5f1662546515f541eae35b964ea5b4f7dc01afc6cde774073f61283936a",
+    "data/processed/urban/chunks/4_4.json": "abfe0ccbdbb4cf7a63d658b1e6900bf944bc4852206b3e27827b2fe653481e62",
+    "data/processed/urban/chunks/4_5.json": "6a6d16f704c8bb462fdc4a2d31184ff90bb1160a15084107f067e9256bbd793f",
+    "data/processed/urban/chunks/4_6.json": "ccbe7dce4e1d32aeccab83cc1609816bc2644c995dc3cd4bba6ecf66a06ec78b",
+    "data/processed/urban/chunks/4_7.json": "9b8ee234e3df0ff782409005cfa46890aa61f057fcacb56019dad1f6a86b643b",
+    "data/processed/urban/chunks/4_8.json": "84da7463d34d5133a74be52d14a1a423a2eee08be740806185753e72c35f79f1",
+    "data/processed/urban/chunks/4_9.json": "3f67381f8598a7cc677fe618185c5214bc19295da56f07605d1446bca498c375",
+    "data/processed/urban/chunks/4_10.json": "093ed2bd5d736894cd60a62b573d7fd7199ce1af671a38501032a4b41125b3b3",
+    "data/processed/urban/chunks/4_11.json": "af26496f5e1d968b7666ab35abdc11dcacfdffd4c8d82087b78de6423be76d1c",
+    "data/processed/urban/chunks/4_12.json": "4a0f1fd8c39cecc5226a1ca6d7bc08e50a9fc07816c2ae73424fbf8c9cb637da",
+    "data/processed/urban/chunks/4_13.json": "a58e15dc2722be0093f004eee61f7b6ecefd57a4c02ecbf475609c033a05c1d5",
+    "data/processed/urban/chunks/4_14.json": "8e73473a9b245ff630837a49ac6fb2b433f7ffd3b538d2716597eccf09e8a5a6",
+    "data/processed/urban/chunks/4_15.json": "939a64a3456cc4266804d330914f400947a8a812dc30cb6c19c6b2bc48855084",
+    "data/processed/urban/chunks/4_16.json": "9cfd47fdc26fc2df421459c8de5142ff740f7aea77a85e64b90853487168d9e3",
+    "data/processed/urban/chunks/4_17.json": "eab8501d36c4f6d19ee223a5de08a050dad741e7e097268f273b30e5bd68ef8d",
+    "data/processed/urban/chunks/4_18.json": "ee97664de22ddcb1c548400297ed1bd3551b84fbdb8379588a8773e89b27c315",
+    "data/processed/urban/chunks/4_19.json": "660e7b292a66badfc5275eb5bd1ff05947e24f1214e738bb92970884cc128a51",
+    "data/processed/urban/chunks/4_21.json": "ffd532296f3dfc57a2edea9fb699bc422b7840ca73b6779f743f5a7c821a5959",
+    "data/processed/urban/chunks/4_22.json": "529264c3d3c631ff57e635ed15442cc01b3f9f3d6f7233f8bbcf6eb2c25d67aa",
+    "data/processed/urban/chunks/4_23.json": "1a4e6da8beb2dc096001cf1266a46260baa58a070d99d14e058e95428ac4b593",
+    "data/processed/urban/chunks/4_24.json": "6e1f3acaa385ee6c5d0e4e2c0928d19176086061fa986ff0e6a0abf2dd9e1f5f",
+    "data/processed/urban/chunks/4_25.json": "7406ce9d182b30d86b7045fc7f21272ac5b2b45e7487e4cc419626fd77a3c05f",
+    "data/processed/urban/chunks/4_26.json": "46c0beec92bf2893272942bc07f992cd4223ab2d06bf0b4869551017eab02aef",
+    "data/processed/urban/chunks/4_27.json": "f7cac50aabc63b20d28521427ee21d2cb038ca646716d7dabca7808dba9b165e",
+    "data/processed/urban/chunks/4_28.json": "d79f4b47deb0e640a4d203ce1799f81e6c49f6d955a19a1212f3c1e6734ad048",
+    "data/processed/urban/chunks/5_-7.json": "b303b7442f5ebb6fce2bf598da1d045e23db15bc123f33a1e013df5647a8d61c",
+    "data/processed/urban/chunks/5_-6.json": "d44e631d20f85f639ac74f74629b372835534644a1106a9a8d1c80701f94cc55",
+    "data/processed/urban/chunks/5_-5.json": "e1301db21f0b89d323946775ff0b07ea95c787bb193469b24e0bda4c4bfc574b",
+    "data/processed/urban/chunks/5_-4.json": "5ae5f56a8946e75a7f256e161f4741d419a6890bb25e191146c3ccaaf3e7dc77",
+    "data/processed/urban/chunks/5_-3.json": "d7cf546092c8c4768094ed33ff6b69bb201f7ccb73357e26b53ab78f0469acec",
+    "data/processed/urban/chunks/5_-2.json": "8eb5f793f972ce4187d15915945ae102a9bec80c72c13dc6e0bc9c64fad9631d",
+    "data/processed/urban/chunks/5_-1.json": "5c0109308c584a538d699b392f5a1841ae5fe4daed56a86d2435b6f0874ba230",
+    "data/processed/urban/chunks/5_0.json": "230bc0cea96cd651f29606ffafb598403a083c1cf5fc3df426fe806eaa9ba826",
+    "data/processed/urban/chunks/5_1.json": "f004b4f0f1c854f6d6290441e03650c78f2c1c3093411c407b16b14e368a3874",
+    "data/processed/urban/chunks/5_2.json": "e751e04826b34906b2e0963cf74d1e2554aa94d7d79ceb6e5c78493ad226789b",
+    "data/processed/urban/chunks/5_3.json": "968d139e4cba3e4a622aa703c7d9a30aa9635d3887a57043cbe93bf01f74e7ff",
+    "data/processed/urban/chunks/5_4.json": "4b13b0b6111758e31910eb0b890d1e5350216e38c131c2753df38ca965d883a9",
+    "data/processed/urban/chunks/5_5.json": "62e03c92de2d222c3133dbdf1ddaa6f0be85e46c5d2f33f18cd337521ba0b5c7",
+    "data/processed/urban/chunks/5_6.json": "e92725e34fff683545bfe2e6f259ea6a61f1dd1575a4ff0f9f871054b6dea71e",
+    "data/processed/urban/chunks/5_7.json": "061b99ee2fbb314b0739a15370935507078cb6e41990eb8b011db3ad594a52fd",
+    "data/processed/urban/chunks/5_8.json": "ebfd48fdf2eea396e5c6a7ea2fe9ea30f82c7f35618b505b97b464ead7dfa586",
+    "data/processed/urban/chunks/5_9.json": "fb518d9c04d581d72bed78df772bce06a66bc36a5366b0f082b8c5b51f99dbb0",
+    "data/processed/urban/chunks/5_10.json": "5338d2746d4df7dba7e93c4f976cede917987c99250e2a696512a6f0fd5c152f",
+    "data/processed/urban/chunks/5_11.json": "962bb323f33a6b799039f02fe7ed1451348a97356bd966d6c953b389754d7245",
+    "data/processed/urban/chunks/5_12.json": "6f8e50e75a61a740d61cec4a57a1eb11a81043b65c991af90b4399c23a71d0d2",
+    "data/processed/urban/chunks/5_13.json": "fd366e3c918adbd63cbd4570af130a5e38f1ab50eda354aeb61a416a98dbd0e0",
+    "data/processed/urban/chunks/5_14.json": "82782618c930d82e9d0b41ccf5fe096dfdb32a908a908ca366a7c11b9a164b84",
+    "data/processed/urban/chunks/5_15.json": "f085cf4638e6e9c035c00a2e47d0d2847b606b88b2593bd1a65a7f4f8029f383",
+    "data/processed/urban/chunks/5_16.json": "272e573aaa7c336956821b5ce95df82f42e58f9bc6011aa29e76b8d6bad2464d",
+    "data/processed/urban/chunks/5_18.json": "444fc55325bca6ab989780b5902c210bc3591f48150c0d6c0921ca081624dcce",
+    "data/processed/urban/chunks/5_23.json": "ce54f2732e55be0f595a85758dc6dca6f204720913f0f1e5b913d88820f863ba",
+    "data/processed/urban/chunks/5_26.json": "5a44c72e85a8d84484de68c68f0252efeb04c0b7e58979a34970a22781155e3d",
+    "data/processed/urban/chunks/5_27.json": "239591cc857d9c25b9f2a88cd2f150625078b686ac8c05d586b7a1299808e5c0",
+    "data/processed/urban/chunks/5_28.json": "e3f8af51a33ba29e3f304ea54faea76c10dfbeecb3d16ed42caeaa07cd20056d",
+    "data/processed/urban/chunks/6_-12.json": "c254dc56206472237a4a4b4cd174acb6886f0ac329f5f7c687551db08e3fa399",
+    "data/processed/urban/chunks/6_-11.json": "3a03af2c95016822e3372adb198d50106b1f38d50ec960428da97463de3af4d0",
+    "data/processed/urban/chunks/6_-10.json": "bef43c8a40f93a8c36b5164f0c062e32de2f01a6a4c5292dd2c021e250b0c485",
+    "data/processed/urban/chunks/6_-9.json": "dd1d8615c1322219594eff4b8b303d14346b7fcfb1ae081b3e556e32040f176c",
+    "data/processed/urban/chunks/6_-8.json": "11b909f3d661a48929a68cbf5e14175dcbdb4501ccbcd52e3b62f76f40815e69",
+    "data/processed/urban/chunks/6_-7.json": "0836a09004c7449dd429d4c5006c1fcb56f4f5433a571b7ed0c985e41a0204ba",
+    "data/processed/urban/chunks/6_-6.json": "1e0b828fbb816e44cb2e16abb69153b94834d7f51a3259e95caf4df632ed9209",
+    "data/processed/urban/chunks/6_-5.json": "f340df77ba203d32b9c73db89497d3517c470ccdf7b48c09f0780f078e9abfa7",
+    "data/processed/urban/chunks/6_-4.json": "070c7779c14b642a6f7aa2589af9cdc27b115df83e87e8bc06b12f313bcbe95f",
+    "data/processed/urban/chunks/6_-3.json": "acdaa10f17d3568b30a5225c98019f523023a7eff51d98a16873e55c5e2fc53f",
+    "data/processed/urban/chunks/6_-2.json": "2e9d18907757b00557dd320ffcd69977219fd9ad1100e14fb1a6bc6fab7ccefe",
+    "data/processed/urban/chunks/6_-1.json": "d0584a8539b0ec380136440fee5436e0dcf0a984d760953856c1ec99cd09ed14",
+    "data/processed/urban/chunks/6_0.json": "d4cacbd0db1e92cf12beb3f47c2a1f68df8811f7ebbe95c1119786c3e8082ac5",
+    "data/processed/urban/chunks/6_1.json": "c197bbefb16bd1e6cdc3886598eb6744437bae685f4f0751655a491b9df260a3",
+    "data/processed/urban/chunks/6_2.json": "cce3fd0c8cd5667b891475d4a48ced8f8f9ba86493ed99914ebbb7035a937985",
+    "data/processed/urban/chunks/6_3.json": "349d03ddcfb44d3cedc83dad486f23e2a072006eda1f513cc50c63fcbbd5da9e",
+    "data/processed/urban/chunks/6_4.json": "ee1e4c866951ae81eee1f8c163934d15304184c4c94122b47d8bba5767fca237",
+    "data/processed/urban/chunks/6_5.json": "8bd983383068df134a6f70199609790263d384cab8965c693eca65ed97b2da56",
+    "data/processed/urban/chunks/6_6.json": "2fa8cbb09e79fcb5ae08dfca8f093da4153596057ef0428fadfce4b97a8e0a4f",
+    "data/processed/urban/chunks/6_7.json": "de453a2d64af0701be006c0b3cecd718fb2e2b114e1112d304709c45f1cf106b",
+    "data/processed/urban/chunks/6_8.json": "54c11ce7f42bd585176db5464aa2c00a2a1db333eb5ed5a0e7f49c2d22e991d6",
+    "data/processed/urban/chunks/6_9.json": "947916600894dff946cafea517218ac775b991ee287a52b861b74562524ef822",
+    "data/processed/urban/chunks/6_10.json": "bf42afdb3057b76c5acc87c00fd88b9ecd1c2212750af4d8b9d6138b41e5af34",
+    "data/processed/urban/chunks/6_11.json": "5166719ca8e727de25532c8a3d7692306b536a4249033530755397cb8d4f2c42",
+    "data/processed/urban/chunks/6_12.json": "6e401fc6c6ef859dc19f11361f27a259132c67ab3805e552ac9fdae490c219cc",
+    "data/processed/urban/chunks/6_13.json": "ca9c3e739b01d9068844e93e9b9590e6e3dce8dab9091f4929cefe3d2fb94d10",
+    "data/processed/urban/chunks/6_14.json": "4c0e0671635254a9268b67d9569abe7a8dc93798aa104a19784de07b8b6549e1",
+    "data/processed/urban/chunks/6_15.json": "9940f81a53b8da17c655a3565906d4c9067db8ea0f93c68a5d9fac5fcc8977fb",
+    "data/processed/urban/chunks/6_16.json": "0bc38a74847f77abac701a188c65a7a9f17f920f739fea67dfd5016503793bb0",
+    "data/processed/urban/chunks/6_17.json": "53c3861d5e85662656acd6d61076c8fd6b0ff064c6ebcb2c6f0622382b3fcf4e",
+    "data/processed/urban/chunks/6_18.json": "e3317f3990502e5bc3b823713f7b18a5a1c742da21b13c7d3c87279dcc5a9dd1",
+    "data/processed/urban/chunks/6_27.json": "ddb17e6c6fb0a2feb76e1bab1227f8beda71c56d796b71ac5b597cfd22244b7b",
+    "data/processed/urban/chunks/6_28.json": "adc4c51dcf422b76c590977ff1bd185c3d83d7ec008a2dbaf7a529e49347508c",
+    "data/processed/urban/chunks/7_-12.json": "73e6b7457c66681533e965d386b2a376582439faf50d4fe0337187f8fd667e05",
+    "data/processed/urban/chunks/7_-11.json": "b3263ab8512ba27ccefa899f22bf7aa9202d7f52b9c43b16f8a211429c13e2b7",
+    "data/processed/urban/chunks/7_-10.json": "349ea930de0b3dc30992906ed3ddcbe386b747dd19f489461124eea82f2dfbb6",
+    "data/processed/urban/chunks/7_-9.json": "92c423a23ac83e1a7bbe1ad1a4c4f1c2dde5ec30b8d88ed2954e909b020323cf",
+    "data/processed/urban/chunks/7_-8.json": "f4ad8c287ccb9593e0460c3660301d64d83ee2b07fb268bb559f0980d1fdbfcd",
+    "data/processed/urban/chunks/7_-6.json": "1758fe64a3413b53f9ba3f0a361415420e22295289c6b66d420dfe312a3c5ee9",
+    "data/processed/urban/chunks/7_-5.json": "cedd94a111ec07ddb1d19092f3110664edc8667f7671eddbc277aac6bac64e94",
+    "data/processed/urban/chunks/7_-4.json": "5666bb02680e02daa4a860ec3705298da4c59705930373ea0ab435d9e5f3a22e",
+    "data/processed/urban/chunks/7_-3.json": "7eb2fc732bb30de87bb8b4ca0b889ab77be2c555f314c08bc39939211f11367d",
+    "data/processed/urban/chunks/7_-2.json": "5822b44aa74f0168a32bf3552c1b962e0a18ab20c450798c754a5334978e46ef",
+    "data/processed/urban/chunks/7_-1.json": "fbb77b311ccf6d87e0d79e2e1213971946a306241f457df8d0c2ad745779cbb9",
+    "data/processed/urban/chunks/7_0.json": "8e2fc58e37a80ce08df261128d9033179cd2a05fd9acd796a723a3f6723022b1",
+    "data/processed/urban/chunks/7_1.json": "29d6e95019d4c2c443f608b058f6739814bab8ee7a8a263481ddeff117954026",
+    "data/processed/urban/chunks/7_2.json": "85162e803475923a05a56b9d16ee8171a066d9bcd5fc05cfe0e9d902577fad2e",
+    "data/processed/urban/chunks/7_3.json": "2d5d2db6a4c22490b7a6dd4ed6b375a6c252617a68b16c3c376026c0230f9c07",
+    "data/processed/urban/chunks/7_4.json": "5cbe3e1bf32723104ab307682daa1560f636a37e99b90bdd7cf70299c81ef8c1",
+    "data/processed/urban/chunks/7_5.json": "0025f282cb391aed8492cff1192ba205a2c9a813385f23e543e59a212048b9d2",
+    "data/processed/urban/chunks/7_6.json": "0f2bfdca15ae0ae6f43baecbb4bc3c366351818c2785f420855adc485093af76",
+    "data/processed/urban/chunks/7_7.json": "98ba4f31ea8838e3243675256cb3bf1bb0225909c0498f9bb9f2cda12edef140",
+    "data/processed/urban/chunks/7_8.json": "50f7193e0bfaf248001b68bf67928f67b7823c55c414410c2865b35fe8215180",
+    "data/processed/urban/chunks/7_9.json": "bbc90b8f25a1441acedb0ad17dd25f18526f2e11dbde116f4e9c37261e9457e2",
+    "data/processed/urban/chunks/7_10.json": "1ca06542f6ba88995e07960aefc4dea8627c580d7ab9a3e332c62d223c266e2d",
+    "data/processed/urban/chunks/7_11.json": "62b1d5b3ce104f40a4ae50263c1e7bbccb39e3d5dc8fa0b1c63bedc85be5c631",
+    "data/processed/urban/chunks/7_12.json": "2193aa9ac279cc7a1c61312310612adbad330d4a2a42ebe2268f70d257a6b360",
+    "data/processed/urban/chunks/7_13.json": "6923220b3a7ed93909d44832868502f32249e8b0abffe88b01ee23639b77bd79",
+    "data/processed/urban/chunks/7_15.json": "20ec5e06295fc66388a70a2c91ba32ad9eeb4446ec612c699cdafce4b8988f2a",
+    "data/processed/urban/chunks/7_16.json": "64893a6f1bdf17184134ab7734fdbc71c7ac4a390bfd6725a8b96b4913839d08",
+    "data/processed/urban/chunks/8_-12.json": "f5e756afa6000c3872dc807d153c660608b29ceac992489d2414173dbd013e8c",
+    "data/processed/urban/chunks/8_-11.json": "940095c0a9b5b7241aa031d075f15f89f0053e1fbefc53c3d5201b2271092122",
+    "data/processed/urban/chunks/8_-10.json": "520feb29624aa72ee4ab9d15cc5adb712e444af9f1cbdeeee8ef5013347b4e1f",
+    "data/processed/urban/chunks/8_-9.json": "d7706904d6ec2bb41509f684986ff1316c4225706aa76f61b3d53407e857ea44",
+    "data/processed/urban/chunks/8_-8.json": "1beed6c772da093d88d4beba1fa91b0c66c797cc6a3386b15b9e1a7b6f4e4b74",
+    "data/processed/urban/chunks/8_-7.json": "c74c232a4d99eb74bd7d09133295f64872956aa5b84c4536aacea99520702af3",
+    "data/processed/urban/chunks/8_-6.json": "c3457ded1b737d1958cde69e165591d5c57cb38c365f38d3d94acd28229b7bf6",
+    "data/processed/urban/chunks/8_-5.json": "b2fa71e0768b688f5f07b65b42baa1ad55c47407657df56eec7aa3a82e2fc695",
+    "data/processed/urban/chunks/8_-4.json": "9590af302c7b80d21d71f7e61d16126be292347b8bfbd39b0bf5d73fadba2307",
+    "data/processed/urban/chunks/8_-3.json": "bbfcf7509e9d455cde1bb3d9db78c0ba7c0d4b52a572cc05551723ef12fcc0c8",
+    "data/processed/urban/chunks/8_-2.json": "3b2a47f11807d0a19db14bbb17f1be167316203413812d65ad401ebe84ff9ca7",
+    "data/processed/urban/chunks/8_0.json": "5bec2f751350b6ea630b9c3313185ec6ff2b8365bdcaf90058cb3ff80ea67252",
+    "data/processed/urban/chunks/8_1.json": "9d98469356783a6094f2a395d8b71b39d0b73acd0d0ce30f2a3402ae1890526a",
+    "data/processed/urban/chunks/8_2.json": "69d703465fb95fd6e7552e0b3ef279ff9680dfe79ce6ca4cada2dec2fb187fa6",
+    "data/processed/urban/chunks/8_3.json": "d6aa52036c0e25419b6db048aa229e4a13a04af7370b46cf706634362eec9a12",
+    "data/processed/urban/chunks/8_4.json": "8520a3d9c73caf418c1ba9f85c388c53c94dcb3a7189fdf07d8de0dc5ea54ce3",
+    "data/processed/urban/chunks/8_5.json": "da8073c5259654abfc63225cd577937eb4660ad315c7f5ef27bfe3625e0fb09e",
+    "data/processed/urban/chunks/8_6.json": "0bc156190b721c95be379f9f05808ac7f045d16a65788e52a83f4158a311b0bf",
+    "data/processed/urban/chunks/8_7.json": "deecebaef46b8abe54f76134c02d9f0a8c3df1e0a7579d5efa4ed733e2b6d336",
+    "data/processed/urban/chunks/8_8.json": "2f8ba53b252139b422b4071a9ed49bc020bf01db0075a3ae333f6f30c8f45d56",
+    "data/processed/urban/chunks/8_9.json": "a30552fb08ca69275b1855817ed29ecc8a89cec7a232413023e3ff3b74adf5a2",
+    "data/processed/urban/chunks/8_10.json": "0e661c6c0e8ed2cf971dfebc22a22070942b19912834f0ea02f5733eb9d9c35a",
+    "data/processed/urban/chunks/8_11.json": "424619f9e54e16357e957aaeb491eba6b97566ce5efcac1b9f70e27ccb28a46e",
+    "data/processed/urban/chunks/8_12.json": "6d9de710ef10e3d33de9cfddb7ab367b745a072c18496d3131b2b93d94ca9820",
+    "data/processed/urban/chunks/8_13.json": "ba0a0e6e9609ea945b155d68f126ab9f2c34e19bdaf509e2dba54b96c2161f71",
+    "data/processed/urban/chunks/8_14.json": "7bc268433eb809d701207f526db5736a3d1dfe62559d0cb6d2d4eab7b54ca04b",
+    "data/processed/urban/chunks/8_15.json": "e0458efba8ddaea8c78dfefc37c0efea3c49a6d6aceb0d77d1c80ce3b51bfd21",
+    "data/processed/urban/chunks/8_16.json": "d2c2b58ba4783877e571857b2835df7da9aefd5da943dab86ae0ce60364f56ee",
+    "data/processed/urban/chunks/9_-10.json": "31d002fbcdc32a067426608f286caf022b07251d0cb692cb2461ce9d81daf586",
+    "data/processed/urban/chunks/9_-9.json": "e4116820eeacf13bd83168516eeaa2685ecc62ea71da96367d788cac421a7a31",
+    "data/processed/urban/chunks/9_-8.json": "03e62073ec0fade24a73d5e9c7c299894c07b2ffb86320b9c4a7348fb8a28563",
+    "data/processed/urban/chunks/9_-7.json": "eaf947d02c2439ac55835e8d7ee787f05c2dc7927dd87a844e46bfca852aa783",
+    "data/processed/urban/chunks/9_-6.json": "37681ed1af770ce574888818b4556fe79636b49aaf7ae0bc3cf3aa0db3d24339",
+    "data/processed/urban/chunks/9_-5.json": "79d74601b5ceccc6dbe947b94c50f8ec301c197d8b1c6c362520f40abca23ad6",
+    "data/processed/urban/chunks/9_-4.json": "eaadbc4ff8b68fecf677cf5bd06f53ba2efb38cd05d89a4c821df0e30fd38ef1",
+    "data/processed/urban/chunks/9_-3.json": "5046b82e2629f6cff0bc6133ecbe136c075411bb2931b12bde58ae55ad300049",
+    "data/processed/urban/chunks/9_3.json": "e5022d7746a1ea95f651f1a4999daf27da4ea40231ba896ca2bbe74f6230379a",
+    "data/processed/urban/chunks/9_4.json": "1104a27ece8406323ea28855c48463e265a050b978d679eaffe73d8d23b9c260",
+    "data/processed/urban/chunks/9_5.json": "bc86b42540c23291c721a10e889df6cebaf0e817643fc5f8daa687bd8d7d8bab",
+    "data/processed/urban/chunks/9_6.json": "8b80416946eccbaf9d26590a9bb99339af78f1cf502096216c22f91d72c18b50",
+    "data/processed/urban/chunks/9_7.json": "656de444a0df344d86780c309bdef8a88d136de75efb98d1e9b7bf1d27600011",
+    "data/processed/urban/chunks/9_8.json": "1ebaf0e83ab75df7d52168874e295dc85ad42e09e570faf0c6e746d6a000c29c",
+    "data/processed/urban/chunks/9_9.json": "cf691822148bdc0dfaa609c799c70ee185e92f6a5b790279f03bb6396c252f70",
+    "data/processed/urban/chunks/9_10.json": "e1ed8f248cf7fff6cf1ae3eb96d9e50d76172cf3b0ac74369b9d3d6f31471314",
+    "data/processed/urban/chunks/9_11.json": "a1ccf82e39064209404e9d1c6ce70124682a5086f7483d983c620b371a938041",
+    "data/processed/urban/chunks/9_12.json": "a400c02d40668e7e4ca1544251f2d7a99e42c680c3c22c0120130f293935073f",
+    "data/processed/urban/chunks/9_13.json": "5f92a26f2aa0a941807c8356f6eb42090a5f35f53d8458aaa9c9af1a733df2f2",
+    "data/processed/urban/chunks/9_14.json": "d7eb070ea97d178cfd18eb3f3a5ce188b475964d2ae855cb97137a6cfd4d40c4",
+    "data/processed/urban/chunks/9_15.json": "8bb576f63b4d6ba94e7b9b2ee1c58ee51369ed2c82f9ad5ff2aeec0b71a9d831",
+    "data/processed/urban/chunks/9_16.json": "c45765d9f8b9e1aa6101f68ac919a740154d35c9755457cad53ad7c968c77075",
+    "data/processed/urban/chunks/10_-9.json": "f58eeae19e9474d6426489e0823771ffedb1a4611a356df66b168d7aab21c5b2",
+    "data/processed/urban/chunks/10_-8.json": "97a3c70d25987d78f8078af2c2dbe5f1a92474e5913db60fb90434836f2968c9",
+    "data/processed/urban/chunks/10_-7.json": "1f2a2f28beda2d4803dee20facade1875710428ef7289de6dbc67ac6c424658a",
+    "data/processed/urban/chunks/10_-6.json": "ae6ba6340651d249e90b1e4577001925d720a653b6521cace6ac9c59fd42b5e5",
+    "data/processed/urban/chunks/10_-5.json": "55f7c2b500c76defee20c27ca0bef938fd918f9f179cf32a3fee415ca9649380",
+    "data/processed/urban/chunks/10_-4.json": "bc08f775457bb3a1b056b654e3bb31573817bdc884cce36dbd7af1cd170fd08d",
+    "data/processed/urban/chunks/10_-3.json": "7f48cbcc6489633928e059adfc5052d5fb4099a4bbcfa744a010da082972faf6",
+    "data/processed/urban/chunks/10_3.json": "f1192f9d625321f2eba3d915797dc6175515c637257ef59a101825933befaee3",
+    "data/processed/urban/chunks/10_4.json": "4f5696eb856f56286667f7e5606f2574dc393c522c4e61c8b348488fffa6b6ea",
+    "data/processed/urban/chunks/10_5.json": "00317e5613192ff062cd0286644f1a7fef535a96cf9c15dbb2d24452ddd7b70c",
+    "data/processed/urban/chunks/10_6.json": "97dfd0b42f99b2936a257befbd91339ce613fd6918e6dcdc64c9bb225722a43e",
+    "data/processed/urban/chunks/10_7.json": "8faf62f2c357d8a89f7c77ad919cb5aa6702fc2153a4bb28585834c4d6335bab",
+    "data/processed/urban/chunks/10_8.json": "ce0211a8862489a6f6ebb68489ea73673e615f1f765bc1bef5e48f29e8e8d4b0",
+    "data/processed/urban/chunks/10_9.json": "bc6e98b24fad43316c1b752109f9c83fdc2c89e0fcc36615871a3f87da060a12",
+    "data/processed/urban/chunks/10_10.json": "3b46a30ca0c114a179dcbc045f9fa0a9c372b8d652224bb874203ea4eb4d8d22",
+    "data/processed/urban/chunks/10_11.json": "34c7df9517b6d5d8c9f064086dd9a9b926eed394deec0e15ac405967f1674c22",
+    "data/processed/urban/chunks/10_12.json": "b8a5211116108239ab47a826ca953b50b33f1c808a1032b2923344c1df03b794",
+    "data/processed/urban/chunks/10_13.json": "b2579cf475549c6fa3f54634a3f55adc8eb7c9b8fd08251ea0b2b5dac97189db",
+    "data/processed/urban/chunks/10_14.json": "e430757c62d7b5787a1a0148794ddc97f0956002b0648782857d22348a17bfdc",
+    "data/processed/urban/chunks/10_15.json": "b2ded0acaae125bfdb38d8518258b2f9457f3d8a8c1dd37214428f7dd6f30812",
+    "data/processed/urban/chunks/10_16.json": "74e048f5e68529778983cbae7b69ea602c06e9ff7b241af8e645437ac12c753f",
+    "data/processed/urban/chunks/11_-10.json": "d441dcee155cf2f330752543da0b3cc1b6974dc7b9a6d24417fa65e837116d69",
+    "data/processed/urban/chunks/11_-8.json": "9af92482c5ac8414cca39f04875d38ddc31b7297b639d950542c42de98eb4b39",
+    "data/processed/urban/chunks/11_-7.json": "c1abf37c54071e3cb3000aba94f04bc5acbe3acfd61143e40c73082fedc8c86b",
+    "data/processed/urban/chunks/11_-6.json": "fe39cdbeb4f576cd8fe47f99356ab6aac59309decd52a7422943a631b3b640a4",
+    "data/processed/urban/chunks/11_-5.json": "a6f17b5bbb49741f8dd8cf2373516348e64dd3a2b35ba15ecd203e946f3b6752",
+    "data/processed/urban/chunks/11_-4.json": "cf9c884a504303e2f8f57540248f689c9e554b2e1637ea44241354b9b9b4cb3c",
+    "data/processed/urban/chunks/11_-3.json": "3c4706aa54e35d7c5afe61a18635582c5de40b484aa736d04e7167e3678defa4",
+    "data/processed/urban/chunks/12_-7.json": "388d19bb016276a937d9bdd6c6649a9852d2c716c17ee5bfca04dbbc6cd156aa",
+    "data/processed/urban/chunks/12_-6.json": "b2d666af5831469fb1c9c8c79efc9b8213d63c526b7c4bbcdf6142def1568b59",
+    "data/processed/urban/chunks/12_-3.json": "061f411093e109ce60cd29d148e2b4eca2aec55a4798f6cba92a85fec7287a38",
+    "data/processed/urban/chunks/13_-4.json": "64990a7c8cbfc32c03c57dcb54d2510bb7a06ccbbe0ac016bea10a4240511a7b",
+    "data/processed/urban/chunks/13_-3.json": "0a2ed20932e66cc533608768aff9280cfc3e567cce5649af9ad239036965ebe0",
+    "data/processed/urban/chunks/14_-4.json": "a82910eb43e3c0feb591d11b0659cc2321234bd853e83703589591ba19d0d357",
+    "data/processed/urban/chunks/14_-3.json": "1f15bc7ba5cf0cdf651b79d4a5db58f9feb1cd756f93bb59b4f81fafd6fea7f7",
+    "data/processed/urban/chunks/15_-3.json": "94850cda6485f564709c4602c8b45b4d4ea1db118044028c06a81e9c202bebd8",
+    "data/processed/arcade/chunks/-11_10.json": "7dc27f1069c8ee1e47ce3d26d1b2e29958d5cf64f2a56838cd1b0c24941edac5",
+    "data/processed/arcade/chunks/-10_8.json": "1ef8b33d4272df4bc91b746eb9514a63b3f9719a68e6a174ce34b58b52345e29",
+    "data/processed/arcade/chunks/-10_9.json": "24f0f687116bdc5d97228118e9098128a37f92421adab49d01c31f7395991da1",
+    "data/processed/arcade/chunks/-10_10.json": "85b6aed33ef30406ed23e9fadc55e77170f0321c3a2ad8bfbec6b9e287a9f25d",
+    "data/processed/arcade/chunks/-10_11.json": "0a858b0e9db7af0c8b2a4cb630965996f5da1c0224e32533e40f9f8e7a56adfe",
+    "data/processed/arcade/chunks/-9_5.json": "a228b82e922c38aad8570c1d8c78af00a99334a34d2af3aeb3c7a4d5a37caba2",
+    "data/processed/arcade/chunks/-9_6.json": "7ab4e6fae6550c648b07b0e0aeaa77a40b38117045ea12dd071744e9fcdf714d",
+    "data/processed/arcade/chunks/-9_7.json": "5e96e56cd1ccd5c8d42626c3b7c4e3f2372f21676b208a8d1f1217f5bb5af446",
+    "data/processed/arcade/chunks/-9_8.json": "21e28549ed0ba5fdc3555a6775db730a4d01ad9b8dc8a7d51246e095dd0c936f",
+    "data/processed/arcade/chunks/-9_9.json": "5ec2bb47403e394f9bf6aa80098716c0485fdf8cdcf8ffeb69755424480b196d",
+    "data/processed/arcade/chunks/-9_10.json": "79b59e366f7d1ddc7b511202e452d0b26ffbd0e4897498b153ee54f180b132d3",
+    "data/processed/arcade/chunks/-9_11.json": "6bf642ae708ce83672768667c905258a5809ea7af6687ad8669061163f7c6068",
+    "data/processed/arcade/chunks/-9_12.json": "b2234a80741f28275d149fb38e1ff876eed11e5c0af727b9efebdf82600fa287",
+    "data/processed/arcade/chunks/-9_13.json": "892951501f729fea082cb64a1e5f0d0ae36473201035091c8c8eb2db31dd188d",
+    "data/processed/arcade/chunks/-9_14.json": "454dd1cbf481098f559a9362ffc4dc0bd0f47078a4fc0c7c6f5ca60ff8177814",
+    "data/processed/arcade/chunks/-9_15.json": "e3b2ff40fb4ca6081fb06d1764338c0f98bc0f591460788c2666349357061f19",
+    "data/processed/arcade/chunks/-9_17.json": "58f5f76ded59e75ccd2c8b9fe1a8ee41ecd515f483147c7a97906b83e936d186",
+    "data/processed/arcade/chunks/-9_18.json": "cd98e81436b5a007f20acb6940075f0a90ef0b1d87db4e32279acf83b96bdd5d",
+    "data/processed/arcade/chunks/-9_19.json": "637d58c5bfe2ba5985a65086c55b2063024d12cd3719c1494042bd97f61d42a5",
+    "data/processed/arcade/chunks/-8_4.json": "6323ae5835c3ae444b43cc869276a2486b467a7a5bc7ff12edc0db4db1e114c4",
+    "data/processed/arcade/chunks/-8_5.json": "59c192118c9038d69b1249f2b64e02f982bbb6bce4e0c57851782f33b81c53bc",
+    "data/processed/arcade/chunks/-8_6.json": "a43de1255ed57e8f66a8d59b04416329b647bc5f8af6822c4fff33be996ea959",
+    "data/processed/arcade/chunks/-8_7.json": "0111d5ea8ca4337c0bf3b2929d26fcaccc6f2e051d876f1b31ccb449ac877563",
+    "data/processed/arcade/chunks/-8_8.json": "620ae077d27b815d988ab3e7dc0a0c57d75cc75e76a7e821a30f86bedd5a18c9",
+    "data/processed/arcade/chunks/-8_9.json": "79070828d3411d74025789059095b34a9470eb229a6535f819490bdeeaec30d4",
+    "data/processed/arcade/chunks/-8_10.json": "9e632352acbf20c8cf04d37b557a3a3ce6ebdf8e95b66165c5308219da062990",
+    "data/processed/arcade/chunks/-8_11.json": "7606adea77f3725bad1d2b126d3f945a89b1a0f06fb16b1ba73b505f2f7e2343",
+    "data/processed/arcade/chunks/-8_12.json": "8b173f05b0001e126a255dc4d4fba9d1370a71fa75458500491e5f92c1aba8c5",
+    "data/processed/arcade/chunks/-8_13.json": "d5d92f0cb3ffd13d5d7ee1fc661e5ad68aa787377d37313aabb1ea4ab1318425",
+    "data/processed/arcade/chunks/-8_14.json": "d8056257a9aac980ef69f9c6c47c92ce701e476426b2867b272c06281ece4a3d",
+    "data/processed/arcade/chunks/-8_15.json": "c5eca75df4435438093caec32e683efdc1c2e76811d30478ed6dddb2f791320c",
+    "data/processed/arcade/chunks/-8_18.json": "4ec71a4a71d64b07ce3621eb5871db076d5d5e7078bdf9a30e3501bd2a90e6e2",
+    "data/processed/arcade/chunks/-8_22.json": "593774316165c08c35faf8f4dccb3c8579b94ab08bcbe9b6cfe222dcfda26682",
+    "data/processed/arcade/chunks/-8_23.json": "f61d8fc81d647441a7272e9ab07772a52f3b3b285224ccd3a55f4e427cc1c4a9",
+    "data/processed/arcade/chunks/-8_24.json": "92f4cfb4b5117b8d79883ccab3f150beaccc7335405c1186c4b8cd96be15b61f",
+    "data/processed/arcade/chunks/-7_4.json": "8787a9876b87c0be00405fcf16065aa94371f7b0de742564cae441832bc20f77",
+    "data/processed/arcade/chunks/-7_5.json": "4e91f52b36360342631aaa09455229c473c54639c590e3c41ec281d1cd18e8b6",
+    "data/processed/arcade/chunks/-7_6.json": "cdb96f3d89f0140b6ae9a96c245b86ef00d4cecc512ce87e633412f8f569a8d3",
+    "data/processed/arcade/chunks/-7_7.json": "c26c5b54d46b59fb6321806af7b44c6e5bb4aa1a549e45ac1d90ea9b9ad33078",
+    "data/processed/arcade/chunks/-7_8.json": "df51ffc23d0ee1275696703026aea58cfd7d6370cb2b18146451a7cbed47c040",
+    "data/processed/arcade/chunks/-7_9.json": "74d77699349a4dfa8191d6c3de39f447538b3c95e62bf0c927be0e902a0fad19",
+    "data/processed/arcade/chunks/-7_10.json": "7952c4136254cc9af0b3feb916e679df0dcb4eb465bd03dc0f4dea1c4d49652c",
+    "data/processed/arcade/chunks/-7_11.json": "df0e38b8517f80147e1de8417c1bd9fa316c541d5e77b059e741f618d42f29d7",
+    "data/processed/arcade/chunks/-7_12.json": "62d0b1035e4e3562dfd6790c7d58c944669361f1399d1006e858ad7d325a37cb",
+    "data/processed/arcade/chunks/-7_13.json": "2ed64e5840e927a7290ccaef6bb437b4982f079a8bf448092c54a98a6c2ced6c",
+    "data/processed/arcade/chunks/-7_14.json": "b3ac1feaeea58e82f4e69c722233be78e3d33f35684198fdfeb02d33df736bb5",
+    "data/processed/arcade/chunks/-7_15.json": "14ba0d06a064853bda15a284f1174d37d9373e530aa8aa46a8ac2fd737c232a5",
+    "data/processed/arcade/chunks/-7_17.json": "c16b6901975fc1691018424fc488ac8a7f141cef8f7e71a10ab8a3b946d7b1e6",
+    "data/processed/arcade/chunks/-7_18.json": "1fad0ee3e3c4b98339315a5671beaac9c6a8cc1b4e3823437ca286c9045a99e8",
+    "data/processed/arcade/chunks/-7_24.json": "5fb787127717a89d3279cbb22f8473425ee50fe87aeb7508ab34c31f296dd2ca",
+    "data/processed/arcade/chunks/-6_3.json": "5cc84e987dc7628a7ff4cb7ec4606e0febb153fa4bca8d8cfc4d0667ca0c1009",
+    "data/processed/arcade/chunks/-6_4.json": "2ad95251226a3663cf437b4a20bb4554a7a144acc6d64d20828b4f5ff164e9f5",
+    "data/processed/arcade/chunks/-6_5.json": "0fc95b693fcdff0df533de5771939f8dcb0944d833012e764f14289dc4b61a77",
+    "data/processed/arcade/chunks/-6_6.json": "2647a6790a8cb32a2c7ada8b5afffa6a274c44ba1528ab86083ebfad89d235e5",
+    "data/processed/arcade/chunks/-6_7.json": "1407001b5591c6a18a5152cb17204f48b47b6237797a04e71b5f623ea5de3c22",
+    "data/processed/arcade/chunks/-6_8.json": "cef55710b92d8ccdfcea72166482030b7af27a351b53cd9bc5cd1d45559f0a2d",
+    "data/processed/arcade/chunks/-6_9.json": "20b67d196270c024752fe0822b954fed7ae8a274876e505049ed258b74832dfb",
+    "data/processed/arcade/chunks/-6_10.json": "62dcce62f786fa4f0119df15cae7a2fa6fa20694abd2d116d4e788bb058f9446",
+    "data/processed/arcade/chunks/-6_11.json": "6441c97a6bbf40f114a2a66d97d42d57d7274ac272f13c11ecfb92e17663aec6",
+    "data/processed/arcade/chunks/-6_12.json": "44bbcd84d81c160c0bc1e517b26ede56d547b44c1899706a5ed3826b0a64a4dc",
+    "data/processed/arcade/chunks/-6_13.json": "46ce3c468ae541bb095b4db74c5ac2eb920f396b8d02026fc059fd25c29360f2",
+    "data/processed/arcade/chunks/-6_14.json": "fab4fe8e2a7cbde79563a24d8a49aaa09ddd367ebc0b14780408596a72196db3",
+    "data/processed/arcade/chunks/-6_15.json": "4f591adfaec5e6f8b481b7b7055ef56f17d9724d9533cef136b6470d14daf3c4",
+    "data/processed/arcade/chunks/-6_16.json": "004bc3047dec122e0133fa5a70997a435660f7518ccd676f3170eb7eade79203",
+    "data/processed/arcade/chunks/-6_17.json": "e30f7dff81e744fb78c1296adeadfe56d6ed424137e8c84b243b8cc3f2c1a273",
+    "data/processed/arcade/chunks/-6_18.json": "2eadc4309fcf349f9badb22d998f1fb624fa0269c806ed053557f1ddbab727d7",
+    "data/processed/arcade/chunks/-6_19.json": "d70f8d03833c65acb081be74f725edaea516cfcb44a11a497896822d5d02e731",
+    "data/processed/arcade/chunks/-6_22.json": "765987b357d50afef339bd5f977a2c8c724a36d1d1a699e357462c307ed7ca11",
+    "data/processed/arcade/chunks/-6_23.json": "e9c7042129282338ceb8b050a37a8505b5fb442689fced286cfef65cc360e78c",
+    "data/processed/arcade/chunks/-6_24.json": "fb59ca95e34f4f8a5928b62a60bc9617c0c26323c4bd46423a8806037e16d030",
+    "data/processed/arcade/chunks/-6_25.json": "1c40e41b0545b542898213df177e01f46c70b1117f2250aa6ba8710c73f6c69f",
+    "data/processed/arcade/chunks/-5_3.json": "0d1105d9d9f4fe44a04d76f86073e00e0162e580bc57fea97e35e6e7429bd4e6",
+    "data/processed/arcade/chunks/-5_4.json": "2f0c11f48d814cde8cf838263e00b2fa3698ddce104399578a94b61b251f4a1e",
+    "data/processed/arcade/chunks/-5_5.json": "3bf0c44e2513c6e894be46058b9d49df959339355cde8607e1ed90dc78b1a128",
+    "data/processed/arcade/chunks/-5_6.json": "af091cafc200808835a4f0184b8760c785a6fee1ffcae4cbf85fd89778cc1010",
+    "data/processed/arcade/chunks/-5_7.json": "e395c9da2f52b194190180cecac2de91523551542888c8be2bc02effd616ac78",
+    "data/processed/arcade/chunks/-5_8.json": "218281188794c763595e74d5ad7ee5b21fdfc3b95a837ccd2412cc3ca16bdbf7",
+    "data/processed/arcade/chunks/-5_9.json": "e94d8e58d1da722b3903810302098371fde2a090af84c65103faa1d3b8c83f4d",
+    "data/processed/arcade/chunks/-5_10.json": "8fc9d75aa44b70635d897d26ea1bcc9c965682c26d61f06fff0e5f0576078c81",
+    "data/processed/arcade/chunks/-5_11.json": "7e018e5cee77781a64d877e89bb7822f6eab4e190ea317416746a34dabe4bce5",
+    "data/processed/arcade/chunks/-5_12.json": "4c5dcdfd4e8cc853348604a828481466bc8fde098385e021de2a449a8b12a777",
+    "data/processed/arcade/chunks/-5_13.json": "7acd5827c3d1a1bb63166f87bf5fba412c58f2c327dd8b9a4b923bea64409e58",
+    "data/processed/arcade/chunks/-5_14.json": "31f266458c4e95dbce3febd95e7098d5bbbe416e9f4ee8ba56551b4a7f453969",
+    "data/processed/arcade/chunks/-5_15.json": "502ee797a2f9d8ffb7df456a44f1d5ac86a330d39d4b75805f75f4393d16083f",
+    "data/processed/arcade/chunks/-5_16.json": "69698f08a9f93f4fae70155360ba2a50689635e64445f2a817fac0f610543efa",
+    "data/processed/arcade/chunks/-5_18.json": "69c8362705217552cd37a149248299db5043797280539f6afbf2e837b3db45e1",
+    "data/processed/arcade/chunks/-5_19.json": "3624232e3d4fac0c05988f30e7f3f976d1e51af44201d8a95e0b5ca995551cc6",
+    "data/processed/arcade/chunks/-5_20.json": "62a88f49c01dd45cb98f7d49ebb6be30ceb36c4a0c16fea886f5adb0adc2649f",
+    "data/processed/arcade/chunks/-5_21.json": "f9d78c0ba9907cb68ec45008e3c9b348840427ee7708c2ed0397e38ecdb28e4e",
+    "data/processed/arcade/chunks/-5_22.json": "81d818b2a3264b1c8af8935866586a3bb1f95543f00ff213842f96a9b6db5176",
+    "data/processed/arcade/chunks/-5_23.json": "436911e3ad68930e24a82b3b15e5d5bbb70dc9683989e3b22edc18587928df0a",
+    "data/processed/arcade/chunks/-5_24.json": "ad4c1f53c48365ea29aa071f83703c39c4f141b0bebbf679ff54aec0cf52b986",
+    "data/processed/arcade/chunks/-5_25.json": "347a77399dbbb2870a8eeb7466ca730f261e9ff96ea5f13e912a48a0e53a1b90",
+    "data/processed/arcade/chunks/-4_2.json": "7f7674db4cb63223b36ed7acce14441b2102f584ba2b679ea0aa316314e7aca6",
+    "data/processed/arcade/chunks/-4_3.json": "3adf87c4e8f8c21e33d3aa414c1592be80a87fc3e26f55a7a077a7de9a12cf4f",
+    "data/processed/arcade/chunks/-4_4.json": "30ec90b437cb14bec607f2d80b750c9ca8c18e6e14dc9f067e9249ca3d9a5e3a",
+    "data/processed/arcade/chunks/-4_5.json": "d1a2938c1d039537bdf53237265383acc54d5e1469a92d71146c420e1727558c",
+    "data/processed/arcade/chunks/-4_6.json": "b86d09e9a18b1a42613409c4cadd47f06693e208357eafaa552a9ada2fbe0b34",
+    "data/processed/arcade/chunks/-4_7.json": "0a4a846859682351df2a8bd5c405b79711f0bb14bfbebb56326fdfef56c182c8",
+    "data/processed/arcade/chunks/-4_8.json": "176c73218fc205e8aa4741af6aa1ce249e44676cdf47691d043130a6070b2a9a",
+    "data/processed/arcade/chunks/-4_9.json": "8f6c77a00c94268602841aa37a5777e6d01138e946be09440a9d527710549957",
+    "data/processed/arcade/chunks/-4_10.json": "254e677d2c3d02d62c54c07380c95663c360b08242fc3c7317110c6e4d132f36",
+    "data/processed/arcade/chunks/-4_11.json": "0d680707ed29bea90055278eadc43932c537d8912f90683f72d9db31b242b59c",
+    "data/processed/arcade/chunks/-4_12.json": "3236218e80e72cc052c124e4cf5e95b48a86dc31f84b41669c264034bcc17968",
+    "data/processed/arcade/chunks/-4_13.json": "da3823ae7e1e841f8d8dba76e84f3d3b5af4d94f1fa31519f7a0bedef19279ea",
+    "data/processed/arcade/chunks/-4_14.json": "1ae5d6251e03d19a47762563d5f6e8e5801864f9b72f38cd9437f2acb1ed45c6",
+    "data/processed/arcade/chunks/-4_15.json": "6499f8a1852928788bcc1ee77b3625b59d9ffb61fc0a7480d5eb84fa44f8f0bb",
+    "data/processed/arcade/chunks/-4_16.json": "e2ce115252d00ad63eb549542739fc40c386cfa07f4f9c74def715c31c1b6a01",
+    "data/processed/arcade/chunks/-4_17.json": "fef70addee611f61e2382d868a26ebac9d3be4a1312aeab261b86d476ddb34cc",
+    "data/processed/arcade/chunks/-4_18.json": "66b1ef8d51ffe20eb1d180d63f0ad5ed9168e175bfd198b7837c5efee902da5e",
+    "data/processed/arcade/chunks/-4_19.json": "22d79335f522be2540d4b92d909fca2be2b20d73411569640423fb394b0651fe",
+    "data/processed/arcade/chunks/-4_20.json": "0449451b382d8a8107b3d6c22252118ee2f39954e2d380f8949fa9d026ecd66d",
+    "data/processed/arcade/chunks/-4_21.json": "e43c147bf4a66443755979f4f2a45efc30bb33e3b86950c3b75bf7f0664b020f",
+    "data/processed/arcade/chunks/-4_23.json": "ed4602bcd6cd335a2da140ba4334d760e9b7d20d347e4fc0b26d481f39d4fadf",
+    "data/processed/arcade/chunks/-4_24.json": "fb91b080484f10f6f2cf022946809c7b1ea192da030a624cca834b985f9e0d88",
+    "data/processed/arcade/chunks/-4_25.json": "6308f69bc3caeb012e1a58e5757554b88dd5a62ed8d0eebd79ee8b7eff030282",
+    "data/processed/arcade/chunks/-4_26.json": "115c1b16ad9ef8b0c4a76736472bb52f49722aec454613bc40421e5b6d1dbd18",
+    "data/processed/arcade/chunks/-3_1.json": "862de803d2d5d4ced60bfe9dc8a3f4c7278e3f1ccd60fa1356170f227998aab1",
+    "data/processed/arcade/chunks/-3_2.json": "b05e342f51c4b730630419199dfca4007faae3fac2009a662690230a4baacc1f",
+    "data/processed/arcade/chunks/-3_3.json": "e5768cb268b2995cad8a600561b2aa0cf6efbef660f76de5d73ae299686368e8",
+    "data/processed/arcade/chunks/-3_4.json": "b16e1aae68b9359d5b3d155580f618c94e93827704a93261a6d3ed8ebc6cf82e",
+    "data/processed/arcade/chunks/-3_5.json": "ebebe785216dae840547c73e26dae80e93e7b545f405f17e8562b050ab5def93",
+    "data/processed/arcade/chunks/-3_6.json": "59198eef2a6d8485f5b5eadbd09e3f358483fd468d25c0414dcd28e2b58862af",
+    "data/processed/arcade/chunks/-3_7.json": "8cc44e84cdacbb4768efc83cb61f0d7a8d63b71e0eb0142f6acba3140a1db14a",
+    "data/processed/arcade/chunks/-3_8.json": "71dbf22c9ce1fe02d0010a274c7d310b9b4ba1be869929f91d105e88e9e5f502",
+    "data/processed/arcade/chunks/-3_9.json": "f46e5adf35392b3af1caec8fc7ffa9dc6fc6d38faeb62a09c1f2cc1c925672fc",
+    "data/processed/arcade/chunks/-3_10.json": "6d9e306162d05031d007abf23b6817b15a4b2e3b9b2021e6056e793c8d72f163",
+    "data/processed/arcade/chunks/-3_11.json": "6150d906755a275d0aa3eb1e651d08336503e2b735feb4a628b61cbc5d553d6b",
+    "data/processed/arcade/chunks/-3_12.json": "c839d0ee7c359c142c8e418f0d3bec8609f5c736034decad09625daa843fd99c",
+    "data/processed/arcade/chunks/-3_13.json": "30b208cf890294757232de50cc7b81556096b42cdb8dfeff4a563d05fffb2721",
+    "data/processed/arcade/chunks/-3_14.json": "fcf866ff59ae6cad0671f0c9fc652115dcd44ccbbf9ec4f0e89322def0a0bef0",
+    "data/processed/arcade/chunks/-3_15.json": "b2a435be011b91aa32d2e58d2ea4aff10c37f7aa221b23bc13e1977004f87aa2",
+    "data/processed/arcade/chunks/-3_16.json": "484dc817485de60071c76daf21c8647222d6e3865774154dd0b5dd341b18819e",
+    "data/processed/arcade/chunks/-3_17.json": "75b725de3b964c95d7816067210c40ad6514bebef6b11806dff675376264a93a",
+    "data/processed/arcade/chunks/-3_18.json": "25720b461d7cd83ab6fb5e692d207e894a119140eaf3e164a701791bf7e316f6",
+    "data/processed/arcade/chunks/-3_19.json": "675fef834f0cda10ceea9388d8fb5f757dfb4670eb5ead3a469693fb7c4b5134",
+    "data/processed/arcade/chunks/-3_23.json": "4d6394143548df79472b689823ace993b88d45a76222516dc545dd4f00aeddc9",
+    "data/processed/arcade/chunks/-3_24.json": "f4ca3d84a3357af13202898cbf1d37b08a6ac373f49c5dceba335c5acbf5f832",
+    "data/processed/arcade/chunks/-3_25.json": "e02be335868a19fd4e2926e7ff70bfa21e68b820e9dd27f69b52217e4860ca27",
+    "data/processed/arcade/chunks/-3_26.json": "931165d00812909d7323cc918552b3a9bea672716a9997d914f673ea5bd45f71",
+    "data/processed/arcade/chunks/-3_27.json": "eb7d6ddd20cc43acb28f49123a21cf5a1ee9c44d16b45d4a7054ede677e777fb",
+    "data/processed/arcade/chunks/-2_1.json": "b48a93a7294e677704319ad89140232264f19860e7b94eef02f4a7ac717b6e96",
+    "data/processed/arcade/chunks/-2_2.json": "e12a53bd987009c1a2bb9746e09a80824f23acde028c5a6bce578ee4ff7291aa",
+    "data/processed/arcade/chunks/-2_3.json": "b1354aafa4e12110fdfb562442c4ffa0f784168ce08108a6b1e64e6c7abf6864",
+    "data/processed/arcade/chunks/-2_4.json": "17e15af23de09c0da4c5251bd34abd9d3ba0aa4ca5784c0540514f0279bdf5b1",
+    "data/processed/arcade/chunks/-2_5.json": "5b045afd5a8f001328ddeeb1aa13fa2fefe8a7bfdde863f1dc8af5c29b2af322",
+    "data/processed/arcade/chunks/-2_6.json": "647f4a93d7edfc19621ed08ce0e2bc12c117d46dc7a9abdda500c851e90787f2",
+    "data/processed/arcade/chunks/-2_7.json": "e80f8abbd30a8db833e3059ed66b2664c656cb42833581fcc0e01300f78ab9be",
+    "data/processed/arcade/chunks/-2_8.json": "af0417b4085d88d219a9552c744056f17a667fee0bd489a3e329a39a7c599ab4",
+    "data/processed/arcade/chunks/-2_9.json": "4c73853550bdf0b84f84a0290accf339380db3ee8c180f727417d5202b4ee2c7",
+    "data/processed/arcade/chunks/-2_10.json": "4280f1aab832352d66870df36b8881f7e350bc7602fba288fe97858c3b2890f8",
+    "data/processed/arcade/chunks/-2_11.json": "1fb45135e4b3f724c9c446903a5c359158a354774771238523d566551cd856ac",
+    "data/processed/arcade/chunks/-2_12.json": "f59a7ab17906ede92917c3c6b30691fe34d78fcbd73ef3acde56a09cc1113116",
+    "data/processed/arcade/chunks/-2_13.json": "1dc8849f580a27d6c79760b725750b68a48ad9403026043ab8b8ac3afcb6df05",
+    "data/processed/arcade/chunks/-2_14.json": "43be373c51271af86ed5181ee529162405713b9f425982aa8a91d157d18ef96b",
+    "data/processed/arcade/chunks/-2_15.json": "842aeae998d769b93ce21d1c5b73997af85a1bd3fa0df689b77673a5f07c3beb",
+    "data/processed/arcade/chunks/-2_16.json": "fd8995763b760e386ea2e87b2d0e57386b860ff9f6ec30dd02c1720022eafd43",
+    "data/processed/arcade/chunks/-2_17.json": "c97847648d7eb19ce46594c8600e592dddb42f0e7bd58473c7ababc143f809b5",
+    "data/processed/arcade/chunks/-2_18.json": "72e52c8046a288c8850f277d65a61b0c12e8903c0bd32b04c2ebcbfb272aaf98",
+    "data/processed/arcade/chunks/-2_19.json": "1dcf9b992438b589201db8478fdec2758a311dc77575e2a4349018d479401515",
+    "data/processed/arcade/chunks/-2_20.json": "7ada96a0c2e583fead877225112ac74d73990781c7907d5bd11e8b55c9459d1c",
+    "data/processed/arcade/chunks/-2_22.json": "8e8dcdc036ebce50e5fc9512c049c0cbe563e64df098217c0bc69544b200d381",
+    "data/processed/arcade/chunks/-2_23.json": "964e776fa7d4c9cb27f9f35d0dd2e2bcf0c7db501826500e6cfee8700611130f",
+    "data/processed/arcade/chunks/-2_24.json": "4d4e073207ba08dec73a69f69c83f6d60f22947a1a269bd53d36a640d18daa06",
+    "data/processed/arcade/chunks/-2_25.json": "be95bf3a6667b3a110f90f59c5dbac7394505172c994d0b07ea1c99a351aaca0",
+    "data/processed/arcade/chunks/-2_26.json": "d7b438e3cdebc1539b36c57262dda082cdda5f48fa0623c7e8a517eea87e3467",
+    "data/processed/arcade/chunks/-2_27.json": "3bde2c3ca31f64e461158d3b1fad5a307e852b6421f326fb059fc0f6a1eecfe3",
+    "data/processed/arcade/chunks/-1_0.json": "8d0aecc84ea6914f98f10f505fb6f4168731a2e3a459952c992183440118fe7b",
+    "data/processed/arcade/chunks/-1_1.json": "6612147a8b1c2cec9237fb290a31a9711c17420b43ec7ad307a4d82f1c01ee16",
+    "data/processed/arcade/chunks/-1_2.json": "b1ccbc7be44c0c2758ac0dc7bc1a1e6e37ab25359ed103595a3569db64fc03d4",
+    "data/processed/arcade/chunks/-1_3.json": "6f0f13a52ebee58c614de02c96efacc488f20b4e818108ed65bbe4226c5358c1",
+    "data/processed/arcade/chunks/-1_4.json": "ce6bcb0cf1c6de41c5f49a9eeb9fd9e182341a5ba4aeefac67b62dfe80de7139",
+    "data/processed/arcade/chunks/-1_5.json": "ab9ae5735b3e1df5fb99c8f9ed84838a4f142c6e682ac88fcc6d2ff80a9cba37",
+    "data/processed/arcade/chunks/-1_6.json": "373dc9222cbc0a15b01eb4b6e141dd70101d6d01be907c8338e1a2bf5dc2195e",
+    "data/processed/arcade/chunks/-1_7.json": "e32905d200f5f6346350b7e459b8bca3860b02a610bef53d49002f71bf89592f",
+    "data/processed/arcade/chunks/-1_8.json": "8b45ab2b5820d2f5608b62056e848ed4d85e6b596d35b5e423f7ffa26f2576a3",
+    "data/processed/arcade/chunks/-1_9.json": "9e862e7f952c5ba1b2bccc36645471e5891b12a78e82059efab05831d92dda4f",
+    "data/processed/arcade/chunks/-1_10.json": "d16ef16ec4d56445d4d8e195f790ee90d388d197f3133844f53ba4ac65d1b9ec",
+    "data/processed/arcade/chunks/-1_11.json": "98c24f6b069f95a000c977999cde616d9f66df06da4429575e6692d794b1fd8c",
+    "data/processed/arcade/chunks/-1_12.json": "99661c6dcd79cff4e86e1c149466ee75e3b627eb78d35584dbf0debd39a17bf9",
+    "data/processed/arcade/chunks/-1_13.json": "fd1da0013ea70f4480ced6e0e3658868fe612b795f51bdd1a2e6cc436e2f75c1",
+    "data/processed/arcade/chunks/-1_14.json": "5cccd9130c5a619e83a976cfb8a71c90c2c3fffadfadbe04b54b7ff44f685812",
+    "data/processed/arcade/chunks/-1_15.json": "3e9d301012a3205f06f4c0b7d9136006c1ab4ad8126c93f0004941731e88e822",
+    "data/processed/arcade/chunks/-1_16.json": "5c3b34da40c8e29941c06b7f6d85a849a0eaffc57387c9199f1527a2af2c3a7c",
+    "data/processed/arcade/chunks/-1_17.json": "b7334dd347817d77612b2dc7d2a681df4e8b2497957aee8740f55f2dd6657240",
+    "data/processed/arcade/chunks/-1_18.json": "f58249395ead14a3fb2794dfd16ba991f943597ed86afe78ee3140f0e97619aa",
+    "data/processed/arcade/chunks/-1_19.json": "d1ee2936388fbe69b3036140a77fe2ef2b44fd26a62635885eac5cbe7e65e4e5",
+    "data/processed/arcade/chunks/-1_20.json": "f599c497a02bc412da48df075c912746a3533f79cd47e9d7e0218a489adb862f",
+    "data/processed/arcade/chunks/-1_21.json": "75588486861761812b532f33a722593f9050da908e26cb048029a45656be8c2e",
+    "data/processed/arcade/chunks/-1_22.json": "d9cac4ebf4fe3e9876a227326c037d3b659f858ca250fa391d91618609db790a",
+    "data/processed/arcade/chunks/-1_23.json": "147877e6c3063ca1443f2f85955c512b60354b1c0917761cf520c736260a52fe",
+    "data/processed/arcade/chunks/-1_24.json": "4d10c2094f8b732497d825ba2f2cef0984d1e32cbd3eea525e5bc0cccb8be93e",
+    "data/processed/arcade/chunks/-1_25.json": "65f12b1428a2f8061d9ecec69a68c874a76f65f44125821d038c22b941e4f26e",
+    "data/processed/arcade/chunks/-1_26.json": "d4960ed50ee03d1ddc377f073cd8bd93593af0565a57d536dafbc184292e6a68",
+    "data/processed/arcade/chunks/-1_27.json": "668308c42137faa3b1573fae9ba54c3df8161c44dbceb270932f2070bb212eb0",
+    "data/processed/arcade/chunks/-1_28.json": "688f41c606c556789f7de101806a34c477e219b28d82ba7bc5944985edd20473",
+    "data/processed/arcade/chunks/0_-2.json": "d6102ca6d19ed3d4532bff760baf4c7d1e318e807d8a2d537a18804d96297991",
+    "data/processed/arcade/chunks/0_-1.json": "56cce12e766f7c545e99a23b3be97183f34acfb3080da342198111fd4502e9e8",
+    "data/processed/arcade/chunks/0_0.json": "31a510213019a6ec91c29bee8581d41cfaaeca9711509e5fdefef13e3d989134",
+    "data/processed/arcade/chunks/0_1.json": "1ed81f1dcfe63ffc4b63f6fd125bc42e1083ad68d747983233ce7ca223412672",
+    "data/processed/arcade/chunks/0_2.json": "bea23c5c446de4dcc06f7001ee98301191ee83cce931daf339733a3b158e6bdb",
+    "data/processed/arcade/chunks/0_3.json": "9f5a1b21812f3f8f4d09c31f78b22f5e5b67c30e02c852e25872e0a7cdb7c839",
+    "data/processed/arcade/chunks/0_4.json": "fa5061fedc62a965d522f4723bf21b4b3cc09a569b6bed82787d6d534e42595f",
+    "data/processed/arcade/chunks/0_5.json": "ca4507079a73cb4405ad739ac9faaf0d8bfab48b55140e90560adaf4b18e1070",
+    "data/processed/arcade/chunks/0_6.json": "cd40beaa5d6fd0465650114c9cc28a1bf9083e79f9c502dad2a060d792a4989a",
+    "data/processed/arcade/chunks/0_7.json": "1f1607875fa1417e4dc378133244500710978210b6d63ad7df575161f0767659",
+    "data/processed/arcade/chunks/0_8.json": "115b2a9cb4857aa9d7aa9955e460a623b3652018b22d2edb2a48b19b8df5421d",
+    "data/processed/arcade/chunks/0_9.json": "b9053aeec89cad89813370f401be44436d4acc4480efc90c5b03314fd7b152c4",
+    "data/processed/arcade/chunks/0_10.json": "2b08a62f4f002c28bbbdc560c54cd58c61def23227a4157bf1300b2cbb37b990",
+    "data/processed/arcade/chunks/0_11.json": "7363446061e4ca116c77dfa1879010ecddadaec40b5fe5559bcce1a886ac19ff",
+    "data/processed/arcade/chunks/0_12.json": "98aaf693fe1232cfa1890eff3aee01f7d06e83c821c5a4898fc4b9c209d3a1a6",
+    "data/processed/arcade/chunks/0_13.json": "8be920b76ecb91a357e70eff5ca7491da858227ff452ac4ff3fb7a13535d83f4",
+    "data/processed/arcade/chunks/0_14.json": "5d9d3120b87efb7d28a9824f429c331f04c7e5cdc959ff4103595016bbc19072",
+    "data/processed/arcade/chunks/0_15.json": "e3f5d56bfc30e5bdfc076407d940f1eeb4574a15645bc1327f65a4272b9fd957",
+    "data/processed/arcade/chunks/0_16.json": "dbf16f6067f294053a57d4a79c7ed4ca78679d44312aa696ed27f1d19b995ff9",
+    "data/processed/arcade/chunks/0_17.json": "27afbdbd409c06a1cf949d2d09b4dc42c8645734e1ca73a95ad9b5e0a0ed5be6",
+    "data/processed/arcade/chunks/0_18.json": "060a3f2958cf0e884330a3a0f6105aa8e0b40ca36608bd785704564f112bb8b4",
+    "data/processed/arcade/chunks/0_19.json": "abecf3fa0582157a382e557d703b90d4af12d0fe68118414e2f2406237177edc",
+    "data/processed/arcade/chunks/0_20.json": "cb7762af6dc7381be34c463f73f69b62796ac1ca154e2cb9f9de23242e2fa6c0",
+    "data/processed/arcade/chunks/0_21.json": "4888bfbb07e2767ee01a96c68a745778d48ff6586a9cfba3cf5ddd23aa091c75",
+    "data/processed/arcade/chunks/0_22.json": "37a05777a1706fadebadc39bf41801db6b6e68270305a5ebdf6dcaf1e988c211",
+    "data/processed/arcade/chunks/0_23.json": "92af8d0f031122de05b081ede76f33ce7d12ffc8d9cd2770ae8e57647df86845",
+    "data/processed/arcade/chunks/0_26.json": "0cea1208b17cdd256fb882d63295d55655a287bfae5dfaf74cdbe7d2869ded94",
+    "data/processed/arcade/chunks/0_27.json": "cfb04d1437c536b9d98f233dab49666721c6729081c97788fc0fbfc529e092b6",
+    "data/processed/arcade/chunks/0_28.json": "115140d1b07443103d13f5f5c56846b20ffc34915bbe48314a4cd6e47bfe8f6e",
+    "data/processed/arcade/chunks/1_-3.json": "b938389a01b78adc93b6a356495e40ae6dfd9f0c4385f4d363add9969195e4b7",
+    "data/processed/arcade/chunks/1_-2.json": "99d101111ba5cdb3e25d7f5a06f8939b4a61a380198ff36c299ad5e2e5fa9900",
+    "data/processed/arcade/chunks/1_-1.json": "6d225fd6a3cae926d87b5069ecdeed68719b712bc089f736d9b82cd3b7e17579",
+    "data/processed/arcade/chunks/1_0.json": "4aa531d4b14774a2f780385a7f27defff94a4a39d96671598c8f615ff8aa8187",
+    "data/processed/arcade/chunks/1_1.json": "9a8ced78afd7bdade8573388a335551da0fd4b44b52c6453452fe48130f7eafd",
+    "data/processed/arcade/chunks/1_2.json": "46365e3a189560caa82ce5b7b45f96c4123f4e42f93a02b99ce254023efa4421",
+    "data/processed/arcade/chunks/1_3.json": "95a549c11cdd9503ad11ab7af94e12c965f9fd2847ea28292c6f73ecf59e3740",
+    "data/processed/arcade/chunks/1_4.json": "730e86cb95890fc5615f7d33f9698dca779ed24ce307cd67cb527988fc99fbbb",
+    "data/processed/arcade/chunks/1_5.json": "18702a548b430cf25c6d19c5a4a6fcf61872f21eaf7164922269ea5dc11e82c0",
+    "data/processed/arcade/chunks/1_6.json": "04b8f48874cb7138ac6c214c0fbe43303cab3ccaadf6fc157aebe39425adc694",
+    "data/processed/arcade/chunks/1_7.json": "733b94311e1a97fecd7f071a3e5290b5328754914dc8d43ec1a572975e942aef",
+    "data/processed/arcade/chunks/1_8.json": "fe56232b95f921b39a0912a0622e45e09e901ebc3e85df043c85532dfe472f62",
+    "data/processed/arcade/chunks/1_9.json": "4804661559eac1f60f0a759fc9e0016eba9bab9a1bf69a1b235b6cf3d9b738b4",
+    "data/processed/arcade/chunks/1_10.json": "967112b542a1270ac05bb19a0f148d1fbf03c41200f2065a351e9542d8ed62ad",
+    "data/processed/arcade/chunks/1_11.json": "4271f2e39358d1d861ca91348f0a4747c9b34ca176ceed825882d92274ce2d95",
+    "data/processed/arcade/chunks/1_12.json": "645e25e514261b0cbb236fb97c19dc0532fe26325d1f2a617e806f1f3a7914f1",
+    "data/processed/arcade/chunks/1_13.json": "f496205f234bd270d57d332ef5a6f810d27aa8b1a60c22a088c3ee51b67cdae9",
+    "data/processed/arcade/chunks/1_14.json": "ff238f21426494c1310b3d8dbe512505a2eb47c497b053c95ff24d162113eba1",
+    "data/processed/arcade/chunks/1_15.json": "499a51bc0c156ad0b0486819b4bf698f80fea8a3ecdbd9316ebce55c5bedfabe",
+    "data/processed/arcade/chunks/1_16.json": "699b9eaf4cb32a0463c736b72a1218d44f7b0982db226086f887623e78ae0c18",
+    "data/processed/arcade/chunks/1_17.json": "921598440098918086d44fe157ac17565add9ce56f33b3f8639d7f4fc6158c57",
+    "data/processed/arcade/chunks/1_18.json": "f32b312b22e49dbabce4eeebd6142a141cd9e4c3bf53c11cfb8c10c637c935bf",
+    "data/processed/arcade/chunks/1_19.json": "c395158a37a956e851561ebb78366c8636e7f9afad350688749fb652c990c297",
+    "data/processed/arcade/chunks/1_20.json": "bf215c8f0652baabf40e9632df8f43ec873ac83ec9a307226e026ffd288a23d5",
+    "data/processed/arcade/chunks/1_21.json": "724319a28a13809dc14f4506d2696e0bf11c7130e69e0f7fdd4e3ec9483244e0",
+    "data/processed/arcade/chunks/1_22.json": "7405b44e60d044c958383a06bb1d5a1837d7c03154d425f908c3c7a8cc92865a",
+    "data/processed/arcade/chunks/1_23.json": "a2b2c9972634075f3628d5dc00d25aaaf56dbea9daaebf4aa4699e5a4e1adbe1",
+    "data/processed/arcade/chunks/1_28.json": "1ff101d94453bf9570058ebec7f06030c50e78473fcb6f1309adaaac4c56c85d",
+    "data/processed/arcade/chunks/2_-3.json": "9c8968b3c60ba701771c7699a9a36b9c12f868798e7adf81bedd024d2f5be466",
+    "data/processed/arcade/chunks/2_-2.json": "e50c44f8a7e6549f900dbece4956eb4817b086dd82989910cd8a90d7dd5d4a50",
+    "data/processed/arcade/chunks/2_-1.json": "ee412c1dd07a3e6a683a63ce1ab09851a06b73520b584eca94a9686a982d77a1",
+    "data/processed/arcade/chunks/2_0.json": "e44a93d0e1765eb38588a4658c4b388cd70e2f44516091ab6e31dce00f7693f2",
+    "data/processed/arcade/chunks/2_1.json": "3fac3f3a155ee8c7dd5866542db73966060205939666b829e0e41e5556de99e0",
+    "data/processed/arcade/chunks/2_2.json": "9eeb884df9e2b2798404c8266a67210adf2cc0c0af2b45825d1dd2ff532a07b3",
+    "data/processed/arcade/chunks/2_3.json": "a9ece86e21ed5d61504ff3c95b38b6ebfdd0e5dbaa1ed55eb71d9ba46f1b7052",
+    "data/processed/arcade/chunks/2_4.json": "2686b668a566a3d80d224c7b6e083e51dd8de8666ca45a9b156909c0c6f66326",
+    "data/processed/arcade/chunks/2_5.json": "19875f7b6379765dffb5bc8e520c7258ffa578811cfd0dc0a01950643cb5540f",
+    "data/processed/arcade/chunks/2_6.json": "ea6dfd7b51406b78d93840c73b891c41ea8dd9c149976a67ba21e4557a8f269b",
+    "data/processed/arcade/chunks/2_7.json": "7813cb4f2f51e54303fbdc10bca13352fe1f91419affeff70a9d4a85ca196b3b",
+    "data/processed/arcade/chunks/2_8.json": "9df2bbadb8b035c3929f00067986f702d6bba2a8d16093e300ba53d93d128665",
+    "data/processed/arcade/chunks/2_9.json": "6a17a896c0ed664f70b1e5783e20018a85452cccaf199105c956237b701662a8",
+    "data/processed/arcade/chunks/2_10.json": "2daa81b3636bade1ef4a2576043da4de7f2d51e2ee0534ab6f54e19aae3b932a",
+    "data/processed/arcade/chunks/2_11.json": "5d4d8c161c502204c371bf1271977620ee3a1258d7757de5fc10e1d8f986c0b1",
+    "data/processed/arcade/chunks/2_12.json": "25b82fbb5c0cef0e8874b59391a9460c9eba38001bf9ed37daea4edb36e25e76",
+    "data/processed/arcade/chunks/2_17.json": "a27f099ef1ae683f14e633728bf444780125a10fd0e1e88414e27558507119dc",
+    "data/processed/arcade/chunks/2_18.json": "e91dad44ca6ad7dcbcf096d44e35281e328cb7b77102cc50436a75c74a8ace81",
+    "data/processed/arcade/chunks/2_19.json": "66b91247a7b271eeae44f48c0cb56cecaf62e7ac237d6f762cf506cb4e937ff4",
+    "data/processed/arcade/chunks/2_20.json": "fd29395714ac37693c00844a0d99104ede3cfc8ac09b60ea0098a8c33fe2dc9b",
+    "data/processed/arcade/chunks/2_21.json": "d639f8dd2f1b5fd7de2904bc1449c987d1c60e0785a118825254261b442747df",
+    "data/processed/arcade/chunks/2_22.json": "128d309b76459219378aed6ec7e8c9ed86a808e42f1713c2789ad55d28200e89",
+    "data/processed/arcade/chunks/2_23.json": "0a0e277791c0a24b5c5a4bc3ff8bf76e4bd4fd7291ffa5a040daa35122e2d899",
+    "data/processed/arcade/chunks/2_24.json": "0504609e7287d97a50f076a1b414a498988a9445c6ed3c9646882be7555b679f",
+    "data/processed/arcade/chunks/2_27.json": "07dab71b6506f141efda0155828d6e579f711be665bac2c25b7b71f518ffe0fb",
+    "data/processed/arcade/chunks/2_28.json": "b8c5fca72788b902cfa6d53c7d1c3e554bf419932e21b1b7f392600f378d267f",
+    "data/processed/arcade/chunks/3_-5.json": "4ebc791a40c0309a94f81a52bd6bb511943393c09e7b455e933db3e90010b163",
+    "data/processed/arcade/chunks/3_-4.json": "024e026aa3fd30fecc233f3307190f8f10805f4ccf7b0453a48b43be19ec8b5d",
+    "data/processed/arcade/chunks/3_-3.json": "14fc3576775aca4eaa93dc6ef0cb9349cf0bd572ebaeada290b46275ffa00ec3",
+    "data/processed/arcade/chunks/3_-2.json": "4ddf0aaa60c9d9cf6fc808abe3751a4b0eb9b2b8d341e92e0a95b06e4feb1348",
+    "data/processed/arcade/chunks/3_-1.json": "06d3cb0045813a4d5fe9998ec9a3b6b001c41c40b7bfc82e2b7ce759630b93bc",
+    "data/processed/arcade/chunks/3_0.json": "e4bac2b2107953d4e5f36b796db11d45fb86ca152bf0e30ec2d9c2943b610746",
+    "data/processed/arcade/chunks/3_1.json": "143a80fff53c985aa1e3979047f8509d1c02ebdad29f8fb19193b091fc69de19",
+    "data/processed/arcade/chunks/3_2.json": "d7f0c12f062032e560064338bd60d3490d04b02bc174879be328e13241b27cd6",
+    "data/processed/arcade/chunks/3_3.json": "e36427998bd9db40b57f39bc544af1c8ef0588cd47eec69fa2bd213d7bbc9a0f",
+    "data/processed/arcade/chunks/3_4.json": "89c02778d4aadb1d00c025fb082f50344e18c0f52eb95f333dca37516f3a4149",
+    "data/processed/arcade/chunks/3_5.json": "2f64310626f39552b50b928ef16030ecbec753bf47fca8ce468aab6a1448e189",
+    "data/processed/arcade/chunks/3_6.json": "77aa465db238966640c19a89ced871a40b1d2480a78ea5dfeaee863c0d5e40a0",
+    "data/processed/arcade/chunks/3_7.json": "d27b471a03b476dc0d91fdef96321acd6097ebd70b8114c0a54e4e3eab60836b",
+    "data/processed/arcade/chunks/3_8.json": "2e7530c8246f01e37c9f81ae7e99358345f3eea8c2b8426844a48258e9ff8870",
+    "data/processed/arcade/chunks/3_9.json": "975fb51aa817d6441ef274a6f9d7b25def51e12070be478e48ca270525caaef0",
+    "data/processed/arcade/chunks/3_10.json": "5ee382dd56e1b518a12eecd638a346cceb5d9c97a14e05e5a7c76459815f41de",
+    "data/processed/arcade/chunks/3_11.json": "19d37ce254436c63796ac24e59a3cd42167cb0eb6879e295598f627a71412ff5",
+    "data/processed/arcade/chunks/3_12.json": "7b6009d84565071df5cf80b3eaafe86942c3d38e2e508a7b9677d6d89a9ef71b",
+    "data/processed/arcade/chunks/3_13.json": "d51705528a5d29ec23327e5c7d7f0014893062cc34266a12e244bbe9d08357ec",
+    "data/processed/arcade/chunks/3_14.json": "58754c9df424a8fd78c2667e518f8742cae31fb3f113631dc4cd151abc0e42a1",
+    "data/processed/arcade/chunks/3_15.json": "b43b93067407b8a434b1f1427212c7d34db237344a6ddd66ba73ca4bf1103b20",
+    "data/processed/arcade/chunks/3_17.json": "d534f51813cb6068c9a46aa4481ffb8885c8688d3f3233dc9fe33db0f435278a",
+    "data/processed/arcade/chunks/3_18.json": "f5ea9df8fe740afeaa5383255ec3d3666a2e8e16f833ad0e51d085227053845a",
+    "data/processed/arcade/chunks/3_19.json": "127853bfab8cc155196ef66ab9d38730957a59868c501b9bab90bbc8584fd315",
+    "data/processed/arcade/chunks/3_20.json": "0522dd42a40052e9e1c5c5689107e55dc555aef3109cdba958db105fccd89e82",
+    "data/processed/arcade/chunks/3_22.json": "e52b40b2b9a4ac516276276e1cfdf7b8b87b1399c102f9c97ffda32a51816f7f",
+    "data/processed/arcade/chunks/3_23.json": "0e9bf45e8f8f4e5715fd68f4ab33f016ca5eb3968b7bac54017e5359c2213a47",
+    "data/processed/arcade/chunks/3_25.json": "186ff34fc8986b2e8a26874aebb39bb74f0486689c282fc2bc5a613bd07707ae",
+    "data/processed/arcade/chunks/3_27.json": "f92ba87d3feed76434481017ce22339aafc61ef7052e568a64b4f3d8c4efb269",
+    "data/processed/arcade/chunks/3_28.json": "00d0f7b8ea38249d28a41d97901ef728c783299321e6589f8392b43a6d85de5a",
+    "data/processed/arcade/chunks/4_-6.json": "586eb1a33229d6213a50fb61097a1918ea97593e028411dff5781d6790408904",
+    "data/processed/arcade/chunks/4_-5.json": "2717b539b92bfd3335813b3c047d55322306128a430388922e16e39fab51f0c8",
+    "data/processed/arcade/chunks/4_-4.json": "7dd6bb0af26fee7004641bcffaea697e5ac120457f253e1913b9d0e9228cd315",
+    "data/processed/arcade/chunks/4_-3.json": "0632e6d181a797b4716e92a9d17a81788647b8048069a2e2c7addf71f60ddcde",
+    "data/processed/arcade/chunks/4_-2.json": "03ce0b7ac2cdf05507b138b54ff13788dc8ad93847eeb83800917a0d1479fd71",
+    "data/processed/arcade/chunks/4_-1.json": "70ee93612b2b258b530320a0dd50b7e6830a32f7a382d47563e5252217a3386d",
+    "data/processed/arcade/chunks/4_0.json": "49fcc97b736534721bb0b7b66f6d4040e758a181d9463cdbfd152f74b4ec3ca7",
+    "data/processed/arcade/chunks/4_1.json": "ec3a62444d1fd61001c2600a5de97b0ca7ba0ef1a8eea5819c1d635791472eab",
+    "data/processed/arcade/chunks/4_2.json": "bf8b9622865ca774b74aa35ff82cc6a5ac21e754bfc2f860be1f17a2173ab04a",
+    "data/processed/arcade/chunks/4_3.json": "2fe12c3b3d64d75a167938cabd85c310dc81c1cc55e4b9b8e11b44fa255b0067",
+    "data/processed/arcade/chunks/4_4.json": "dffa99044824e8a72574f6798ab10952fe6b1ff944ff6c18195bf37da2d1e09b",
+    "data/processed/arcade/chunks/4_5.json": "5cc9bfd8c76df517ac59fc96789444ff9d323259b27db44bf87c26230de4229a",
+    "data/processed/arcade/chunks/4_6.json": "7e32d9cd0bcb425483a96b87d55c37dedd6521c664334a3ca9c3f3ce4a860b75",
+    "data/processed/arcade/chunks/4_7.json": "ff57ce1c0b32c0ba4c527c3102c60e384c7c0e1323822e9c30c042fb9b2f5f94",
+    "data/processed/arcade/chunks/4_8.json": "669dde24b78fa2e593635852c3a4201a9a78ed53db1d878bd4d24cbdeb31fdd6",
+    "data/processed/arcade/chunks/4_9.json": "4bbf1dd69defb8372c580d1dd9105d5c9aa68f89ef3129c31a797af0f795ebcd",
+    "data/processed/arcade/chunks/4_10.json": "3ebbbb74c1bc935b645712ed8b4817ebe5e4ef3a35947f2c905ece8a53de6462",
+    "data/processed/arcade/chunks/4_11.json": "15d5f519e51eb037cdc85e2f29288accbd09d7517480522ed9d717c3944986b2",
+    "data/processed/arcade/chunks/4_12.json": "923925ca84fe563a2bfb1972896084b5694ba60fadf4205fc76466e12466b35b",
+    "data/processed/arcade/chunks/4_13.json": "830f876b713aef097fa73fb99476f7fa6e351f56404f822bb8f5b4c34fdfe408",
+    "data/processed/arcade/chunks/4_14.json": "c72e70643b7d50f9349d42e764ee36bef11a7d43fe20c574b09cc38a2fc58263",
+    "data/processed/arcade/chunks/4_15.json": "04b1124a86eb0f2a6016733ea8903690103438a03fcf1b337af2719c7a26cfab",
+    "data/processed/arcade/chunks/4_16.json": "cbd018214c2e28e287c6a661a66269cb537fb3e86bf8dd56e4cc0a7e6843f912",
+    "data/processed/arcade/chunks/4_17.json": "b2fd5f79c194d7797f1c1478818c73763b046fa8f1897eb3a2e0f57d25f36e9c",
+    "data/processed/arcade/chunks/4_18.json": "600dd1d3af4d54f4e17f0826fb9ee246b3f3c9b5cda09d6414140f4bc8b32af2",
+    "data/processed/arcade/chunks/4_19.json": "92c7a9a87a2c6fb33388a9949fd73ee9a51e765a79319e01c0626d9b697aa172",
+    "data/processed/arcade/chunks/4_21.json": "520e856f08341cd97c5eaaa4e0c8828145110fdd48cbd26d9070f4d97df1bcc9",
+    "data/processed/arcade/chunks/4_22.json": "70add5a7013a683dac168b2bda1f4bd7e4f80f1b4daa1163f020cea0f9d6f105",
+    "data/processed/arcade/chunks/4_23.json": "f74a79223ff4fc4c2d9d44c67358dd9d92502cd62f3987f4f416160c3c787171",
+    "data/processed/arcade/chunks/4_26.json": "2584d1ce9bf01f3d7c702d7517d0bb45c1a0693f95349a132d66eaaf9e371bb7",
+    "data/processed/arcade/chunks/4_27.json": "450d21279dccc18a696edbdb9110b83bc438167b05a9e19ddd8432ee2de900db",
+    "data/processed/arcade/chunks/4_28.json": "4a0c023fadec853fc98afa39eeb1867e91b1cf0103e42c74d4ce257399293db3",
+    "data/processed/arcade/chunks/5_-7.json": "8e4bc0d2d272cc0e064c95317e0000a7850f468109d6bee70ee69cfb0c329802",
+    "data/processed/arcade/chunks/5_-6.json": "26f39aa2378ae1215a6a5f9abbfaa7dc8ddad15ded763a6ff059381919613155",
+    "data/processed/arcade/chunks/5_-5.json": "f733ce0359c3d4ad9ac32d4e9a73332eb7a74a1e7656c285401be6403930eb83",
+    "data/processed/arcade/chunks/5_-4.json": "9fba5a8b09a37e68a0f44c3b8a18c931699773611036e7c15d2480ed9df705c8",
+    "data/processed/arcade/chunks/5_-3.json": "c1874c9566bdfa91bcec245ff2b12e8c28ca2491db5438114ef973345ce1ee6e",
+    "data/processed/arcade/chunks/5_-2.json": "006095a382d853157d6d8b583ec37d429905c2134a81d9dbfa665143d274c8d4",
+    "data/processed/arcade/chunks/5_-1.json": "20db88ef61e3d87b159be16f667a211f18903b52e7b10972806075ade49a9ccd",
+    "data/processed/arcade/chunks/5_0.json": "9b6de9b542bf6172e989d4b291ba4839a98c1eafdc27b1ec5e0b7eb95698f4d6",
+    "data/processed/arcade/chunks/5_1.json": "c32d4f6c37164d4b697e97f8e6b56ecc343192d0c8d35276d014e47e910a8546",
+    "data/processed/arcade/chunks/5_2.json": "1c3b5629a946c6afcd05ef0e9aaadffed4e18ef599f8e98f4a05641cfc213a06",
+    "data/processed/arcade/chunks/5_3.json": "a1cee08a0bbd7cc206a1a3c1e905dfcb2b31cddc3d2df9d3d22a02186fd07fa5",
+    "data/processed/arcade/chunks/5_4.json": "a1010ca275fbdb608267447e3243f8a6a02ba655abea92528d5278ebce25b6c9",
+    "data/processed/arcade/chunks/5_5.json": "8af250ff8eebf526a212d6e9d0e700dfcf41293705b369ef690cdef91ff22a51",
+    "data/processed/arcade/chunks/5_6.json": "b893c14a5a37d9b25c9f0ca4e5118e0dc8cabcf51fe0c4b64b0d14be7bedcd64",
+    "data/processed/arcade/chunks/5_7.json": "2330ae33925181d2b7e053c177c338b3fea0b7ef6b20121997e1d820f0288c2d",
+    "data/processed/arcade/chunks/5_8.json": "91ac6a56530dc73105e5e1c5740a2b813632a756bb2a11dc3aa1ca16d3b02e8d",
+    "data/processed/arcade/chunks/5_9.json": "5c4e7b6e528a559754a96078d4c2b7615152688aa0e021241a28f5e86b6062d2",
+    "data/processed/arcade/chunks/5_10.json": "5c534057dd439ca2ca100267323b5113b6e7f4971bd7bd55a9e84dc8b850fa37",
+    "data/processed/arcade/chunks/5_11.json": "d9c9b68df66ce04cce9befff1735f36c1608dd43c83555cd3dce7797602d9e7d",
+    "data/processed/arcade/chunks/5_12.json": "3bdcbf1ae3118db729cda6a215003fd0b2badb9930cf13a206b9eb73a69e98de",
+    "data/processed/arcade/chunks/5_13.json": "f5faebbfd5e3c5f1854ba2c24f1a74cd52092da61ee45512b320ac8133532a84",
+    "data/processed/arcade/chunks/5_14.json": "0c3774f49d07274cce9590de9d1c5d86f6e584dd17687872268ccf915747088c",
+    "data/processed/arcade/chunks/5_15.json": "ba2673009a0c7e4eacb6feedebc8be98e0f86ffc413d8f98c540d063bb00b3e1",
+    "data/processed/arcade/chunks/5_16.json": "0f9ef37708bdb0dcd83f307486ce41e1e3e29f37145e7e17a25afa1caf2576e7",
+    "data/processed/arcade/chunks/5_18.json": "25cbf58c4a48c298bf0902e92adf08ae627323eddae29f1093ca901731cb51b3",
+    "data/processed/arcade/chunks/5_23.json": "239757aad0dcfc5591b1cb73ea241ab099ab425df01e27fde7d70d01785c4d9c",
+    "data/processed/arcade/chunks/5_27.json": "165c3be6b5ad64bcd0d94420a89b49b973120c1565a5ef8a4500691bd01370d6",
+    "data/processed/arcade/chunks/5_28.json": "657ce5c374a1759e38f6f30e351cddc0dab318af604dea5e600c601cb9bc78bd",
+    "data/processed/arcade/chunks/6_-12.json": "98615854137f8ca73a958e076c4d3b0fb81a592980434c069370de23c1b86468",
+    "data/processed/arcade/chunks/6_-11.json": "939e779ec7568574549fc8b173df610b535225f4a8b1017cfe37da3f5906e35e",
+    "data/processed/arcade/chunks/6_-10.json": "92353dcd543142cb2273c8b0c2f95e08e669b65a660aadcdcd85d8a20fdf5f9c",
+    "data/processed/arcade/chunks/6_-9.json": "61c2ff4185cae2e07eb803ce8c0a4b53225df8c1f960a4839bc5c3fb6e74b60c",
+    "data/processed/arcade/chunks/6_-8.json": "443e7f548e42255020b203ef5945516bc71a9170d814ec9476518e220a481dad",
+    "data/processed/arcade/chunks/6_-7.json": "139de06f384818cc00d16f985eb84dc2b5ea03105d3289de2415f0728696a6cf",
+    "data/processed/arcade/chunks/6_-6.json": "ec1a6864471e25c5165ef7d21f0575079dd91293e696f4bfda5ec65ce031faaf",
+    "data/processed/arcade/chunks/6_-5.json": "3f3489693e6eba03c8bd00b9ac67d6dda4faa997a3713c8a30b13def3e352d41",
+    "data/processed/arcade/chunks/6_-4.json": "9ca27368c914b8acec2319bdab3add6314cc8fda2010fd1e674a5ff54b0d53ed",
+    "data/processed/arcade/chunks/6_-3.json": "e7225992bef75243ceb05f4a04af0ff049751a5182135b154a5f8be7e210bfe4",
+    "data/processed/arcade/chunks/6_-2.json": "fb9c1f33e6c8cd9b7e0c04ae4be938ab3796885714e8e531dc4563cb027059e5",
+    "data/processed/arcade/chunks/6_-1.json": "837fabe362f5808bda8ac31dbefd41561c1fb4f9c384ca06c529de15a07c7c53",
+    "data/processed/arcade/chunks/6_0.json": "ebf738a2f7ed5173b47f8614650688d2ff1aa7ee72b5337015045203c56e1883",
+    "data/processed/arcade/chunks/6_1.json": "7e5fcce118f5b2c176182cb07deac4b58254a32b6cfde9bc7846326c324f86c6",
+    "data/processed/arcade/chunks/6_2.json": "b1e0562159f79c4f05ca460693b933b7c13c4e1fd03469fc2a3fbb896f023d72",
+    "data/processed/arcade/chunks/6_3.json": "f5bdf09835519d6362f3eef405222575ad7df10f5632f0e81d50d58e7fa6e7f8",
+    "data/processed/arcade/chunks/6_4.json": "d6da38650de709d498bdd7b477c4551aa8f5ac86bfb92e71ed58417850fe3a16",
+    "data/processed/arcade/chunks/6_5.json": "4d7c722210b84eda1b16077c8b9f93a532794d9cf583c61e2c67efd7964fc692",
+    "data/processed/arcade/chunks/6_6.json": "6535b1bdb9c9518b1f8601c786fdd4220d0f0b942ab1a08daa74cfdb27cd1930",
+    "data/processed/arcade/chunks/6_7.json": "8ffc54de3b28d1220138ba20397bb29cef5c49de5097e79bb215296308d0d24b",
+    "data/processed/arcade/chunks/6_8.json": "7b6f20a5f55d594c0db317b56d59cf933389d73bff4827d4d27a0c3ddd069ba4",
+    "data/processed/arcade/chunks/6_9.json": "3f2e04eb6340dc65195236fbcd4080b755cb46042d885823f86b5e68d68b8616",
+    "data/processed/arcade/chunks/6_10.json": "52803d973f2f8da0595bda893c94eb5469d90ecb0d56184b17529cf52083ebc1",
+    "data/processed/arcade/chunks/6_11.json": "c3b38f94adc28c24235632a67a255d161b21fd83c3bd57d61cbba0416483c879",
+    "data/processed/arcade/chunks/6_12.json": "be91968de52b20380c5e135095a4acd1f243103678459c95bedf96231af5c3a5",
+    "data/processed/arcade/chunks/6_13.json": "4dbf76c2bc6d762767ff9d23bac7780a8df775029d0af940f425eac97fdc437a",
+    "data/processed/arcade/chunks/6_14.json": "8bbeb29a86f8c020d0c13ce7faf0b484a4f1669b01cfd933ed7b139a958c4e1a",
+    "data/processed/arcade/chunks/6_15.json": "8e8759615494622833377b522e664c875c21fe8a2ed7bb8bf65afa0205995c1d",
+    "data/processed/arcade/chunks/6_16.json": "1e5f217e6f9232d4365ec911f2f868ed04e70de79af2193e551933bb558ad87a",
+    "data/processed/arcade/chunks/6_17.json": "5d2bade67967131a65ff831a5d90488ce51bd2c39b026518e2352af7bd485d70",
+    "data/processed/arcade/chunks/6_18.json": "77619498604a6c796341047a69d1e0b4c633d75f1df3c8d4f9a6a1f4c79ecc06",
+    "data/processed/arcade/chunks/6_27.json": "76bd425048f486a6ffd2126f34770fc37b49577878e84016152a42587811b748",
+    "data/processed/arcade/chunks/6_28.json": "5104fd96580cc487cb1f7b22f7e34d539ef04c669b4970c5b8a38f3db573045e",
+    "data/processed/arcade/chunks/7_-11.json": "47c7dc3d7f13e29cd06318e29974421db4621bdb3011c4fbe341e8cf06b9a398",
+    "data/processed/arcade/chunks/7_-10.json": "31c401dc61c540e7bc277b1f2e91ffc3bbf214a2e2e6d59b1f30eaa3f1e74721",
+    "data/processed/arcade/chunks/7_-9.json": "dd6af3f7872c25e4e2082a35ea68e4f38b4986007f4988ebbb72857a7c42f2f6",
+    "data/processed/arcade/chunks/7_-6.json": "32e86f7cd7c76d266fffd7bb4fe597e6a78db0676009d34650662681645f0967",
+    "data/processed/arcade/chunks/7_-5.json": "e547e2a72c5743eab7a83bd4aff0abedea0b194e99f8d05d9b17a0e76a30d327",
+    "data/processed/arcade/chunks/7_-4.json": "54cd9a64e29744f6c6131fd530a6b9eb59e1fbaa6be5beb9e51e6b45403f7a04",
+    "data/processed/arcade/chunks/7_-3.json": "eb95a4cae337ebb8288b916f4c0434b5b4e217d7dd4ae3cba51bc545148c4734",
+    "data/processed/arcade/chunks/7_-2.json": "e33f4ae0ad34649c1d53c4f97409cf368497956b7100e09161825688933c7c5a",
+    "data/processed/arcade/chunks/7_-1.json": "cfa601eab5ef5ef6c3e8390df190ab79a3b64fda38ab5a4ba18a73793048624d",
+    "data/processed/arcade/chunks/7_0.json": "ccaad54c4cfde89a89aa6f417a8544b15f2be5867f9b3a40c3e29626b47e646f",
+    "data/processed/arcade/chunks/7_1.json": "5879e882b6208df629485ca17a78a6be41f58f1645ebb240f8ec65f7a64d0e2c",
+    "data/processed/arcade/chunks/7_2.json": "e0c0c7a613e287e9806f7066dc11be2779f3160b878beaf6dd6f1bc98b8113b1",
+    "data/processed/arcade/chunks/7_3.json": "7c95e080fdecde67e0b94b5674d023f2077fbc198a84d998e352d41b5eedd52f",
+    "data/processed/arcade/chunks/7_4.json": "fa637ded621d09cd702033784b8713c34fce8571b5368776c40d70958e8f5947",
+    "data/processed/arcade/chunks/7_5.json": "be934227d669442649a34ea0d17651a28744ebd802cecd54a337857e13c1d285",
+    "data/processed/arcade/chunks/7_6.json": "79c8d85ada51ef63a014812b4212b8666cddc56b72995129b95b5aa603d27b00",
+    "data/processed/arcade/chunks/7_7.json": "b0b19b9f398309b829a080ee2621d74f60e669682add369fdf7c1a752088f607",
+    "data/processed/arcade/chunks/7_8.json": "a76b46c18b33d87dcf900f5aa7454b9b2e119b36c95fed620b3b009d7b923e13",
+    "data/processed/arcade/chunks/7_9.json": "382489ddb87daa2e53f819b4a20fa29f7b7201e06d833f78b1efb027cd1b1832",
+    "data/processed/arcade/chunks/7_10.json": "b75f66ab125449a890142c84aaed92731dd781a12c19642c52b94d706299868d",
+    "data/processed/arcade/chunks/7_11.json": "98e64d41b5f37c4cbe96b6a788ae6b310736ab50807e6a9ea1658f7057576dce",
+    "data/processed/arcade/chunks/7_12.json": "f1d90906446857e4483d1eb66f320f253aaf0a331f4bf1875f56d3d84385b61c",
+    "data/processed/arcade/chunks/7_13.json": "05bf53f1818d665b2bc2c7d7c4b6a17b0cc363f31dea72e8e34ece4070342314",
+    "data/processed/arcade/chunks/7_15.json": "24ceff50edc084e0e6c045dcd4f672d16b3d1c52c623ec8747c959e7f0945525",
+    "data/processed/arcade/chunks/7_16.json": "a5907f019376f6311a916077471a1decfa765247c0899d7f773802ba7b004ddc",
+    "data/processed/arcade/chunks/8_-10.json": "3020d18fe4f447b0f090f700370c0f65dd9e2bae690f381e014b5a0c1f8976c5",
+    "data/processed/arcade/chunks/8_-9.json": "92d0d832c4df231361b02142347ed3998e25cbfbc095b5f73bcbf59422f6c44b",
+    "data/processed/arcade/chunks/8_-8.json": "f93303c5d5cb1823e366a60d546465680bbab8d4532d73aaa1998a2b4300d690",
+    "data/processed/arcade/chunks/8_-7.json": "2803644146f459edd8404b31aab5cf270aaa6262972d2873aebdc77b91ddd51e",
+    "data/processed/arcade/chunks/8_-6.json": "fa84925c418ed2bc4d9450c5c312dc4d7df5546a8b1080a3bb474f4f90b201be",
+    "data/processed/arcade/chunks/8_-5.json": "9c1e52b060f3cb3cd900db5a12d7d8e7b17d1895aae25b3971646920994c3a84",
+    "data/processed/arcade/chunks/8_-4.json": "b0a78af964e2e7fdb57136e62a21a9c8237160edcdbc1a0f689061113225aa8f",
+    "data/processed/arcade/chunks/8_-3.json": "833f4f80ccc7f80da9b82a8f9e1fe1811e83872e35d9776feddcb2eebeb58b49",
+    "data/processed/arcade/chunks/8_-2.json": "a6837d54d5a327f591dea964bd518de9610a54b1d6419a1e9526f51c0ad0e504",
+    "data/processed/arcade/chunks/8_0.json": "4f69e655599743e8bb87edb90c058e667f46367dbb3cc115d18052eeac18c907",
+    "data/processed/arcade/chunks/8_1.json": "d00241017bb4f3431e434c1dcc693cbb2a231cf96ffe3b42818e946877d81294",
+    "data/processed/arcade/chunks/8_2.json": "c4821e32e99106bb47dddd9c441471648ee6e17097e3203226221d1a8e61eb3d",
+    "data/processed/arcade/chunks/8_3.json": "e94fd74212f8ce4313f2ebc34756ccf98d914a16467e063c17e005d6c795f096",
+    "data/processed/arcade/chunks/8_4.json": "a5940cf292693f709bfba4b36776510218ba7f3e44a16428154c42cc1d352907",
+    "data/processed/arcade/chunks/8_5.json": "49ea2b601b1de050d5f396667283877fc3534b078e43503eeb0bc2fb1c9dfeb3",
+    "data/processed/arcade/chunks/8_6.json": "694feaa10ffcd852cfaf91921272f1955c67244e98440dc480e9e1119014e4dc",
+    "data/processed/arcade/chunks/8_7.json": "bc3dadcf043039952b2ce4350f8e7e88d9788e365c30f69aecb0aec79219282c",
+    "data/processed/arcade/chunks/8_8.json": "3a500eb33aebc98ac519bfeb09db3be6f735c6ce76a2eccb8e7ff1f3117c079c",
+    "data/processed/arcade/chunks/8_9.json": "9f636f290192dc4340b47f229f68a88dd0de335d2fbb721d8d7af1d2cd7890cb",
+    "data/processed/arcade/chunks/8_10.json": "74719c9ab9fc2bfd42f18314588e8f012f8317d74d741649b645962a0ff50f0d",
+    "data/processed/arcade/chunks/8_11.json": "74a050355cdbae398b72b3eea17efb67a7c310724cc02d1b2da110806267cb17",
+    "data/processed/arcade/chunks/8_12.json": "9ddf478e960a82fd0dcc46f66a2466fff9d0855ec3fd81cb19aa94282ac34684",
+    "data/processed/arcade/chunks/8_13.json": "de8da48edf6cc232cfa3f57f22bb0b3cb3791227dc1a7654dce5a2543a17d336",
+    "data/processed/arcade/chunks/8_15.json": "730fed72d3b4fc320b0c794994e1ed7e06281aa00f91abd8fa85fb0ba9664734",
+    "data/processed/arcade/chunks/8_16.json": "811e5dfc4c2e1e2b168436a22b0991f90149726d0a2d01200a29045109fd09a3",
+    "data/processed/arcade/chunks/9_-10.json": "294293f5cb9a7e5550346d8b3954c0814518d3f0422ad370085f12c077fc3e96",
+    "data/processed/arcade/chunks/9_-9.json": "73a05ba7533a49b32d69882cf06893f066103c2c24e08b1654f1acc6bdb3050b",
+    "data/processed/arcade/chunks/9_-8.json": "eb0a9ced99fe612f61f9095ed7568ed2ad67d44d63cfd7207144340fc257f3d7",
+    "data/processed/arcade/chunks/9_-7.json": "2a035f3f6e43ed3f1faf55b2ad47bd00cfb3dcbb59f7cb8138841ba12e853048",
+    "data/processed/arcade/chunks/9_-6.json": "71b479e638c5ca2fb5ee1010106dc00a98617224481d618e3bb41b14631e588b",
+    "data/processed/arcade/chunks/9_-5.json": "1a55eb42e944c21dbe586b99c58559d17ca7a3a52b6158503279630f8795fa0a",
+    "data/processed/arcade/chunks/9_-4.json": "af1a096b3ebd810e5b5cd891d8bf5b2c5febc913b8e9abd9c8c985b80a2c38ac",
+    "data/processed/arcade/chunks/9_-3.json": "f2d9512073e178ec66d378d6a3777b5479e9951f3c983a66b7c7045a791f16bf",
+    "data/processed/arcade/chunks/9_3.json": "42877f9f6797d870d17fe58e122401b16e3ba5d604f6a67e0b24985d6399684d",
+    "data/processed/arcade/chunks/9_4.json": "a9786d1cd98b73f1d289709fad1621ef28a4324b1a1462d3c0ad586b2d0bdad5",
+    "data/processed/arcade/chunks/9_5.json": "614e8b5ec62fdf0f1d646ff0b4a61d309efc3ea118abe95e9ab9bc9c6de5922d",
+    "data/processed/arcade/chunks/9_6.json": "8d16e8b31779ca43f45c089b6493254c4bbf9e2060a18acad47c458d7fd8d508",
+    "data/processed/arcade/chunks/9_7.json": "9d51ca02450a87cfd13b428ae393e9286746b43700d44ee218024fb7de1b0d07",
+    "data/processed/arcade/chunks/9_8.json": "014562b744e997f4c5301c6d7fbfa2a1a71a748bb1181b2a7a91584bfa79d4ff",
+    "data/processed/arcade/chunks/9_9.json": "c912e6ff9621c0fac948ea4b204291b79968a4950662c025dd00aec9aacb21e2",
+    "data/processed/arcade/chunks/9_10.json": "2602e1aee03c15285b31e2bb30f8326765d69373cc0652f7cb8c43ad906212d9",
+    "data/processed/arcade/chunks/9_11.json": "c480303e8d546fdfa2af150c812005fc3040c906b5a81b5071f7581f522f39ec",
+    "data/processed/arcade/chunks/9_12.json": "ec40c9528dc9c4bde5108a83452c4b03783d226f76749a7fb1dc203e300d5c27",
+    "data/processed/arcade/chunks/9_13.json": "9a90647c9847cb61901766584d9f11dad0ac7249653c6faaee9ce5488eb9f2a2",
+    "data/processed/arcade/chunks/9_14.json": "f032ea554ebdf9c52e89ce8ca2ca628f88f8dc29372c972db14e7b1e1df718fe",
+    "data/processed/arcade/chunks/9_15.json": "1c2e575cb20812e6ebbe5749335c87885a9d624bb3c6b7c1262ce3f2c66d6927",
+    "data/processed/arcade/chunks/9_16.json": "19030d5fa9f199cb70afdeecc6337edf71996274fc06450de48b48b7e143ac75",
+    "data/processed/arcade/chunks/10_-8.json": "2cb3b2a1aa18ee7082e222e84c5ab79609118790716d87a7f235a864ca6c680c",
+    "data/processed/arcade/chunks/10_-7.json": "0a9bf36a0164aa2895bdd7c9f5c5ce2a2a72260ea93cdbd73da33b3c5e5452db",
+    "data/processed/arcade/chunks/10_-6.json": "a998e3ad6ce13aa216277912ee85cc49ab244cb982dec875d12f3b2c2d92fce9",
+    "data/processed/arcade/chunks/10_-5.json": "271873321a95a4c8511c845e6592ae1d414b7bb41866dd83f8daf7a994e9127a",
+    "data/processed/arcade/chunks/10_-4.json": "e4341ec1f705076bced445e4b17a740d37954a33cb1c1b4f1a7104571cc5ea3a",
+    "data/processed/arcade/chunks/10_-3.json": "1d95fb123f23676ca8587a89e5954408a533043dd2da760537b6a65e35407f70",
+    "data/processed/arcade/chunks/10_4.json": "a4e5a8e85963586a46c78d38dd7e488bb72058a481c46cd9783af72bb208ef31",
+    "data/processed/arcade/chunks/10_5.json": "b0261a12ef45a0affe668bfad43a4c65ade27264943722664f639e3da4a38577",
+    "data/processed/arcade/chunks/10_6.json": "c3b2cfc89efe5b135209108df15f2f46b37151b9257346536bccd15c5d7a8fd5",
+    "data/processed/arcade/chunks/10_7.json": "03d9ba46e1e36fdd7dbb239fdc5b1f364f833fff259674b24b7c2bf6cd5c2358",
+    "data/processed/arcade/chunks/10_8.json": "c10878001319de103552a90b3fb6ef0c9dc93b07d0d666014b55afb8808fa4c3",
+    "data/processed/arcade/chunks/10_9.json": "bcf9810058d4c0bdbe49a06221cb2ca4cd39705bb8b102f87d8cf3b09a213fb6",
+    "data/processed/arcade/chunks/10_10.json": "baee6ff8dcbd57637722af8a5837918007af7d5093724f48087aeb47348d3f24",
+    "data/processed/arcade/chunks/10_11.json": "75007697f61ccf712d852c432d959a71750dc5b5a9a79a0913e632be5162497e",
+    "data/processed/arcade/chunks/10_12.json": "d42d41ceebc7dae5785b681d8a0f6016e6a3cc034a1896f34b12f0fcfc9e1eac",
+    "data/processed/arcade/chunks/10_14.json": "8ca3c26f2701cb1b08511b4556e215e620291603d59d4d6c4798379bde7bfb5f",
+    "data/processed/arcade/chunks/10_15.json": "a677e0758a604c1545b7d78fc4836f53679e727a1f8a7a016a968411a017999f",
+    "data/processed/arcade/chunks/11_-7.json": "cacbdff307434129c2ec2e702d46adc831746bc60c0d8c9143ce324ed31c7fa6",
+    "data/processed/arcade/chunks/11_-6.json": "c0ce8810f3ef7fbf95ccbdc04ca033c9ac9cf271e5f5d7c431e371419d6bcd78",
+    "data/processed/arcade/chunks/11_-5.json": "a0a4e37d9cd47fed5a6455d1dfbb204397d7ecf86ee1c0615f0c84421446016f",
+    "data/processed/arcade/chunks/11_-4.json": "accd80c06419748d6bcc50f30e7099f5c48a5da1faa041736160a36ed7c3812d",
+    "data/processed/arcade/chunks/11_-3.json": "4a03211ae0089f4e2601ccc24451b3b765da63ad4aa9d8fc7d1ce6f8fcf9ee53",
+    "data/processed/arcade/chunks/12_-6.json": "7d521e3faf37236926d3b60d6a00c092965f6ef78ad216d42c586b93f55161b4",
+    "data/processed/arcade/chunks/12_-3.json": "1166c6ee8399990dae5ccfa8053eec451d4e267692cdcf94ff67bcfcafbc78c5",
+    "data/processed/arcade/chunks/13_-4.json": "181af0e65d663fed412bf706b0ca8bfda6cf65ea7c376cac7bdde1864e43cf34",
+    "data/processed/arcade/chunks/13_-3.json": "03c6421e2a6d175488e876866f28b87e6ccd3cd7dde6d2f10d0525466cfc8b0f",
+    "data/processed/arcade/chunks/14_-4.json": "d7e035061d3e83ef7eb8b4c97e0675918171861c72a569a3f965432e8f872a90",
+    "data/processed/arcade/chunks/14_-3.json": "1089fe71e38762bb08a9bda739311c7ca959d441f463462e52a374bd22067101"
+  },
+  "osm": {
+    "counts": {
+      "visual": {
+        "sidewalk_attribute": {
+          "way": 38
+        },
+        "sidewalk_geometry": {
+          "way": 22
+        },
+        "crossing": {
+          "node": 52,
+          "way": 9
+        },
+        "traffic_signals": {
+          "node": 28
+        },
+        "traffic_sign": {
+          "node": 21
+        },
+        "median_explicit": {},
+        "parking": {
+          "node": 6,
+          "way": 70
+        },
+        "parking_attribute": {
+          "way": 38
+        },
+        "street_lamp": {},
+        "lit_attribute": {
+          "node": 2,
+          "way": 90,
+          "relation": 1
+        },
+        "barrier": {
+          "node": 36,
+          "way": 2
+        },
+        "bench": {},
+        "tree": {
+          "node": 6
+        },
+        "palm_explicit": {},
+        "tree_row": {},
+        "park_garden": {
+          "node": 2,
+          "way": 60
+        },
+        "green_area": {
+          "way": 7
+        },
+        "square": {
+          "way": 1
+        },
+        "pedestrian": {
+          "way": 161
+        },
+        "beach": {
+          "node": 1
+        },
+        "coastline": {
+          "way": 3
+        },
+        "building": {
+          "node": 1,
+          "way": 6058,
+          "relation": 6
+        },
+        "building_height": {},
+        "building_levels": {
+          "way": 9
+        },
+        "building_appearance": {
+          "way": 2
+        },
+        "shop": {
+          "node": 107,
+          "way": 44
+        },
+        "food": {
+          "node": 194,
+          "way": 20
+        },
+        "hotel": {
+          "node": 32,
+          "way": 6,
+          "relation": 1
+        },
+        "public_cultural": {
+          "node": 27,
+          "way": 83,
+          "relation": 2
+        },
+        "monument": {
+          "way": 1
+        },
+        "artwork": {
+          "node": 13
+        },
+        "tourist_attraction": {
+          "node": 10,
+          "way": 1
+        },
+        "malecon_named": {
+          "way": 5
+        }
+      },
+      "roads": {
+        "sidewalk_attribute": {
+          "way": 38
+        },
+        "sidewalk_geometry": {
+          "way": 22
+        },
+        "crossing": {
+          "node": 51,
+          "way": 9
+        },
+        "traffic_signals": {
+          "node": 28
+        },
+        "traffic_sign": {
+          "node": 21
+        },
+        "median_explicit": {},
+        "parking": {
+          "node": 5,
+          "way": 70
+        },
+        "parking_attribute": {
+          "way": 38
+        },
+        "street_lamp": {},
+        "lit_attribute": {
+          "node": 2,
+          "way": 87,
+          "relation": 1
+        },
+        "barrier": {
+          "node": 33,
+          "way": 2
+        },
+        "bench": {},
+        "tree": {
+          "node": 6
+        },
+        "palm_explicit": {},
+        "tree_row": {},
+        "park_garden": {
+          "node": 2,
+          "way": 59
+        },
+        "green_area": {
+          "way": 7
+        },
+        "square": {
+          "way": 1
+        },
+        "pedestrian": {
+          "way": 157
+        },
+        "beach": {
+          "node": 1
+        },
+        "coastline": {
+          "way": 2
+        },
+        "building": {
+          "node": 1,
+          "way": 6019,
+          "relation": 6
+        },
+        "building_height": {},
+        "building_levels": {
+          "way": 9
+        },
+        "building_appearance": {
+          "way": 2
+        },
+        "shop": {
+          "node": 107,
+          "way": 44
+        },
+        "food": {
+          "node": 194,
+          "way": 20
+        },
+        "hotel": {
+          "node": 32,
+          "way": 6,
+          "relation": 1
+        },
+        "public_cultural": {
+          "node": 26,
+          "way": 79,
+          "relation": 2
+        },
+        "monument": {
+          "way": 1
+        },
+        "artwork": {
+          "node": 13
+        },
+        "tourist_attraction": {
+          "node": 10,
+          "way": 1
+        },
+        "malecon_named": {
+          "way": 5
+        }
+      }
+    },
+    "examples": {
+      "traffic_signals": [
+        {
+          "id": "osm:node:313433815",
+          "lat": 24.151311,
+          "lon": -110.3263697,
+          "position_method": "source point",
+          "tags": {
+            "highway": "traffic_signals"
+          }
+        },
+        {
+          "id": "osm:node:313433824",
+          "lat": 24.1513997,
+          "lon": -110.3262929,
+          "position_method": "source point",
+          "tags": {
+            "highway": "traffic_signals",
+            "traffic_signals": "traffic_lights"
+          }
+        },
+        {
+          "id": "osm:node:313435915",
+          "lat": 24.138662,
+          "lon": -110.3365595,
+          "position_method": "source point",
+          "tags": {
+            "highway": "traffic_signals"
+          }
+        }
+      ],
+      "traffic_sign": [
+        {
+          "id": "osm:node:316527007",
+          "lat": 24.1241693,
+          "lon": -110.3119726,
+          "position_method": "source point",
+          "tags": {
+            "direction": "forward",
+            "highway": "give_way"
+          }
+        },
+        {
+          "id": "osm:node:316527420",
+          "lat": 24.1237548,
+          "lon": -110.3118771,
+          "position_method": "source point",
+          "tags": {
+            "direction": "forward",
+            "highway": "give_way"
+          }
+        },
+        {
+          "id": "osm:node:4081026937",
+          "lat": 24.1325273,
+          "lon": -110.3083784,
+          "position_method": "source point",
+          "tags": {
+            "direction": "forward",
+            "highway": "stop"
+          }
+        }
+      ],
+      "public_cultural": [
+        {
+          "id": "osm:node:679555719",
+          "lat": 24.1415656,
+          "lon": -110.3127831,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "school",
+            "check_date": "2025-10-15",
+            "name": "Esc Sec. Jose Ma. Morelos Y Pavon"
+          }
+        },
+        {
+          "id": "osm:node:679555887",
+          "lat": 24.138932,
+          "lon": -110.3129655,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "school",
+            "check_date": "2025-10-16",
+            "name": "Prep. Morelos"
+          }
+        },
+        {
+          "id": "osm:node:920562004",
+          "lat": 24.1488833,
+          "lon": -110.305221,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "clinic",
+            "healthcare": "clinic",
+            "name": "Clínica del ISSSTE"
+          }
+        }
+      ],
+      "shop": [
+        {
+          "id": "osm:node:920620905",
+          "lat": 24.1392154,
+          "lon": -110.311476,
+          "position_method": "source point",
+          "tags": {
+            "name": "Supermercado Aramburo",
+            "shop": "supermarket"
+          }
+        },
+        {
+          "id": "osm:node:920625033",
+          "lat": 24.1250916,
+          "lon": -110.3131604,
+          "position_method": "source point",
+          "tags": {
+            "brand": "Soriana",
+            "brand:wikidata": "Q735562",
+            "brand:wikipedia": "en:Soriana",
+            "name": "MEGA Soriana",
+            "shop": "supermarket"
+          }
+        },
+        {
+          "id": "osm:node:984842249",
+          "lat": 24.1461954,
+          "lon": -110.3193234,
+          "position_method": "source point",
+          "tags": {
+            "name": "Granja San Pedro",
+            "shop": "convenience"
+          }
+        }
+      ],
+      "parking": [
+        {
+          "id": "osm:node:920620957",
+          "lat": 24.149921,
+          "lon": -110.305661,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "parking"
+          }
+        },
+        {
+          "id": "osm:node:920620960",
+          "lat": 24.1479826,
+          "lon": -110.3068304,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "parking"
+          }
+        },
+        {
+          "id": "osm:node:920620965",
+          "lat": 24.1491183,
+          "lon": -110.3058004,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "parking"
+          }
+        }
+      ],
+      "hotel": [
+        {
+          "id": "osm:node:920625044",
+          "lat": 24.1239705,
+          "lon": -110.3140187,
+          "position_method": "source point",
+          "tags": {
+            "name": "Casa del Estudiante Sudcaliforniano",
+            "tourism": "guest_house"
+          }
+        },
+        {
+          "id": "osm:node:958717762",
+          "lat": 24.1415304,
+          "lon": -110.3258242,
+          "position_method": "source point",
+          "tags": {
+            "name": "Hacienda Jalisco",
+            "tourism": "hotel"
+          }
+        },
+        {
+          "id": "osm:node:984857915",
+          "lat": 24.160498,
+          "lon": -110.3115557,
+          "position_method": "source point",
+          "tags": {
+            "name": "Ángel Azul",
+            "tourism": "hotel",
+            "website": "https://www.elangelazul.com/"
+          }
+        }
+      ],
+      "food": [
+        {
+          "id": "osm:node:958684066",
+          "lat": 24.1558017,
+          "lon": -110.3243815,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "cafe",
+            "name": "Café Capri"
+          }
+        },
+        {
+          "id": "osm:node:958690420",
+          "lat": 24.1442196,
+          "lon": -110.3166522,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "cafe",
+            "name": "Cafe Capri"
+          }
+        },
+        {
+          "id": "osm:node:958695950",
+          "lat": 24.1254601,
+          "lon": -110.3128971,
+          "position_method": "source point",
+          "tags": {
+            "amenity": "fast_food",
+            "name": "Gorditas de Doña Tota"
+          }
+        }
+      ],
+      "tourist_attraction": [
+        {
+          "id": "osm:node:992911680",
+          "lat": 24.1617722,
+          "lon": -110.3154131,
+          "position_method": "source point",
+          "tags": {
+            "name": "Tourist Information",
+            "tourism": "information"
+          }
+        },
+        {
+          "id": "osm:node:1583889399",
+          "lat": 24.1640557,
+          "lon": -110.3167422,
+          "position_method": "source point",
+          "tags": {
+            "tourism": "viewpoint"
+          }
+        },
+        {
+          "id": "osm:node:1584195401",
+          "lat": 24.1583771,
+          "lon": -110.31948,
+          "position_method": "source point",
+          "tags": {
+            "name": "Información Turística",
+            "tourism": "information"
+          }
+        }
+      ],
+      "barrier": [
+        {
+          "id": "osm:node:1460468615",
+          "lat": 24.1822824,
+          "lon": -110.3020013,
+          "position_method": "source point",
+          "tags": {
+            "access": "permissive",
+            "barrier": "gate"
+          }
+        },
+        {
+          "id": "osm:node:3601730974",
+          "lat": 24.1191296,
+          "lon": -110.3442853,
+          "position_method": "source point",
+          "tags": {
+            "access": "permissive",
+            "barrier": "gate"
+          }
+        },
+        {
+          "id": "osm:node:3601730975",
+          "lat": 24.1192195,
+          "lon": -110.3442973,
+          "position_method": "source point",
+          "tags": {
+            "access": "permissive",
+            "barrier": "gate"
+          }
+        }
+      ],
+      "building": [
+        {
+          "id": "osm:node:2266527082",
+          "lat": 24.121471,
+          "lon": -110.30266,
+          "position_method": "source point",
+          "tags": {
+            "addr:housename": "Qrubit",
+            "addr:housenumber": "135a",
+            "addr:postcode": "23054",
+            "addr:street": "Damiana",
+            "building": "office",
+            "name": "Qrubit",
+            "website": "http://qrubit.com"
+          }
+        },
+        {
+          "id": "osm:way:136634556",
+          "lat": 24.1587901,
+          "lon": -110.3065132,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "building": "supermarket",
+            "name": "Ley 5 de Mayo",
+            "shop": "supermarket",
+            "source:geometry": "Bing"
+          }
+        },
+        {
+          "id": "osm:way:137201450",
+          "lat": 24.123865,
+          "lon": -110.3153799,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "amenity": "townhall",
+            "building": "yes",
+            "name": "Ayuntamiento de La Paz"
+          }
+        }
+      ],
+      "tree": [
+        {
+          "id": "osm:node:5877319628",
+          "lat": 24.162034,
+          "lon": -110.313746,
+          "position_method": "source point",
+          "tags": {
+            "natural": "tree"
+          }
+        },
+        {
+          "id": "osm:node:5877319630",
+          "lat": 24.1621161,
+          "lon": -110.3133748,
+          "position_method": "source point",
+          "tags": {
+            "natural": "tree"
+          }
+        },
+        {
+          "id": "osm:node:5877319631",
+          "lat": 24.1622367,
+          "lon": -110.3135875,
+          "position_method": "source point",
+          "tags": {
+            "natural": "tree"
+          }
+        }
+      ],
+      "park_garden": [
+        {
+          "id": "osm:node:6285201962",
+          "lat": 24.1346634,
+          "lon": -110.3445919,
+          "position_method": "source point",
+          "tags": {
+            "addr:city": "la paz",
+            "addr:street": "Erizo del Mar entre nautilus y ostra",
+            "dog": "yes",
+            "leisure": "park",
+            "name": "Parque Conchalito"
+          }
+        },
+        {
+          "id": "osm:node:13948569348",
+          "lat": 24.1639177,
+          "lon": -110.3165217,
+          "position_method": "source point",
+          "tags": {
+            "leisure": "park",
+            "name": "Kiosko Parque"
+          }
+        },
+        {
+          "id": "osm:way:155831062",
+          "lat": 24.1624384,
+          "lon": -110.3136632,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "leisure": "park",
+            "name": "Jardín Velasco"
+          }
+        }
+      ],
+      "crossing": [
+        {
+          "id": "osm:node:9188203536",
+          "lat": 24.1240469,
+          "lon": -110.3119442,
+          "position_method": "source point",
+          "tags": {
+            "crossing": "traffic_signals",
+            "highway": "crossing"
+          }
+        },
+        {
+          "id": "osm:node:9188203537",
+          "lat": 24.1241819,
+          "lon": -110.311627,
+          "position_method": "source point",
+          "tags": {
+            "crossing": "traffic_signals",
+            "highway": "crossing"
+          }
+        },
+        {
+          "id": "osm:node:9188203538",
+          "lat": 24.1239249,
+          "lon": -110.3119139,
+          "position_method": "source point",
+          "tags": {
+            "crossing": "traffic_signals",
+            "highway": "crossing"
+          }
+        }
+      ],
+      "artwork": [
+        {
+          "id": "osm:node:9284265540",
+          "lat": 24.1634429,
+          "lon": -110.3133879,
+          "position_method": "source point",
+          "tags": {
+            "artwork_type": "statue",
+            "name": "Piedras y Pájaros",
+            "tourism": "artwork"
+          }
+        },
+        {
+          "id": "osm:node:9284265543",
+          "lat": 24.1646534,
+          "lon": -110.314786,
+          "position_method": "source point",
+          "tags": {
+            "artwork_type": "statue",
+            "tourism": "artwork"
+          }
+        },
+        {
+          "id": "osm:node:9284265544",
+          "lat": 24.1641283,
+          "lon": -110.3157748,
+          "position_method": "source point",
+          "tags": {
+            "artwork_type": "statue",
+            "tourism": "artwork"
+          }
+        }
+      ],
+      "beach": [
+        {
+          "id": "osm:node:10805373470",
+          "lat": 24.15578,
+          "lon": -110.3229743,
+          "position_method": "source point",
+          "tags": {
+            "natural": "beach"
+          }
+        }
+      ],
+      "lit_attribute": [
+        {
+          "id": "osm:node:10805405566",
+          "lat": 24.1729648,
+          "lon": -110.3067286,
+          "position_method": "source point",
+          "tags": {
+            "lit": "yes",
+            "man_made": "windpump",
+            "material": "metal",
+            "ref": "Molinito"
+          }
+        },
+        {
+          "id": "osm:node:11484505433",
+          "lat": 24.1838822,
+          "lon": -110.3013717,
+          "position_method": "source point",
+          "tags": {
+            "indoor": "no",
+            "leisure": "track",
+            "lit": "yes",
+            "name": "BMX park",
+            "sport": "bmx"
+          }
+        },
+        {
+          "id": "osm:way:24503421",
+          "lat": 24.1509349,
+          "lon": -110.3177415,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "cycleway:both": "no",
+            "highway": "tertiary",
+            "lanes": "2",
+            "lit": "yes",
+            "name": "Calle Ignacio Ramírez",
+            "name:etymology:wikidata": "Q205389",
+            "oneway": "yes",
+            "parking:both": "lane",
+            "parking:both:orientation": "parallel",
+            "sidewalk": "both",
+            "surface": "asphalt"
+          }
+        }
+      ],
+      "coastline": [
+        {
+          "id": "osm:way:22653914",
+          "lat": 24.1674077,
+          "lon": -110.3324624,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "natural": "coastline"
+          }
+        },
+        {
+          "id": "osm:way:22658906",
+          "lat": 24.1245933,
+          "lon": -110.3454154,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "natural": "coastline"
+          }
+        },
+        {
+          "id": "osm:way:28533913",
+          "lat": 24.1627926,
+          "lon": -110.3179467,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "natural": "coastline"
+          }
+        }
+      ],
+      "sidewalk_attribute": [
+        {
+          "id": "osm:way:24503421",
+          "lat": 24.1509349,
+          "lon": -110.3177415,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "cycleway:both": "no",
+            "highway": "tertiary",
+            "lanes": "2",
+            "lit": "yes",
+            "name": "Calle Ignacio Ramírez",
+            "name:etymology:wikidata": "Q205389",
+            "oneway": "yes",
+            "parking:both": "lane",
+            "parking:both:orientation": "parallel",
+            "sidewalk": "both",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "id": "osm:way:24503432",
+          "lat": 24.1513872,
+          "lon": -110.3143926,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "cycleway:both": "no",
+            "highway": "residential",
+            "lanes": "2",
+            "name": "Calle Licenciado Benito Juárez",
+            "name:etymology:wikidata": "Q182276",
+            "parking:both": "lane",
+            "parking:both:orientation": "parallel",
+            "sidewalk": "both",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "id": "osm:way:24503438",
+          "lat": 24.0952556,
+          "lon": -110.3106297,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "alt_name": "Carretera Transpeninsular;Carretera Cabo San Lucas-La Paz",
+            "cycleway:both": "no",
+            "highway": "trunk",
+            "lanes": "2",
+            "name": "Boulevard Forjadores de Sudcalifornia",
+            "oneway": "yes",
+            "ref": "MEX 1",
+            "sidewalk": "right",
+            "surface": "asphalt"
+          }
+        }
+      ],
+      "parking_attribute": [
+        {
+          "id": "osm:way:24503421",
+          "lat": 24.1509349,
+          "lon": -110.3177415,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "cycleway:both": "no",
+            "highway": "tertiary",
+            "lanes": "2",
+            "lit": "yes",
+            "name": "Calle Ignacio Ramírez",
+            "name:etymology:wikidata": "Q205389",
+            "oneway": "yes",
+            "parking:both": "lane",
+            "parking:both:orientation": "parallel",
+            "sidewalk": "both",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "id": "osm:way:24503432",
+          "lat": 24.1513872,
+          "lon": -110.3143926,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "cycleway:both": "no",
+            "highway": "residential",
+            "lanes": "2",
+            "name": "Calle Licenciado Benito Juárez",
+            "name:etymology:wikidata": "Q182276",
+            "parking:both": "lane",
+            "parking:both:orientation": "parallel",
+            "sidewalk": "both",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "id": "osm:way:28532251",
+          "lat": 24.1583169,
+          "lon": -110.308712,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "cycleway:both": "no",
+            "highway": "tertiary",
+            "lanes": "2",
+            "name": "Calle Valentín Gómez Farías",
+            "name:etymology:wikidata": "Q358534",
+            "oneway": "no",
+            "parking:both": "lane",
+            "parking:both:orientation": "parallel",
+            "sidewalk": "both",
+            "surface": "asphalt"
+          }
+        }
+      ],
+      "pedestrian": [
+        {
+          "id": "osm:way:28534056",
+          "lat": 24.161755,
+          "lon": -110.316674,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "highway": "pedestrian",
+            "name": "Calle 21 de Agosto"
+          }
+        },
+        {
+          "id": "osm:way:28534060",
+          "lat": 24.1626297,
+          "lon": -110.3177368,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "highway": "pedestrian",
+            "name": "Calle La Paz"
+          }
+        },
+        {
+          "id": "osm:way:28534063",
+          "lat": 24.1613627,
+          "lon": -110.3186347,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "highway": "footway"
+          }
+        }
+      ],
+      "green_area": [
+        {
+          "id": "osm:way:144944663",
+          "lat": 24.1242767,
+          "lon": -110.3397932,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "landuse": "recreation_ground",
+            "name": "Parque Fidepaz"
+          }
+        },
+        {
+          "id": "osm:way:525846921",
+          "lat": 24.1302083,
+          "lon": -110.3202781,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "landuse": "recreation_ground",
+            "name": "Parque del Cereso"
+          }
+        },
+        {
+          "id": "osm:way:1161797108",
+          "lat": 24.1627196,
+          "lon": -110.3141587,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "landuse": "grass"
+          }
+        }
+      ],
+      "building_levels": [
+        {
+          "id": "osm:way:154141796",
+          "lat": 24.159618,
+          "lon": -110.3180497,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "addr:street": "Mutualismo",
+            "building": "yes",
+            "building:levels": "1",
+            "disused:shop": "supermarket",
+            "name:en": "Arumburo Mini"
+          }
+        },
+        {
+          "id": "osm:way:442250068",
+          "lat": 24.1447371,
+          "lon": -110.341795,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "building": "yes",
+            "building:levels": "20"
+          }
+        },
+        {
+          "id": "osm:way:988832604",
+          "lat": 24.136873,
+          "lon": -110.3189325,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "building": "yes",
+            "building:levels": "2",
+            "roof:type": "flat"
+          }
+        }
+      ],
+      "building_appearance": [
+        {
+          "id": "osm:way:441184796",
+          "lat": 24.17986,
+          "lon": -110.3029591,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "building": "yes",
+            "roof:shape": "gabled"
+          }
+        },
+        {
+          "id": "osm:way:1442221216",
+          "lat": 24.1509578,
+          "lon": -110.3143704,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "addr:city": "La Paz",
+            "addr:neighbourhood": "Centro",
+            "addr:postcode": "23000",
+            "addr:state": "Baja California Sur",
+            "addr:street": "Calle Valentín Gómez Farías",
+            "building": "warehouse",
+            "building:colour": "Blanco",
+            "building:levels": "1",
+            "description": "Bodega de Paquetería IMile. En La Paz, BCS.",
+            "name": "iMile Delivery Services LLC - La Paz",
+            "website": "https://www.imile.com/MX-es/"
+          }
+        }
+      ],
+      "sidewalk_geometry": [
+        {
+          "id": "osm:way:462434216",
+          "lat": 24.1642221,
+          "lon": -110.3154026,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "bicycle": "permissive",
+            "foot": "yes",
+            "footway": "sidewalk",
+            "highway": "footway",
+            "horse": "no",
+            "name": "Malecón",
+            "surface": "concrete",
+            "width": "5"
+          }
+        },
+        {
+          "id": "osm:way:482094318",
+          "lat": 24.1787928,
+          "lon": -110.303023,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "bicycle": "permissive",
+            "footway": "sidewalk",
+            "highway": "footway",
+            "horse": "no",
+            "lit": "yes",
+            "name": "Malecón",
+            "surface": "concrete",
+            "width": "5"
+          }
+        },
+        {
+          "id": "osm:way:1006312140",
+          "lat": 24.1625117,
+          "lon": -110.313714,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "footway": "sidewalk",
+            "highway": "footway"
+          }
+        }
+      ],
+      "malecon_named": [
+        {
+          "id": "osm:way:462434216",
+          "lat": 24.1642221,
+          "lon": -110.3154026,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "bicycle": "permissive",
+            "foot": "yes",
+            "footway": "sidewalk",
+            "highway": "footway",
+            "horse": "no",
+            "name": "Malecón",
+            "surface": "concrete",
+            "width": "5"
+          }
+        },
+        {
+          "id": "osm:way:482094318",
+          "lat": 24.1787928,
+          "lon": -110.303023,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "bicycle": "permissive",
+            "footway": "sidewalk",
+            "highway": "footway",
+            "horse": "no",
+            "lit": "yes",
+            "name": "Malecón",
+            "surface": "concrete",
+            "width": "5"
+          }
+        },
+        {
+          "id": "osm:way:1161797115",
+          "lat": 24.1730016,
+          "lon": -110.3063453,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "bicycle": "permissive",
+            "foot": "yes",
+            "footway": "sidewalk",
+            "highway": "footway",
+            "horse": "no",
+            "name": "Malecón",
+            "surface": "concrete",
+            "width": "5"
+          }
+        }
+      ],
+      "monument": [
+        {
+          "id": "osm:way:1365246290",
+          "lat": 24.1641019,
+          "lon": -110.3165341,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "historic": "memorial",
+            "inscription": "Obelisco erigido en 1973.",
+            "material": "concrete",
+            "memorial": "obelisk",
+            "name": "Monumento a Los Niños Héroes"
+          }
+        }
+      ],
+      "square": [
+        {
+          "id": "osm:way:1497400972",
+          "lat": 24.1620577,
+          "lon": -110.3152445,
+          "position_method": "derived representative point on available geometry; not an entrance",
+          "tags": {
+            "place": "square"
+          }
+        }
+      ]
+    },
+    "unresolved_category_records": {},
+    "incomplete_geometry_by_type": {},
+    "unique_elements_by_type": {
+      "node": 61779,
+      "way": 11689,
+      "relation": 37
+    }
+  },
+  "geojson": {
+    "overture_buildings": {
+      "file_records": 84824,
+      "domains": {
+        "visual": {
+          "records": 74704,
+          "nonnull_attributes": {
+            "class": 879,
+            "has_parts": 74704,
+            "is_underground": 74704,
+            "level": 84,
+            "names": 138,
+            "num_floors": 9,
+            "roof_shape": 1,
+            "sources": 74704,
+            "subtype": 929,
+            "version": 74704
+          },
+          "primary_source_records": {
+            "OpenStreetMap": 5816,
+            "Google Open Buildings": 38834,
+            "Microsoft ML Buildings": 30054
+          }
+        },
+        "roads": {
+          "records": 65558,
+          "nonnull_attributes": {
+            "class": 879,
+            "has_parts": 65558,
+            "is_underground": 65558,
+            "level": 83,
+            "names": 136,
+            "num_floors": 9,
+            "roof_shape": 1,
+            "sources": 65558,
+            "subtype": 928,
+            "version": 65558
+          },
+          "primary_source_records": {
+            "OpenStreetMap": 5651,
+            "Google Open Buildings": 35809,
+            "Microsoft ML Buildings": 24098
+          }
+        }
+      }
+    },
+    "inegi_blocks": {
+      "file_records": 5796,
+      "domains": {
+        "visual": {
+          "records": 2998,
+          "nonnull_attributes": {
+            "ambito": 2998,
+            "cve_ageb": 2998,
+            "cve_ent": 2998,
+            "cve_loc": 2998,
+            "cve_mun": 2998,
+            "cve_mza": 2998,
+            "cvegeo": 2998,
+            "nom_ent": 2998,
+            "nom_loc": 2998,
+            "nom_mun": 2998,
+            "pob_femenina": 2938,
+            "pob_masculina": 2938,
+            "pob_total": 2938,
+            "tipomza": 2998,
+            "total_viviendas_habitadas": 2938
+          },
+          "primary_source_records": {}
+        },
+        "roads": {
+          "records": 2658,
+          "nonnull_attributes": {
+            "ambito": 2658,
+            "cve_ageb": 2658,
+            "cve_ent": 2658,
+            "cve_loc": 2658,
+            "cve_mun": 2658,
+            "cve_mza": 2658,
+            "cvegeo": 2658,
+            "nom_ent": 2658,
+            "nom_loc": 2658,
+            "nom_mun": 2658,
+            "pob_femenina": 2600,
+            "pob_masculina": 2600,
+            "pob_total": 2600,
+            "tipomza": 2658,
+            "total_viviendas_habitadas": 2600
+          },
+          "primary_source_records": {}
+        }
+      }
+    },
+    "overture_places": {
+      "file_records": 3055,
+      "domains": {
+        "visual": {
+          "records": 3055,
+          "nonnull_attributes": {
+            "addresses": 3055,
+            "basic_category": 2942,
+            "brand": 2881,
+            "confidence": 3055,
+            "emails": 1452,
+            "names": 3055,
+            "operating_status": 11,
+            "phones": 2672,
+            "socials": 2899,
+            "sources": 3055,
+            "taxonomy": 2940,
+            "version": 3055,
+            "websites": 1151
+          },
+          "primary_source_records": {
+            "meta": 2874,
+            "Uberall": 7,
+            "Foursquare": 44,
+            "Microsoft": 119,
+            "AllThePlaces": 6,
+            "OpenTravel": 1,
+            "PinMeTo": 3,
+            "DAC": 1
+          }
+        },
+        "roads": {
+          "records": 3055,
+          "nonnull_attributes": {
+            "addresses": 3055,
+            "basic_category": 2942,
+            "brand": 2881,
+            "confidence": 3055,
+            "emails": 1452,
+            "names": 3055,
+            "operating_status": 11,
+            "phones": 2672,
+            "socials": 2899,
+            "sources": 3055,
+            "taxonomy": 2940,
+            "version": 3055,
+            "websites": 1151
+          },
+          "primary_source_records": {
+            "meta": 2874,
+            "Uberall": 7,
+            "Foursquare": 44,
+            "Microsoft": 119,
+            "AllThePlaces": 6,
+            "OpenTravel": 1,
+            "PinMeTo": 3,
+            "DAC": 1
+          }
+        }
+      }
+    }
+  },
+  "buildings_prepared": {
+    "records": 62465,
+    "sources": {
+      "osm": 5194,
+      "fictional": 1000,
+      "overture": 56271
+    },
+    "categories": {
+      "unknown": 60983,
+      "institutional": 86,
+      "cultural": 27,
+      "commercial": 362,
+      "restaurant": 157,
+      "residential": 798,
+      "hotel": 33,
+      "industrial": 19
+    },
+    "height_estimated": 62465,
+    "height_sources": {
+      "estimated:deterministic_1_to_3_floors": 61457,
+      "fictional:seeded_1_to_3_floors": 1000,
+      "estimated:num_floors*3.1": 7,
+      "manual override": 1
+    },
+    "floor_source_present": 7,
+    "fictional": 1000
+  },
+  "buildings_effective_after_arcade": {
+    "records": 62410,
+    "sources": {
+      "osm": 5194,
+      "fictional": 1000,
+      "overture": 56216
+    },
+    "categories": {
+      "unknown": 60929,
+      "institutional": 86,
+      "cultural": 27,
+      "commercial": 361,
+      "restaurant": 157,
+      "residential": 798,
+      "hotel": 33,
+      "industrial": 19
+    },
+    "height_estimated": 62410,
+    "height_sources": {
+      "estimated:deterministic_1_to_3_floors": 61402,
+      "fictional:seeded_1_to_3_floors": 1000,
+      "estimated:num_floors*3.1": 7,
+      "manual override": 1
+    },
+    "floor_source_present": 7,
+    "fictional": 1000
+  },
+  "arcade_statistics": {
+    "source_asphalt_area_m2": 4370210.6437371,
+    "arcade_asphalt_area_m2": 7513467.436140279,
+    "buildings_total": 62465,
+    "buildings_adjusted": 10230,
+    "buildings_removed": 55,
+    "max_adjusted_building_overlap_m2": 0.0,
+    "triangulation_error_m2": 4.0978193283081055e-08
+  },
+  "poi_records_by_domain": {
+    "visual": {
+      "denue": 9232,
+      "osm": 603,
+      "overture_places": 3055
+    },
+    "roads": {
+      "denue": 9232,
+      "osm": 603,
+      "overture_places": 3055
+    }
+  },
+  "poi_statistics": {
+    "pois": 12890,
+    "records_by_source": {
+      "denue": 9232,
+      "osm": 603,
+      "overture": 3055
+    },
+    "classification_ineligible": 1369,
+    "associated": 1131,
+    "unassociated": 11759,
+    "duplicate_candidates": 670,
+    "categories": {
+      "commercial": 362,
+      "institutional": 86,
+      "unknown": 60983,
+      "cultural": 27,
+      "restaurant": 157,
+      "hotel": 33,
+      "residential": 798,
+      "industrial": 19
+    }
+  },
+  "poi_association_reasons": {
+    "proximity requires review": 4913,
+    "ambiguous proximity": 1460,
+    "no nearby building": 4014,
+    "unique containment": 1131,
+    "fictional footprint is not geographic evidence": 3,
+    "source confidence/status requires review": 1369
+  },
+  "poi_position_methods": {
+    "source point": 12287,
+    "source node": 432,
+    "polygon representative point": 171
+  },
+  "landmarks": [
+    {
+      "id": "landmark:osm:node:958717770",
+      "poi_id": "osm:node:958717770",
+      "name": "Centro Cultural La Paz",
+      "position_xz": [
+        410.77392228240717,
+        -338.88877793459545
+      ],
+      "lat": 24.1620477,
+      "lon": -110.3154512,
+      "category": "cultural",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:137201460",
+      "poi_id": "osm:way:137201460",
+      "name": "Universidad Autónoma de Baja California Sur (UABCS)",
+      "position_xz": [
+        204.0605498653442,
+        6323.488685886111
+      ],
+      "lat": 24.1021315,
+      "lon": -110.31748867379481,
+      "category": "institutional",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:155831056",
+      "poi_id": "osm:way:155831056",
+      "name": "Museo de Arte de Baja California Sur",
+      "position_xz": [
+        546.1173863511281,
+        -383.7281321041828
+      ],
+      "lat": 24.16245095,
+      "lon": -110.31411718489437,
+      "category": "cultural",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:155831064",
+      "poi_id": "osm:way:155831064",
+      "name": "Museo de Antropología e Historia",
+      "position_xz": [
+        1090.3158335900866,
+        -64.94339690681036
+      ],
+      "lat": 24.15958405,
+      "lon": -110.30875328384403,
+      "category": "cultural",
+      "building_id": "osm:155831064:0",
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:155831066",
+      "poi_id": "osm:way:155831066",
+      "name": "Catedral de Nuestra Señora de La Paz",
+      "position_xz": [
+        669.6952121969947,
+        -288.673149062123
+      ],
+      "lat": 24.1615961,
+      "lon": -110.31289913799766,
+      "category": "cultural",
+      "building_id": "osm:155831066:0",
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 1,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": "res://scenes/landmarks/Cathedral.tscn",
+      "rotation_degrees": 0,
+      "scale": 1,
+      "silhouette_reference": "https://sitiosymonumentos.cultura.gob.mx/iii-estudios-monograficos/nuestra-senora-de-la-paz-catedral/",
+      "dimensions_estimated": true
+    },
+    {
+      "id": "landmark:osm:way:301737276",
+      "poi_id": "osm:way:301737276",
+      "name": "Hospital General Juan María de Salvatierra",
+      "position_xz": [
+        42.841222296951685,
+        5187.121013549466
+      ],
+      "lat": 24.112351099999998,
+      "lon": -110.31907773477958,
+      "category": "institutional",
+      "building_id": null,
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:450296320",
+      "poi_id": "osm:way:450296320",
+      "name": "Mercado Bravo",
+      "position_xz": [
+        495.2039824950691,
+        342.9807512351341
+      ],
+      "lat": 24.1559155,
+      "lon": -110.31461901370665,
+      "category": "commercial",
+      "building_id": "overture:01326eca-6638-4e93-bf74-debbb03e33ac:0:0",
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    },
+    {
+      "id": "landmark:osm:way:450296505",
+      "poi_id": "osm:way:450296505",
+      "name": "Mercado Francisco I. Madero",
+      "position_xz": [
+        402.92687502725926,
+        79.15410853213436
+      ],
+      "lat": 24.158288149999997,
+      "lon": -110.31552854455184,
+      "category": "commercial",
+      "building_id": "overture:5ab8adc6-35b9-49ba-8f09-d6ca66e4781f:0:0",
+      "source": {
+        "file": "osm_map_c6_boundary_expansion.osm",
+        "sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "license": "ODbL-1.0"
+      },
+      "priority": 2,
+      "verification": "location documented in hashed OSM snapshot; not field verified",
+      "architecture_verified": false,
+      "model_path": null,
+      "rotation_degrees": 0,
+      "scale": 1
+    }
+  ],
+  "validation": {
+    "input_files_unchanged": 1054,
+    "sector_hashes_verified": 541,
+    "arcade_sector_hashes_verified": 502,
+    "counts_crosschecked": true
+  }
+}

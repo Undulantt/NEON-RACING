@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "samples": [
+    {
+      "airborne_frames": 13,
+      "burst_seconds": 19.3666666666667,
+      "completed": true,
+      "distance_m": 1689.25788021088,
+      "expected_m": 1693.96913051605,
+      "max_deviation_m": 0.0544190034270287,
+      "mode": "A",
+      "offroad_frames": 0,
+      "peak_burst_bonus": 0.35,
+      "peak_speed_kmh": 249.803118896484,
+      "recoveries": 0,
+      "time_s": 32.6166666666667,
+      "wall_contacts": 0
+    },
+    {
+      "airborne_frames": 13,
+      "burst_seconds": 19.3666666666667,
+      "completed": true,
+      "distance_m": 1689.25768947601,
+      "expected_m": 1693.96913051605,
+      "max_deviation_m": 0.0543946176767349,
+      "mode": "B",
+      "offroad_frames": 0,
+      "peak_burst_bonus": 0.35,
+      "peak_speed_kmh": 249.803118896484,
+      "recoveries": 0,
+      "time_s": 32.6166666666667,
+      "wall_contacts": 0
+    }
+  ],
+  "source": "Existing extension_C2 OSM path, points 25..42; existing pure-pursuit test driver; actual unchanged physical controller; no teleports during route"
+}

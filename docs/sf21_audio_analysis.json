@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "source": "Actual Master bus captures of the unchanged physical controller; music absent",
+  "raw_B_minus_A_rms_db": 4.418255421321722,
+  "previews": "22.05 kHz mono, gain-only RMS matching to 0.08; these gains are NOT game defaults",
+  "samples": [
+    {
+      "mode": "A",
+      "duration_s": 29.002666666666666,
+      "rms": 0.018669226858197392,
+      "peak": 0.04144287109375,
+      "preview_gain_db": 12.639273078951671,
+      "preview_rms": 0.07998903705738541,
+      "stage_rms": {
+        "idle": 0.01021645008645015,
+        "accel": 0.021519807529661688,
+        "top": 0.021508987649014558,
+        "lift": 0.010215119321652946,
+        "brake": 0.009930421374562569
+      }
+    },
+    {
+      "mode": "B",
+      "duration_s": 29.002666666666666,
+      "rms": 0.031048391369408585,
+      "peak": 0.0953369140625,
+      "preview_gain_db": 8.221017657629949,
+      "preview_rms": 0.0799848538858837,
+      "stage_rms": {
+        "idle": 0.009413036995695323,
+        "accel": 0.03686937800703225,
+        "top": 0.03741034104491427,
+        "lift": 0.013747790283763415,
+        "brake": 0.010167978935901262
+      }
+    }
+  ]
+}

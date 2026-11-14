@@ -1,0 +1,82 @@
+{
+  "engine": "Godot 4.7.2 stable official ed1daf0bf",
+  "scope": "SF.1.1 and SF.2.1 only; SF.2.2 pending user evaluation",
+  "editor_import": "exit 0",
+  "final_log_errors_or_warnings": [],
+  "consolidated_logs": [
+    "sf21_benchmark.log",
+    "sf21_capture.log",
+    "sf21_godot_phase_d1.log",
+    "sf21_godot_race_navigation.log",
+    "sf21_import.log",
+    "sf21_powertrain.log",
+    "sf21_sf1.log",
+    "sf21_sf1_city.log",
+    "sf21_smoke.log",
+    "sf21_validation.log"
+  ],
+  "protected_files_unchanged": {
+    "scripts/driving/ArcadeCar.gd": true,
+    "scripts/driving/DrivingAbilities.gd": true,
+    "scripts/driving/AutomaticTransmission.gd": true,
+    "scripts/driving/DrivingFeedback.gd": true,
+    "scripts/driving/DrivingInput.gd": true,
+    "config/driving_config.json": true,
+    "config/powertrain_config.json": true,
+    "config/sf1_camera_experimental.json": true,
+    "config/vehicles/vector.json": true,
+    "config/vehicles/comet.json": true,
+    "config/vehicles/apex.json": true,
+    "data/processed/la_paz_map.json": true,
+    "data/processed/la_paz_environment.json": true,
+    "scripts/style/RetroLook.gd": true,
+    "scripts/ui/SpeedEffects.gd": true
+  },
+  "reports": {
+    "sf21_validation.json": {
+      "passed": true,
+      "checks": 101,
+      "failures": []
+    },
+    "sf21_audio_capture.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf21_audio_analysis.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf21_benchmark.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "sf1_validation.json": {
+      "passed": true,
+      "checks": 67,
+      "failures": []
+    },
+    "sf1_manual_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    },
+    "phase_d1_validation.json": {
+      "passed": true,
+      "checks": 207,
+      "failures": []
+    },
+    "race_navigation_validation.json": {
+      "passed": true,
+      "checks": 48,
+      "failures": []
+    },
+    "powertrain_validation.json": {
+      "passed": true,
+      "checks": null,
+      "failures": []
+    }
+  }
+}

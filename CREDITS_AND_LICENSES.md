@@ -83,3 +83,11 @@ Modificaciones propias para el juego: remuestreo al sistema métrico existente, 
 Ventanas, letreros ficticios, palmeras, farolas y materiales nocturnos son geometría/código originales. No se usan fotos ni marcas comerciales. Los sonidos `assets/audio/malecon_night_demo.wav` y `malecon_surf.wav` se sintetizan con `tools/build_night_audio.py`, sin muestras externas ni copia de una composición: estudio musical original a 160 BPM y ambiente de oleaje artificial. Se incorporan como recursos originales del proyecto, no como música comercial licenciada. El sistema permite reemplazarlos por pistas cuya licencia autorice el uso y distribución en el juego. Permanecen todas las atribuciones geográficas anteriores.
 
 Revisión Neon Coast: shaders de cielo/asfalto/resplandor, palmeras y carrocería procedural originales. Las tres imágenes aportadas por el usuario se usan exclusivamente como referencias visuales; no se incorporan sus píxeles, modelos ni marcas al proyecto.
+
+
+## SF.2.1 — Audio experimental
+
+El motor reutiliza los bucles de combustión sintetizados originalmente por el proyecto en `DrivingFeedback.gd`. `assets/audio/sf21_wind_placeholder.wav` es ruido filtrado periódico original, generado con `tools/build_sf21_wind.py` y semilla fija, sin grabaciones ni muestras de terceros. Es un recurso provisional del proyecto. Las muestras `docs/evidence/sf21_audio_*` son capturas de esa síntesis y su mezcla dentro de Godot; las copias `_matched` solo ajustan ganancia RMS y formato para la comparación. No se incorporan voces, motores comerciales ni música ajena.
+
+
+Revisión del motor SF.2.1: los cuatro recursos `engine_combustion_*.wav` son síntesis original de pulsos, resonancias y ruido, generada con `tools/build_combustion_audio.py`, sin muestras de terceros. Las capturas `sf21r_audio_*` documentan su reproducción dentro de Godot.

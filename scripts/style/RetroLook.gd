@@ -50,6 +50,7 @@ func configure(target: Node3D) -> void:
 			turbo_trail=preload("res://scripts/style/TurboTrail.gd").new()
 			add_child(turbo_trail)
 			turbo_trail.attach(world.player,effect,world.hud)
+	world.follow_camera.speed_feedback.vehicle_feedback.bind_world_effects(world.hud,turbo_trail)
 	refresh()
 func refresh() -> void:
 	poll_baked()

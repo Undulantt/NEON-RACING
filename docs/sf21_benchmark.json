@@ -1,0 +1,37 @@
+{
+  "B_minus_A_ms": -0.318575,
+  "B_overhead_percent": -11.9305680821649,
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "passed": true,
+  "samples": [
+    {
+      "audio_mean_us": 20.5383333333333,
+      "audio_mode": "A",
+      "mean_ms": 2.88745166666667,
+      "median_ms": 2.339,
+      "p95_ms": 5.016
+    },
+    {
+      "audio_mean_us": 25.8266666666667,
+      "audio_mode": "B",
+      "mean_ms": 2.699755,
+      "median_ms": 2.494,
+      "p95_ms": 4.433
+    },
+    {
+      "audio_mean_us": 17.8516666666667,
+      "audio_mode": "B",
+      "mean_ms": 2.00357833333334,
+      "median_ms": 1.916,
+      "p95_ms": 2.412
+    },
+    {
+      "audio_mean_us": 20.8366666666667,
+      "audio_mode": "A",
+      "mean_ms": 2.45303166666667,
+      "median_ms": 2.229,
+      "p95_ms": 3.862
+    }
+  ],
+  "scenario": "1280x720 full existing city; Compatibility, VSync off, same camera and frozen synthetic 180 km/h telemetry, 6500 RPM; audio A/B/B/A, 3 seconds warmup and 600 rendered samples; NOT city-traversal FPS"
+}

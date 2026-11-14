@@ -1,0 +1,26 @@
+[
+  {
+    "file": "engine_combustion_coast.wav",
+    "reference_rpm": 3000,
+    "rms": 0.21000000000000002,
+    "peak": 0.772066504703541
+  },
+  {
+    "file": "engine_combustion_load_low.wav",
+    "reference_rpm": 3000,
+    "rms": 0.24999999999999994,
+    "peak": 0.47454224616921004
+  },
+  {
+    "file": "engine_combustion_load_high.wav",
+    "reference_rpm": 6000,
+    "rms": 0.25,
+    "peak": 0.45729528421085824
+  },
+  {
+    "file": "engine_combustion_body.wav",
+    "reference_rpm": 3000,
+    "rms": 0.19999999999999996,
+    "peak": 0.483796986559801
+  }
+]

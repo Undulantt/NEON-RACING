@@ -157,7 +157,8 @@ func run() -> void:
 		FileAccess.open("res://docs/burst_balance_synthetic.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 		quit(0 if failures.is_empty() else 1)
 		return
-	world = preload("res://scenes/ReliefWorld.tscn").instantiate()
+	# Resolve after Autoload initialization; derived SF.1 tools reuse the driver.
+	world = load("res://scenes/ReliefWorld.tscn").instantiate()
 	root.add_child(world)
 	car = world.player
 	car.external_control = true

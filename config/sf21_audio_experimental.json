@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "experimental_enabled": true,
+  "engine_enabled": true,
+  "wind_enabled": true,
+  "engine_coast_db": -22.0,
+  "engine_load_db": -19.0,
+  "engine_body_db": -25.0,
+  "engine_pitch_scale": 1.0,
+  "engine_body_pitch_scale": 0.5,
+  "engine_pitch_max": 2.7,
+  "engine_lift_drop_rpm": 500.0,
+  "engine_response_per_s": 14.0,
+  "load_response_per_s": 10.0,
+  "wind_gain_db": -27.0,
+  "wind_start_kmh": 45.0,
+  "wind_exponent": 2.0,
+  "wind_overcap_gain": 0.35,
+  "wind_pitch_base": 0.85,
+  "wind_pitch_add": 0.35,
+  "wind_response_per_s": 4.0,
+  "ab_response_per_s": 10.0
+}

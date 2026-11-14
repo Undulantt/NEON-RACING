@@ -1,0 +1,42 @@
+{
+  "asphalt_mean_abs_rgb_difference": 0.00349496815846395,
+  "failures": [],
+  "original_repeat_rgb_difference": 0.00000248988469441732,
+  "passed": true,
+  "preview_mean_abs_rgb_difference": 0.0184290895913604,
+  "scenario": "Real city, stationary car, same pose/camera and frozen decoration. GPU-rendered pixel comparison in two ground ROIs excluding HUD/car. Preview is visual only.",
+  "stages": [
+    {
+      "applied_gain": 0.0,
+      "bindings": 0,
+      "diagnostic": "Original: mejoras SF.3 desactivadas.",
+      "shader_asphalt": 0.0,
+      "speed_kmh": 0.0,
+      "stage": "original"
+    },
+    {
+      "applied_gain": 0.0,
+      "bindings": 0,
+      "diagnostic": "Original: mejoras SF.3 desactivadas.",
+      "shader_asphalt": 0.0,
+      "speed_kmh": 0.0,
+      "stage": "original_repeat"
+    },
+    {
+      "applied_gain": 0.199999999924692,
+      "bindings": 10,
+      "diagnostic": "Base visible; la respuesta crece al acelerar.",
+      "shader_asphalt": 0.12999999995105,
+      "speed_kmh": 0.0,
+      "stage": "stationary"
+    },
+    {
+      "applied_gain": 1.0,
+      "bindings": 10,
+      "diagnostic": "VISTA PREVIA ESTÁTICA · física y BURST reales intactos.",
+      "shader_asphalt": 0.65,
+      "speed_kmh": 0.0,
+      "stage": "preview"
+    }
+  ]
+}

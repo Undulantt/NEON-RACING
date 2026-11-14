@@ -100,7 +100,9 @@ def build():
     print("URBAN: indexed exact road mask",len(mask_tiles),flush=True)
     protected,coast=protected_shapes(load_json(inputs['osm_protected'][0]),project)
     protected_union=unary_union([g for _,g,_ in protected])
-    protected_prepared=prep(protected_union)
+    from urban_protection import real_building_exclusions
+    real_exclusions=real_building_exclusions([{'geometry_xz':mapping(g),'tags':tags} for _,g,tags in protected])
+    real_exclusions_prepared=prep(real_exclusions)
     region_prepared=prep(region)
     # Additional coast guard for fictional fill only. Real buildings still require
     # geometric exclusion of mapped parks/beaches/water.
@@ -121,9 +123,11 @@ def build():
             audit.append({'id':identifier,'reason':'outside bbox; no partial landmark'}); return
         if original.area<settings['real_min_area_m2'] or original.area>settings['real_max_area_m2']:
             audit.append({'id':identifier,'reason':'size outside prototype limits'}); return
-        if protected_prepared.intersects(original):
-            audit.append({'id':identifier,'reason':'mapped protected/open space'}); return
-        candidate=original.simplify(0.12,preserve_topology=True).difference(local_mask(original))
+        # A campus is a parcel, not empty land. Keep real roofs while clipping
+        # actual open areas; tiny boundary touches must not erase a whole shop.
+        candidate=original.simplify(0.12,preserve_topology=True)
+        if real_exclusions_prepared.intersects(candidate): candidate=candidate.difference(real_exclusions)
+        candidate=candidate.difference(local_mask(original))
         overlap=unary_union([geometries[i] for i in nearby(candidate)] if not candidate.is_empty else [])
         if not overlap.is_empty:
             if candidate.intersection(overlap).area/max(0.01,min(candidate.area,overlap.area))>0.25:

@@ -7,6 +7,7 @@ var intensity := 0.0
 var elapsed := 0.0
 var drift_tint := 0.0
 var burst_blend := 0.0
+var sf4_burst_progress := -1.0
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -20,8 +21,9 @@ func _process(delta: float) -> void:
 	var target: float = clampf((car.speed_mps - 24.0) / 22.0, 0.0, 0.22)
 	var bursting: bool = car.abilities.burst_state == 2
 	burst_blend = lerpf(burst_blend, 1.0 if bursting and active else 0.0, 1.0 - exp(-10.0 * delta))
+	if sf4_burst_progress>=0:burst_blend=sf4_burst_progress if active else 0.0
 	if bursting:
-		target = 2.0
+		target = lerpf(0.22,1.4,sf4_burst_progress) if sf4_burst_progress>=0 else 2.0
 	elif car.turbo_active:
 		target = 1.0
 	elif car.drift_boost_active:

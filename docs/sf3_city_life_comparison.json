@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "protocol": "1280x720, Compatibility, VSync off. Same recovered geometry, fixed elevated views at three existing road locations. Two seconds warmup, 240 rendered samples per site and mode; 2 separate runs. Static view samples, not driving FPS. Absolute incremental budget 1 ms; also reports whether the initially proposed 5% p95 target is met.",
+  "initial_5_percent_p95_target_met": false,
+  "samples": [
+    {
+      "site": "Soriana Forjadores",
+      "original_median_ms": 2.658,
+      "life_median_ms": 2.671,
+      "median_delta_ms": 0.0129999999999999,
+      "original_p95_ms": 3.243,
+      "life_p95_ms": 3.504,
+      "p95_delta_ms": 0.2610000000000001,
+      "original_draw_calls": 322.0,
+      "life_draw_calls": 334.0,
+      "original_vertices": 604152,
+      "life_vertices": 672198
+    },
+    {
+      "site": "Tec de La Paz",
+      "original_median_ms": 2.328,
+      "life_median_ms": 2.391,
+      "median_delta_ms": 0.06300000000000017,
+      "original_p95_ms": 2.806,
+      "life_p95_ms": 2.776,
+      "p95_delta_ms": -0.03000000000000025,
+      "original_draw_calls": 397.0,
+      "life_draw_calls": 416.0,
+      "original_vertices": 590280,
+      "life_vertices": 658968
+    },
+    {
+      "site": "UABCS",
+      "original_median_ms": 1.939,
+      "life_median_ms": 1.958,
+      "median_delta_ms": 0.018999999999999906,
+      "original_p95_ms": 2.201,
+      "life_p95_ms": 2.345,
+      "p95_delta_ms": 0.14400000000000013,
+      "original_draw_calls": 342.0,
+      "life_draw_calls": 363.0,
+      "original_vertices": 249465,
+      "life_vertices": 292725
+    }
+  ]
+}

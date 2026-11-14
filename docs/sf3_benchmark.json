@@ -1,0 +1,70 @@
+{
+  "failures": [],
+  "full_minus_original_ms": -0.192007500000001,
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "max_registration_us": 188,
+  "passed": true,
+  "samples": [
+    {
+      "active_light_pools": 2,
+      "bindings": 0,
+      "draw_calls": 259.0,
+      "environment_mean_us": 6.55666666666667,
+      "mean_ms": 2.02319,
+      "median_ms": 1.927,
+      "mode": "original",
+      "p95_ms": 2.485
+    },
+    {
+      "active_light_pools": 2,
+      "bindings": 2,
+      "draw_calls": 259.0,
+      "environment_mean_us": 13.52,
+      "mean_ms": 1.99686833333333,
+      "median_ms": 1.941,
+      "mode": "partial",
+      "p95_ms": 2.347
+    },
+    {
+      "active_light_pools": 2,
+      "bindings": 10,
+      "draw_calls": 259.0,
+      "environment_mean_us": 17.21,
+      "mean_ms": 2.091365,
+      "median_ms": 2.019,
+      "mode": "full",
+      "p95_ms": 2.518
+    },
+    {
+      "active_light_pools": 2,
+      "bindings": 10,
+      "draw_calls": 259.0,
+      "environment_mean_us": 16.305,
+      "mean_ms": 2.00937166666667,
+      "median_ms": 1.953,
+      "mode": "full",
+      "p95_ms": 2.375
+    },
+    {
+      "active_light_pools": 2,
+      "bindings": 2,
+      "draw_calls": 259.0,
+      "environment_mean_us": 23.6466666666667,
+      "mean_ms": 2.92884,
+      "median_ms": 2.711,
+      "mode": "partial",
+      "p95_ms": 4.825
+    },
+    {
+      "active_light_pools": 2,
+      "bindings": 0,
+      "draw_calls": 259.0,
+      "environment_mean_us": 8.74833333333333,
+      "mean_ms": 2.46156166666667,
+      "median_ms": 2.372,
+      "mode": "original",
+      "p95_ms": 3.221
+    }
+  ],
+  "scenario": "Existing full city 1280x720 Compatibility, VSync off; same frozen decoration/pose/camera/FOV75, synthetic max-normal speed with full BURST telemetry; screen streaks disabled equally; original/partial/full/full/partial/original, 3s warmup and 600 rendered wall-clock samples each; NOT city traversal FPS"
+}

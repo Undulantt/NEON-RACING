@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "checks": 110,
+  "protected_files_unchanged": 15,
+  "capture_passed": true,
+  "audio_discarded_frames": 0,
+  "final_log_errors_or_warnings": [],
+  "asset_health": {
+    "engine_combustion_body.wav": {
+      "rms": 0.1999938803128423,
+      "peak": 0.483795166015625,
+      "dc": 2.456630438633787e-08
+    },
+    "engine_combustion_coast.wav": {
+      "rms": 0.20999363621941866,
+      "peak": 0.77203369140625,
+      "dc": -4.740258733701814e-08
+    },
+    "engine_combustion_load_high.wav": {
+      "rms": 0.24999239001565698,
+      "peak": 0.457275390625,
+      "dc": -1.3840171485260771e-09
+    },
+    "engine_combustion_load_low.wav": {
+      "rms": 0.24999240655575194,
+      "peak": 0.474517822265625,
+      "dc": -2.422030009920635e-09
+    }
+  },
+  "resolved_harness_issue": "Initial capture exited with pending audio objects; explicit player stop and scene teardown added. Cleanup smoke and final real capture exit without leaks.",
+  "final_logs_consolidated": [
+    "combustion_test.log",
+    "combustion_cleanup.log",
+    "combustion_capture_final.log",
+    "combustion_import.log"
+  ]
+}

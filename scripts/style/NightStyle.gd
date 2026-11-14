@@ -17,6 +17,7 @@ var pilot: Node3D
 var emission: StandardMaterial3D
 var furniture: RefCounted
 var solid: StandardMaterial3D
+var clouds: Node3D
 
 func material(color: Color, luminous := false) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
@@ -68,6 +69,12 @@ func configure(target: Node3D, config: Dictionary) -> void:
 	var retro := preload("res://scripts/style/RetroLook.gd").new()
 	add_child(retro)
 	retro.configure(world)
+	clouds = preload("res://scripts/style/NeonClouds.gd").new()
+	clouds.name = "NeonClouds"
+	add_child(clouds)
+	clouds.configure(world)
+	world.follow_camera.experiment_panel.bind_city_clouds(clouds)
+	world.follow_camera.speed_feedback.environment_feedback.bind_world(world,retro.road_material,furniture)
 	refresh()
 
 func geometry() -> Dictionary:
@@ -147,8 +154,8 @@ func decorate(id: String) -> void:
 	pilot.name = "NightPilotDecor"
 	chunk.add_child(pilot)
 	var reading:=Time.get_ticks_usec()
-	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(entry["source"]["file"])))
-	manager.apply_arcade_layout(data)
+	var data: Dictionary = manager.read_chunk(entry["source"])
+	if data.is_empty() or not manager.apply_arcade_layout(data): return
 	record_work("facade_data",reading)
 	var lit := geometry()
 	var storefronts := geometry()
@@ -195,6 +202,14 @@ func decorate(id: String) -> void:
 			var base := float(b.get("base_y_m",0))
 			var category: String = b.get("category","unknown")
 			var commercial := category in ["commercial","restaurant","hotel","cultural"]
+			if manager.facades_enabled and length > 3:
+				# A shallow base strip and one door, merged into the existing solid
+				# batch. Artistic details; never alter the geographic collider.
+				var plinth := Vector3(a.x,base+0.03,a.y)+normal*0.045
+				Builder.quad(storefronts,plinth,plinth+tangent*length,plinth+tangent*length+Vector3.UP*0.38,plinth+Vector3.UP*0.38,normal,Color("55516c"))
+				if edge == edges[0] and not commercial:
+					var door := plinth+tangent*minf(1.0,length*0.2)+normal*0.02
+					Builder.quad(storefronts,door,door+tangent*0.9,door+tangent*0.9+Vector3.UP*minf(2.2,height-0.4),door+Vector3.UP*minf(2.2,height-0.4),normal,Color("192635"))
 			if commercial and edge == edges[0] and length > 6 and storefront_count < 10:
 				var start := Vector3(a.x,base,a.y)+tangent*0.5+normal*0.10
 				var span := minf(6.0,length-1.0)
@@ -219,7 +234,8 @@ func decorate(id: String) -> void:
 						continue
 					var p := Vector3(a.x,base+1.1+floor_index*3,a.y)+tangent*(1.0+i*length/maxi(count,1))+normal*0.065
 					var color := Color("dcb080") if not commercial else Color("e6a3c9") if i%2 == 0 else Color("70cad6")
-					Builder.quad(lit,p,p+tangent*1.1,p+tangent*1.1+Vector3.UP,p+Vector3.UP,normal,color)
+					var unlit: bool = manager.facades_enabled and (i+floor_index+int(b["palette_index"]))%4 == 0
+					Builder.quad(storefronts if unlit else lit,p,p+tangent*1.1,p+tangent*1.1+Vector3.UP,p+Vector3.UP,normal,Color("172e42") if unlit else color)
 					window_count += 1
 			if commercial and length > 5 and sign_count < 8:
 				var p := Vector3(a.x,base+minf(3,height-0.4),a.y)+tangent*0.6+normal*0.085

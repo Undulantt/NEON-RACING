@@ -1,0 +1,6 @@
+{
+  "turbo_fov_percent": 25.0,
+  "turbo_fov_max_deg": 100.0,
+  "turbo_fov_attack_per_s": 12.0,
+  "turbo_fov_release_per_s": 5.0
+}

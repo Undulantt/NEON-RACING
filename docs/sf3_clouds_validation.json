@@ -1,0 +1,13 @@
+{
+  "checks": 13,
+  "cloud_instances": 81,
+  "effective_altitude_m": 409.610370571769,
+  "failures": [],
+  "gpu": "",
+  "max_update_us": 18,
+  "mean_update_us": 0.93,
+  "passed": true,
+  "samples": [],
+  "scenario": "Existing OSM SF.1 avenue, frozen identical pose/camera, 1280x720 Compatibility, VSync off. A/B/B/A with 2s settle and 600 rendered frames per sample; not driving FPS.",
+  "triangles": 162
+}

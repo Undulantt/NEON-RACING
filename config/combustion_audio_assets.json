@@ -1,0 +1,10 @@
+{
+  "coast": "res://assets/audio/engine_combustion_coast.wav",
+  "load": "res://assets/audio/engine_combustion_load_low.wav",
+  "load_high": "res://assets/audio/engine_combustion_load_high.wav",
+  "body": "res://assets/audio/engine_combustion_body.wav",
+  "low_reference_rpm": 3000.0,
+  "high_reference_rpm": 6000.0,
+  "high_bank_start_rpm": 3500.0,
+  "high_bank_full_rpm": 6500.0
+}

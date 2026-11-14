@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SF4_REPORT {"checks":75,"failures":[],"note":"Synthetic contact/telemetry fixtures; real wheel raycasts, all 3 production profiles; physics/config/map hashes unchanged.","passed":true,"stage":4}

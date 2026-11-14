@@ -1,0 +1,49 @@
+{
+  "checks": 67,
+  "failures": [],
+  "metrics": {
+    "APEX": {
+      "fov_samples": [
+        70.0000457763672,
+        74.9999542236328,
+        77.9999542236328,
+        75.839958190918,
+        78.9199523925781,
+        81.9999542236328
+      ],
+      "original_parity": true,
+      "physical_replay_max_difference": 0.0
+    },
+    "COMET": {
+      "fov_samples": [
+        70.0000457763672,
+        74.9999542236328,
+        77.9999542236328,
+        75.839958190918,
+        78.9199523925781,
+        81.9999542236328
+      ],
+      "original_parity": true,
+      "physical_replay_max_difference": 0.0
+    },
+    "VECTOR": {
+      "fov_samples": [
+        70.0000457763672,
+        74.9999542236328,
+        77.9999542236328,
+        75.839958190918,
+        78.9199523925781,
+        81.9999542236328
+      ],
+      "original_parity": true,
+      "physical_replay_max_difference": 0.0
+    },
+    "response_by_hz": [
+      97.4999999991506,
+      97.4999999991506,
+      97.4999999991506
+    ]
+  },
+  "passed": true,
+  "physics_replay": "1800 fixed 60 Hz steps per mode/profile: accelerate, TURBO, BURST and braking; synthetic flat test fixture, not La Paz map"
+}

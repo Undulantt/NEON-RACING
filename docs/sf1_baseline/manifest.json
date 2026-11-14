@@ -1,0 +1,19 @@
+{
+  "commit": "e0ffbeb6efb6d7e462fcd868102430dc3cb3d1a0",
+  "sha256": {
+    "scripts/driving/ArcadeCar.gd": "04b208796ec2caebe6eb4f6f875cb5f3a7c15147b8f1b36cf1a33cdc9caf3ac3",
+    "scripts/driving/DrivingAbilities.gd": "9b4229469a2a2a21957c465d4c7dbaa47b34b44dfcebf5f09680d9c1b980550c",
+    "scripts/driving/VehicleProfiles.gd": "29cc5f0eb08296adad6f5f2adcd51d304d2b661e1c4e6f697c6b4069ce2a5798",
+    "scripts/driving/DrivingInput.gd": "496f160d8785ff4dbfd6cb11eb3482762d142adba46bce6a6e231cc70ae51122",
+    "scripts/driving/DrivingFeedback.gd": "e70cf779f2dfd9a4e542f2b622d506919b9cab99b827498f7b2d74bec0c032cd",
+    "config/driving_config.json": "6384800a32afe34dd8e991930998081b63e0a7d503eff254cd78ce4ec4e71d3d",
+    "config/vehicles/vector.json": "99e076ee2f06385f9bbfe5d954e5fa4ecca128301dc28c1fe32f94c64cb1b4a2",
+    "config/vehicles/comet.json": "a488a55bbe65bf1ab21d5fe8b58207ef3678385b96367deb4d89fc67ab1ca46e",
+    "config/vehicles/apex.json": "7a834fcee46778910262e7d94e1dc5cbc8b915b5820b128e7061961cb68a01d0",
+    "data/processed/la_paz_map.json": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+    "data/processed/la_paz_environment.json": "892bab2cd6ed3b99c948d0ecb7a842edee70c8eb8d071be9559b4fa71f61926a",
+    "scripts/ui/SpeedEffects.gd": "62d5f0ce61855b4188b41a61ac6358d514fbf9bdc955251414e6363da90acecd",
+    "scripts/style/RetroLook.gd": "ede6b590b8eeb41760f5a57d717d09aced28878e0de223eb18b95dcdc4725dd7",
+    "scripts/driving/FollowCamera.gd": "c1436db177f74c74f5d13d0985c82b6e397da2baace2bac3bb5852b319600f93"
+  }
+}

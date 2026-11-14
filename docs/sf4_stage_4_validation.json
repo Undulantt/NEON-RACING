@@ -1,0 +1,7 @@
+{
+  "checks": 75,
+  "failures": [],
+  "note": "Synthetic contact/telemetry fixtures; real wheel raycasts, all 3 production profiles; physics/config/map hashes unchanged.",
+  "passed": true,
+  "stage": 4
+}

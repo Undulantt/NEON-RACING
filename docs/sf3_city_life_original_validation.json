@@ -1,0 +1,57 @@
+{
+  "checks": 13473,
+  "failures": [],
+  "note": "Real game transitions and frozen views at three existing road locations. Static render samples are not driving FPS.",
+  "passed": true,
+  "renderer": "NVIDIA GeForce RTX 4060 Ti",
+  "samples": [
+    {
+      "draw_calls": 322.0,
+      "loaded_recoveries": 1,
+      "loaded_sectors": 28,
+      "max_foundation_spread_m": 8.21682843673624,
+      "median_ms": 2.658,
+      "meshes": 67,
+      "new_decorations": 27,
+      "p95_ms": 3.243,
+      "site": "Soriana Forjadores",
+      "vertices": 604152
+    },
+    {
+      "draw_calls": 397.0,
+      "loaded_recoveries": 62,
+      "loaded_sectors": 32,
+      "max_foundation_spread_m": 5.58288327421864,
+      "median_ms": 2.328,
+      "meshes": 73,
+      "new_decorations": 14,
+      "p95_ms": 2.806,
+      "site": "Tec de La Paz",
+      "vertices": 590280
+    },
+    {
+      "draw_calls": 342.0,
+      "loaded_recoveries": 172,
+      "loaded_sectors": 30,
+      "max_foundation_spread_m": 5.47252974220032,
+      "median_ms": 1.939,
+      "meshes": 62,
+      "new_decorations": 29,
+      "p95_ms": 2.201,
+      "site": "UABCS",
+      "vertices": 249465
+    }
+  ],
+  "status": {
+    "chunk_loads": 91,
+    "chunk_unloads": 61,
+    "enabled": true,
+    "failed_chunks": [],
+    "loaded_buildings": 2268,
+    "loaded_chunks": 30,
+    "max_chunk_build_ms": 31,
+    "max_loaded_chunks": 32,
+    "sf3_facades": false,
+    "sf3_recovered_buildings": 235
+  }
+}

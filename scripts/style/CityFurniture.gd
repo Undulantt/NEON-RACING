@@ -234,8 +234,8 @@ func cache_buildings(id: String, entry: Dictionary) -> void:
 	if building_cache.has(id): return
 	var manager=world.city_manager
 	var reading:=Time.get_ticks_usec()
-	var data=JSON.parse_string(FileAccess.get_file_as_string(manager.data_root+str(entry["file"])))
-	manager.apply_arcade_layout(data)
+	var data: Dictionary=manager.read_chunk(entry)
+	if data.is_empty() or not manager.apply_arcade_layout(data): return
 	var rings: Array=[]
 	for building in data["buildings"]:
 		if building.get("disabled",false): continue

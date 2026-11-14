@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "seed": 20261113,
+  "cell_size_m": 650.0,
+  "grid_radius": 4,
+  "view_radius_m": 2100.0,
+  "altitude_m": 380.0,
+  "altitude_variation_m": 40.0,
+  "width_min_m": 360.0,
+  "width_max_m": 650.0,
+  "height_min_m": 75.0,
+  "height_max_m": 110.0,
+  "wind_x_mps": 1.5,
+  "wind_z_mps": 0.4,
+  "opacity": 0.65,
+  "top_color": "ef73c9",
+  "bottom_color": "b82e94",
+  "note": "Fictional artistic cloud field, not weather data. Finite-world parallax, one billboard MultiMesh; Ctrl+Alt+C toggles independently."
+}

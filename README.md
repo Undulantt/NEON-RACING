@@ -1,4 +1,14 @@
-# Neon Racing LP — Fase D.2
+# Neon Racing LP — SF.3
+
+**SF.3 corregido:** vista previa estática y cambios de material más visibles. **Ctrl+Alt+P → Entorno → Restablecer SF.3 → Vista previa estática**, y comparar Original/Completo dentro de Entorno. [Detalles de la corrección](docs/SF3_VISIBILITY_FIX.md).
+
+**SF.3 · Entorno:** textura de asfalto más legible, marcas reforzadas y respuesta de bordes/farolas existentes según velocidad, TURBO y BURST gradual. **Ctrl + Alt + L** compara Original/Parcial/Completo; **Ctrl + Alt + P → Entorno** ofrece ajustes y guardado. [Guía, arquitectura, pruebas y hooks para SF.4](docs/SF3_FLUJO_OPTICO.md). La física, cámara, audio y geometría se conservan. SF.4 no está implementado.
+
+**Motor revisado:** Audio B usa ahora pulsos de combustión, escape grave y dos bancos de carga por RPM, conservando los cambios reales de marcha. **Ctrl + Alt + O** selecciona A/B. [Cambios, muestras comparativas y validación](docs/SF21_MOTOR_COMBUSTION.md).
+
+**SF.1.1 + SF.2.1:** TURBO visual con presets **0/10/15/25%** y audio experimental de motor por RPM/carga + viento por velocidad. **Ctrl + Alt + P** abre Cámara/Audio; **Ctrl + Alt + O** compara audio anterior/nuevo sin cambiar cámara. Los presets TURBO se comparan manteniendo Cámara B; **0% conserva SF.1 aprobado**. [Guía, parámetros, recursos provisionales, muestras A/B y validaciones](docs/SF21_AUDIO_Y_TURBO.md). Desarrollo detenido antes de SF.2.2 para evaluación del jugador.
+
+**SF.1 · Cámara experimental:** inicia normalmente con F5. Durante la conducción, **Ctrl + Alt + B** compara la cámara original y la nueva; **Ctrl + Alt + P** abre ajustes en vivo, telemetría, FPS, restauración y guardado de pruebas. La física, los tres perfiles y el mapa permanecen intactos. [Guía de prueba, recorrido OSM reproducible, parámetros y validaciones](docs/SF1_SPEED_FEEL.md). La base aprobada se conserva con el preset TURBO 0% de SF.1.1.
 
 **Navegación y presentación:** aros circulares azul neón con transparencia degradada y un cuarto del radio bajo la carretera, cinta naranja, recuperación de 3 segundos al último checkpoint, rutas/controles en minimapa y cilindro rosa de entrada. En modo libre, **Esc / Start** abre el mapa de pausa para elegir destino por las calles reales. [Controles, decisiones, capturas y pruebas](docs/RACE_NAVIGATION_UPDATE.md).
 

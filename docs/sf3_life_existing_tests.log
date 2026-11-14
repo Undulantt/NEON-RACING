@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SF3_REPORT {"checks":85,"failures":[],"metrics":{"APEX":{"combined_samples":[0.0,0.45,0.75,0.482999999998754,0.741499999990241,0.999999999990241,0.999999999999999]},"COMET":{"combined_samples":[0.0,0.45,0.75,0.482999999998754,0.741499999990241,0.999999999990241,0.999999999999999]},"VECTOR":{"combined_samples":[0.0,0.45,0.75,0.482999999998754,0.741499999990241,0.999999999990241,0.999999999999999]},"response_by_hz":[0.817889779489971,0.817889779489971,0.817889779489971]},"passed":true,"scenario":"Presentation telemetry, real instance override/restoration and protected production file hashes; synthetic geometry is test-only"}

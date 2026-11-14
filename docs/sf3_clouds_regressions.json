@@ -1,0 +1,13 @@
+{
+  "cloud_checks": 13,
+  "cloud_render_checks": 14,
+  "navigation_checks": 48,
+  "new_tests_passed": true,
+  "atlas_deterministic": true,
+  "atlas_sha256": "7b140f96d9ede41e294d70aa2d74b229f46529681831e93aab9292e9f1d95af5",
+  "legacy_sf3_checks": 85,
+  "legacy_sf3_failures": [
+    "Protected: scripts/style/CityFurniture.gd"
+  ],
+  "legacy_note": "The original SF.3 protected hash for CityFurniture predates the authorized real-building recovery. This clouds delivery does not modify CityFurniture or replace that historical hash."
+}

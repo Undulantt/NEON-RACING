@@ -136,6 +136,9 @@ static func build(parent: Node3D, data: Dictionary) -> Dictionary:
 	material.roughness = 0.9
 	if data.get("night_visuals",false):
 		material.albedo_color=Color("8460a8");material.roughness=0.78
+		if data.get("sf3_life_enabled",false):
+			# Keep the original per-building palette readable under the night tint.
+			material.albedo_color=Color("c3b7df")
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	var triangle_count := 0
 	for cell in groups:
