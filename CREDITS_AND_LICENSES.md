@@ -94,4 +94,11 @@ Revisión del motor SF.2.1: los cuatro recursos `engine_combustion_*.wav` son s�
 
 ## D.4 — Pasaporte La Paz
 
+
 Ubicaciones del kiosco y la Catedral derivadas del snapshot OpenStreetMap existente, © colaboradores de OpenStreetMap, bajo ODbL, conservando las atribuciones cartográficas anteriores. Las fichas son paráfrasis propias basadas en Turismo Municipal de La Paz ([Kiosco](https://turismo.lapaz.gob.mx/atractivos/kiosco-del-malecon-18), [Catedral](https://turismo.lapaz.gob.mx/atractivos/catedral-de-nuestra-senora-de-la-paz)), y el [Sistema de Información Cultural, Secretaría de Cultura: Teatro de la Ciudad, ficha 12](https://sic.cultura.gob.mx/ficha.php?table=teatro&table_id=12). Para el teatro se conserva la coordenada de su enlace cartográfico oficial. No se descargaron fotografías, logotipos ni materiales gráficos de esas páginas. Procedencia y método en `data/passport/pois.json` y `docs/guides/PASAPORTE_LA_PAZ.md`.
+
+## Interfaz del menú
+
+Diseño de menú, créditos y opciones aportado por el usuario en [Figma: UI RAICING DARK LAPAZ](https://www.figma.com/design/J49HkD9RLXtIv2sJmowxIu/UI-RAICING-DARK-LAPAZ?node-id=16-2). Fondo y logo aportados en `assets/ui/menu/`; barras, subrayados y marco exportados del mismo diseño. Se conserva el SVG original del logo y una copia PNG compatible con sus filtros. Arial se solicita al sistema con fuentes de respaldo; no se redistribuyen archivos de fuentes de Windows. La implementación nativa y los detalles de exportación se documentan en `docs/guides/MENU_FIGMA.md`.
+
+Audio de interfaz aportado por el usuario: `assets/audio/Button-Notification.wav` y `assets/audio/Main menu.mp3`. Se integran sin modificar sus archivos originales; no se atribuyen autoría ni condiciones de licencia que no hayan sido proporcionadas.

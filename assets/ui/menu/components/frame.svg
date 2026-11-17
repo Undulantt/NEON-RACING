@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1000" height="500" viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Marco">
+<g clip-path="url(#clip0_0_4)">
+<path id="Terminal cian" d="M974 0H1010L1001 11H983L974 0Z" fill="#00EBF1"/>
+<path id="Terminal cian_2" d="M26 500H-10L-1 489H17L26 500Z" fill="#00EBF1"/>
+</g>
+<rect x="2.5" y="2.5" width="995" height="495" stroke="#00EBF1" stroke-width="5"/>
+</g>
+<defs>
+<clipPath id="clip0_0_4">
+<rect width="1000" height="500" fill="white"/>
+</clipPath>
+</defs>
+</svg>

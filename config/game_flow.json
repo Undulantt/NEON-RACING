@@ -20,7 +20,20 @@
   "credits": {
     "project": "Neon Racing LP",
     "description": "Prototipo arcade de carreras ambientado en La Paz, B.C.S.",
-    "contributors": [],
+    "contributors": [
+      {
+        "name": "EMILIANO RAFAEL MENDOZA NAVA",
+        "contribution": "Creador y desarrollador principal"
+      },
+      {
+        "name": "Guillermo Alonso Servin Valenzuela",
+        "contribution": "Artista 3D"
+      },
+      {
+        "name": "Alejandro Maximiliano Luque Varela",
+        "contribution": "Artista de sonido"
+      }
+    ],
     "licenses_file": "res://CREDITS_AND_LICENSES.md"
   }
 }

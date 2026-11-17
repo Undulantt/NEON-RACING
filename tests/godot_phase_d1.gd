@@ -193,7 +193,7 @@ func run() -> void:
 	flow.go_back()
 	press("credits")
 	check(flow.current_state==&"credits","Credits opens")
-	check(flow.definition["credits"]["contributors"].is_empty(),"No invented collaborators")
+	check(flow.definition["credits"]["contributors"].size()==3,"Credits use the three collaborators supplied in the Figma design")
 	await screenshot("credits")
 	flow.go_back()
 	press("play")

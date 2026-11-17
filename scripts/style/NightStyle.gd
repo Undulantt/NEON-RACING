@@ -75,6 +75,7 @@ func configure(target: Node3D, config: Dictionary) -> void:
 	clouds.configure(world)
 	world.follow_camera.experiment_panel.bind_city_clouds(clouds)
 	world.follow_camera.speed_feedback.environment_feedback.bind_world(world,retro.road_material,furniture)
+	GameFlow.apply_graphics(world)
 	refresh()
 
 func geometry() -> Dictionary:

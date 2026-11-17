@@ -26,6 +26,7 @@ var marks_dirty:=true
 var ray_queries:=0
 var burst_material: ShaderMaterial
 var body_bindings: Array=[]
+var player_burst_allowed:=true
 var burst_value:=0.0
 var real_burst_ratio:=0.0
 var preview_enabled:=false
@@ -119,7 +120,7 @@ func sync_legacy() -> void:
 	car.drift_particles.set_physics_process(not settings["experimental_enabled"])
 	car.drift_particles.clear_trail()
 	if is_instance_valid(hud):
-		var original: bool=not (settings["experimental_enabled"] and settings["burst_enabled"])
+		var original: bool=player_burst_allowed and not (settings["experimental_enabled"] and settings["burst_enabled"])
 		hud.ground_flames.set_physics_process(original)
 		hud.ground_flames.clear_trail()
 		hud.speed_effects.sf4_burst_progress=-1.0 if original else burst_value
@@ -285,7 +286,7 @@ func update_burst(delta: float) -> void:
 	burst_material.set_shader_parameter("turbo_flash",turbo_flash)
 	for binding in body_bindings:
 		if is_instance_valid(binding["node"]):binding["node"].material_overlay=burst_material if enabled and gain>0 and (burst_value>.001 or turbo_flash>.001) else binding["original"]
-	if is_instance_valid(hud):hud.speed_effects.sf4_burst_progress=burst_value if enabled else -1.0
+	if is_instance_valid(hud):hud.speed_effects.sf4_burst_progress=(burst_value if enabled else -1.0) if player_burst_allowed else 0.0
 	if is_instance_valid(legacy_turbo_trail):legacy_turbo_trail.sf4_energy_active=enabled and burst_value>.3 and gain>0
 	var life:=lerpf(.18,.55,burst_value)
 	if enabled and gain>0 and (active or preview_enabled) and burst_value>.30:

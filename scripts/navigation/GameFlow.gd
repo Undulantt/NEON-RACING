@@ -7,6 +7,7 @@ signal settings_changed
 signal race_requested(context: Dictionary)
 
 const Profiles = preload("res://scripts/driving/VehicleProfiles.gd")
+const Graphics = preload("res://scripts/ui/GraphicsPreferences.gd")
 const MENU_STATES := [&"main_menu", &"play_menu", &"vehicle_select", &"how_to_play", &"options", &"credits", &"race_pending", &"results"]
 var definition: Dictionary = {}
 var current_state: StringName = &"main_menu"
@@ -26,6 +27,10 @@ var settings_path := "user://game_settings.cfg"
 var volumes: Dictionary = {}
 var screen_mode := "windowed"
 var window_size := Vector2i(1280, 720)
+var graphics: Dictionary = {}
+var graphics_configured := false
+var menu_audio: Node
+var quitting:=false
 var _world: WeakRef
 var prepared_world: Dictionary = {}
 var road_graph: RefCounted
@@ -46,6 +51,10 @@ func _ready() -> void:
 			if requested in preload("res://scripts/racing/RivalDifficulty.gd").IDS: rival_difficulty=requested
 	preload("res://scripts/driving/DrivingInput.gd").install_gamepad_bindings()
 	_install_menu_bindings()
+	menu_audio=preload("res://scripts/ui/MenuAudio.gd").new()
+	add_child(menu_audio);menu_audio.configure(self)
+	get_tree().auto_accept_quit=false
+	get_tree().root.close_requested.connect(quit_game)
 
 func _install_menu_bindings() -> void:
 	for binding in [["ui_accept", JOY_BUTTON_A], ["ui_cancel", JOY_BUTTON_B], ["ui_up", JOY_BUTTON_DPAD_UP], ["ui_down", JOY_BUTTON_DPAD_DOWN], ["ui_left", JOY_BUTTON_DPAD_LEFT], ["ui_right", JOY_BUTTON_DPAD_RIGHT]]:
@@ -321,6 +330,7 @@ func _perform_transition(path: String, destination: StringName) -> void:
 		world.attach_racing()
 		if destination == &"race": world.race_activity.start(active_race)
 		else: world.player.driving_enabled = true
+		apply_graphics(world)
 		world.prepared = {}
 	prepared_world = {}
 	launch_context.clear()
@@ -371,6 +381,11 @@ func load_settings() -> void:
 	legacy.load("user://night_audio.cfg")
 	var saved := ConfigFile.new()
 	saved.load(settings_path)
+	graphics=Graphics.effective_defaults()
+	graphics_configured=saved.has_section("graphics")
+	for key in Graphics.DEFAULTS:
+		var value=saved.get_value("graphics",key,graphics[key])
+		if Graphics.valid(key,value):graphics[key]=value
 	for bus in volumes:
 		var value = saved.get_value("volume", bus, legacy.get_value("volume", bus, volumes[bus]))
 		volumes[bus] = clampf(float(value), 0.0, 1.0) if (value is float or value is int) and is_finite(float(value)) else volumes[bus]
@@ -410,6 +425,20 @@ func _apply_display() -> void:
 		window.borderless = screen_mode == "borderless"
 		window.size = window_size
 
+func set_graphics(key: String, value: Variant) -> bool:
+	if not Graphics.valid(key,value):return false
+	graphics[key]=value;graphics_configured=true
+	apply_graphics(world_instance())
+	_save_settings();settings_changed.emit()
+	return true
+
+func apply_graphics(world: Node3D) -> void:
+	if graphics_configured:Graphics.apply(world,graphics)
+
+func reset_graphics() -> void:
+	graphics=Graphics.DEFAULTS.duplicate();graphics_configured=true
+	apply_graphics(world_instance());_save_settings();settings_changed.emit()
+
 func _save_settings() -> void:
 	var saved := ConfigFile.new()
 	for bus in volumes:
@@ -418,12 +447,17 @@ func _save_settings() -> void:
 	saved.set_value("display", "window_size", window_size)
 	saved.set_value("session", "vehicle", selected_vehicle_id)
 	saved.set_value("race","difficulty",rival_difficulty)
+	if graphics_configured:
+		for key in Graphics.DEFAULTS:saved.set_value("graphics",key,graphics[key])
 	var error := saved.save(settings_path)
 	if error != OK:
 		navigation_error = "No se pudieron guardar las opciones (error %d)." % error
 
 func quit_game() -> void:
-	if OS.has_feature("web"):
+	if OS.has_feature("web") or quitting:
 		return
+	quitting=true
+	transition_busy=true
+	if is_instance_valid(menu_audio):await menu_audio.shutdown()
 	get_tree().paused = false
 	get_tree().quit()
