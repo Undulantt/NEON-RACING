@@ -5,7 +5,7 @@ import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
-    source=ROOT/'docs/evidence/engine_gear_changes.wav'
+    source=ROOT/'.local/artifacts/evidence/engine_gear_changes.wav'
     with wave.open(str(source),'rb') as stream:
         rate=stream.getframerate(); channels=stream.getnchannels()
         assert stream.getsampwidth()==2
@@ -17,11 +17,11 @@ def main():
     new_rate=22050
     at=np.arange(int(len(mono)/rate*new_rate))*rate/new_rate
     preview=np.interp(at,np.arange(len(mono)),mono)*gain
-    destination=ROOT/'docs/evidence/engine_gear_changes_preview.wav'
+    destination=ROOT/'.local/artifacts/evidence/engine_gear_changes_preview.wav'
     with wave.open(str(destination),'wb') as output:
         output.setnchannels(1);output.setsampwidth(2);output.setframerate(new_rate)
         output.writeframes(np.clip(preview*32767,-32767,32767).astype('<i2').tobytes())
-    capture=json.loads((ROOT/'docs/powertrain_capture_validation.json').read_text(encoding='utf-8'))
+    capture=json.loads((ROOT/'.local/artifacts/powertrain_capture_validation.json').read_text(encoding='utf-8'))
     telemetry=capture['telemetry']; shifts=[]
     for previous,current in zip(telemetry,telemetry[1:]):
         if previous['gear']>0 and current['gear']>0 and current['gear']!=previous['gear']:
@@ -32,7 +32,7 @@ def main():
     assert all(s['minimum_pitch']<s['pitch_before']*.95 for s in ups)
     assert all(s['maximum_pitch']>s['pitch_before']*1.02 for s in downs)
     report={'passed':True,'audio_source':'Real Engine bus through AudioEffectCapture; preview is resampled and gain-normalized only','duration_s':len(mono)/rate,'sample_rate':rate,'rms':rms,'peak':peak,'preview_gain_db':20*math.log10(gain),'shifts':shifts}
-    (ROOT/'docs/powertrain_audio_validation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'.local/artifacts/powertrain_audio_validation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print('Engine audio verified:',len(ups),'RPM drops,',len(downs),'rev-matching blips,',round(report['duration_s'],2),'seconds, peak',round(peak,4))
 
 if __name__=='__main__':main()

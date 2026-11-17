@@ -50,7 +50,7 @@ func run() -> void:
 	rig.speed_feedback.settings_path = "res://tests/.sf1_settings.cfg"
 	rig.speed_feedback.reset_experiment()
 	var old_script := GDScript.new()
-	old_script.source_code = FileAccess.get_file_as_string("res://docs/sf1_baseline/FollowCamera.gd.txt")
+	old_script.source_code = FileAccess.get_file_as_string("res://tests/fixtures/baselines/sf1_baseline/FollowCamera.gd.txt")
 	check(old_script.reload() == OK,"Original camera snapshot compiles")
 	legacy = old_script.new()
 	level.add_child(legacy)
@@ -187,12 +187,12 @@ func run() -> void:
 			for column in range(6): max_difference=maxf(max_difference,absf(float(runs[0][i][column])-float(runs[1][i][column])))
 		check(max_difference<0.0001,id+" A/B physical replay is identical")
 		metrics[id]["physical_replay_max_difference"]=max_difference
-	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/sf1_baseline/manifest.json"))
+	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/baselines/sf1_baseline/manifest.json"))
 	for path in manifest["sha256"]:
 		if path.ends_with("FollowCamera.gd"): continue
 		check(FileAccess.get_sha256("res://"+path)==manifest["sha256"][path],"Preserved bytes: "+path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(feedback.settings_path))
 	var report := {"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"physics_replay":"1800 fixed 60 Hz steps per mode/profile: accelerate, TURBO, BURST and braking; synthetic flat test fixture, not La Paz map"}
-	FileAccess.open("res://docs/sf1_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf1_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF1_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

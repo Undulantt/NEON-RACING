@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+  "origin_lat": 24.159,
+  "origin_lon": -110.3195,
+  "max_active_pois": 3,
+  "pois": [
+    {
+      "id": "poi_001",
+      "name": "Kiosco del Malecón",
+      "category": "Patrimonio y turismo",
+      "latitude": 24.163772,
+      "longitude": -110.3165411,
+      "position_xz": [
+        300.1973322079473,
+        -530.6221899481303
+      ],
+      "description": "Espacio de encuentro en el Malecón, frente a la bahía de La Paz. Su entorno reúne paseo, descanso y actividades turísticas en el centro de la ciudad.",
+      "references": [
+        {
+          "title": "Fuente oficial",
+          "url": "https://turismo.lapaz.gob.mx/atractivos/kiosco-del-malecon-18"
+        }
+      ],
+      "coordinate_evidence": {
+        "verified": true,
+        "source_ref": "osm:node:9284265569",
+        "method": "Punto OSM histórico del kiosco; corroborado por la ubicación municipal en Obregón y 16 de Septiembre.",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-16"
+      },
+      "activation": {
+        "road_id": "28531128:0",
+        "t": 0.16387309976729586,
+        "radius_m": 9.0,
+        "max_speed_mps": 3.0,
+        "position_xz": [
+          311.1958672728719,
+          -512.4003635033766
+        ],
+        "street": "Paseo Álvaro Obregón",
+        "offset_from_place_m": 21.283860847062048,
+        "validated": true,
+        "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+        "validation_method": "offline 11 x 5.2 m vehicle footprint covered by current arcade asphalt"
+      },
+      "enabled": true
+    },
+    {
+      "id": "poi_002",
+      "name": "Catedral de Nuestra Señora de La Paz",
+      "category": "Historia y arquitectura",
+      "latitude": 24.161592427181475,
+      "longitude": -110.31289398310717,
+      "position_xz": [
+        670.2182053269609,
+        -288.2647502755727
+      ],
+      "description": "Templo del centro histórico dedicado a Nuestra Señora de La Paz. La primera piedra de la construcción actual se colocó el 6 de octubre de 1861.",
+      "references": [
+        {
+          "title": "Fuente oficial",
+          "url": "https://turismo.lapaz.gob.mx/atractivos/catedral-de-nuestra-senora-de-la-paz"
+        }
+      ],
+      "coordinate_evidence": {
+        "verified": true,
+        "source_ref": "osm:way:155831066",
+        "method": "Centro del contorno OSM de la Catedral; no es una coordenada de acceso vehicular.",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-16"
+      },
+      "activation": {
+        "road_id": "28531154:29",
+        "t": 0.45622468418450907,
+        "radius_m": 9.0,
+        "max_speed_mps": 3.0,
+        "position_xz": [
+          634.9233959582864,
+          -315.2992688831923
+        ],
+        "street": "Calle Revolución de 1910",
+        "offset_from_place_m": 44.45884349279459,
+        "validated": true,
+        "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+        "validation_method": "offline 11 x 5.2 m vehicle footprint covered by current arcade asphalt"
+      },
+      "enabled": true
+    },
+    {
+      "id": "poi_003",
+      "name": "Teatro de la Ciudad",
+      "category": "Arte y cultura",
+      "latitude": 24.147021132883,
+      "longitude": -110.31775828735,
+      "position_xz": [
+        176.70671229229984,
+        1331.9892503594876
+      ],
+      "description": "Recinto de la Unidad Cultural Profesor Jesús Castro Agúndez. Fue inaugurado el 26 de enero de 1986 y alberga presentaciones de teatro, música y danza.",
+      "references": [
+        {
+          "title": "Fuente oficial",
+          "url": "https://sic.cultura.gob.mx/ficha.php?table=teatro&table_id=12"
+        }
+      ],
+      "coordinate_evidence": {
+        "verified": true,
+        "source_ref": "sic:teatro:12",
+        "method": "Coordenadas del enlace cartográfico de la ficha oficial SIC. El edificio OSM 155831068 identifica el mismo conjunto, con un punto representativo distinto. No corresponde al Teatro Juárez.",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-16"
+      },
+      "activation": {
+        "road_id": "28533869:10",
+        "t": 0.85,
+        "radius_m": 9.0,
+        "max_speed_mps": 3.0,
+        "position_xz": [
+          162.54271753628683,
+          1341.414452916991
+        ],
+        "street": "Calle Antonio Navarro",
+        "offset_from_place_m": 17.013323916810943,
+        "validated": true,
+        "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+        "validation_method": "offline 11 x 5.2 m vehicle footprint covered by current arcade asphalt"
+      },
+      "enabled": true
+    }
+  ]
+}

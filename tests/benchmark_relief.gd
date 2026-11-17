@@ -58,11 +58,11 @@ func run() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--sample="):
 			sample_tag = "_" + argument.trim_prefix("--sample=")
-	var file := FileAccess.open("res://docs/phase_b7r_benchmark_"+suffix+sample_tag+".json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/phase_b7r_benchmark_"+suffix+sample_tag+".json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_b7r_"+suffix+".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_b7r_"+suffix+".png")
 	print("RELIEF_BENCHMARK ",JSON.stringify(report))
 	quit(0)
 

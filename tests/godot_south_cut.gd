@@ -58,7 +58,7 @@ func _run() -> void:
 		break
 	check(tested,"No clear clipped-edge collision test available")
 	var report := {"passed":failures.is_empty(),"failures":failures,"excluded_ground_probes":3,"retained_anchor_probes":3,"clipped_edge_collision_tested":tested}
-	var output := FileAccess.open("res://docs/phase_c5_south_cut_physics.json",FileAccess.WRITE)
+	var output := FileAccess.open("res://.local/artifacts/phase_c5_south_cut_physics.json",FileAccess.WRITE)
 	output.store_string(JSON.stringify(report,"  "))
 	print("SOUTH_CUT_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

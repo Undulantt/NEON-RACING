@@ -149,7 +149,7 @@ func run() -> void:
 	check(world.player.position == frozen, "Pause freezes vehicle")
 	world.hud.set_pause(false)
 	var report := {"passed": failures.is_empty(), "failures": failures, "metrics": metrics}
-	var output := FileAccess.open("res://docs/phase_c_validation.json", FileAccess.WRITE)
+	var output := FileAccess.open("res://.local/artifacts/phase_c_validation.json", FileAccess.WRITE)
 	output.store_string(JSON.stringify(report, "  "))
 	print("PHASE_C_REPORT ", JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

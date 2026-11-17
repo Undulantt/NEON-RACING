@@ -66,7 +66,7 @@ func screenshot(name_value: String) -> void:
 		return
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/d1_"+name_value+".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/d1_"+name_value+".png")
 
 func press(id: String) -> void:
 	var shell = current_scene
@@ -248,7 +248,7 @@ func finish() -> void:
 	if FileAccess.file_exists("res://tests/.d1_settings.cfg"):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path("res://tests/.d1_settings.cfg"))
 	var report:={"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"rendered":capture}
-	FileAccess.open("res://docs/phase_d1_validation_render.json" if capture else "res://docs/phase_d1_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_d1_validation_render.json" if capture else "res://.local/artifacts/phase_d1_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PHASE_D1_REPORT ",JSON.stringify(report))
 	if failures.is_empty() and current_scene!=null and current_scene.has_method("render") and current_scene.buttons.has("quit"):
 		current_scene.buttons["quit"].pressed.emit()

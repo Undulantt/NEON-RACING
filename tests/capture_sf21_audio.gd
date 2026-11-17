@@ -101,7 +101,7 @@ func run() -> void:
 		var stream:=AudioStreamWAV.new()
 		stream.stereo=true;stream.mix_rate=int(AudioServer.get_mix_rate());stream.format=AudioStreamWAV.FORMAT_16_BITS;stream.data=bytes
 		var mode_name:="B" if mode else "A"
-		stream.save_to_wav("res://docs/evidence/%s_audio_%s.wav"%[prefix,mode_name])
+		stream.save_to_wav("res://.local/artifacts/evidence/%s_audio_%s.wav"%[prefix,mode_name])
 		check(frames>AudioServer.get_mix_rate()*25 and peak_sample>0.005 and peak_sample<0.95,"Mode "+mode_name+" contains audio without clipping")
 		check(car.powertrain.upshifts-starting_ups>=5 and car.powertrain.downshifts-starting_downs>0,"Physical gear changes are exercised")
 		var value:={"mode":mode_name,"frames":frames,"duration_s":frames/AudioServer.get_mix_rate(),"peak":peak_sample,"rms":sqrt(energy/maxi(frames,1)),"states":states.duplicate(true),"upshifts":car.powertrain.upshifts-starting_ups,"downshifts":car.powertrain.downshifts-starting_downs}
@@ -130,7 +130,7 @@ func run() -> void:
 	paused=false
 	check(capture.get_discarded_frames()==0,"Audio capture buffer did not overflow")
 	var report:={"passed":failures.is_empty(),"failures":failures,"scenario":"Real VECTOR physics at 60 Hz: idle, 20 seconds acceleration, 2 seconds lift and 6 seconds brake; A/B only affects presentation; Master bus capture without music; synthetic flat fixture, not city FPS","sample_rate":AudioServer.get_mix_rate(),"discarded_frames":capture.get_discarded_frames(),"counter_semantics":"per-pass deltas; pitch ranges describe the experimental controller even when audio A is selected","samples":results}
-	FileAccess.open("res://docs/%s_audio_capture.json"%prefix,FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/%s_audio_capture.json"%prefix,FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF21_AUDIO_CAPTURE ",JSON.stringify({"passed":failures.is_empty(),"failures":failures}))
 	await close_audio_fixture(level,audio)
 	quit(0 if failures.is_empty() else 1)

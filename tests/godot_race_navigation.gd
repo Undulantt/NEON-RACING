@@ -29,11 +29,11 @@ func shot(name: String) -> void:
 	if not capture: return
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/navigation_"+name+".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/navigation_"+name+".png")
 
 func finish() -> void:
 	var report := {"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"rendered":capture}
-	FileAccess.open("res://docs/race_navigation_validation_render.json" if capture else "res://docs/race_navigation_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/race_navigation_validation_render.json" if capture else "res://.local/artifacts/race_navigation_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("RACE_NAVIGATION_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)
 
@@ -106,7 +106,7 @@ func run() -> void:
 	var ring_radius: float = visuals.next_gate.get_meta("radius_m")
 	var ring_p: Array = activity.definition["checkpoints"][0]["position_xz"]
 	var road_y: float = car.surface_height(ring_p[0],ring_p[1])
-	check(absf(visuals.next_gate.position.y-ring_radius-road_y+ring_radius*0.25)<0.0001,"Exactly quarter radius lies below local road level")
+	check(absf(visuals.next_gate.position.y-ring_radius-road_y+ring_radius*0.5)<0.0001,"Half the ring radius lies below local road level")
 	var ring_vertices: PackedVector3Array=visuals.next_gate.get_child(0).mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 	var outer_count := 0
 	for v in ring_vertices:

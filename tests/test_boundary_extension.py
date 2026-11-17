@@ -21,7 +21,7 @@ class FlatField:
 
 class BoundaryExtensionTests(unittest.TestCase):
     def test_sea_geometry_changes_only_in_user_approved_cells(self):
-        before=json.loads((ROOT/'docs/map_extension_baseline/urban_geography.json').read_text(encoding='utf-8'))
+        before=json.loads((ROOT/'tests/fixtures/baselines/map_extension_baseline/urban_geography.json').read_text(encoding='utf-8'))
         after=json.loads((ROOT/'data/processed/urban/urban_geography.json').read_text(encoding='utf-8'))
         cfg=json.loads((ROOT/'config/map_config.json').read_text(encoding='utf-8'))
         source=json.loads((ROOT/cfg['preserved_sea_file']).read_text(encoding='utf-8'))
@@ -30,7 +30,7 @@ class BoundaryExtensionTests(unittest.TestCase):
         self.assertLess(change.difference(approved).area,0.001)
 
     def test_local_extensions_preserve_original_region(self):
-        old=json.loads((ROOT/'docs/map_extension_baseline/expansion_config.json').read_text(encoding='utf-8'))
+        old=json.loads((ROOT/'tests/fixtures/baselines/map_extension_baseline/expansion_config.json').read_text(encoding='utf-8'))
         new=json.loads((ROOT/'config/expansion_config.json').read_text(encoding='utf-8'))
         def cfg(profile):
             return {**profile,'bbox':[24.09,-110.3455,24.185,-110.281],'active_blocks':{k:profile['blocks'][k]['bbox'] for k in profile['active_blocks']}}

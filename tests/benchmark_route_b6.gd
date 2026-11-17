@@ -44,12 +44,12 @@ func _run() -> void:
 		results[mode] = {"mean_frame_ms":total/intervals.size(),"average_fps":1000.0*intervals.size()/total,"p95_frame_ms":intervals[int(intervals.size()*0.95)],"max_frame_ms":intervals[-1],"render_frames":intervals.size(),"peak_static_memory_bytes":peak_memory,"peak_nodes":peak_nodes,"route":metrics.duplicate(),"streaming":world.city_manager.status()}
 		print("B6_ROUTE_MODE ", mode, " ", JSON.stringify(results[mode]))
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://docs/evidence/phase_b6_route_"+mode+".png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_b6_route_"+mode+".png")
 		world.queue_free()
 		await process_frame
 		await process_frame
 	check(results["b6"]["mean_frame_ms"] / results["b5_equivalent"]["mean_frame_ms"] <= 1.15, "frame-time regression exceeds 15 percent")
 	var report := {"passed":failures.is_empty(),"failures":failures,"scenario":"Same 1.2 km route, production car, 1280x720; B5-equivalent uses same footprints with B6 cosmetics and geography disabled","results":results,"frame_time_ratio":results["b6"]["mean_frame_ms"]/results["b5_equivalent"]["mean_frame_ms"]}
-	var output := FileAccess.open("res://docs/phase_b6_route_benchmark.json",FileAccess.WRITE)
+	var output := FileAccess.open("res://.local/artifacts/phase_b6_route_benchmark.json",FileAccess.WRITE)
 	output.store_string(JSON.stringify(report,"  "))
 	quit(0 if failures.is_empty() else 1)

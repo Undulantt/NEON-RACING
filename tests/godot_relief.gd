@@ -41,7 +41,7 @@ func _run() -> void:
 	metrics["road_streaming"] = world.road_root.status()
 	metrics["terrain_streaming"] = world.terrain_root.status()
 	var report := {"passed": failures.is_empty(), "failures": failures, "metrics": metrics, "physics_frames": test_frames}
-	var file := FileAccess.open("res://docs/phase_b7r_pilot_physics.json", FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/phase_b7r_pilot_physics.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "  "))
 	print("RELIEF_REPORT ", JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

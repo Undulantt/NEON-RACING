@@ -5,6 +5,7 @@ const LOAD_RADIUS := 1100.0
 const UNLOAD_RADIUS := 1400.0
 const PRIME_RADIUS := 300.0
 var defer_prime := false
+var race_targets: Array = []
 var target: CharacterBody3D
 var entries: Dictionary = {}
 var loaded: Dictionary = {}
@@ -38,7 +39,12 @@ func distance_to(entry: Dictionary) -> float:
 	var origin: Array = entry["origin_xz"]
 	var rect := Rect2(float(origin[0]), float(origin[1]), 256, 256)
 	var point := Vector2(anchor.x, anchor.z)
-	return point.distance_to(point.clamp(rect.position, rect.end))
+	var distance := point.distance_to(point.clamp(rect.position, rect.end))
+	for car in race_targets:
+		if is_instance_valid(car):
+			var p := Vector2(car.position.x,car.position.z)
+			distance = minf(distance,p.distance_to(p.clamp(rect.position,rect.end)))
+	return distance
 
 func refresh(prime: bool = false) -> void:
 	previous_anchor = anchor
@@ -58,6 +64,19 @@ func refresh(prime: bool = false) -> void:
 			var distance := distance_to(entries[cell])
 			if distance <= LOAD_RADIUS:
 				pending.append({"cell": cell, "distance": distance})
+	var queued := {}
+	for item in pending: queued[item["cell"]] = true
+	for car in race_targets:
+		if not is_instance_valid(car): continue
+		var at := Vector2i(floori(car.position.x/256),floori(car.position.z/256))
+		for x in range(at.x-2,at.x+3):
+			for z in range(at.y-2,at.y+3):
+				var cell := Vector2i(x,z)
+				if entries.has(cell) and not loaded.has(cell) and not queued.has(cell):
+					var distance := distance_to(entries[cell])
+					if distance <= PRIME_RADIUS:
+						pending.append({"cell":cell,"distance":distance})
+						queued[cell] = true
 	pending.sort_custom(func(a: Dictionary, b: Dictionary): return a["distance"] < b["distance"])
 	if prime:
 		var immediate: Array = pending.duplicate()

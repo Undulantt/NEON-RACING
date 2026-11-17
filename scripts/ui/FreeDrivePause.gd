@@ -52,7 +52,7 @@ func configure(target: Node3D, driving_hud: CanvasLayer) -> void:
 	destination_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	destination_label.custom_minimum_size.y = 95
 	sidebar.add_child(destination_label)
-	for entry in [["resume","Continuar",hud._button.bind("resume")],["center","Centrar en jugador",map.recenter],["race","Destino: salida de carrera",_race_destination],["clear","Borrar destino",_clear],["recover","Recuperar · 3 segundos",hud._button.bind("recover")],["menu","Menú principal",hud._button.bind("menu")]]:
+	for entry in [["resume","Continuar",hud._button.bind("resume")],["passport","Pasaporte La Paz",_passport],["center","Centrar en jugador",map.recenter],["race","Destino: salida de carrera",_race_destination],["clear","Borrar destino",_clear],["recover","Recuperar · 3 segundos",hud._button.bind("recover")],["menu","Menú principal",hud._button.bind("menu")]]:
 		var button := Button.new()
 		button.text = entry[1]
 		button.custom_minimum_size.y = 43
@@ -85,6 +85,9 @@ func _race_destination() -> void:
 	var start: Array = world.race_activity.default_race["start"]["position_xz"]
 	world.navigation.set_destination(Vector2(start[0],start[1]))
 	map.queue_redraw()
+
+func _passport() -> void:
+	if world.passport != null: world.passport.open_book()
 
 func _clear() -> void:
 	world.navigation.clear_destination()

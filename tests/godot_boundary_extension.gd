@@ -13,7 +13,7 @@ func _run() -> void:
 	car.external_control = true
 	await step(60)
 	var report_routes := {}
-	var entries: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/map_extension_routes.json"))
+	var entries: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/routes/map_extension_routes.json"))
 	for entry in entries["routes"]:
 		points.clear()
 		lengths.clear()
@@ -86,7 +86,7 @@ func _run() -> void:
 			break
 	check(barriers.size()>=3,"Fewer than three real mountain barriers tested")
 	var report := {"passed":failures.is_empty(),"failures":failures,"routes":report_routes,"mountain_collisions":barriers,"terrain_streaming":world.terrain_root.status(),"boundary_streaming":world.limit_root.status()}
-	var file := FileAccess.open("res://docs/map_extension_physics.json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/map_extension_physics.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("EXTENSION_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

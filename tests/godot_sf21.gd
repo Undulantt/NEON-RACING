@@ -153,10 +153,10 @@ func run() -> void:
 	paused=true
 	check(not rig.experiment_panel.can_use(),"Pause hides extended debug UI")
 	paused=false
-	var manifest: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/sf21_baseline.json"))
+	var manifest: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/baselines/sf21_baseline.json"))
 	for path in manifest["sha256"]: check(FileAccess.get_sha256("res://"+path)==manifest["sha256"][path],"Unchanged protected file: "+path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(audio.settings_path))
 	var report:={"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"scenario":"Synthetic read-only presentation telemetry; actual controller/gearbox replay is independently covered by godot_sf1 and powertrain suites"}
-	FileAccess.open("res://docs/sf21_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf21_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF21_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

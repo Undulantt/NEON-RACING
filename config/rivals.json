@@ -1,0 +1,64 @@
+{
+  "rival_count": 5,
+  "lineup": [
+    {
+      "name": "Luque",
+      "vehicle": "COMET",
+      "personality": "aggressive",
+      "line_preference_m": -0.3
+    },
+    {
+      "name": "Guille",
+      "vehicle": "APEX",
+      "personality": "conservative",
+      "line_preference_m": 0.15
+    },
+    {
+      "name": "Dani",
+      "vehicle": "COMET",
+      "personality": "aggressive",
+      "line_preference_m": 0.3
+    },
+    {
+      "name": "Xavi",
+      "vehicle": "VECTOR",
+      "personality": "balanced",
+      "line_preference_m": -0.15
+    },
+    {
+      "name": "Iris",
+      "vehicle": "APEX",
+      "personality": "aggressive",
+      "line_preference_m": 0.35
+    }
+  ],
+  "profiles": {
+    "conservative": {
+      "anticipation": 1.5,
+      "throttle": 0.8,
+      "gap": 8.0,
+      "turbo_reserve": 0.65,
+      "overtake": false,
+      "lateral_accel_mps2": 8.5,
+      "lane_change_mps": 1.5
+    },
+    "balanced": {
+      "anticipation": 1.2,
+      "throttle": 0.95,
+      "gap": 6.0,
+      "turbo_reserve": 0.4,
+      "overtake": true,
+      "lateral_accel_mps2": 10.0,
+      "lane_change_mps": 1.8
+    },
+    "aggressive": {
+      "anticipation": 1.0,
+      "throttle": 1.0,
+      "gap": 4.5,
+      "turbo_reserve": 0.2,
+      "overtake": true,
+      "lateral_accel_mps2": 11.5,
+      "lane_change_mps": 2.1
+    }
+  }
+}

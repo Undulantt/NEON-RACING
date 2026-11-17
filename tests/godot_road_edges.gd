@@ -116,7 +116,7 @@ func run() -> void:
 			cases.append({"road": road["id"], "side": sign_value, "width_m": width, "source_width_m": road["source_width_m"], "height_range_m": max_y - min_y, "return_frames": frames})
 	check(cases.size() == 6, "Need six actual clear road exit/reentry cases")
 	var report := {"passed": failures.is_empty(), "failures": failures, "cases": cases, "layout": world.arcade_layout["statistics"]}
-	var output := FileAccess.open("res://docs/road_edges_validation.json", FileAccess.WRITE)
+	var output := FileAccess.open("res://.local/artifacts/road_edges_validation.json", FileAccess.WRITE)
 	output.store_string(JSON.stringify(report, "  "))
 	print("ROAD_EDGES_REPORT ", JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

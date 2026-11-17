@@ -22,7 +22,7 @@ func run() -> void:
 	world=current_scene
 	car=world.player
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tracks/extension_C2.json"))
-	var geometry: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/burst_route_geometry.json"))
+	var geometry: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/routes/burst_route_geometry.json"))
 	var span: Dictionary = geometry["extension_C2"]["longest_runs"][0]
 	build_path(data["points_xz"].slice(int(span["first_point_index"]),int(span["last_point_index"])+1))
 	var at := sample(3)
@@ -53,7 +53,7 @@ func run() -> void:
 	var passed := true
 	for value in sf1_results: passed=passed and value["completed"] and value["recoveries"]==0 and value["wall_contacts"]==0 and value["burst_seconds"]>0
 	var output := {"comparison":"SF.3 original/full with identical camera/audio" if compare_environment else "Camera A/B","passed":passed,"source":"Existing extension_C2 OSM path, points 25..42; existing pure-pursuit test driver; actual unchanged physical controller; no teleports during route","samples":sf1_results}
-	FileAccess.open("res://docs/sf3_city_drive.json" if compare_environment else "res://docs/sf1_city_drive.json",FileAccess.WRITE).store_string(JSON.stringify(output,"  "))
+	FileAccess.open("res://.local/artifacts/sf3_city_drive.json" if compare_environment else "res://.local/artifacts/sf1_city_drive.json",FileAccess.WRITE).store_string(JSON.stringify(output,"  "))
 	cleanup()
 	quit(0 if passed else 1)
 
@@ -93,7 +93,7 @@ func manual_smoke() -> void:
 	await restart_route()
 	passed=passed and panel.buttons.has("restart_route") and car.driving_enabled and world.runtime_error.is_empty()
 	var result:={"passed":passed,"native_shortcuts_and_W_throttle":passed,"restart_on_existing_road":world.runtime_error.is_empty()}
-	FileAccess.open("res://docs/sf1_manual_validation.json",FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
+	FileAccess.open("res://.local/artifacts/sf1_manual_validation.json",FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
 	print("SF1_MANUAL_SMOKE ",JSON.stringify(result))
 	cleanup()
 	quit(0 if passed else 1)
@@ -130,17 +130,17 @@ func benchmark() -> void:
 		sf1_results.append(value)
 		print("SF1_BENCH_SAMPLE ",JSON.stringify(value))
 		if sf1_results.size()<3:
-			root.get_texture().get_image().save_png("res://docs/evidence/sf1_%s_180kmh.png"%value["mode"])
+			root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf1_%s_180kmh.png"%value["mode"])
 	rig.speed_feedback.set_experimental(true)
 	rig.experiment_panel.open_requested=true
 	var panel_until := Time.get_ticks_msec()+3500
 	while Time.get_ticks_msec()<panel_until: await render_frame()
-	root.get_texture().get_image().save_png("res://docs/evidence/sf1_panel.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf1_panel.png")
 	var a: float=(sf1_results[0]["mean_ms"]+sf1_results[3]["mean_ms"])*0.5
 	var b: float=(sf1_results[1]["mean_ms"]+sf1_results[2]["mean_ms"])*0.5
 	var passed := b-a<=maxf(1.0,a*0.15)
 	var output := {"passed":passed,"scenario":"1280x720, Compatibility, VSync off, existing complete city, same frozen pose and synthetic 180 km/h / half BURST telemetry; A/B/B/A, 3.5 seconds warmup and 600 rendered wall-clock samples each; NOT city-traversal FPS","gpu":RenderingServer.get_video_adapter_name(),"samples":sf1_results,"B_minus_A_ms":b-a,"B_overhead_percent":(b/a-1)*100,"regression_budget":"max(1 ms, 15% of A)"}
-	FileAccess.open("res://docs/sf1_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(output,"  "))
+	FileAccess.open("res://.local/artifacts/sf1_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(output,"  "))
 	print("SF1_BENCHMARK ",JSON.stringify(output))
 	cleanup()
 	quit(0 if passed else 1)

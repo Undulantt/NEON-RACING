@@ -108,7 +108,7 @@ func run() -> void:
 			sample["median_ms"]=intervals[120];sample["p95_ms"]=intervals[228]
 			sample["draw_calls"]=Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
 			var mode: String="original" if not manager.facades_enabled else "life"
-			root.get_texture().get_image().save_png("res://docs/evidence/sf3_%s_%s.png"%[site[0],mode])
+			root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_%s_%s.png"%[site[0],mode])
 			camera.queue_free()
 		samples.append(sample)
 		print("SF3_CITY_LIFE_SAMPLE ",JSON.stringify(sample))
@@ -122,7 +122,7 @@ func run() -> void:
 	var result:={"passed":failures.is_empty(),"checks":checks,"failures":failures,"samples":samples,"status":status,"renderer":RenderingServer.get_video_adapter_name(),"note":"Real game transitions and frozen views at three existing road locations. Static render samples are not driving FPS."}
 	var label: String="original" if "--sf3-facades-original" in OS.get_cmdline_user_args() else "life"
 	if "--flat-world" in OS.get_cmdline_user_args(): label+="_flat"
-	FileAccess.open("res://docs/sf3_city_life_%s_validation.json"%label,FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
+	FileAccess.open("res://.local/artifacts/sf3_city_life_%s_validation.json"%label,FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
 	if FileAccess.file_exists(flow.settings_path): DirAccess.remove_absolute(flow.settings_path)
 	print("SF3_CITY_LIFE_RESULT ",JSON.stringify({"passed":failures.is_empty(),"checks":checks,"failures":failures}))
 	quit(0 if failures.is_empty() else 1)

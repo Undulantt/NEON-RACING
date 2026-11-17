@@ -29,7 +29,7 @@ def analyze():
             prior = direction
         spans.append({'length_m': round(length, 2), 'first_point_index': start, 'last_point_index': len(points)-1})
         result[path.stem] = {'criterion': 'At most 12 degrees of cumulative heading change per run; intersections and slopes still exist', 'longest_runs': sorted(spans,key=lambda p:p['length_m'],reverse=True)[:5]}
-    (ROOT/'docs/burst_route_geometry.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'tests/fixtures/routes/burst_route_geometry.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     for key, value in result.items():
         print(key, value['longest_runs'][0]['length_m'])
 

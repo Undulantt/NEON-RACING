@@ -55,7 +55,7 @@ func run() -> void:
 		road.queue_free()
 	check(Neon.chunk_cut(Vector3(256,3,10),Vector3(256,6,20)),"Chunk seam must not be outlined")
 	var report:={"passed":failures.is_empty(),"failures":failures,"max_surface_error_m":worst,"scenarios":["inclined plane","successive slope reversals","border continuity","chunk seam"]}
-	FileAccess.open("res://docs/phase_e_road_neon_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_e_road_neon_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("ROAD_NEON ",JSON.stringify(report))
 	await process_frame
 	quit(0 if failures.is_empty() else 1)

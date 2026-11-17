@@ -54,7 +54,7 @@ func _run() -> void:
 	await step(30)
 	check(car.on_asphalt and car.is_on_floor(),"Distant recovery lost support")
 	var report := {"passed":failures.is_empty(),"failures":failures,"default_main_profile":world.relief_profile,"production_spawn_xz":original_spawn,"routes":results,"anchors_tested":anchors,"road_streaming":world.road_root.status(),"terrain_streaming":world.terrain_root.status(),"urban_streaming":world.city_manager.status(),"static_memory_bytes":Performance.get_monitor(Performance.MEMORY_STATIC)}
-	var file := FileAccess.open("res://docs/phase_b7r_default_integration.json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/phase_b7r_default_integration.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("RELIEF_WORLD_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

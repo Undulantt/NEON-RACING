@@ -11,7 +11,7 @@ from relief_regions import apply_boundary_outsets
 
 class CoastalFixTests(unittest.TestCase):
     def test_requested_aerial_cells_are_water(self):
-        before=json.loads((ROOT/'docs/coast_fix_baseline/relief_manifest.json').read_text(encoding='utf-8'))
+        before=json.loads((ROOT/'tests/fixtures/baselines/coast_fix_baseline/relief_manifest.json').read_text(encoding='utf-8'))
         b=before['bounds_xz'];w=max(b[2]-b[0],(b[3]-b[1])*2/3)*1.12;h=w*1.5
         left=(b[0]+b[2])/2-w/2;top=(b[1]+b[3])/2-h/2
         sea=shape(json.loads((ROOT/'data/processed/urban/urban_geography.json').read_text(encoding='utf-8'))['water_geometry_xz'])

@@ -130,9 +130,9 @@ func run() -> void:
 	car.global_position.x+=20;vfx.advance(0,slide)
 	check(vfx.smoke.is_empty(),"Teleport clears detached effects")
 	check(car.config==Profiles.load_profile("APEX")["config"],"VFX never changes profile physics")
-	var baseline: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/sf4_baseline.json"))
+	var baseline: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/baselines/sf4_baseline.json"))
 	for path in baseline["sha256"]:check(FileAccess.get_sha256("res://"+path)==baseline["sha256"][path],"Protected "+path)
 	var result:={"passed":failures.is_empty(),"checks":checks,"failures":failures,"stage":stage,"note":"Synthetic contact/telemetry fixtures; real wheel raycasts, all 3 production profiles; physics/config/map hashes unchanged."}
-	FileAccess.open("res://docs/sf4_stage_%d_validation.json"%stage,FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
+	FileAccess.open("res://.local/artifacts/sf4_stage_%d_validation.json"%stage,FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
 	print("SF4_REPORT ",JSON.stringify(result))
 	level.queue_free();await process_frame;quit(0 if failures.is_empty() else 1)

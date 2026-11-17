@@ -19,7 +19,7 @@ def main():
     prefix = parser.parse_args().prefix
     results = []
     for mode in ['A', 'B']:
-        path = ROOT / f'docs/evidence/{prefix}_audio_{mode}.wav'
+        path = ROOT / f'.local/artifacts/evidence/{prefix}_audio_{mode}.wav'
         with wave.open(str(path), 'rb') as stream:
             rate = stream.getframerate()
             assert stream.getsampwidth() == 2
@@ -33,7 +33,7 @@ def main():
         new_rate = 22050
         at = np.arange(round(len(mono) / rate * new_rate)) * rate / new_rate
         preview = np.interp(at, np.arange(len(mono)), mono) * gain
-        with wave.open(str(ROOT / f'docs/evidence/{prefix}_audio_{mode}_matched.wav'), 'wb') as output:
+        with wave.open(str(ROOT / f'.local/artifacts/evidence/{prefix}_audio_{mode}_matched.wav'), 'wb') as output:
             output.setnchannels(1)
             output.setsampwidth(2)
             output.setframerate(new_rate)
@@ -50,7 +50,7 @@ def main():
     report = {'passed': True, 'source': 'Actual Master bus captures of the unchanged physical controller; music absent',
               'raw_B_minus_A_rms_db': difference, 'previews': '22.05 kHz mono, gain-only RMS matching to 0.08; these gains are NOT game defaults',
               'samples': results}
-    (ROOT / f'docs/{prefix}_audio_analysis.json').write_bytes((json.dumps(report, indent=2)+'\n').encode('utf8'))
+    (ROOT / f'.local/artifacts/{prefix}_audio_analysis.json').write_bytes((json.dumps(report, indent=2)+'\n').encode('utf8'))
     print('Audio A/B measured; matched previews ready; raw B-A:', round(difference, 2), 'dB')
 
 

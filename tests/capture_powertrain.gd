@@ -12,7 +12,7 @@ var telemetry: Array = []
 func snapshot(name: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/tachometer_"+name+".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/tachometer_"+name+".png")
 
 func drain_audio() -> void:
 	if engine_record != null:
@@ -75,13 +75,13 @@ func finish() -> void:
 	audio.mix_rate = int(AudioServer.get_mix_rate())
 	audio.data = data
 	var audio_bytes := data.size()
-	audio.save_to_wav("res://docs/evidence/engine_gear_changes.wav")
+	audio.save_to_wav("res://.local/artifacts/evidence/engine_gear_changes.wav")
 	await snapshot("braking")
 	var shifts_up:int=car.powertrain.upshifts
 	var shifts_down:int=car.powertrain.downshifts
 	var passed:bool=shifts_up==6 and shifts_down==6 and audio_bytes>22050 and capture_flags.size()==3 and engine_routing and discarded_frames==0
 	var report:={"passed":passed,"scenario":"Real standing start and braking on existing C2 street, VECTOR, render limited to 60 FPS, Engine bus recording with no music/effects","elapsed_s":elapsed,"upshifts":shifts_up,"downshifts":shifts_down,"audio_bytes":audio_bytes,"discarded_audio_frames":discarded_frames,"engine_bus_routing":engine_routing,"screenshots":capture_flags,"telemetry":telemetry}
-	FileAccess.open("res://docs/powertrain_capture_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/powertrain_capture_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("POWERTRAIN_CAPTURE ",JSON.stringify({"passed":passed,"duration":elapsed,"audio_bytes":audio_bytes,"upshifts":shifts_up,"downshifts":shifts_down,"screenshots":capture_flags}))
 	world.queue_free()
 	for i in range(4):await process_frame
@@ -102,7 +102,7 @@ func run() -> void:
 	engine_record.buffer_length=2.0
 	AudioServer.add_bus_effect(engine_bus,engine_record)
 	var data:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tracks/extension_C2.json"))
-	var geometry:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/burst_route_geometry.json"))
+	var geometry:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/routes/burst_route_geometry.json"))
 	var span:Dictionary=geometry["extension_C2"]["longest_runs"][0]
 	build_path(data["points_xz"].slice(int(span["first_point_index"]),int(span["last_point_index"])+1))
 	engine_record.clear_buffer()

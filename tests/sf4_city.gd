@@ -22,13 +22,13 @@ func benchmark() -> void:
 	world.follow_camera.snap();world.follow_camera.set_physics_process(false)
 	await render_frame()
 	if sf4_stage>=3:
-		root.get_texture().get_image().save_png("res://docs/evidence/sf4_drift.png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf4_drift.png")
 		vfx.preview_enabled=true
 		for amount in [0.0,.25,.6,1.0]:
 			vfx.preview_burst=amount
 			for i in range(60):vfx.advance(1.0/60)
 			await render_frame()
-			root.get_texture().get_image().save_png("res://docs/evidence/sf4_burst_%03d.png"%roundi(amount*100))
+			root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf4_burst_%03d.png"%roundi(amount*100))
 		for i in range(90):
 			var at:=sample(33+i*.25);var ahead:=sample(34+i*.25)
 			car.rotation.y=atan2(-(ahead.x-at.x),-(ahead.z-at.z))
@@ -37,7 +37,7 @@ func benchmark() -> void:
 			await render_frame()
 		world.follow_camera.snap();world.follow_camera.set_physics_process(false)
 		await render_frame()
-	root.get_texture().get_image().save_png("res://docs/evidence/sf4_stage_%d.png"%sf4_stage)
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf4_stage_%d.png"%sf4_stage)
 	# Finish and freeze background city decoration equally in all samples.
 	until=Time.get_ticks_msec()+3500
 	while Time.get_ticks_msec()<until:await render_frame()
@@ -69,7 +69,7 @@ func benchmark() -> void:
 	if sf4_stage>=3:
 		await capture_panel(vfx)
 	var report:={"stage":sf4_stage,"gpu":RenderingServer.get_video_adapter_name(),"samples":samples,"particles":vfx.smoke.size(),"marks":vfx.marks.size(),"note":"Existing OSM avenue. VFX supplied slide telemetry for visual QA, frozen car physics; same scene current stage batches A/B/B/A. Not real driving FPS."}
-	FileAccess.open("res://docs/sf4_stage_%d_render.json"%sf4_stage,FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf4_stage_%d_render.json"%sf4_stage,FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF4_RENDER ",JSON.stringify(report))
 	cleanup();quit()
 
@@ -79,4 +79,4 @@ func capture_panel(vfx: Node3D) -> void:
 	world.follow_camera.experiment_panel.open_requested=true
 	world.follow_camera.experiment_panel.tabs.current_tab=3
 	await render_frame();await render_frame()
-	root.get_texture().get_image().save_png("res://docs/evidence/sf4_panel.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf4_panel.png")

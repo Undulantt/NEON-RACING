@@ -154,7 +154,7 @@ func run() -> void:
 	if "--synthetic-only" in OS.get_cmdline_user_args():
 		report["passed"] = failures.is_empty()
 		report["failures"] = failures
-		FileAccess.open("res://docs/burst_balance_synthetic.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
+		FileAccess.open("res://.local/artifacts/burst_balance_synthetic.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 		quit(0 if failures.is_empty() else 1)
 		return
 	# Resolve after Autoload initialization; derived SF.1 tools reuse the driver.
@@ -175,6 +175,6 @@ func run() -> void:
 			print("BALANCE_REAL ",file," ",id," ", JSON.stringify(result))
 	report["passed"] = failures.is_empty()
 	report["failures"] = failures
-	FileAccess.open("res://docs/burst_balance.json", FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/burst_balance.json", FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("BALANCE_REPORT ",JSON.stringify({"passed":failures.is_empty(),"failures":failures}))
 	quit(0 if failures.is_empty() else 1)

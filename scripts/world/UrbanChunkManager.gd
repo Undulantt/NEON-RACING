@@ -127,6 +127,8 @@ func read_chunk(entry: Dictionary) -> Dictionary:
 	data["sf3_life_enabled"] = facades_enabled
 	return data
 
+var race_targets: Array = []
+
 func rectangle(entry: Dictionary) -> Rect2:
 	var b: Array = entry["bounds_xz"]
 	return Rect2(b[0], b[1], b[2] - b[0], b[3] - b[1])
@@ -135,7 +137,12 @@ func distance_to(entry: Dictionary) -> float:
 	var r := rectangle(entry)
 	var p := Vector2(target.global_position.x, target.global_position.z)
 	var nearest := p.clamp(r.position, r.end)
-	return p.distance_to(nearest)
+	var distance := p.distance_to(nearest)
+	for car in race_targets:
+		if is_instance_valid(car):
+			var at := Vector2(car.position.x,car.position.z)
+			distance = minf(distance,at.distance_to(at.clamp(r.position,r.end)))
+	return distance
 
 func refresh(_prime: bool = false) -> void:
 	pending.clear()
@@ -148,6 +155,12 @@ func refresh(_prime: bool = false) -> void:
 		for z in range(center.y - extent, center.y + extent + 1):
 			for entry in spatial_index.get(Vector2i(x, z), []):
 				nearby[entry["id"]] = entry
+	for car in race_targets:
+		if not is_instance_valid(car): continue
+		var cell := Vector2i(floori(car.position.x/256),floori(car.position.z/256))
+		for x in range(cell.x-2,cell.x+3):
+			for z in range(cell.y-2,cell.y+3):
+				for entry in spatial_index.get(Vector2i(x,z),[]): nearby[entry["id"]]=entry
 	# Always audit currently loaded sectors for unloading, even after a teleport.
 	for id in loaded:
 		nearby[id] = loaded[id]["source"]

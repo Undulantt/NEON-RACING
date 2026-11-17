@@ -3,13 +3,5 @@
 /data/** -text
 /config/** -text
 /scripts/driving/ArcadeCar.gd -text
-/docs/b6_baseline/** -text
-/docs/b7r_baseline/** -text
-/docs/slope_physics_baseline/** -text
-/docs/c6_baseline/** -text
-/docs/burst_baseline/** -text
-/docs/powertrain_baseline/** -text
-
-# Validation reports are hash-linked evidence; keep their exact recorded bytes.
-/docs/*validation*.json -text
-/docs/powertrain_summary.json -text
+# Regression snapshots and routes retain their original bytes after relocation.
+/tests/fixtures/** -text

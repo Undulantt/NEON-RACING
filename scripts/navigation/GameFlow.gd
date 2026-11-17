@@ -13,6 +13,7 @@ var current_state: StringName = &"main_menu"
 var current_scene_path := ""
 var selected_mode: StringName = &""
 var selected_vehicle_id := "COMET"
+var rival_difficulty := "expert"
 var race_origin: StringName = &""
 var return_destination: StringName = &"main_menu"
 var activity_id := ""
@@ -39,6 +40,10 @@ func _ready() -> void:
 	selected_vehicle_id = definition["default_vehicle"]
 	current_scene_path = definition["menu_scene"]
 	load_settings()
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--ai-difficulty="):
+			var requested:=argument.trim_prefix("--ai-difficulty=")
+			if requested in preload("res://scripts/racing/RivalDifficulty.gd").IDS: rival_difficulty=requested
 	preload("res://scripts/driving/DrivingInput.gd").install_gamepad_bindings()
 	_install_menu_bindings()
 
@@ -81,6 +86,13 @@ func select_vehicle(id: String) -> bool:
 	selected_vehicle_id = id
 	vehicle_changed.emit(id)
 	_save_settings()
+	return true
+
+func set_rival_difficulty(id: String) -> bool:
+	if transition_busy or current_state not in [&"vehicle_select",&"options"] or id not in preload("res://scripts/racing/RivalDifficulty.gd").IDS: return false
+	rival_difficulty=id
+	_save_settings()
+	settings_changed.emit()
 	return true
 
 func go_back() -> void:
@@ -158,6 +170,8 @@ func _prepare_existing_race() -> void:
 	transition_busy = true
 	get_tree().paused = false
 	world_instance().hud.set_pause(false)
+	# Remove finished rivals before checking the new grid for occupied space.
+	world_instance().race_activity.release_competition()
 	var needs_loading: bool = not world_instance().initial_support_ready(active_race["start"])
 	if needs_loading:
 		_show_loading("Preparando salida y colisiones de la carrera")
@@ -363,6 +377,8 @@ func load_settings() -> void:
 		_apply_volume(bus)
 	var id := str(saved.get_value("session", "vehicle", definition["default_vehicle"]))
 	selected_vehicle_id = id if id in Profiles.IDS else definition["default_vehicle"]
+	var difficulty:=str(saved.get_value("race","difficulty","expert"))
+	rival_difficulty=difficulty if difficulty in preload("res://scripts/racing/RivalDifficulty.gd").IDS else "expert"
 	screen_mode = str(saved.get_value("display", "mode", "windowed"))
 	if screen_mode not in ["windowed", "borderless", "fullscreen"]:
 		screen_mode = "windowed"
@@ -401,6 +417,7 @@ func _save_settings() -> void:
 	saved.set_value("display", "mode", screen_mode)
 	saved.set_value("display", "window_size", window_size)
 	saved.set_value("session", "vehicle", selected_vehicle_id)
+	saved.set_value("race","difficulty",rival_difficulty)
 	var error := saved.save(settings_path)
 	if error != OK:
 		navigation_error = "No se pudieron guardar las opciones (error %d)." % error

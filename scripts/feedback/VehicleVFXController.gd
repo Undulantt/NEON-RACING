@@ -262,7 +262,7 @@ func refresh_body_bindings() -> void:
 	for node in car.visual_root.find_children("*","MeshInstance3D",true,false):
 		if not node.is_visible_in_tree():continue
 		var mat: Material=node.material_override
-		if mat!=null and mat.get_meta("sf4_body",false):body_bindings.append({"node":node,"original":node.material_overlay})
+		if node.get_meta("sf4_body",false) or (mat!=null and mat.get_meta("sf4_body",false)):body_bindings.append({"node":node,"original":node.material_overlay})
 
 func update_burst(delta: float) -> void:
 	bind_timer+=delta

@@ -66,8 +66,8 @@ func run() -> void:
 	if "--capture-d2" in OS.get_cmdline_user_args():
 		await process_frame
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://docs/evidence/laps_physical_results.png" if circuit_test else "res://docs/evidence/d2_physical_results.png")
-	FileAccess.open("res://docs/laps_physical_drive.json" if circuit_test else "res://docs/phase_d2_physical_drive.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/laps_physical_results.png" if circuit_test else "res://.local/artifacts/evidence/d2_physical_results.png")
+	FileAccess.open("res://.local/artifacts/laps_physical_drive.json" if circuit_test else "res://.local/artifacts/phase_d2_physical_drive.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(flow.settings_path))
 	if not circuit_id.is_empty(): DirAccess.remove_absolute(ProjectSettings.globalize_path("user://races/"+circuit_id+".json"))
 	print("D2_PHYSICAL_DRIVE ",JSON.stringify(report))

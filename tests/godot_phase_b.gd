@@ -245,7 +245,7 @@ func drive_route() -> void:
 		if visualize and captures < 3 and route_progress > [200.0, 600.0, 1000.0][captures]:
 			await process_frame
 			await RenderingServer.frame_post_draw
-			root.get_texture().get_image().save_png(("res://docs/evidence/phase_b5_drive_%d.png" if world.city_manager != null else "res://docs/evidence/phase_b_drive_%d.png") % captures)
+			root.get_texture().get_image().save_png(("res://.local/artifacts/evidence/phase_b5_drive_%d.png" if world.city_manager != null else "res://.local/artifacts/evidence/phase_b_drive_%d.png") % captures)
 			captures += 1
 		if best > 10 or car.recovery_count > starting_recoveries:
 			break
@@ -365,13 +365,13 @@ func polygon_boundaries() -> void:
 
 func finish() -> void:
 	var report := {"passed": failures.is_empty(), "failures": failures, "metrics": metrics, "physics_frames": test_frames, "world": world.stats, "city_streaming": world.city_manager.status() if world.city_manager != null else {}}
-	var prefix := "res://docs/phase_b5_driving_validation" if world.city_manager != null else "res://docs/phase_b_validation"
+	var prefix := "res://.local/artifacts/phase_b5_driving_validation" if world.city_manager != null else "res://.local/artifacts/phase_b_validation"
 	if "--phase-c-regression" in OS.get_cmdline_user_args():
-		prefix = "res://docs/phase_c_route_validation"
+		prefix = "res://.local/artifacts/phase_c_route_validation"
 	if "--slope-regression" in OS.get_cmdline_user_args():
-		prefix = "res://docs/slope_controls_validation"
+		prefix = "res://.local/artifacts/slope_controls_validation"
 	if "--road-regression" in OS.get_cmdline_user_args():
-		prefix = "res://docs/road_width_route_validation"
+		prefix = "res://.local/artifacts/road_width_route_validation"
 	var file := FileAccess.open(prefix + ("_render.json" if visualize else ".json"), FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(report, "  "))

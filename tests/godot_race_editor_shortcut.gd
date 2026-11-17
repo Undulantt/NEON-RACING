@@ -57,6 +57,6 @@ func run() -> void:
 		check(is_instance_valid(activity.editor),"Editor reopens without stopping the game")
 		if is_instance_valid(activity.editor): activity.editor.close()
 	var report := {"passed":failures.is_empty(),"checks":checks,"failures":failures,"shortcut":"Ctrl+Alt+E"}
-	FileAccess.open("res://docs/race_editor_shortcut_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/race_editor_shortcut_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("EDITOR_SHORTCUT_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

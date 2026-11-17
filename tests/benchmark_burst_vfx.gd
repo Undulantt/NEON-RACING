@@ -84,7 +84,7 @@ func run() -> void:
 	var overhead := burst_mean - normal_mean
 	var economical := overhead <= maxf(2.0, normal_mean * 0.5)
 	var report := {"passed":economical,"scenario":"1280x720 Compatibility / VSync off; static NightPilot geometry and fixed 95-degree FOV; 128 stressed wheel-track segments; 150 warmup and 360 rendered samples per stage; normal/BURST/BURST/normal comparison; timing includes test harness and is not city-traversal FPS","samples":results,"burst_overhead_ms":overhead,"burst_overhead_percent":overhead/normal_mean*100,"additional_draw_calls":float(results[1]["draw_calls"])-float(results[0]["draw_calls"]),"gpu":RenderingServer.get_video_adapter_name()}
-	FileAccess.open("res://docs/burst_vfx_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/burst_vfx_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("BURST_VFX_BENCHMARK ",JSON.stringify(report))
 	world.queue_free()
 	for i in range(4):

@@ -14,6 +14,8 @@ static func shell(parent: Node3D, lower: Array[Vector3], upper: Array[Vector3], 
 	var visual := MeshInstance3D.new();visual.mesh=mesh;visual.material_override=material;parent.add_child(visual)
 static func build(car: CharacterBody3D) -> void:
 	var root: Node3D = car.visual_root
+	root.set_meta("retro_style",true)
+	if car.vehicle_profile=="COMET":return
 	for child in root.get_children():
 		if child is MeshInstance3D and child not in car.visuals["exhaust"]:
 			child.visible=false

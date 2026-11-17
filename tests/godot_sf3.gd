@@ -107,10 +107,10 @@ func run() -> void:
 	visual.free()
 	environment.restore_bindings()
 	check(environment.bindings.is_empty(),"Sector unload / expired weak references are safe")
-	var baseline: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/sf3_baseline.json"))
+	var baseline: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/baselines/sf3_baseline.json"))
 	for path in baseline["sha256"]: check(FileAccess.get_sha256("res://"+path)==baseline["sha256"][path],"Protected: "+path)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(environment.settings_path))
 	var report:={"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"scenario":"Presentation telemetry, real instance override/restoration and protected production file hashes; synthetic geometry is test-only"}
-	FileAccess.open("res://docs/sf3_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf3_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF3_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

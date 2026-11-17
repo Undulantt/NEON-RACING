@@ -31,7 +31,7 @@ La carrocería procedural, los materiales planos, ventanas genéricas, plataform
 
 **INEGI. Marco Geoestadístico, diciembre de 2025; Censo de Población y Vivienda 2020**, según los metadatos del GeoJSON obtenido del servicio oficial el 24/10/2026. [Servicio y documentación](https://www.inegi.org.mx/servicios/catalogounico.html), [términos de libre uso de la información INEGI](https://www.inegi.org.mx/inegi/terminos.html). Las manzanas se transformaron de Mexico ITRF2008 a la proyección local y se utilizaron únicamente como restricciones de colocación; **INEGI no proporciona ni certifica las 167 huellas ficticias generadas**.
 
-Extracto adicional OSM para espacios abiertos: API oficial, XML original conservado con hash y JSON derivado normalizado; © OpenStreetMap contributors, ODbL. La base urbana derivada de OSM/Overture y sus modificaciones se ofrece bajo ODbL 1.0; los términos y atribución de la fuente INEGI se mantienen expresamente. Todo origen, exclusión, recorte menor y estimación se documenta en `docs/PHASE_B5.md` y la auditoría de colocación.
+Extracto adicional OSM para espacios abiertos: API oficial, XML original conservado con hash y JSON derivado normalizado; © OpenStreetMap contributors, ODbL. La base urbana derivada de OSM/Overture y sus modificaciones se ofrece bajo ODbL 1.0; los términos y atribución de la fuente INEGI se mantienen expresamente. Todo origen, exclusión, recorte menor y estimación se documenta en `docs/history/PHASE_B5.md` y la auditoría de colocación.
 
 Cliente Overture, PyProj, Shapely/PyArrow y dependencias se instalan en `.venv-urban` exclusivamente para herramientas offline, con sus licencias en los paquetes. Ese entorno se excluye de Git y del contenido Godot mediante `.gdignore`; no se requiere ni se incorpora como dependencia del juego. No se añadieron texturas, audio ni modelos descargados.
 
@@ -70,7 +70,7 @@ Nueva selección Overture Buildings 2026-10-21.0 de 84.824 registros descargados
 
 ## Corrección vial del Cajoncito
 
-Se reutilizan los mismos XML OSM originales verificados y se guardan nuevos agregados `*_c5_cajoncito.*`, derivados de esas respuestas sin modificarlas. Se incorporan trunk/trunk_link y cuatro cruces Forjadores revisados, con nodos, sentidos, etiquetas y atribución ODbL preservados. El tratamiento plano de los cruces y la exclusión provisional de la vía inferior 660516292 se declaran en `docs/CAJONCITO_ROADS.md` y en los metadatos de la red.
+Se reutilizan los mismos XML OSM originales verificados y se guardan nuevos agregados `*_c5_cajoncito.*`, derivados de esas respuestas sin modificarlas. Se incorporan trunk/trunk_link y cuatro cruces Forjadores revisados, con nodos, sentidos, etiquetas y atribución ODbL preservados. El tratamiento plano de los cruces y la exclusión provisional de la vía inferior 660516292 se declaran en `docs/design/CAJONCITO_ROADS.md` y en los metadatos de la red.
 
 ## Relieve B.7-R
 
@@ -87,7 +87,11 @@ Revisión Neon Coast: shaders de cielo/asfalto/resplandor, palmeras y carrocerí
 
 ## SF.2.1 — Audio experimental
 
-El motor reutiliza los bucles de combustión sintetizados originalmente por el proyecto en `DrivingFeedback.gd`. `assets/audio/sf21_wind_placeholder.wav` es ruido filtrado periódico original, generado con `tools/build_sf21_wind.py` y semilla fija, sin grabaciones ni muestras de terceros. Es un recurso provisional del proyecto. Las muestras `docs/evidence/sf21_audio_*` son capturas de esa síntesis y su mezcla dentro de Godot; las copias `_matched` solo ajustan ganancia RMS y formato para la comparación. No se incorporan voces, motores comerciales ni música ajena.
+El motor reutiliza los bucles de combustión sintetizados originalmente por el proyecto en `DrivingFeedback.gd`. `assets/audio/sf21_wind_placeholder.wav` es ruido filtrado periódico original, generado con `tools/build_sf21_wind.py` y semilla fija, sin grabaciones ni muestras de terceros. Es un recurso provisional del proyecto. Las muestras `.local/artifacts/evidence/sf21_audio_*` son capturas de esa síntesis y su mezcla dentro de Godot; las copias `_matched` solo ajustan ganancia RMS y formato para la comparación. No se incorporan voces, motores comerciales ni música ajena.
 
 
 Revisión del motor SF.2.1: los cuatro recursos `engine_combustion_*.wav` son síntesis original de pulsos, resonancias y ruido, generada con `tools/build_combustion_audio.py`, sin muestras de terceros. Las capturas `sf21r_audio_*` documentan su reproducción dentro de Godot.
+
+## D.4 — Pasaporte La Paz
+
+Ubicaciones del kiosco y la Catedral derivadas del snapshot OpenStreetMap existente, © colaboradores de OpenStreetMap, bajo ODbL, conservando las atribuciones cartográficas anteriores. Las fichas son paráfrasis propias basadas en Turismo Municipal de La Paz ([Kiosco](https://turismo.lapaz.gob.mx/atractivos/kiosco-del-malecon-18), [Catedral](https://turismo.lapaz.gob.mx/atractivos/catedral-de-nuestra-senora-de-la-paz)), y el [Sistema de Información Cultural, Secretaría de Cultura: Teatro de la Ciudad, ficha 12](https://sic.cultura.gob.mx/ficha.php?table=teatro&table_id=12). Para el teatro se conserva la coordenada de su enlace cartográfico oficial. No se descargaron fotografías, logotipos ni materiales gráficos de esas páginas. Procedencia y método en `data/passport/pois.json` y `docs/guides/PASAPORTE_LA_PAZ.md`.

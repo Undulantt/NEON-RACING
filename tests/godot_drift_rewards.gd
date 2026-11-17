@@ -166,7 +166,7 @@ func run() -> void:
 	await step(2)
 	check(car.drift_charge == 0 and not car.drift_boost_active and not car.drift_particles.smoke[0].emitting, "Recovery resets drift meter, bonus and smoke")
 	var report := {"passed": failures.is_empty(), "failures": failures, "metrics": metrics}
-	var path := "res://docs/slope_drift_validation.json" if "--slope-regression" in OS.get_cmdline_user_args() else "res://docs/drift_rewards_validation.json"
+	var path := "res://.local/artifacts/slope_drift_validation.json" if "--slope-regression" in OS.get_cmdline_user_args() else "res://.local/artifacts/drift_rewards_validation.json"
 	var output := FileAccess.open(path, FileAccess.WRITE)
 	output.store_string(JSON.stringify(report, "  "))
 	print("DRIFT_REWARDS_REPORT ", JSON.stringify(report))

@@ -59,7 +59,7 @@ func run() -> void:
 		for i in range(60):
 			await physics_frame
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://docs/evidence/phase_c5_" + anchor["id"] + ".png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_c5_" + anchor["id"] + ".png")
 	# Inspection-only overview. Load all sectors here, never in normal gameplay.
 	world.player.set_physics_process(false)
 	for cell in world.road_root.entries:
@@ -95,6 +95,6 @@ func run() -> void:
 	for i in range(3):
 		await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_c5_south_cut_overview.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_c5_south_cut_overview.png")
 	print("C5_CAPTURE_COMPLETE")
 	quit()

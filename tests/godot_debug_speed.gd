@@ -102,7 +102,7 @@ func run() -> void:
 	check(car.config == original_config and FileAccess.get_sha256("res://config/driving_config.json") == source_hash, "Toggle must not mutate baseline configuration")
 	check(car.recovery_count == 0, "Test must not require recovery")
 	var report := {"passed":failures.is_empty(),"failures":failures,"metrics":metrics,"controller_sha256":FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd")}
-	var output := FileAccess.open("res://docs/debug_speed_validation.json", FileAccess.WRITE)
+	var output := FileAccess.open("res://.local/artifacts/debug_speed_validation.json", FileAccess.WRITE)
 	output.store_string(JSON.stringify(report, "  "))
 	print("DEBUG_SPEED_REPORT ", JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

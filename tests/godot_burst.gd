@@ -268,7 +268,7 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--report-suffix="):
 			suffix = arg.trim_prefix("--report-suffix=")
-	FileAccess.open("res://docs/burst_validation%s.json" % suffix, FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
+	FileAccess.open("res://.local/artifacts/burst_validation%s.json" % suffix, FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 	print("BURST_REPORT ", JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)
 

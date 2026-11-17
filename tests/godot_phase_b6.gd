@@ -27,7 +27,7 @@ func _initialize() -> void:
 	cathedral._ready()
 	check(cathedral.get_child_count() == 1, "cathedral details stay in one mesh")
 	cathedral.free()
-	var f := FileAccess.open("res://docs/phase_b6_runtime.json", FileAccess.WRITE)
+	var f := FileAccess.open("res://.local/artifacts/phase_b6_runtime.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify({"passed":failures.is_empty(),"failures":failures},"  "))
 	print("B6_RUNTIME ", failures)
 	quit(0 if failures.is_empty() else 1)

@@ -37,9 +37,9 @@ func _process(_delta: float) -> bool:
 		intervals.sort()
 		var count := intervals.size()
 		var report := {"scenario": "Static spawn, normal renderer, 2s warmup + 10s sample; not a full driving benchmark", "elapsed_s": float(now - measured) / 1000000.0, "frames": count, "average_fps": float(count) * 1000000.0 / float(now - measured), "p95_frame_ms": intervals[int(count * 0.95)], "max_frame_ms": intervals[-1], "mean_draw_calls": draw_calls / count, "mean_primitives": primitives / count, "viewport_texture_px": [root.get_texture().get_width(), root.get_texture().get_height()], "node_count": Performance.get_monitor(Performance.OBJECT_NODE_COUNT), "world": world.stats}
-		var file := FileAccess.open("res://docs/phase_b_benchmark.json", FileAccess.WRITE)
+		var file := FileAccess.open("res://.local/artifacts/phase_b_benchmark.json", FileAccess.WRITE)
 		file.store_string(JSON.stringify(report, "  "))
-		root.get_texture().get_image().save_png("res://docs/evidence/phase_b_spawn_final.png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_b_spawn_final.png")
 		print("PHASE_B_BENCHMARK ", JSON.stringify(report))
 		quit()
 	return false

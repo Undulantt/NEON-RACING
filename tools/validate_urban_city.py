@@ -116,5 +116,5 @@ def validate(manifest_path=None):
 
 if __name__=='__main__':
     try:
-        report=validate(); (ROOT/'docs/phase_b5_data_validation.json').write_text(json.dumps(report,indent=2),encoding='utf-8'); print(json.dumps(report,indent=2))
+        report=validate(); (ROOT/'.local/artifacts/phase_b5_data_validation.json').write_text(json.dumps(report,indent=2),encoding='utf-8'); print(json.dumps(report,indent=2))
     except (AssertionError,ValueError,KeyError,OSError) as error: raise SystemExit(f'FAIL {type(error).__name__}: {error}')

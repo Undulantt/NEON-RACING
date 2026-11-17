@@ -56,6 +56,6 @@ func run() -> void:
 		await process_frame
 	var ratio: float = results["true"]["mean_ms"]/results["false"]["mean_ms"]
 	var report := {"scenario":"1280x720 Compatibility, VSync off, fixed simulation 60 Hz; same short acceleration repeated six times, 1080 rendered frames per mode; no city-wide traversal","turbo_test":boost_test,"results":results,"mean_ratio":ratio,"passed":ratio<=1.15 and results["true"]["offroad_frames"]==0 and (not boost_test or results["true"]["boost_frames"]>300)}
-	FileAccess.open("res://docs/phase_e_motion_benchmark.json" if boost_test else "res://docs/phase_e_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_e_motion_benchmark.json" if boost_test else "res://.local/artifacts/phase_e_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PHASE_E_BENCHMARK ",JSON.stringify(report))
 	quit(0 if report["passed"] else 1)

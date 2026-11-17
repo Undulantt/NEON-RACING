@@ -11,7 +11,7 @@ def read(p):return json.loads(p.read_text(encoding='utf-8'))
 
 def build():
     cfg=read(ROOT/'config/map_config.json');data=read(ROOT/'data/processed/la_paz_map.json')
-    old=shape(read(ROOT/'docs/map_extension_baseline/relief_manifest.json')['region_geojson'])
+    old=shape(read(ROOT/'tests/fixtures/baselines/map_extension_baseline/relief_manifest.json')['region_geojson'])
     region=metric_region(cfg);added=region.difference(old).buffer(-40)
     manifest=read(ROOT/'data/processed/expansion_manifest.json')
     start=manifest['routes'][0]
@@ -27,7 +27,7 @@ def build():
         path=ROOT/('tracks/extension_'+label+'.json')
         path.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n',encoding='utf-8',newline='\n')
         entries.append({'area':label,'file':path.relative_to(ROOT).as_posix(),'length_m':result['length_m'],'target_xz':[node['x'],node['z']],'target_osm_node':node['id']})
-    output=ROOT/'docs/map_extension_routes.json'
+    output=ROOT/'tests/fixtures/routes/map_extension_routes.json'
     output.write_text(json.dumps({'routes':entries},indent=2)+'\n',encoding='utf-8',newline='\n')
     print(entries)
 

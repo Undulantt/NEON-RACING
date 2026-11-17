@@ -20,7 +20,7 @@ static func box(parent: Node3D, size: Vector3, at: Vector3, mat: Material) -> Me
 	parent.add_child(node)
 	return node
 
-static func build(parent: Node3D) -> Dictionary:
+static func build(parent: Node3D, vehicle_profile: String = "") -> Dictionary:
 	var paint := material(Color("26a99c"))
 	paint.set_meta("sf4_body",true)
 	var glass := material(Color("193342"))
@@ -70,4 +70,6 @@ static func build(parent: Node3D) -> Dictionary:
 		var flame := box(parent, Vector3(0.16, 0.16, 0.8), Vector3(x, -0.15, 2.35), turbo_material)
 		flame.visible = false
 		exhaust.append(flame)
-	return {"exhaust": exhaust, "pivots": pivots, "wheels": wheels, "brake_material": brake}
+	var visuals: Dictionary={"exhaust": exhaust, "pivots": pivots, "wheels": wheels, "brake_material": brake}
+	if vehicle_profile=="COMET":preload("res://scripts/driving/CometVisual.gd").apply(parent,visuals)
+	return visuals

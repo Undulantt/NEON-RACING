@@ -112,7 +112,7 @@ func drive_test_multiplier() -> float:
 	return 2.0 if debug_speed_enabled else 1.0
 
 func _unhandled_input(event: InputEvent) -> void:
-	if driving_enabled and not get_tree().paused and event.is_action_pressed("debug_speed_toggle") and not event.is_echo():
+	if not external_control and driving_enabled and not get_tree().paused and event.is_action_pressed("debug_speed_toggle") and not event.is_echo():
 		debug_speed_enabled = not debug_speed_enabled
 		abilities.cancel_burst("debug_mode", forward_plane_speed)
 		get_viewport().set_input_as_handled()
@@ -176,7 +176,7 @@ func _ready() -> void:
 	abilities.drift_boost_triggered.connect(func(strength: float): drift_boost_triggered.emit(strength))
 	abilities.turbo_changed.connect(func(active: bool, charge: float): turbo_changed.emit(active, charge))
 	collision_layer = 16
-	collision_mask = 15
+	collision_mask = 31
 	floor_snap_length = 0.35
 	floor_max_angle = deg_to_rad(42)
 	safe_margin = 0.005
@@ -190,7 +190,7 @@ func _ready() -> void:
 	visual_root = Node3D.new()
 	add_child(visual_root)
 	visual_root.scale = Vector3.ONE * vehicle_scale
-	visuals = VisualBuilder.build(visual_root)
+	visuals = VisualBuilder.build(visual_root, vehicle_profile)
 	feedback = Node.new()
 	feedback.set_script(preload("res://scripts/driving/DrivingFeedback.gd"))
 	add_child(feedback)
@@ -213,6 +213,12 @@ func apply_vehicle_profile(id: String) -> bool:
 	abilities.configure(config)
 	powertrain.configure(config)
 	turbo_charge = 1.0
+	if visual_root != null:
+		var retro: bool = visual_root.get_meta("retro_style",false)
+		for child in visual_root.get_children():
+			if not child is Light3D: child.free()
+		visuals = VisualBuilder.build(visual_root, vehicle_profile)
+		if retro: preload("res://scripts/style/RetroCar.gd").build(self)
 	vehicle_profile_changed.emit(id)
 	return true
 
@@ -278,7 +284,7 @@ func clear_of_obstacles(at: Transform3D) -> bool:
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = collision_shape
 	query.transform = at
-	query.collision_mask = 12
+	query.collision_mask = 28
 	query.exclude = [get_rid()]
 	return get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 

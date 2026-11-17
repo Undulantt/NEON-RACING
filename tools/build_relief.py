@@ -192,7 +192,7 @@ def build(mode='pilot'):
     if max_grade>cfg['max_road_grade']:
         raise ValueError(f'Road grade requires review: {max_grade}')
     write(out/'manifest.json',manifest)
-    write(ROOT/f'docs/phase_b7r_{mode}_bake.json',dict(passed=True,statistics=stats,bake_seconds=time.perf_counter()-start,manifest_sha256=digest(out/'manifest.json')))
+    write(ROOT/f'.local/artifacts/phase_b7r_{mode}_bake.json',dict(passed=True,statistics=stats,bake_seconds=time.perf_counter()-start,manifest_sha256=digest(out/'manifest.json')))
     print(stats,flush=True)
     return manifest
 

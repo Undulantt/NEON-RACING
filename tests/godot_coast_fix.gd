@@ -53,7 +53,7 @@ func run() -> void:
 		var crossing = Geometry2D.segment_intersects_segment(origin,origin+direction*150,a,b)
 		if crossing != null:
 			boundary_distance=minf(boundary_distance,origin.distance_to(crossing))
-	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/coast_fix_baseline/relief_manifest.json"))
+	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/baselines/coast_fix_baseline/relief_manifest.json"))
 	var old_ring: Array = before["boundary_xz"]
 	var boundary_point := origin+direction*boundary_distance
 	var normal_setback := INF
@@ -66,7 +66,7 @@ func run() -> void:
 		distance=Vector2(mountain["position"].x-center.x,mountain["position"].z-center.z).length()
 		check(distance>=boundary_distance-.1 and distance<boundary_distance+16,"Collision does not follow the retreated contour's steep front")
 	var report := {"passed":failures.is_empty(),"failures":failures,"A2_terrain_absent":not world.terrain_root.entries.has(water_cell),"normal_setback_m":normal_setback,"boundary_distance_along_diagonal_m":boundary_distance,"join_mountain_collision_distance_m":distance,"terrain_before_mountain_supported":not space.intersect_ray(ground_query).is_empty(),"manifest_sha256":FileAccess.get_sha256("res://data/processed/relief/world/manifest.json")}
-	var file := FileAccess.open("res://docs/coast_fix_physics.json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/coast_fix_physics.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("COAST_FIX_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

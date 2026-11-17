@@ -30,7 +30,7 @@ func shot(name: String) -> void:
 	if not capture: return
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/laps_"+name+".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/laps_"+name+".png")
 
 func cross_lap(session: RefCounted) -> void:
 	for gate in session.definition["checkpoints"]:
@@ -41,7 +41,7 @@ func cross_lap(session: RefCounted) -> void:
 func finish() -> void:
 	if not saved_id.is_empty(): DirAccess.remove_absolute(ProjectSettings.globalize_path(Store.LOCAL+saved_id+".json"))
 	var report := {"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"rendered":capture}
-	FileAccess.open("res://docs/editor_laps_validation_render.json" if capture else "res://docs/editor_laps_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/editor_laps_validation_render.json" if capture else "res://.local/artifacts/editor_laps_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("EDITOR_LAPS_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)
 

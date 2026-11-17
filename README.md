@@ -1,52 +1,68 @@
 # Neon Racing LP — SF.3
 
-**SF.3 corregido:** vista previa estática y cambios de material más visibles. **Ctrl+Alt+P → Entorno → Restablecer SF.3 → Vista previa estática**, y comparar Original/Completo dentro de Entorno. [Detalles de la corrección](docs/SF3_VISIBILITY_FIX.md).
+[Documentación](docs/README.md) · [Estructura de carpetas y política de Git](docs/PROJECT_STRUCTURE.md).
+Los resultados de pruebas, logs y capturas se guardan localmente en `.local/artifacts/`.
 
-**SF.3 · Entorno:** textura de asfalto más legible, marcas reforzadas y respuesta de bordes/farolas existentes según velocidad, TURBO y BURST gradual. **Ctrl + Alt + L** compara Original/Parcial/Completo; **Ctrl + Alt + P → Entorno** ofrece ajustes y guardado. [Guía, arquitectura, pruebas y hooks para SF.4](docs/SF3_FLUJO_OPTICO.md). La física, cámara, audio y geometría se conservan. SF.4 no está implementado.
+## D.3 — Competición beta actual
 
-**Motor revisado:** Audio B usa ahora pulsos de combustión, escape grave y dos bancos de carga por RPM, conservando los cambios reales de marcha. **Ctrl + Alt + O** selecciona A/B. [Cambios, muestras comparativas y validación](docs/SF21_MOTOR_COMBUSTION.md).
+**Nivel Experto implementado:** seleccionable al elegir vehículo. Reduce un 9–14% el tiempo de dos vueltas en la comparación con el mismo auto, sin alterar su física. Corrige el contador de adelantamientos y añade derrape con Drift Boost para los agresivos en curvas amplias. El sobrepaso limpio está probado contra un coche más lento; la competición contra rivales igual de rápidos y la dificultad humana siguen pendientes. [Uso, resultados y límites](docs/design/RIVAL_EXPERT_MODE.md).
 
-**SF.1.1 + SF.2.1:** TURBO visual con presets **0/10/15/25%** y audio experimental de motor por RPM/carga + viento por velocidad. **Ctrl + Alt + P** abre Cámara/Audio; **Ctrl + Alt + O** compara audio anterior/nuevo sin cambiar cámara. Los presets TURBO se comparan manteniendo Cámara B; **0% conserva SF.1 aprobado**. [Guía, parámetros, recursos provisionales, muestras A/B y validaciones](docs/SF21_AUDIO_Y_TURBO.md). Desarrollo detenido antes de SF.2.2 para evaluación del jugador.
+**Auditoría de aceptación: IA pendiente.** La auditoría inicial verificó conducción física, interacción entre NPC y personalidades; detectó falsos positivos y falta de derrape. Experto corrige el contador y demuestra Drift Boost en curvas amplias. Los adelantamientos generales y la diversión siguen pendientes. [Evidencia histórica de los cinco criterios](docs/design/RIVAL_AI_ACCEPTANCE_AUDIT.md).
 
-**SF.1 · Cámara experimental:** inicia normalmente con F5. Durante la conducción, **Ctrl + Alt + B** compara la cámara original y la nueva; **Ctrl + Alt + P** abre ajustes en vivo, telemetría, FPS, restauración y guardado de pruebas. La física, los tres perfiles y el mapa permanecen intactos. [Guía de prueba, recorrido OSM reproducible, parámetros y validaciones](docs/SF1_SPEED_FEEL.md). La base aprobada se conserva con el preset TURBO 0% de SF.1.1.
+**Checkpoints esféricos:** la zona de detección admite entradas laterales durante el derrape. Auditoría con Luque, Guille, Dani, Xavi e Iris: usan TURBO; aún no derrapan ni obtienen Drift Boost/BURST en Centro LP. Los cinco sí consiguen BURST en una recta larga de prueba. [Cambios, resultados y reproducción](docs/design/CHECKPOINT_SPHERES_AND_AI_ABILITIES.md).
 
-**Navegación y presentación:** aros circulares azul neón con transparencia degradada y un cuarto del radio bajo la carretera, cinta naranja, recuperación de 3 segundos al último checkpoint, rutas/controles en minimapa y cilindro rosa de entrada. En modo libre, **Esc / Start** abre el mapa de pausa para elegir destino por las calles reales. [Controles, decisiones, capturas y pruebas](docs/RACE_NAVIGATION_UPDATE.md).
+**IA continua:** los rivales anticipan el recorrido completo, calculan frenadas por curvatura y eligen líneas laterales para el tráfico. Los checkpoints verifican el avance. Implementación, fuentes de Forza/Gran Turismo y pruebas: [docs/design/D3_CONTINUOUS_AI.md](docs/design/D3_CONTINUOUS_AI.md).
 
-**Editor actualizado:** elección de carreras **Sin vueltas** o **Con vueltas (1–99)**, cierre por la red vial, mensajes concretos y botones de guardado habilitados sólo con un trazado válido. [Guía paso a paso para crear, guardar y probar recorridos](docs/RACE_EDITOR_GUIDE.md).
+Carrera de dos vueltas con cinco rivales, personalidades, clasificación y resultados medidos. Circuito Centro LP de 626 m por vuelta, disponible desde el menú y el modo libre. F6 muestra depuración y Ctrl+Alt+O permite observar rivales. Parrilla de dos columnas y rodeo de coches detenidos; se probaron dos vueltas con el jugador inmóvil, despeje de meta y reinicios. Quedan pendientes la carrera humana completa, Drift Boost de IA y la validación de rendimiento en tiempo real. Detalles y pruebas: [docs/history/PHASE_D3.md](docs/history/PHASE_D3.md). Los apartados de fases anteriores se conservan como historial.
 
-**F5 → Jugar → Modo carrera → vehículo:** sprint en solitario de unos 979 m sobre el Malecón, con 47 controles, cuenta regresiva y resultados. En modo libre, **E / mando B** junto al anillo de salida abre la confirmación. **Esc** permite reiniciar o abandonar. **Ctrl + Alt + E** abre el editor de recorridos únicamente durante desarrollo. Carga por etapas con actividad real y reutilización del mundo entre actividades. [Uso, arquitectura, formato, pruebas y límites de D.2](docs/PHASE_D2.md).
+
+**SF.3 corregido:** vista previa estática y cambios de material más visibles. **Ctrl+Alt+P → Entorno → Restablecer SF.3 → Vista previa estática**, y comparar Original/Completo dentro de Entorno. [Detalles de la corrección](docs/history/SF3_VISIBILITY_FIX.md).
+
+**SF.3 · Entorno:** textura de asfalto más legible, marcas reforzadas y respuesta de bordes/farolas existentes según velocidad, TURBO y BURST gradual. **Ctrl + Alt + L** compara Original/Parcial/Completo; **Ctrl + Alt + P → Entorno** ofrece ajustes y guardado. [Guía, arquitectura, pruebas y hooks para SF.4](docs/history/SF3_FLUJO_OPTICO.md). La física, cámara, audio y geometría se conservan. SF.4 no está implementado.
+
+**Motor revisado:** Audio B usa ahora pulsos de combustión, escape grave y dos bancos de carga por RPM, conservando los cambios reales de marcha. **Ctrl + Alt + O** selecciona A/B. [Cambios, muestras comparativas y validación](docs/history/SF21_MOTOR_COMBUSTION.md).
+
+**SF.1.1 + SF.2.1:** TURBO visual con presets **0/10/15/25%** y audio experimental de motor por RPM/carga + viento por velocidad. **Ctrl + Alt + P** abre Cámara/Audio; **Ctrl + Alt + O** compara audio anterior/nuevo sin cambiar cámara. Los presets TURBO se comparan manteniendo Cámara B; **0% conserva SF.1 aprobado**. [Guía, parámetros, recursos provisionales, muestras A/B y validaciones](docs/history/SF21_AUDIO_Y_TURBO.md). Desarrollo detenido antes de SF.2.2 para evaluación del jugador.
+
+**SF.1 · Cámara experimental:** inicia normalmente con F5. Durante la conducción, **Ctrl + Alt + B** compara la cámara original y la nueva; **Ctrl + Alt + P** abre ajustes en vivo, telemetría, FPS, restauración y guardado de pruebas. La física, los tres perfiles y el mapa permanecen intactos. [Guía de prueba, recorrido OSM reproducible, parámetros y validaciones](docs/history/SF1_SPEED_FEEL.md). La base aprobada se conserva con el preset TURBO 0% de SF.1.1.
+
+**Navegación y presentación:** aros circulares azul neón con transparencia degradada y la mitad del radio bajo la carretera, cinta naranja, recuperación de 3 segundos al último checkpoint, rutas/controles en minimapa y cilindro rosa de entrada. En modo libre, **Esc / Start** abre el mapa de pausa para elegir destino por las calles reales. [Controles, decisiones, capturas y pruebas](docs/guides/RACE_NAVIGATION_UPDATE.md).
+
+**Editor actualizado:** elección de carreras **Sin vueltas** o **Con vueltas (1–99)**, cierre por la red vial, mensajes concretos y botones de guardado habilitados sólo con un trazado válido. [Guía paso a paso para crear, guardar y probar recorridos](docs/guides/RACE_EDITOR_GUIDE.md).
+
+**F5 → Jugar → Modo carrera → vehículo:** sprint en solitario de unos 979 m sobre el Malecón, con 47 controles, cuenta regresiva y resultados. En modo libre, **E / mando B** junto al anillo de salida abre la confirmación. **Esc** permite reiniciar o abandonar. **Ctrl + Alt + E** abre el editor de recorridos únicamente durante desarrollo. Carga por etapas con actividad real y reutilización del mundo entre actividades. [Uso, arquitectura, formato, pruebas y límites de D.2](docs/history/PHASE_D2.md).
 
 La conducción física completa pasó sin recuperaciones; también se comprobaron los flujos desde menú y exploración. No hay rivales NPC ni Pasaporte La Paz todavía.
 
 ## Flujo de menús de D.1
 
-**F5 inicia el menú principal.** Jugar permite elegir modo y comparar VECTOR, COMET y APEX antes de conducir por el Malecón. Opciones, ayuda, créditos y regreso desde la pausa están integrados. [Arquitectura original e interfaces de D.1](docs/PHASE_D1.md); su pantalla provisional de carrera ya está sustituida por el sistema de D.2.
+**F5 inicia el menú principal.** Jugar permite elegir modo y comparar VECTOR, COMET y APEX antes de conducir por el Malecón. Opciones, ayuda, créditos y regreso desde la pausa están integrados. [Arquitectura original e interfaces de D.1](docs/history/PHASE_D1.md); su pantalla provisional de carrera ya está sustituida por el sistema de D.2.
 
 Las notas siguientes corresponden a entregas anteriores; sus referencias a F5 iniciando directamente el mundo quedan reemplazadas por el menú de D.1. Para abrir el mundo directamente durante desarrollo, usar F6 sobre scenes/Main.tscn.
 
 ---
 
-**Velocímetro y motor:** aguja por RPM, siete marchas automáticas, turbo integrado y sonido sincronizado con las subidas y reducciones. [Capturas, audio y verificación](docs/POWERTRAIN_TACHOMETER.md).
+**Velocímetro y motor:** aguja por RPM, siete marchas automáticas, turbo integrado y sonido sincronizado con las subidas y reducciones. [Capturas, audio y verificación](docs/design/POWERTRAIN_TACHOMETER.md).
 
-**Efectos BURST:** cuenta 3–2–1, dos huellas continuas de fuego neón rosa dejadas por las ruedas, partículas intensificadas y FOV gradual. [Capturas, controles, coste medido y cómo cambiar de perfil desde el Inspector](docs/BURST_PRESENTATION.md).
+**Efectos BURST:** cuenta 3–2–1, dos huellas continuas de fuego neón rosa dejadas por las ruedas, partículas intensificadas y FOV gradual. [Capturas, controles, coste medido y cómo cambiar de perfil desde el Inspector](docs/design/BURST_PRESENTATION.md).
 
-**Conducción BURST y perfiles de vehículos:** VECTOR, COMET y APEX comparten controlador con límites base de 185/205/175 km/h. Turbo y Drift Boost añaden aceleración; BURST amplía el límite al sostener velocidad. Soltar el acelerador o frenar lo cancela inmediatamente, con pérdida gradual del exceso de velocidad. [Implementación, controles, perfiles y balance medido](docs/PHASE_C_BURST.md).
+**Conducción BURST y perfiles de vehículos:** VECTOR, COMET y APEX comparten controlador con límites base de 185/205/175 km/h. Turbo y Drift Boost añaden aceleración; BURST amplía el límite al sostener velocidad. Soltar el acelerador o frenar lo cancela inmediatamente, con pérdida gradual del exceso de velocidad. [Implementación, controles, perfiles y balance medido](docs/history/PHASE_C_BURST.md).
 
-**Versión del 3 de noviembre de 2026:** [Novedades desde la fase C.6](docs/RELEASE_2026-11-03.md).
+**Versión del 3 de noviembre de 2026:** [Novedades desde la fase C.6](docs/history/RELEASE_2026-11-03.md).
 
-**Señalización corregida:** las líneas se preparan por calles conectadas y se cargan con el sector vial, sin el límite anterior de 64 tramos. [Detalle, capturas de Forjadores y verificación](docs/PHASE_E_ROAD_MARKINGS.md).
+**Señalización corregida:** las líneas se preparan por calles conectadas y se cargan con el sector vial, sin el límite anterior de 64 tramos. [Detalle, capturas de Forjadores y verificación](docs/history/PHASE_E_ROAD_MARKINGS.md).
 
-**Actualización de rendimiento:** F5 arranca directamente de noche, sin generar primero los detalles diurnos. Bordes neón precalculados, carga incremental y colisiones de postes y troncos. [Resultados y límites](docs/PHASE_E_STREAMING_FIX.md).
+**Actualización de rendimiento:** F5 arranca directamente de noche, sin generar primero los detalles diurnos. Bordes neón precalculados, carga incremental y colisiones de postes y troncos. [Resultados y límites](docs/history/PHASE_E_STREAMING_FIX.md).
 
 # Ciudad nocturna — expansión de la estética
 
-**F5** abre la ciudad con la estética retrofuturista, farolas orientadas a las calles, palmeras y árboles de copa facetada. Decoración por sectores y manchas de luz estilizadas para las farolas. [Implementación, reglas de colocación y verificación](docs/PHASE_E_CITY.md).
+**F5** abre la ciudad con la estética retrofuturista, farolas orientadas a las calles, palmeras y árboles de copa facetada. Decoración por sectores y manchas de luz estilizadas para las farolas. [Implementación, reglas de colocación y verificación](docs/history/PHASE_E_CITY.md).
 
 # Revisión visual — La Paz / Neon Coast
 
-Estelas de turbo ahusadas, líneas periféricas más discretas y ajuste de contraste del piloto. **F4** alterna efectos completos, sutiles o desactivados. [Progreso, capturas y pruebas](docs/PHASE_E_MOTION.md).
+Estelas de turbo ahusadas, líneas periféricas más discretas y ajuste de contraste del piloto. **F4** alterna efectos completos, sutiles o desactivados. [Progreso, capturas y pruebas](docs/history/PHASE_E_MOTION.md).
 
-Abre `scenes/NightPilot.tscn` y pulsa **F6**: horizonte synthwave, asfalto estilizado, bordes cian, palmeras y carrocería arcade. Música detenida por defecto. [Capturas, pruebas y límites de esta revisión](docs/PHASE_E_RETRO.md).
+Abre `scenes/NightPilot.tscn` y pulsa **F6**: horizonte synthwave, asfalto estilizado, bordes cian, palmeras y carrocería arcade. Música detenida por defecto. [Capturas, pruebas y límites de esta revisión](docs/history/PHASE_E_RETRO.md).
 
 ---
 
@@ -54,25 +70,25 @@ Abre `scenes/NightPilot.tscn` y pulsa **F6**: horizonte synthwave, asfalto estil
 
 Abre `scenes/NightPilot.tscn` y pulsa **F6** en Godot. Un sector con cielo nocturno, ventanas iluminadas, neón comercial, farolas, palmeras estilizadas, faros y audio original de prueba. **F7** abre la mezcla de música, motor y efectos. Se reutilizan conducción, turbo, derrape y cámara de C.6.
 
-[Dirección artística, pruebas, rendimiento y límites](docs/PHASE_E.md). La escena principal y los datos geográficos se conservan.
+[Dirección artística, pruebas, rendimiento y límites](docs/history/PHASE_E.md). La escena principal y los datos geográficos se conservan.
 
 ---
 
-El relieve real B.7-R está integrado en el mapa principal: **F5** inicia `Main.tscn` con terreno, carreteras y edificios elevados en centro, norte y sur, conservando el punto de aparición habitual. El piloto sigue en `scenes/ReliefPilot.tscn` (**F6**). Para comparar con el plano, abrir `scenes/FlatWorld.tscn` o iniciar con `--flat-world`. [Implementación, fuentes, reproducción, pruebas y límites](docs/PHASE_B7R.md); [auditoría previa](docs/PHASE_B7R_PROPOSAL.md).
+El relieve real B.7-R está integrado en el mapa principal: **F5** inicia `Main.tscn` con terreno, carreteras y edificios elevados en centro, norte y sur, conservando el punto de aparición habitual. El piloto sigue en `scenes/ReliefPilot.tscn` (**F6**). Para comparar con el plano, abrir `scenes/FlatWorld.tscn` o iniciar con `--flat-world`. [Implementación, fuentes, reproducción, pruebas y límites](docs/history/PHASE_B7R.md); [auditoría previa](docs/history/PHASE_B7R_PROPOSAL.md).
 
-La conducción incorpora gravedad en pendientes, retroceso cuando falta fuerza y pequeños vuelos al coronar subidas con velocidad. **Espacio mantiene el coche frenado en una cuesta. T activa/desactiva velocidad máxima y aceleración ×2 para pruebas.** [Comportamiento, parámetros y pruebas](docs/SLOPE_PHYSICS.md).
+La conducción incorpora gravedad en pendientes, retroceso cuando falta fuerza y pequeños vuelos al coronar subidas con velocidad. **Espacio mantiene el coche frenado en una cuesta. T activa/desactiva velocidad máxima y aceleración ×2 para pruebas.** [Comportamiento, parámetros y pruebas](docs/design/SLOPE_PHYSICS.md).
 
-Las zonas **C2, A4 y A5** se amplían siguiendo el recorte del usuario. Los bordes terrestres incorporan montañas ficticias infranqueables. Después se ajustó el mar de **A1, A2, B1 y la parte costera de A3**, y se retranqueó la montaña Centro–Sur. [Corrección del mar y límites](docs/COAST_FIX.md) · [Ampliación C.6](docs/PHASE_C6_BOUNDARIES.md).
+Las zonas **C2, A4 y A5** se amplían siguiendo el recorte del usuario. Los bordes terrestres incorporan montañas ficticias infranqueables. Después se ajustó el mar de **A1, A2, B1 y la parte costera de A3**, y se retranqueó la montaña Centro–Sur. [Corrección del mar y límites](docs/design/COAST_FIX.md) · [Ampliación C.6](docs/history/PHASE_C6_BOUNDARIES.md).
 
-Se restituyen las carreteras principales del Cajoncito: Juan de Dios Angulo, Federal 1, Forjadores y Olachea, conservando el límite sur recortado. [Detalles, procedencia y pruebas](docs/CAJONCITO_ROADS.md).
+Se restituyen las carreteras principales del Cajoncito: Juan de Dios Angulo, Federal 1, Forjadores y Olachea, conservando el límite sur recortado. [Detalles, procedencia y pruebas](docs/design/CAJONCITO_ROADS.md).
 
-La extensión sur se recorta ahora por el límite poligonal indicado en rojo: la franja inferior queda excluida de calles, edificios, suelo visual y físico. [Corrección del límite sur](docs/PHASE_C5_SOUTH_CUT.md).
+La extensión sur se recorta ahora por el límite poligonal indicado en rojo: la franja inferior queda excluida de calles, edificios, suelo visual y físico. [Corrección del límite sur](docs/history/PHASE_C5_SOUTH_CUT.md).
 
 # Fase C.5 — corredor sur
 
 Se incorpora el corredor hacia **el hospital Salvatierra, UABCS y las conexiones viales al sur**, conservando Centro/Malecón y el bloque norte. La ampliación utiliza el mismo proceso de calles OSM, huellas OSM/Overture y selección INEGI/DENUE del núcleo, con calles anchas y streaming por sectores de 256 m.
 
-Abre `project.godot` y pulsa **F5**. Las fuentes están guardadas offline. El HUD identifica CORREDOR SUR al entrar en el bloque. Detalles y validación: [docs/PHASE_C5_SOUTH.md](docs/PHASE_C5_SOUTH.md).
+Abre `project.godot` y pulsa **F5**. Las fuentes están guardadas offline. El HUD identifica CORREDOR SUR al entrar en el bloque. Detalles y validación: [docs/history/PHASE_C5_SOUTH.md](docs/history/PHASE_C5_SOUTH.md).
 
 Para regenerar: `.\.venv-urban\Scripts\python.exe tools/expand_map.py`. Agrega `--fetch` solo si faltan fuentes. El contorno rojo completo sigue siendo referencia para futuras etapas.
 
@@ -82,7 +98,7 @@ Para regenerar: `.\.venv-urban\Scripts\python.exe tools/expand_map.py`. Agrega `
 
 Ya se puede conducir desde Centro/Malecón hacia **Esterito, Colina del Sol, Pedregal del Cortez y la costa norte**. La cobertura de los bloques crece de 7,2 a **15,9 km²**, con 2.836 tramos viales, unos 12.200 volúmenes urbanos y streaming de calles y edificios. Se conservan las calles anchas, derrape con recompensa y turbo. El resto de la zona roja queda para siguientes bloques.
 
-Abre `project.godot` y pulsa **F5**. No se requiere Internet para jugar. El HUD identifica el bloque actual. Hay dos recorridos preparados para futuras carreras, de **3,7 y 4,0 km**, probados con el coche de producción. Documentación, mediciones y capturas: [docs/PHASE_C5.md](docs/PHASE_C5.md).
+Abre `project.godot` y pulsa **F5**. No se requiere Internet para jugar. El HUD identifica el bloque actual. Hay dos recorridos preparados para futuras carreras, de **3,7 y 4,0 km**, probados con el coche de producción. Documentación, mediciones y capturas: [docs/history/PHASE_C5.md](docs/history/PHASE_C5.md).
 
 Para regenerar el estado actual con las fuentes locales: `.\.venv-urban\Scripts\python.exe tools/expand_map.py`. Para añadir un bloque se edita `config/expansion_config.json` y se utiliza el mismo comando con `--fetch` si faltan sus fuentes. La imagen roja solo define la referencia del perímetro final.
 
@@ -92,23 +108,23 @@ Las secciones siguientes conservan el historial de las fases anteriores.
 
 # Fase C — conducción arcade
 
-**Derrape con recompensa:** humo en las ruedas traseras y nuevo medidor naranja. Derrapa con **Espacio**, conserva velocidad y suelta para enderezar: una salida limpia entrega un impulso de 0,9 s proporcional a lo acumulado, independiente del turbo de Shift. El turbo ahora muestra líneas de velocidad más largas y visibles. Mecánica y pruebas: [docs/DRIFT_REWARDS.md](docs/DRIFT_REWARDS.md).
+**Derrape con recompensa:** humo en las ruedas traseras y nuevo medidor naranja. Derrapa con **Espacio**, conserva velocidad y suelta para enderezar: una salida limpia entrega un impulso de 0,9 s proporcional a lo acumulado, independiente del turbo de Shift. El turbo ahora muestra líneas de velocidad más largas y visibles. Mecánica y pruebas: [docs/design/DRIFT_REWARDS.md](docs/design/DRIFT_REWARDS.md).
 
-**Corrección de calles y suelo:** calles 60 % más anchas, con mínimo de 12 m; terreno y asfalto tienen colisión a la misma altura, permitiendo salir y volver. Hay fondo visible continuo bajo el mapa. Ajustes y pruebas: [docs/ARCADE_ROADS.md](docs/ARCADE_ROADS.md). Después de regenerar el mapa o la ciudad, ejecuta `.\.venv-urban\Scripts\python.exe tools/build_arcade_layout.py` para actualizar la adaptación jugable.
+**Corrección de calles y suelo:** calles 60 % más anchas, con mínimo de 12 m; terreno y asfalto tienen colisión a la misma altura, permitiendo salir y volver. Hay fondo visible continuo bajo el mapa. Ajustes y pruebas: [docs/design/ARCADE_ROADS.md](docs/design/ARCADE_ROADS.md). Después de regenerar el mapa o la ciudad, ejecuta `.\.venv-urban\Scripts\python.exe tools/build_arcade_layout.py` para actualizar la adaptación jugable.
 
 Aceleración y frenada más ágiles, derrape con recuperación gradual de agarre y turbo recargable. **Espacio** derrapa; **Shift** activa el turbo; **V** alterna cámara cerca/lejos; **M** silencia el sonido provisional. **C** conserva la inspección aérea. La velocidad máxima pasa de **115,2 km/h a 158,4 km/h** con turbo, con 3,5 segundos de reserva y recarga automática.
 
 El turbo añade escape cian, líneas de velocidad, apertura de campo de visión y sonido. Motor y neumáticos tienen audio sintetizado propio, sin descargas ni recursos externos. Los parámetros están en `config/driving_config.json`.
 
-Implementación, pruebas reproducibles y límites: [docs/PHASE_C.md](docs/PHASE_C.md). Pruebas automáticas de mecánicas y recorrido real aprobadas; la valoración de la sensación arcade requiere jugar. Las secciones siguientes conservan el historial de fases anteriores.
+Implementación, pruebas reproducibles y límites: [docs/history/PHASE_C.md](docs/history/PHASE_C.md). Pruebas automáticas de mecánicas y recorrido real aprobadas; la valoración de la sensación arcade requiere jugar. Las secciones siguientes conservan el historial de fases anteriores.
 
 ---
 
 # Fase B.6 — enriquecimiento urbano
 
-Implementación y registro: [docs/PHASE_B6.md](docs/PHASE_B6.md). Conserva conducción, vías y 7.779 huellas; incorpora 5.836 registros POI (OSM, Overture Places y DENUE), con 385 edificios clasificados, categorías, fachadas, overrides, costa, espacios abiertos y seis registros de lugares. La Catedral incorpora una silueta simplificada con dimensiones estimadas. **F9** muestra nombres de lugares; **F8** conserva el control de ciudad.
+Implementación y registro: [docs/history/PHASE_B6.md](docs/history/PHASE_B6.md). Conserva conducción, vías y 7.779 huellas; incorpora 5.836 registros POI (OSM, Overture Places y DENUE), con 385 edificios clasificados, categorías, fachadas, overrides, costa, espacios abiertos y seis registros de lugares. La Catedral incorpora una silueta simplificada con dimensiones estimadas. **F9** muestra nombres de lugares; **F8** conserva el control de ciudad.
 
-Regeneración: `tools/build_urban_city.py` con `.venv-urban`. Validación adicional: `tools/validate_urban_enrichment.py` y `tests/godot_phase_b6.gd`. Integración de fuentes y verificación: [continuación B.6](docs/PHASE_B6_SOURCES.md).
+Regeneración: `tools/build_urban_city.py` con `.venv-urban`. Validación adicional: `tools/validate_urban_enrichment.py` y `tests/godot_phase_b6.gd`. Integración de fuentes y verificación: [continuación B.6](docs/history/PHASE_B6_SOURCES.md).
 
 El texto siguiente conserva la documentación histórica B.5.
 
@@ -120,7 +136,7 @@ Prototipo Godot 3D sobre calles reales de La Paz, B.C.S. La conducción libre de
 
 La ciudad se carga por **75 sectores de 256 m**. **F8** activa/desactiva edificios y sus colisiones, conservando calles, suelo y límites. Para reactivarla vuelve completamente al asfalto. El HUD indica el estado y los sectores instanciados. Los controles del coche siguen iguales.
 
-Documentación actual y pruebas: [docs/PHASE_B5.md](docs/PHASE_B5.md). Registro histórico de la conducción base: [docs/PHASE_B.md](docs/PHASE_B.md). No se inició la nueva fase C de turbo/derrape ni se implementaron carreras.
+Documentación actual y pruebas: [docs/history/PHASE_B5.md](docs/history/PHASE_B5.md). Registro histórico de la conducción base: [docs/history/PHASE_B.md](docs/history/PHASE_B.md). No se inició la nueva fase C de turbo/derrape ni se implementaron carreras.
 
 ## Regenerar y probar la ciudad B.5
 
@@ -196,8 +212,8 @@ Para repetir el recorrido de prueba con render y capturas (unos 2–3 minutos si
 
 ```powershell
 & $g --path . --fixed-fps 60 --script tests/godot_phase_b.gd -- --visual-test
-& $g --path . -- --capture=res://docs/evidence/phase_b_spawn.png
-& $g --path . -- --aerial --capture=res://docs/evidence/phase_b_aerial.png
+& $g --path . -- --capture=res://.local/artifacts/evidence/phase_b_spawn.png
+& $g --path . -- --aerial --capture=res://.local/artifacts/evidence/phase_b_aerial.png
 & $g --path . --script tests/benchmark_phase_b.gd
 ```
 
@@ -236,11 +252,11 @@ tests/test_environment.py               4 pruebas de entorno auténtico
 tests/godot_phase_a.gd                  regresión de calzada sin suelo auxiliar
 tests/godot_phase_b.gd                  integración del coche real
 tests/benchmark_phase_b.gd              muestra breve del render
-docs/PHASE_B.md                         decisiones, pruebas y limitaciones
-docs/phase_b_validation.json            último informe headless
-docs/phase_b_validation_render.json     informe de recorrido renderizado
-docs/phase_b_benchmark.json             muestra de rendimiento
-docs/evidence/                         capturas reales de Godot
+docs/history/PHASE_B.md                         decisiones, pruebas y limitaciones
+.local/artifacts/phase_b_validation.json            último informe headless
+.local/artifacts/phase_b_validation_render.json     informe de recorrido renderizado
+.local/artifacts/phase_b_benchmark.json             muestra de rendimiento
+.local/artifacts/evidence/                         capturas reales de Godot
 CREDITS_AND_LICENSES.md                 atribuciones y licencias
 ```
 
@@ -250,10 +266,10 @@ CREDITS_AND_LICENSES.md                 atribuciones y licencias
 
 Carreteras planas y anchos estimados cuando falta información OSM. Edificios con huellas reales pero alturas estimadas/estilizadas y fachadas genéricas. La plataforma de seguridad y las barreras son elementos del prototipo, **no terreno ni costa cartográficos**. No hay mar, edificios emblemáticos fieles, tráfico, carrera ni IA rival.
 
-Pruebas automáticas y recorrido renderizado aprobados. La prueba manual de escritorio quedó pendiente porque la herramienta de control capturó otra ventana; no se enviaron teclas a un destino incierto. El InputMap sí se probó con eventos físicos dentro del motor. Consulta [docs/PHASE_B.md](docs/PHASE_B.md) para resultados y alcance exactos.
+Pruebas automáticas y recorrido renderizado aprobados. La prueba manual de escritorio quedó pendiente porque la herramienta de control capturó otra ventana; no se enviaron teclas a un destino incierto. El InputMap sí se probó con eventos físicos dentro del motor. Consulta [docs/history/PHASE_B.md](docs/history/PHASE_B.md) para resultados y alcance exactos.
 
 ## Pruebas actuales B.5
 
 Datos geométricos y fuentes validados, **22 pruebas Python**, recorrido de coche de ~1.2 km/14 cruces sin pérdida de suelo, streaming/F8 y equivalencia de manejo con ciudad activa/desactivada aprobados. Muestra estática a render fijo 1280×720: 120 FPS aproximados tanto con ciudad anterior como nueva en RTX 4060 Ti; no es garantía de rendimiento general.
 
-Capturas actuales: [Aquiles Serdán](docs/evidence/phase_b5_drive_1.png), [Melchor Ocampo](docs/evidence/phase_b5_drive_2.png). Los registros anteriores se conservan como historial; la documentación vigente de ciudad es PHASE_B5.md.
+Capturas actuales: [Aquiles Serdán](.local/artifacts/evidence/phase_b5_drive_1.png), [Melchor Ocampo](.local/artifacts/evidence/phase_b5_drive_2.png). Los registros anteriores se conservan como historial; la documentación vigente de ciudad es PHASE_B5.md.

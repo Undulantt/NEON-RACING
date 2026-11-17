@@ -10,7 +10,7 @@ def read(p):return json.loads(p.read_text(encoding='utf-8'))
 def write(p,d):p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8',newline='\n')
 
 def prepare():
-    baseline=ROOT/'docs/coast_fix_baseline';baseline.mkdir(exist_ok=True)
+    baseline=ROOT/'tests/fixtures/baselines/coast_fix_baseline';baseline.mkdir(exist_ok=True)
     for src,name in [('data/processed/relief/world/manifest.json','relief_manifest.json'),('data/processed/urban/urban_geography.json','urban_geography.json'),('config/relief_config.json','relief_config.json')]:
         target=baseline/name
         if not target.exists():target.write_bytes((ROOT/src).read_bytes())

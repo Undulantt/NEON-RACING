@@ -43,7 +43,7 @@ func run() -> void:
 			if capture and airborne==9:
 				await process_frame
 				await RenderingServer.frame_post_draw
-				root.get_texture().get_image().save_png("res://docs/evidence/slope_real_crest_airborne.png")
+				root.get_texture().get_image().save_png("res://.local/artifacts/evidence/slope_real_crest_airborne.png")
 			for pivot in car.visuals["pivots"]:
 				var p: Vector3=pivot.global_position
 				var h: float=world.elevation.get_height_at(p.x,p.z)
@@ -57,14 +57,14 @@ func run() -> void:
 			if capture:
 				await process_frame
 				await RenderingServer.frame_post_draw
-				root.get_texture().get_image().save_png("res://docs/evidence/slope_real_crest_landed.png")
+				root.get_texture().get_image().save_png("res://.local/artifacts/evidence/slope_real_crest_landed.png")
 		previous_airborne=not car.is_on_floor()
 	if airborne<2 or peak<0.015 or not landed:failures.append("Real urban crest did not produce and land a small hop")
 	if car.recovery_count!=recoveries or car.wall_contacts!=contacts:failures.append("Real crest required recovery or hit an obstacle")
 	if not car.on_asphalt or not car.is_on_floor():failures.append("Real crest did not return to supported asphalt")
 	if min_visual_clearance < -0.005:failures.append("Airborne visual tire penetrated the road")
 	var report:={"passed":failures.is_empty(),"failures":failures,"controller_sha256":FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd"),"street":"Calle Miguel Hidalgo y Costilla","osm_road_id":"28531909:0","airborne_frames":airborne,"peak_clearance_m":peak,"minimum_visual_tire_clearance_m":min_visual_clearance,"landed":landed,"takeoffs":car.crest_takeoffs-takeoffs,"wall_contacts":car.wall_contacts-contacts,"recoveries":car.recovery_count-recoveries}
-	var file:=FileAccess.open("res://docs/slope_real_crest_render_validation.json" if capture else "res://docs/slope_real_crest_validation.json",FileAccess.WRITE)
+	var file:=FileAccess.open("res://.local/artifacts/slope_real_crest_render_validation.json" if capture else "res://.local/artifacts/slope_real_crest_validation.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("REAL_CREST_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

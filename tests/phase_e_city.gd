@@ -33,13 +33,13 @@ func run() -> void:
 	for light in world.night_style.furniture.lights:
 		if light.visible: report["live_lights"]+=1
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_city_driver.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_city_driver.png")
 	var camera:=Camera3D.new();world.add_child(camera)
 	camera.position=world.player.position+Vector3(25,32,35)
 	camera.look_at(world.player.position+Vector3(0,0,-30));camera.current=true
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_city_sector.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_city_sector.png")
 	check(report["coast"]["trees"]>0 and report["coast"]["palms"]>0,"Missing vegetation types")
 	check(world.city_manager.set_city_enabled(false),"F8 disable")
 	world.night_style.furniture.update_lights()
@@ -64,9 +64,9 @@ func run() -> void:
 	check(unloaded>0,"Old decoration did not unload")
 	report["unloaded_sectors"]=unloaded
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_city_inland.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_city_inland.png")
 	report["passed"]=failures.is_empty();report["failures"]=failures
-	FileAccess.open("res://docs/phase_e_city_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_e_city_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("CITY_STYLE ",JSON.stringify(report))
 	world.queue_free()
 	for i in range(8): await process_frame

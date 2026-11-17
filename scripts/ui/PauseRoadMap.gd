@@ -42,6 +42,12 @@ func _draw() -> void:
 		var start := screen(Vector2(p[0],p[1]))
 		draw_circle(start,7,Color("ff48b3"))
 		draw_string(ThemeDB.fallback_font,start+Vector2(12,5),"Carrera",HORIZONTAL_ALIGNMENT_LEFT,-1,14,Color("ffa2d8"))
+	var passport=world.get("passport")
+	if passport!=null and passport.allowed():
+		for poi in passport.active:
+			var at:=screen(poi["interaction_xz"])
+			draw_circle(at,5,Color("61fff4"))
+			draw_string(ThemeDB.fallback_font,at+Vector2(9,-5),poi["name"],HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("8cebe6"))
 	var player := screen(Vector2(world.player.position.x,world.player.position.z))
 	var triangle := PackedVector2Array()
 	for p in [Vector2(0,-10),Vector2(7,8),Vector2(0,4),Vector2(-7,8)]: triangle.append(player+p.rotated(-world.player.rotation.y))

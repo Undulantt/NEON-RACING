@@ -34,7 +34,7 @@ func shot(name: String) -> void:
 	if not capture: return
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/d2_"+name+".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/d2_"+name+".png")
 
 func finish() -> void:
 	flow.settings_path = original_path
@@ -42,7 +42,7 @@ func finish() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://data/races/"+fixture_id+".json"))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://tests/.d2_settings.cfg"))
 	var report := {"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics}
-	FileAccess.open("res://docs/phase_d2_validation_render.json" if capture else "res://docs/phase_d2_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_d2_validation_render.json" if capture else "res://.local/artifacts/phase_d2_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PHASE_D2_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)
 

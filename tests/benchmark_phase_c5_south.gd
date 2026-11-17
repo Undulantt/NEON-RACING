@@ -33,9 +33,9 @@ func run() -> void:
 	var elapsed := float(previous - start) / 1000000
 	var report := {"scenario": "Same core spawn and camera; VSync off; 2s warmup plus 5s render sample; not a traversal benchmark", "startup_ms": startup_ms, "mean_frame_ms": elapsed * 1000 / times.size(), "average_fps": times.size() / elapsed, "p95_ms": times[int(times.size() * 0.95)], "max_frame_ms": times[-1], "peak_static_memory_bytes": peak_memory, "peak_nodes": peak_nodes, "viewport_px": [root.get_texture().get_width(), root.get_texture().get_height()], "streaming": world.city_manager.status()}
 	var baseline := false
-	var path := "res://docs/cajoncito_benchmark.json"
+	var path := "res://.local/artifacts/cajoncito_benchmark.json"
 	if not baseline:
-		var old = JSON.parse_string(FileAccess.get_file_as_string("res://docs/phase_c5_benchmark.json"))
+		var old = JSON.parse_string(FileAccess.get_file_as_string("res://.local/artifacts/phase_c5_benchmark.json"))
 		report["mean_frame_ratio"] = report["mean_frame_ms"] / old["mean_frame_ms"]
 		report["static_memory_ratio"] = peak_memory / old["peak_static_memory_bytes"]
 	if not baseline:

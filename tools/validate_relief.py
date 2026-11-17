@@ -63,7 +63,7 @@ def validate(mode):
         cached_scenes_checked=cache_count,max_mesh_height_error_m=max_error,max_quantized_road_grade=max_grade,
         coast_samples=coast_samples,max_coast_height_error_m=coast_error,
         note='Geometric/metadata validation; local DEM vertical accuracy and manual foundations are separate review items')
-    write(ROOT/f'docs/phase_b7r_{mode}_geometry.json',report)
+    write(ROOT/f'.local/artifacts/phase_b7r_{mode}_geometry.json',report)
     print(report)
     return report
 

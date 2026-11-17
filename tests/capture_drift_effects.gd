@@ -5,7 +5,7 @@ func _initialize() -> void:
 
 func capture(path: String) -> void:
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/" + path + ".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/" + path + ".png")
 
 func run() -> void:
 	var world := preload("res://scenes/FlatWorld.tscn").instantiate()

@@ -12,7 +12,7 @@ func run() -> void:
 	world.follow_camera.snap()
 	for i in range(30): await physics_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_neon_relief_fixed.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_neon_relief_fixed.png")
 	world.queue_free()
 	for i in range(8): await process_frame
 	quit()

@@ -20,11 +20,11 @@ func run() -> void:
 	for i in range(180):
 		await physics_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_b6_cathedral.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_b6_cathedral.png")
 	camera.near=30.0
 	camera.position=Vector3(0,1650,700)
 	camera.look_at(Vector3(0,0,0))
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_b6_coast.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_b6_coast.png")
 	quit()

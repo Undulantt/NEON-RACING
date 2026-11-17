@@ -1,4 +1,4 @@
-"""Offline research inventory. Writes only docs/sf3_urban_evidence.json.
+"""Offline research inventory. Writes only .local/artifacts/sf3_urban_evidence.json.
 
 Counts source records, not completeness of the city. Uses existing Shapely.
 OSM ways are intersected as lines (not inferred filled areas); relations use
@@ -170,7 +170,7 @@ def main():
     assert len(pois) == sum(enrichment["statistics"]["records_by_source"].values())
     assert all(digest(p) == sha for p, sha in before.items()), "Research input modified"
     report["validation"] = {"input_files_unchanged": len(before), "sector_hashes_verified": len(manifest["chunks"]), "arcade_sector_hashes_verified": len(arcade["chunk_overrides"]), "counts_crosschecked": True}
-    out = ROOT / "docs/sf3_urban_evidence.json"
+    out = ROOT / ".local/artifacts/sf3_urban_evidence.json"
     out.write_bytes((json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     print(json.dumps({"output": str(out), "buildings": report["buildings_effective_after_arcade"], "validation": report["validation"], "osm_visual": osm["counts"]["visual"], "geojson": geojson}, ensure_ascii=True, indent=2))
 

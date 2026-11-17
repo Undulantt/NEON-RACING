@@ -23,6 +23,6 @@ for (x,z), area in regions.items():
         if abs(a.length-b.length) > .0001:
             mismatches.append({"cell":[x,z],"neighbor":[x+dx,z+dz],"difference_m":abs(a.length-b.length)})
 report = {"checked_painted_seams":checked,"mismatches":mismatches,"passed":not mismatches,"tolerance_m":.0001}
-(ROOT / "docs/phase_e_marking_seams.json").write_text(json.dumps(report,indent=2),encoding="utf-8")
+(ROOT / ".local/artifacts/phase_e_marking_seams.json").write_text(json.dumps(report,indent=2),encoding="utf-8")
 print(report)
 raise SystemExit(0 if report["passed"] else 1)

@@ -2,7 +2,7 @@ extends SceneTree
 
 # Inspection only: preload the complete production world without changing streaming settings.
 const SIZE := Vector2i(2560, 3840)
-const OUTPUT := "res://docs/evidence/la_paz_coast_fix"
+const OUTPUT := "res://.local/artifacts/evidence/la_paz_coast_fix"
 
 class ReferenceOverlay:
 	extends Control
@@ -102,7 +102,7 @@ func run() -> void:
 	await RenderingServer.frame_post_draw
 	assert(root.get_texture().get_image().save_png(OUTPUT + "_grid.png") == OK)
 	var report := {"size_px":[SIZE.x, SIZE.y], "profile":world.relief_profile, "north_up":true,"bounds_xz":bounds,"roads_loaded":world.road_root.loaded.size(),"roads_total":world.road_root.entries.size(),"terrain_loaded":world.terrain_root.loaded.size(),"terrain_total":world.terrain_root.entries.size(),"urban_loaded":world.city_manager.loaded.size(),"urban_total":world.city_manager.manifest["chunks"].size(),"buildings":world.city_manager.loaded_buildings,"clean":OUTPUT + ".png","grid":OUTPUT + "_grid.png"}
-	var file := FileAccess.open("res://docs/full_aerial_capture.json", FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/full_aerial_capture.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "  "))
 	print("FULL_AERIAL_COMPLETE ", JSON.stringify(report))
 	quit()

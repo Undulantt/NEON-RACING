@@ -64,6 +64,13 @@ func _draw_navigation(center: Vector2, position_xz: Vector2) -> void:
 		draw_polyline(line,Color(1,0.4,0.05,0.2),7,true)
 		draw_polyline(line,Color("ff891c"),3,true)
 	var bounds := Rect2(Vector2.ZERO,size)
+	var passport=world.get("passport")
+	if passport!=null and passport.allowed():
+		for poi in passport.active:
+			var at:=screen(poi["interaction_xz"],center,position_xz)
+			if bounds.grow(-7).has_point(at):
+				if passport.store.discovered.has(poi["id"]):draw_circle(at,5,Color("61fff4"),false,1.5)
+				else:draw_circle(at,5,Color("61fff4"))
 	if active_race:
 		var session = activity.session
 		var candidates: Array = []

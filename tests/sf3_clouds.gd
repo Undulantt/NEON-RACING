@@ -78,13 +78,13 @@ func benchmark() -> void:
 				intervals.append((now-previous)/1000.0);previous=now
 			intervals.sort()
 			measurements.append({"enabled":active,"median_ms":intervals[300],"p95_ms":intervals[570],"draw_calls":Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)})
-			if measurements.size()<=2: root.get_texture().get_image().save_png("res://docs/evidence/sf3_clouds_%s.png"%["on" if active else "off"])
+			if measurements.size()<=2: root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_clouds_%s.png"%["on" if active else "off"])
 		var before: float=(measurements[0]["p95_ms"]+measurements[3]["p95_ms"])*0.5
 		var after: float=(measurements[1]["p95_ms"]+measurements[2]["p95_ms"])*0.5
 		verify(after-before<0.5,"Cloud p95 increase stays below 0.5 ms in this fixed view")
 	clouds.set_enabled(true)
 	var report:={"passed":cloud_failures.is_empty(),"checks":cloud_checks,"failures":cloud_failures,"cloud_instances":81,"triangles":162,"mean_update_us":update_us/1000.0,"max_update_us":max_update_us,"effective_altitude_m":clouds.altitude,"samples":measurements,"gpu":RenderingServer.get_video_adapter_name(),"scenario":"Existing OSM SF.1 avenue, frozen identical pose/camera, 1280x720 Compatibility, VSync off. A/B/B/A with 2s settle and 600 rendered frames per sample; not driving FPS."}
-	FileAccess.open("res://docs/sf3_clouds_validation.json" if DisplayServer.get_name()=="headless" else "res://docs/sf3_clouds_render_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf3_clouds_validation.json" if DisplayServer.get_name()=="headless" else "res://.local/artifacts/sf3_clouds_render_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF3_CLOUDS_REPORT ",JSON.stringify(report))
 	cleanup()
 	quit(0 if cloud_failures.is_empty() else 1)

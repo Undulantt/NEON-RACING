@@ -145,7 +145,7 @@ func run() -> void:
 			check(unsupported==0 and car.crest_takeoffs==initial_takeoffs,"Slow crest crossing should remain grounded")
 	check(car.recovery_count==0,"Hill fixture required recovery")
 	var report:={"passed":failures.is_empty(),"failures":failures,"controller_sha256":FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd"),"driving_config_sha256":FileAccess.get_sha256("res://config/driving_config.json"),"metrics":metrics,"fixture":"Synthetic 25% hill with flat crest; production CharacterBody3D controller"}
-	var output:=FileAccess.open("res://docs/slope_physics_validation.json",FileAccess.WRITE)
+	var output:=FileAccess.open("res://.local/artifacts/slope_physics_validation.json",FileAccess.WRITE)
 	output.store_string(JSON.stringify(report,"  "))
 	print("SLOPE_PHYSICS_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

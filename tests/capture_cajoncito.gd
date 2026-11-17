@@ -46,7 +46,7 @@ func run() -> void:
 		for frame in range(60):
 			await physics_frame
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://docs/evidence/cajoncito_"+str(groups[i]["id"])+".png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/cajoncito_"+str(groups[i]["id"])+".png")
 	world.player.set_physics_process(false)
 	for cell in world.road_root.entries:
 		world.road_root.load_chunk(cell)
@@ -85,6 +85,6 @@ func run() -> void:
 	for frame in range(3):
 		await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/cajoncito_overview.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/cajoncito_overview.png")
 	print("CAJONCITO_CAPTURE_COMPLETE")
 	quit()

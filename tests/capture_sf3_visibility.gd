@@ -40,7 +40,7 @@ func benchmark() -> void:
 		until=Time.get_ticks_msec()+1800
 		while Time.get_ticks_msec()<until: await render_frame()
 		var captured:=root.get_texture().get_image()
-		captured.save_png("res://docs/evidence/sf3_fix_%s.png"%stage)
+		captured.save_png("res://.local/artifacts/evidence/sf3_fix_%s.png"%stage)
 		images.append(captured)
 		values.append({"stage":stage,"applied_gain":environment.applied_gain(),"shader_asphalt":environment.road_material.get_shader_parameter("sf3_asphalt"),"bindings":environment.bindings.size(),"speed_kmh":environment.last_speed_kmh,"diagnostic":environment.diagnostic()})
 	var noise_difference:=difference(images[0],images[1])
@@ -58,9 +58,9 @@ func benchmark() -> void:
 	while Time.get_ticks_msec()<until: await render_frame()
 	rig.experiment_panel.refresh_timer=0
 	await render_frame()
-	root.get_texture().get_image().save_png("res://docs/evidence/sf3_fix_panel.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_fix_panel.png")
 	var report:={"passed":sf3_failures.is_empty(),"failures":sf3_failures,"scenario":"Real city, stationary car, same pose/camera and frozen decoration. GPU-rendered pixel comparison in two ground ROIs excluding HUD/car. Preview is visual only.","original_repeat_rgb_difference":noise_difference,"asphalt_mean_abs_rgb_difference":base_difference,"preview_mean_abs_rgb_difference":preview_difference,"stages":values}
-	FileAccess.open("res://docs/sf3_visibility_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf3_visibility_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF3_VISIBILITY_REPORT ",JSON.stringify(report))
 	cleanup()
 	quit(0 if sf3_failures.is_empty() else 1)

@@ -59,7 +59,7 @@ def main():
                build('engine_combustion_load_low', 3000, .65, 2800, .25, 3102),
                build('engine_combustion_load_high', 6000, 1.4, 4200, .25, 3103),
                build('engine_combustion_body', 3000, .10, 750, .20, 3104)]
-    (ROOT/'docs/combustion_sources.json').write_bytes((json.dumps(results, indent=2)+'\n').encode('utf8'))
+    (ROOT/'.local/artifacts/combustion_sources.json').write_bytes((json.dumps(results, indent=2)+'\n').encode('utf8'))
     print(json.dumps(results))
 
 

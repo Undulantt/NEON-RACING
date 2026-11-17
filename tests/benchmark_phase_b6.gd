@@ -40,12 +40,12 @@ func run() -> void:
 		var record := {"average_fps":count/elapsed,"sample_s":elapsed,"frames":count,"p95_frame_ms":intervals[int(count*0.95)],"max_frame_ms":intervals[-1],"mean_draw_calls":calls/count,"mean_visible_primitives":primitives/count,"viewport_px":[root.get_texture().get_width(),root.get_texture().get_height()],"static_memory_bytes":Performance.get_monitor(Performance.MEMORY_STATIC),"nodes":Performance.get_monitor(Performance.OBJECT_NODE_COUNT),"world":world.stats,"streaming":world.city_manager.status() if world.city_manager!=null else {}}
 		reports[mode]=record
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://docs/evidence/phase_b6_"+mode+".png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_b6_"+mode+".png")
 		print("URBAN_BENCHMARK_MODE ",mode," ",JSON.stringify(record))
 		world.queue_free()
 		await process_frame
 	var report := {"scenario":"Static spawn, same camera, fixed 1280x720 viewport, 2s warmup + 5s sample per mode; not a sustained driving benchmark","results":reports,"urban_to_legacy_fps_ratio":reports["urban"]["average_fps"]/reports["legacy"]["average_fps"]}
-	var file := FileAccess.open("res://docs/phase_b6_benchmark.json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/phase_b6_benchmark.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("PHASE_B5_BENCHMARK ",JSON.stringify(report))
 	quit()

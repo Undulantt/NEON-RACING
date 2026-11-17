@@ -114,7 +114,7 @@ func render(state: StringName) -> void:
 			heading.text = "Jugar"
 			button("free_drive", "Modo libre", GameFlow.choose_mode.bind(&"free_drive"))
 			button("race", "Modo carrera", GameFlow.choose_mode.bind(&"race"))
-			text("Elige un modo y después tu vehículo. El modo carrera inicia el recorrido predeterminado en solitario.")
+			text("Elige un modo y después tu vehículo. El modo carrera inicia un circuito de dos vueltas con cinco rivales.")
 		&"vehicle_select": _vehicles()
 		&"how_to_play": _how_to_play()
 		&"options": _options()
@@ -176,6 +176,16 @@ func _vehicles() -> void:
 			var cell := text("%d / 10" % value, grid, 18)
 			cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text("Los tres perfiles utilizan por ahora la carrocería compartida del prototipo.", null, 15)
+	if GameFlow.selected_mode==&"race":
+		text("Dificultad de los rivales",null,20)
+		var difficulty:=OptionButton.new()
+		difficulty.name="RivalDifficulty"
+		difficulty.add_item("Estándar")
+		difficulty.add_item("Experto")
+		difficulty.select(1 if GameFlow.rival_difficulty=="expert" else 0)
+		difficulty.item_selected.connect(func(index: int):GameFlow.set_rival_difficulty("expert" if index==1 else "standard"))
+		body.add_child(difficulty)
+		text("Experto: mayor ritmo y frenadas más exigentes. Estándar: más margen para aprender el circuito.",null,15)
 	button("continue", "Entrar al modo libre" if GameFlow.selected_mode == &"free_drive" else "Continuar a modo carrera", GameFlow.start_selected)
 	_refresh_vehicle_selection(GameFlow.selected_vehicle_id)
 
@@ -195,8 +205,8 @@ func _how_to_play() -> void:
 	text("RT acelerar · LT frenar · stick izquierdo girar · A derrape · X turbo · Y recuperar · Start pausa. En los menús: dirección, aceptar y volver.")
 	text("Mecánicas disponibles", null, 24)
 	text("Derrapa con suficiente velocidad y termina una salida limpia para recibir impulso de derrape. El turbo consume su reserva y se recarga. BURST se prepara manteniendo la aceleración cerca de la velocidad base; el indicador muestra su entrada y recuperación. El cambio de marchas es automático.")
-	text("Puedes explorar el mundo en modo libre. E / mando B junto a la salida permite confirmar una carrera. Sigue los controles en orden y completa las vueltas indicadas en los circuitos; Esc permite reiniciar o abandonar. Los rivales se integrarán en D.3; las interacciones turísticas de Pasaporte La Paz en D.4.", null, 16)
-	if preload("res://scripts/racing/RaceEditor.gd").available(): text("Desarrollo: Ctrl + Alt + E abre el editor de sprints desde modo libre.", null, 16)
+	text("Puedes explorar el mundo en modo libre. E / mando B junto a la salida permite confirmar una carrera. Sigue los controles en orden y completa las vueltas indicadas en los circuitos; Esc permite reiniciar o abandonar. Compite contra cinco rivales con distintas personalidades. Las interacciones turísticas de Pasaporte La Paz quedan para D.4.", null, 16)
+	if preload("res://scripts/racing/RaceEditor.gd").available(): text("Desarrollo: Ctrl + Alt + E abre el editor de recorridos desde modo libre.", null, 16)
 
 func _options() -> void:
 	heading.text = "Opciones"

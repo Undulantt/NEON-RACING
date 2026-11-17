@@ -38,7 +38,7 @@ func run() -> void:
 	for i in range(60):
 		await physics_frame
 	await RenderingServer.frame_post_draw
-	var path := "res://docs/evidence/la_paz_core_south_setback.png" if core_south else "res://docs/evidence/la_paz_boundary_mountains_detail.png"
+	var path := "res://.local/artifacts/evidence/la_paz_core_south_setback.png" if core_south else "res://.local/artifacts/evidence/la_paz_boundary_mountains_detail.png"
 	var err:=root.get_texture().get_image().save_png(path)
 	print("BOUNDARY_DETAIL_CAPTURE ",err)
 	quit(0 if err==OK else 1)

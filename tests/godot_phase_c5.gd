@@ -76,7 +76,7 @@ func _run() -> void:
 		print("C5_DRIVE_END ", entry["id"], " ", JSON.stringify(record))
 		if DisplayServer.get_name() != "headless":
 			await RenderingServer.frame_post_draw
-			root.get_texture().get_image().save_png("res://docs/evidence/phase_c5_" + entry["id"] + ".png")
+			root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_c5_" + entry["id"] + ".png")
 	# Actual facade and SpringArm collisions in each new neighborhood.
 	var facades := {}
 	for anchor in expansion["anchors"]:
@@ -104,15 +104,15 @@ func _run() -> void:
 	check(world.road_root.max_loaded < world.road_root.entries.size(), "Road streaming must keep a bounded neighbourhood")
 	check(FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd")==controller_sha and FileAccess.get_sha256("res://config/driving_config.json")==driving_config_sha,"Controller/config changed while regression was running")
 	var report := {"passed": failures.is_empty(), "failures": failures, "controller_sha256":controller_sha,"driving_config_sha256":driving_config_sha,"rendered": DisplayServer.get_name() != "headless", "viewport_px": [root.get_texture().get_width(), root.get_texture().get_height()], "routes": results, "anchor_facade_tests": facades, "physics_frames": test_frames, "world": world.stats}
-	var path := "res://docs/phase_c5_south_cut_driving_render.json" if report["rendered"] else "res://docs/phase_c5_south_cut_driving.json"
+	var path := "res://.local/artifacts/phase_c5_south_cut_driving_render.json" if report["rendered"] else "res://.local/artifacts/phase_c5_south_cut_driving.json"
 	if critical:
-		path = "res://docs/cajoncito_driving_render.json" if report["rendered"] else "res://docs/cajoncito_driving.json"
+		path = "res://.local/artifacts/cajoncito_driving_render.json" if report["rendered"] else "res://.local/artifacts/cajoncito_driving.json"
 	if "--b7r-regression" in OS.get_cmdline_user_args():
-		path = "res://docs/phase_b7r_flat_regression.json"
+		path = "res://.local/artifacts/phase_b7r_flat_regression.json"
 	if "--b7r-default-flat-regression" in OS.get_cmdline_user_args():
-		path = "res://docs/phase_b7r_default_flat_regression.json"
+		path = "res://.local/artifacts/phase_b7r_default_flat_regression.json"
 	if "--slope-regression" in OS.get_cmdline_user_args():
-		path = "res://docs/slope_flat_regression.json"
+		path = "res://.local/artifacts/slope_flat_regression.json"
 	var output := FileAccess.open(path, FileAccess.WRITE)
 	output.store_string(JSON.stringify(report, "  "))
 	print("C5_REPORT ", JSON.stringify(report))

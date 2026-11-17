@@ -52,5 +52,5 @@ def validate():
 
 if __name__=='__main__':
     report=validate()
-    (ROOT/'docs/phase_b6_data_validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+    (ROOT/'.local/artifacts/phase_b6_data_validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False,indent=2))

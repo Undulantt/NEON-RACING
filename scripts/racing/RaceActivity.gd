@@ -1,5 +1,7 @@
 extends Node3D
 const Store = preload("res://scripts/racing/RaceStore.gd")
+var competition: Node3D
+var result_table: Label
 var world: Node3D
 var session: RefCounted
 var definition: Dictionary = {}
@@ -12,6 +14,7 @@ var panel: PanelContainer
 var panel_column: VBoxContainer
 var editor: Control
 var previous := Vector2.ZERO
+var previous_y := 0.0
 var prompting := false
 var recovery_remaining := 0.0
 var recovering := false
@@ -31,7 +34,7 @@ func configure(target: Node3D) -> void:
 	add_child(overlay)
 	info = Label.new()
 	info.position = Vector2(330,75)
-	info.add_theme_font_size_override("font_size",22)
+	info.add_theme_font_size_override("font_size",18)
 	info.add_theme_color_override("font_color",Color("b9f9ff"))
 	info.add_theme_color_override("font_outline_color",Color.BLACK)
 	info.add_theme_constant_override("outline_size",5)
@@ -101,7 +104,13 @@ func cancel_prompt() -> void:
 	panel.hide()
 	world.player.driving_enabled = true
 
+func release_competition() -> void:
+	if is_instance_valid(competition): competition.dispose()
+	competition = null
+	result_table = null
+
 func start(data: Dictionary) -> void:
+	release_competition()
 	cancel_recovery()
 	definition = data
 	last_checkpoint = data["start"].duplicate(true)
@@ -113,9 +122,11 @@ func start(data: Dictionary) -> void:
 	visuals.configure(world,data)
 	session = preload("res://scripts/racing/RaceSession.gd").new()
 	session.begin(data)
+	session.set_surface_heights(world.player.surface_height)
 	session.completed.connect(_completed)
 	session.checkpoint_passed.connect(_checkpoint_passed)
 	panel.hide()
+	info.show()
 	prompting = false
 	var car = world.player
 	car.driving_enabled = false
@@ -128,20 +139,35 @@ func start(data: Dictionary) -> void:
 	car.safe_transform = car.global_transform
 	car.reset_surface_motion()
 	car.abilities.reset("race_restart")
+	car.powertrain.reset()
+	car.steering = 0.0
+	car.set_controls(0,0)
 	previous = Vector2(car.position.x,car.position.z)
+	previous_y = car.position.y
+	competition = preload("res://scripts/racing/RaceCompetition.gd").new()
+	add_child(competition)
+	competition.prepare(world,data,session)
 	if marker != null: marker.hide()
 
 func _completed(result: Dictionary) -> void:
+	info.hide()
+	if is_instance_valid(competition): result["participants"] = competition.result_rows()
 	world.player.driving_enabled = false
 	GameFlow.finish_activity(result)
 	clear_panel()
 	add_text("Resultados · "+str(definition["name"]))
 	add_text("Tiempo: %.3f s\nDistancia: %.0f m\n%s" % [result["elapsed_seconds"],definition["distance_m"],result["summary"]])
 	if definition.get("type") == "circuit": add_text("Vueltas completadas: %d / %d" % [result["laps"],definition["laps"]])
+	result_table = Label.new()
+	result_table.add_theme_font_size_override("font_size",18)
+	panel_column.add_child(result_table)
 	add_button("Reiniciar carrera",GameFlow.restart_race).grab_focus()
 	add_button("Volver al modo libre" if GameFlow.race_origin == &"free_drive" else "Volver al menú principal",GameFlow.return_from_activity)
 
 func leave() -> void:
+	if is_instance_valid(competition): competition.dispose()
+	competition = null
+	result_table = null
 	cancel_recovery()
 	session = null
 	definition = {}
@@ -152,9 +178,15 @@ func leave() -> void:
 	visuals = null
 	if marker != null: marker.show()
 	info.text = ""
+	info.show()
 
 func _physics_process(delta: float) -> void:
 	if world == null or (GameFlow.transition_busy and not recovery_finishing): return
+	if is_instance_valid(competition):
+		competition.step(delta)
+		if is_instance_valid(result_table):
+			result_table.text = competition.table(true)
+			GameFlow.activity_result["participants"] = competition.result_rows()
 	var car = world.player
 	var p := Vector2(car.position.x,car.position.z)
 	if recovering:
@@ -167,14 +199,17 @@ func _physics_process(delta: float) -> void:
 	if session != null:
 		if get_tree().paused: return
 		var ground: float = car.surface_height(p.x,p.y)
-		session.advance(previous,p,delta,absf(car.position.y-ground) < 3.5)
+		session.advance(previous,p,delta,is_finite(ground),previous_y,car.position.y)
 		previous = p
+		previous_y = car.position.y
 		car.driving_enabled = session.phase == "running"
 		if session.phase == "countdown":
 			info.text = "%s · %d" % [definition["name"],ceili(session.countdown)]
 		else:
-			info.text = "%.2f s · %sControl %d/%d · Restan %.0f m" % [session.elapsed,"Vuelta %d/%d · " % [session.current_lap(),session.total_laps] if definition.get("type") == "circuit" else "",session.next_checkpoint,definition["checkpoints"].size(),session.remaining()]
-			visuals.show_gate(session.next_checkpoint)
+			info.text = "%.2f s · %sSiguiente %d/%d · Restan %.0f m" % [session.elapsed,"Vuelta %d/%d · " % [session.current_lap(),session.total_laps] if definition.get("type") == "circuit" else "",mini(session.next_checkpoint+1,definition["checkpoints"].size()),definition["checkpoints"].size(),session.remaining()]
+			if is_instance_valid(competition):
+				info.text += " · Posición %d/%d\nVuelta: %.2f s\n%s" % [competition.player_place(),competition.racers.size(),session.elapsed-session.last_lap_elapsed,competition.table()]
+			if session.phase != "finished": visuals.show_gate(session.next_checkpoint)
 	elif GameFlow.current_state == &"free_drive" and not default_race.is_empty() and not prompting:
 		var start: Array = default_race["start"]["position_xz"]
 		info.text = "E / mando B · %s · %.0f m" % [default_race["name"],default_race["distance_m"]] if p.distance_to(Vector2(start[0],start[1])) < 24 and car.speed_mps < 3 else ""
@@ -266,6 +301,7 @@ func _finish_recovery() -> void:
 	var car = world.player
 	var valid: bool = car.apply_recovery_pose(car.global_transform,"último checkpoint" if session != null else "punto seguro")
 	previous = Vector2(car.position.x,car.position.z)
+	previous_y = car.position.y
 	recovering = false
 	recovery_finishing = false
 	if recovery_owns_transition: GameFlow.transition_busy = false

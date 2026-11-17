@@ -27,6 +27,6 @@ func _run() -> void:
 	world.environment_data["driving_test_route"]=JSON.parse_string(FileAccess.get_file_as_string("res://tracks/c5_south_hospital.json"))
 	route_frame_limit=90000
 	await drive_route()
-	var file:=FileAccess.open("res://docs/map_extension_contact_probe.json",FileAccess.WRITE)
+	var file:=FileAccess.open("res://.local/artifacts/map_extension_contact_probe.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify({"passed":failures.is_empty(),"metrics":metrics,"misses":misses},"  "))
 	quit(0 if failures.is_empty() else 1)

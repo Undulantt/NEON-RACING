@@ -75,7 +75,7 @@ func run() -> void:
 		report["max_road_chunk_build_ms"]=world.road_root.max_build_ms
 		report["max_terrain_chunk_build_ms"]=world.terrain_root.max_build_ms
 	var suffix:="markings" if "--markings" in OS.get_cmdline_user_args() else "no_lamps" if "--no-street-lights" in OS.get_cmdline_user_args() else "day" if world.night_style==null else "before" if "--before" in OS.get_cmdline_user_args() else "after"
-	FileAccess.open("res://docs/phase_e_stream_"+suffix+".json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_e_stream_"+suffix+".json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("STREAM_PERF ",JSON.stringify(report))
 	if "--markings" in OS.get_cmdline_user_args():
 		world.city_manager.set_city_enabled(true)
@@ -97,7 +97,7 @@ func run() -> void:
 			car.velocity=Vector3.ZERO;car.set_controls(0,0,true);car.reset_surface_motion();world.follow_camera.snap()
 			for i in range(300): await physics_frame
 			await RenderingServer.frame_post_draw
-			root.get_texture().get_image().save_png("res://docs/evidence/phase_e_forjadores_markings.png")
+			root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_forjadores_markings.png")
 			var cell:=Vector2i(floori(at.x/256),floori(at.y/256))
 			print("FORJADORES_CAPTURE road=",selected["id"]," cell=",cell," position=",at)
 	world.queue_free()

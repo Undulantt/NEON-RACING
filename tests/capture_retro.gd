@@ -7,12 +7,12 @@ func run() -> void:
 	world.player.external_control=true
 	for i in range(150): await physics_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_retro_driver.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_retro_driver.png")
 	var camera:=Camera3D.new();world.add_child(camera)
 	camera.position=world.player.position+Vector3(-28,24,28)
 	camera.look_at(world.player.position+Vector3(25,3,-55));camera.current=true
 	await process_frame;await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_retro_sector.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_retro_sector.png")
 	world.queue_free()
 	for i in range(8): await process_frame
 	quit()

@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> bool:
 func finish() -> void:
 	var report := {"passed": failures.is_empty(), "ray_samples": rays, "junctions": junctions, "route_junctions": route_junctions, "ray_edge_misses": ray_edge_points.size(), "independent_drop_probes": edge_probes.size(), "route_m": progress, "probe_min_y": minimum_y, "probe_max_y": maximum_y, "physics_frames": frame, "failures": failures, "mesh": world.stats}
 	print("PHASE_A_REPORT ", JSON.stringify(report))
-	var file := FileAccess.open("res://docs/godot_validation.json", FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/godot_validation.json", FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(report, "  "))
 	quit(0 if failures.is_empty() else 1)

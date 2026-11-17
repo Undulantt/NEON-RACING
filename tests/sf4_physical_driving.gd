@@ -34,6 +34,6 @@ func run() -> void:
 		car.set_controls(0,0,false,false,1)
 		await ticks(45)
 	var report:={"passed":failures.is_empty(),"checks":checks,"failures":failures,"metrics":metrics,"scenario":"Actual accelerate/handbrake inputs, unchanged production physics, synthetic asphalt contact fixture; all three beta profiles. No injected slip/BURST state in this test."}
-	FileAccess.open("res://docs/sf4_physical_driving.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf4_physical_driving.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF4_PHYSICS_REPORT ",JSON.stringify(report))
 	level.queue_free();await process_frame;quit(0 if failures.is_empty() else 1)

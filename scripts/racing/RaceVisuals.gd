@@ -1,6 +1,6 @@
 extends Node3D
 const SCALE = preload("res://scripts/racing/RaceGeometry.gd").CHECKPOINT_SCALE
-const SUBMERGED_RADIUS_FRACTION := 0.25
+const SUBMERGED_RADIUS_FRACTION := 0.5
 const SEGMENTS := 96
 var world: Node3D
 var next_gate: Node3D
@@ -49,8 +49,8 @@ func show_gate(index: int) -> void:
 	var gate: Dictionary = route_data["checkpoints"][index]
 	var p: Array = gate["position_xz"]
 	var d: Array = gate["forward_xz"]
-	# Keep the existing width at road level: chord = R * sqrt(1 - 0.75^2).
-	# The center is 0.75 R above the local road, so the lowest edge is -0.25 R.
+	# Preserve the gate width at road level while burying half the radius.
+	# Lower proportions make the visible ring read as a road arch.
 	var center_fraction := 1.0-SUBMERGED_RADIUS_FRACTION
 	var radius := float(gate["half_width_m"])/sqrt(1.0-center_fraction*center_fraction)
 	var world_radius := radius*SCALE

@@ -1,0 +1,332 @@
+{
+  "c5_cajoncito_federal_1": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1270.75,
+        "first_point_index": 28,
+        "last_point_index": 46
+      },
+      {
+        "length_m": 1072.85,
+        "first_point_index": 47,
+        "last_point_index": 64
+      },
+      {
+        "length_m": 948.3,
+        "first_point_index": 17,
+        "last_point_index": 28
+      },
+      {
+        "length_m": 818.84,
+        "first_point_index": 148,
+        "last_point_index": 159
+      },
+      {
+        "length_m": 798.75,
+        "first_point_index": 72,
+        "last_point_index": 85
+      }
+    ]
+  },
+  "c5_cajoncito_forjadores_uabcs": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1463.32,
+        "first_point_index": 57,
+        "last_point_index": 81
+      },
+      {
+        "length_m": 1102.89,
+        "first_point_index": 191,
+        "last_point_index": 215
+      },
+      {
+        "length_m": 810.26,
+        "first_point_index": 227,
+        "last_point_index": 248
+      },
+      {
+        "length_m": 681.4,
+        "first_point_index": 117,
+        "last_point_index": 132
+      },
+      {
+        "length_m": 648.75,
+        "first_point_index": 81,
+        "last_point_index": 93
+      }
+    ]
+  },
+  "c5_cajoncito_juan_de_dios_angulo": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1463.32,
+        "first_point_index": 57,
+        "last_point_index": 81
+      },
+      {
+        "length_m": 1102.14,
+        "first_point_index": 162,
+        "last_point_index": 174
+      },
+      {
+        "length_m": 648.75,
+        "first_point_index": 81,
+        "last_point_index": 93
+      },
+      {
+        "length_m": 565.51,
+        "first_point_index": 93,
+        "last_point_index": 106
+      },
+      {
+        "length_m": 513.7,
+        "first_point_index": 144,
+        "last_point_index": 150
+      }
+    ]
+  },
+  "c5_cajoncito_olachea_cajoncito": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1333.15,
+        "first_point_index": 32,
+        "last_point_index": 45
+      },
+      {
+        "length_m": 857.74,
+        "first_point_index": 23,
+        "last_point_index": 32
+      },
+      {
+        "length_m": 798.97,
+        "first_point_index": 106,
+        "last_point_index": 116
+      },
+      {
+        "length_m": 570.45,
+        "first_point_index": 82,
+        "last_point_index": 87
+      },
+      {
+        "length_m": 422.36,
+        "first_point_index": 0,
+        "last_point_index": 10
+      }
+    ]
+  },
+  "c5_north_coast": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 580.32,
+        "first_point_index": 92,
+        "last_point_index": 106
+      },
+      {
+        "length_m": 502.65,
+        "first_point_index": 18,
+        "last_point_index": 28
+      },
+      {
+        "length_m": 481.74,
+        "first_point_index": 28,
+        "last_point_index": 35
+      },
+      {
+        "length_m": 355.3,
+        "first_point_index": 41,
+        "last_point_index": 49
+      },
+      {
+        "length_m": 243.63,
+        "first_point_index": 84,
+        "last_point_index": 92
+      }
+    ]
+  },
+  "c5_north_neighborhoods": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 502.65,
+        "first_point_index": 18,
+        "last_point_index": 28
+      },
+      {
+        "length_m": 481.74,
+        "first_point_index": 28,
+        "last_point_index": 35
+      },
+      {
+        "length_m": 355.3,
+        "first_point_index": 35,
+        "last_point_index": 43
+      },
+      {
+        "length_m": 249.51,
+        "first_point_index": 56,
+        "last_point_index": 59
+      },
+      {
+        "length_m": 199.44,
+        "first_point_index": 80,
+        "last_point_index": 84
+      }
+    ]
+  },
+  "c5_south_hospital": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1022.29,
+        "first_point_index": 57,
+        "last_point_index": 73
+      },
+      {
+        "length_m": 766.42,
+        "first_point_index": 98,
+        "last_point_index": 113
+      },
+      {
+        "length_m": 634.9,
+        "first_point_index": 113,
+        "last_point_index": 127
+      },
+      {
+        "length_m": 422.36,
+        "first_point_index": 0,
+        "last_point_index": 10
+      },
+      {
+        "length_m": 414.93,
+        "first_point_index": 92,
+        "last_point_index": 97
+      }
+    ]
+  },
+  "c5_south_uabcs": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1022.29,
+        "first_point_index": 57,
+        "last_point_index": 73
+      },
+      {
+        "length_m": 928.12,
+        "first_point_index": 113,
+        "last_point_index": 134
+      },
+      {
+        "length_m": 766.42,
+        "first_point_index": 98,
+        "last_point_index": 113
+      },
+      {
+        "length_m": 545.46,
+        "first_point_index": 162,
+        "last_point_index": 169
+      },
+      {
+        "length_m": 422.36,
+        "first_point_index": 0,
+        "last_point_index": 10
+      }
+    ]
+  },
+  "extension_A4": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1270.75,
+        "first_point_index": 28,
+        "last_point_index": 46
+      },
+      {
+        "length_m": 948.3,
+        "first_point_index": 17,
+        "last_point_index": 28
+      },
+      {
+        "length_m": 422.36,
+        "first_point_index": 0,
+        "last_point_index": 10
+      },
+      {
+        "length_m": 321.17,
+        "first_point_index": 47,
+        "last_point_index": 53
+      },
+      {
+        "length_m": 257.41,
+        "first_point_index": 15,
+        "last_point_index": 17
+      }
+    ]
+  },
+  "extension_A5": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1270.75,
+        "first_point_index": 28,
+        "last_point_index": 46
+      },
+      {
+        "length_m": 1072.85,
+        "first_point_index": 47,
+        "last_point_index": 64
+      },
+      {
+        "length_m": 948.3,
+        "first_point_index": 17,
+        "last_point_index": 28
+      },
+      {
+        "length_m": 798.75,
+        "first_point_index": 72,
+        "last_point_index": 85
+      },
+      {
+        "length_m": 422.36,
+        "first_point_index": 0,
+        "last_point_index": 10
+      }
+    ]
+  },
+  "extension_C2": {
+    "criterion": "At most 12 degrees of cumulative heading change per run; intersections and slopes still exist",
+    "longest_runs": [
+      {
+        "length_m": 1693.97,
+        "first_point_index": 25,
+        "last_point_index": 42
+      },
+      {
+        "length_m": 260.84,
+        "first_point_index": 18,
+        "last_point_index": 25
+      },
+      {
+        "length_m": 188.48,
+        "first_point_index": 9,
+        "last_point_index": 18
+      },
+      {
+        "length_m": 167.22,
+        "first_point_index": 0,
+        "last_point_index": 5
+      },
+      {
+        "length_m": 66.87,
+        "first_point_index": 5,
+        "last_point_index": 9
+      }
+    ]
+  }
+}

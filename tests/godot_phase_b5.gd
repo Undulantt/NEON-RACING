@@ -121,7 +121,7 @@ func run() -> void:
 
 func finish() -> void:
 	var report := {"passed":failures.is_empty(),"failures":failures,"metrics":metrics}
-	var file := FileAccess.open("res://docs/phase_b5_runtime_validation.json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/phase_b5_runtime_validation.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("PHASE_B5_RUNTIME ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

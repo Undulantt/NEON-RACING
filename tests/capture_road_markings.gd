@@ -15,7 +15,7 @@ func run() -> void:
 		car.velocity=Vector3.ZERO;car.set_controls(0,0,true);car.reset_surface_motion();world.follow_camera.snap()
 	for i in range(300): await physics_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/phase_e_forjadores_continuous.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_forjadores_continuous.png")
 	print("MARKINGS_CAPTURE position=",car.position," on_asphalt=",car.on_asphalt)
 	world.queue_free()
 	for i in range(8): await process_frame

@@ -1,15 +1,55 @@
-# Godot 4+ specific ignores
+# Godot: generated cache and local execution profiles.
 .godot/
+/.godot-local-profile/
 /android/
+/export_credentials.cfg
 
-# Python conversion tools
+# Keep only the output directory skeleton so tests work after a fresh clone.
+/.local/*
+!/.local/.gdignore
+!/.local/artifacts/
+/.local/artifacts/*
+!/.local/artifacts/.gitkeep
+!/.local/artifacts/evidence/
+/.local/artifacts/evidence/*
+!/.local/artifacts/evidence/.gitkeep
+
+# Guard against older commands writing generated results back into docs.
+/docs/*.json
+/docs/*_baseline/
+/docs/evidence/
+*.log
+
+# Python environments and caches; immutable data/raw snapshots stay tracked.
+.venv/
+.venv-*/
+venv/
 __pycache__/
 *.py[cod]
-.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+/data/raw/*.state
 
-# Optional urban source conversion environment
-.venv-urban/
+# Build outputs.
+/build/
+/dist/
+/exports/
 
-# Overture client download checkpoint (not the immutable source snapshot)
-data/raw/*.state
-.godot-local-profile/
+# Machine-specific settings, secrets and temporary files.
+/.idea/
+/.vscode/
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Keep Godot metadata (*.uid and *.import), game data, licenses,
+# documentation and regression fixtures versioned.

@@ -67,7 +67,7 @@ func run() -> void:
 		if expected==0:
 			check(trail.history.is_empty() and not car.visuals["exhaust"][0].visible,"Disabled effects remain visible")
 	var report:={"passed":failures.is_empty(),"failures":failures,"peak_samples":peak_samples,"storefronts":world.night_style.storefront_count,"checks":["turbo emission","bounded mesh","pause","fade","teleport","recovery","F4 modes","peripheral blur","no invented labels","elevated borders"]}
-	FileAccess.open("res://docs/phase_e_motion_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_e_motion_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PHASE_E_MOTION ",JSON.stringify(report))
 	world.queue_free()
 	for i in range(8):

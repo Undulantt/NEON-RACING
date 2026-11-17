@@ -54,13 +54,13 @@ func run() -> void:
 	var file := FileAccess.open(path,FileAccess.WRITE)
 	file.store_string(JSON.stringify(manifest))
 	file.flush()
-	var bake_path := "res://docs/phase_b7r_"+mode+"_bake.json"
+	var bake_path := "res://.local/artifacts/phase_b7r_"+mode+"_bake.json"
 	if FileAccess.file_exists(bake_path):
 		var bake_report: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(bake_path))
 		bake_report["published_manifest_sha256"] = FileAccess.get_sha256(path)
 		var bake_file := FileAccess.open(bake_path,FileAccess.WRITE)
 		bake_file.store_string(JSON.stringify(bake_report,"  "))
-	var report := FileAccess.open("res://docs/phase_b7r_"+mode+"_native_cache.json",FileAccess.WRITE)
+	var report := FileAccess.open("res://.local/artifacts/phase_b7r_"+mode+"_native_cache.json",FileAccess.WRITE)
 	report.store_string(JSON.stringify(manifest["native_cache"],"  "))
 	print("RELIEF_CACHE_READY ",manifest["native_cache"])
 	quit(0)

@@ -128,6 +128,6 @@ func run() -> void:
 	check(car.powertrain.rpm==frozen_rpm,"Pause freezes engine telemetry")
 	paused=false
 	var report:={"passed":failures.is_empty(),"failures":failures,"metrics":metrics}
-	FileAccess.open("res://docs/powertrain_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/powertrain_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("POWERTRAIN_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

@@ -72,7 +72,7 @@ def validate():
     assert not unary_union([shape(parcel['geometry_xz'])]).is_empty,'Fictional mask must retain campus'
     result={'passed':True,'buildings':len(accepted),'sectors':len(report['chunks']),'by_site':dict(Counter(b['site'] for b,p in accepted)),'source_hashes_verified':len(report['source_hashes']),'overlap_with_arcade_clearance_m2':0,'overlap_with_real_open_areas_m2':0,'duplicates':0,'road_and_car_unchanged':True}
     assert result['by_site']==report['statistics']['by_site']
-    (ROOT/'docs/sf3_recovery_data_validation.json').write_bytes((json.dumps(result,indent=2)+'\n').encode('utf-8'))
+    (ROOT/'.local/artifacts/sf3_recovery_data_validation.json').write_bytes((json.dumps(result,indent=2)+'\n').encode('utf-8'))
     print(json.dumps(result,indent=2))
 
 

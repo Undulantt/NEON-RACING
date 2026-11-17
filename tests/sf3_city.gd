@@ -56,7 +56,7 @@ func benchmark() -> void:
 		var sample:={"mode":mode,"mean_ms":total/600,"median_ms":intervals[300],"p95_ms":intervals[570],"environment_mean_us":update_us/600,"bindings":bindings,"active_light_pools":count_pools(environment),"draw_calls":Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)}
 		sf1_results.append(sample)
 		print("SF3_BENCH_SAMPLE ",JSON.stringify(sample))
-		if sf1_results.size()<=3: root.get_texture().get_image().save_png("res://docs/evidence/sf3_%s.png"%mode)
+		if sf1_results.size()<=3: root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_%s.png"%mode)
 		check_sf3(environment.bindings.size()<=96,"Bindings are bounded")
 		if mode=="original":
 			check_sf3(environment.bindings.is_empty(),"Original restores every material override")
@@ -67,12 +67,12 @@ func benchmark() -> void:
 	rig.experiment_panel.tabs.current_tab=2
 	var until:=Time.get_ticks_msec()+1500
 	while Time.get_ticks_msec()<until: await render_frame()
-	root.get_texture().get_image().save_png("res://docs/evidence/sf3_panel.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_panel.png")
 	var original: float=(sf1_results[0]["mean_ms"]+sf1_results[5]["mean_ms"])/2
 	var full: float=(sf1_results[2]["mean_ms"]+sf1_results[3]["mean_ms"])/2
 	check_sf3(full-original<=maxf(1.0,original*0.15),"Full mode meets the 1 ms / 15% static benchmark budget")
 	var report:={"passed":sf3_failures.is_empty(),"failures":sf3_failures,"scenario":"Existing full city 1280x720 Compatibility, VSync off; same frozen decoration/pose/camera/FOV75, synthetic max-normal speed with full BURST telemetry; screen streaks disabled equally; original/partial/full/full/partial/original, 3s warmup and 600 rendered wall-clock samples each; NOT city traversal FPS","gpu":RenderingServer.get_video_adapter_name(),"samples":sf1_results,"full_minus_original_ms":full-original,"max_registration_us":registration_max_us}
-	FileAccess.open("res://docs/sf3_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/sf3_benchmark.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SF3_BENCHMARK ",JSON.stringify(report))
 	cleanup()
 	quit(0 if sf3_failures.is_empty() else 1)
@@ -89,11 +89,11 @@ func capture_views(environment: Node) -> void:
 		environment.set_mode(mode)
 		var until:=Time.get_ticks_msec()+1500
 		while Time.get_ticks_msec()<until: await render_frame()
-		root.get_texture().get_image().save_png("res://docs/evidence/sf3_%s.png"%mode)
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_%s.png"%mode)
 	world.follow_camera.experiment_panel.open_requested=true
 	world.follow_camera.experiment_panel.tabs.current_tab=2
 	for i in range(12): await render_frame()
 	world.follow_camera.experiment_panel.refresh_timer=0
 	await render_frame()
-	root.get_texture().get_image().save_png("res://docs/evidence/sf3_panel.png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/sf3_panel.png")
 	print("SF3_CAPTURES_OK")

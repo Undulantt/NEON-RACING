@@ -28,7 +28,7 @@ func run() -> void:
 			if not car.road_hit(p):failures.append(str(p))
 			samples+=1
 	var report := {"passed":failures.is_empty(),"failures":failures,"seam_x":144,"samples":samples,"raw_central_ray_misses":central_misses,"fallback_radius_m":0.001,"controller_sha256":FileAccess.get_sha256("res://scripts/driving/ArcadeCar.gd")}
-	var file := FileAccess.open("res://docs/map_extension_seam_validation.json",FileAccess.WRITE)
+	var file := FileAccess.open("res://.local/artifacts/map_extension_seam_validation.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "))
 	print("ROAD_SEAM_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

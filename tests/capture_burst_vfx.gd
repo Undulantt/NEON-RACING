@@ -9,7 +9,7 @@ var countdown_records := []
 func capture(name: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://docs/evidence/burst_vfx_" + name + ".png")
+	root.get_texture().get_image().save_png("res://.local/artifacts/evidence/burst_vfx_" + name + ".png")
 
 func _process(_delta: float) -> bool:
 	if not capture_started or saving or car == null:
@@ -61,7 +61,7 @@ func finish() -> void:
 				fire_samples += 1
 	report["rendered_pink_fire_samples"] = fire_samples
 	report["passed"] = report["passed"] and fire_samples > 32
-	FileAccess.open("res://docs/burst_vfx_render_validation.json", FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/burst_vfx_render_validation.json", FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("BURST_VFX_RENDER_REPORT ",JSON.stringify(report))
 	world.queue_free()
 	for i in range(4):
@@ -76,7 +76,7 @@ func run() -> void:
 	car.external_control = true
 	await step(60)
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tracks/extension_C2.json"))
-	var geometry: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/burst_route_geometry.json"))
+	var geometry: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/routes/burst_route_geometry.json"))
 	var span: Dictionary = geometry["extension_C2"]["longest_runs"][0]
 	build_path(data["points_xz"].slice(int(span["first_point_index"]), int(span["last_point_index"])+1))
 	capture_started = true

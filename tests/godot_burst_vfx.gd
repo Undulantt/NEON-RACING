@@ -139,6 +139,6 @@ func run() -> void:
 	await step(2,0)
 	check(hud.ground_flames.instances.get_instance_custom_data(0).r < 0.2, "Normalized GPU ages remain precise after a long session")
 	var report := {"passed":failures.is_empty(), "failures":failures, "metrics":metrics}
-	FileAccess.open("res://docs/burst_vfx_validation.json", FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/burst_vfx_validation.json", FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("BURST_VFX_REPORT ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)

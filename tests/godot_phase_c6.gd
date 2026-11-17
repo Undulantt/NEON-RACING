@@ -20,7 +20,7 @@ func run() -> void:
 	check(world.hud.instruments.minimap.nearby.size() > 0, "Minimap receives actual nearby roads")
 	if DisplayServer.get_name() != "headless":
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png("res://docs/evidence/burst_c6_hud.png")
+		root.get_texture().get_image().save_png("res://.local/artifacts/evidence/burst_c6_hud.png")
 	# Isolate surface transition with the production controller on a known flat fixture.
 	world.queue_free()
 	await process_frame
@@ -66,7 +66,7 @@ func run() -> void:
 		await physics_frame
 	check(car.drift_rewards == rewards + 1, "Terrain drift awards one exit boost")
 	var report := {"passed": failures.is_empty(), "failures": failures, "departure_before_mps": before, "departure_after_half_second_mps": after}
-	FileAccess.open("res://docs/c6_validation.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
+	FileAccess.open("res://.local/artifacts/c6_validation.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 	print("C6_REPORT ", JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)
 

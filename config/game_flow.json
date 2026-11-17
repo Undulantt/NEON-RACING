@@ -4,7 +4,7 @@
   "menu_scene": "res://scenes/ui/GameShell.tscn",
   "world_scene": "res://scenes/Main.tscn",
   "default_vehicle": "COMET",
-  "default_race_id": "malecon_sprint_01",
+  "default_race_id": "centro_circuit_d3",
   "free_drive_spawn": {
     "id": "malecon",
     "position_xz": [

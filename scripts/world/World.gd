@@ -40,6 +40,7 @@ var staged_loading := false
 var prepared: Dictionary = {}
 var race_activity: Node3D
 var navigation: Node
+var passport: Node3D
 
 func _ready() -> void:
 	var start := Time.get_ticks_msec()
@@ -489,6 +490,9 @@ func attach_racing() -> void:
 	navigation = preload("res://scripts/navigation/FreeDriveNavigation.gd").new()
 	add_child(navigation)
 	navigation.configure(self)
+	passport = preload("res://scripts/passport/PassportController.gd").new()
+	add_child(passport)
+	passport.configure(self)
 
 func place_at(spawn: Dictionary) -> void:
 	var p: Array = spawn["position_xz"]

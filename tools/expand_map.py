@@ -47,7 +47,7 @@ def main():
     from validate_urban_city import validate as validate_city
     from validate_urban_enrichment import validate as validate_geography
     report={"urban":validate_city(),"geography":validate_geography()}
-    write(ROOT/"docs/phase_c5_data_validation.json",report)
+    write(ROOT/".local/artifacts/phase_c5_data_validation.json",report)
     print("C5 BUILD VERIFIED",flush=True)
 
 if __name__=="__main__": main()

@@ -45,7 +45,7 @@ func run() -> void:
 			check(mixer.panel.visible,"F7 audio panel")
 			if DisplayServer.get_name() != "headless":
 				await RenderingServer.frame_post_draw
-				root.get_texture().get_image().save_png("res://docs/evidence/phase_e_audio.png")
+				root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_audio.png")
 			key = InputEventKey.new()
 			key.keycode = KEY_F7
 			key.pressed = false
@@ -60,7 +60,7 @@ func run() -> void:
 			check(not mixer.panel.visible,"F7 panel close")
 			if DisplayServer.get_name() != "headless":
 				await RenderingServer.frame_post_draw
-				root.get_texture().get_image().save_png("res://docs/evidence/phase_e_driver.png")
+				root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_driver.png")
 				var camera := Camera3D.new()
 				world.add_child(camera)
 				camera.position = world.player.position + Vector3(-28,24,28)
@@ -68,7 +68,7 @@ func run() -> void:
 				camera.current = true
 				await process_frame
 				await RenderingServer.frame_post_draw
-				root.get_texture().get_image().save_png("res://docs/evidence/phase_e_sector.png")
+				root.get_texture().get_image().save_png("res://.local/artifacts/evidence/phase_e_sector.png")
 				camera.queue_free()
 				world.follow_camera.camera.current = true
 		world.player.global_transform = world.player.spawn_transform
@@ -115,7 +115,7 @@ func run() -> void:
 	for i in range(3):
 		check(absf(results["false"]["position"][i]-results["true"]["position"][i])<0.01,"Night changes trajectory")
 	var report := {"passed":failures.is_empty(),"failures":failures,"results":results}
-	FileAccess.open("res://docs/phase_e_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	FileAccess.open("res://.local/artifacts/phase_e_validation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("PHASE_E_TEST ",JSON.stringify(report))
 	quit(0 if failures.is_empty() else 1)
 func style_visible(world: Node3D) -> bool:
