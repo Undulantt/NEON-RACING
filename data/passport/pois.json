@@ -1,33 +1,34 @@
 {
   "schema_version": 1,
+  "content_revision": 3,
   "map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
   "origin_lat": 24.159,
   "origin_lon": -110.3195,
-  "max_active_pois": 3,
+  "max_active_pois": 64,
   "pois": [
     {
       "id": "poi_001",
       "name": "Kiosco del Malecón",
-      "category": "Patrimonio y turismo",
+      "category": "Arte, historia y patrimonio",
       "latitude": 24.163772,
       "longitude": -110.3165411,
       "position_xz": [
         300.1973322079473,
         -530.6221899481303
       ],
-      "description": "Espacio de encuentro en el Malecón, frente a la bahía de La Paz. Su entorno reúne paseo, descanso y actividades turísticas en el centro de la ciudad.",
+      "description": "Punto de encuentro del Malecón frente a la bahía de La Paz.",
       "references": [
         {
-          "title": "Fuente oficial",
+          "title": "Fuente institucional",
           "url": "https://turismo.lapaz.gob.mx/atractivos/kiosco-del-malecon-18"
         }
       ],
       "coordinate_evidence": {
-        "verified": true,
         "source_ref": "osm:node:9284265569",
-        "method": "Punto OSM histórico del kiosco; corroborado por la ubicación municipal en Obregón y 16 de Septiembre.",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
         "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
-        "checked_on": "2026-11-16"
+        "checked_on": "2026-11-17"
       },
       "activation": {
         "road_id": "28531128:0",
@@ -42,91 +43,229 @@
         "offset_from_place_m": 21.283860847062048,
         "validated": true,
         "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
-        "validation_method": "offline 11 x 5.2 m vehicle footprint covered by current arcade asphalt"
+        "validation_method": "offline 11 x 5.2m footprint covered by existing asphalt"
       },
-      "enabled": true
+      "enabled": true,
+      "model_id": "kiosco"
     },
     {
       "id": "poi_002",
       "name": "Catedral de Nuestra Señora de La Paz",
-      "category": "Historia y arquitectura",
+      "category": "Arte, historia y patrimonio",
       "latitude": 24.161592427181475,
-      "longitude": -110.31289398310717,
+      "longitude": -110.31289398310716,
       "position_xz": [
-        670.2182053269609,
-        -288.2647502755727
+        670.2182053280056,
+        -288.26475027544865
       ],
-      "description": "Templo del centro histórico dedicado a Nuestra Señora de La Paz. La primera piedra de la construcción actual se colocó el 6 de octubre de 1861.",
+      "description": "Templo del centro histórico frente al Jardín Velasco. El modelo aportado representa su arquitectura de forma estilizada.",
       "references": [
         {
-          "title": "Fuente oficial",
+          "title": "Fuente institucional",
           "url": "https://turismo.lapaz.gob.mx/atractivos/catedral-de-nuestra-senora-de-la-paz"
         }
       ],
       "coordinate_evidence": {
-        "verified": true,
         "source_ref": "osm:way:155831066",
-        "method": "Centro del contorno OSM de la Catedral; no es una coordenada de acceso vehicular.",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
         "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
-        "checked_on": "2026-11-16"
+        "checked_on": "2026-11-17"
       },
       "activation": {
-        "road_id": "28531154:29",
-        "t": 0.45622468418450907,
+        "road_id": "28531285:13",
+        "t": 0.6675188537653409,
         "radius_m": 9.0,
         "max_speed_mps": 3.0,
         "position_xz": [
-          634.9233959582864,
-          -315.2992688831923
+          649.5246134918671,
+          -261.7975114812601
         ],
-        "street": "Calle Revolución de 1910",
-        "offset_from_place_m": 44.45884349279459,
+        "street": "Calle Independencia",
+        "offset_from_place_m": 33.59671818004404,
         "validated": true,
         "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
-        "validation_method": "offline 11 x 5.2 m vehicle footprint covered by current arcade asphalt"
+        "validation_method": "offline 11 x 5.2m footprint covered by existing asphalt"
       },
-      "enabled": true
+      "enabled": true,
+      "model_id": "catedral"
     },
     {
       "id": "poi_003",
       "name": "Teatro de la Ciudad",
-      "category": "Arte y cultura",
-      "latitude": 24.147021132883,
-      "longitude": -110.31775828735,
+      "category": "Arte, historia y patrimonio",
+      "latitude": 24.147957355391984,
+      "longitude": -110.3172970702689,
       "position_xz": [
-        176.70671229229984,
-        1331.9892503594876
+        223.49982368897915,
+        1227.8860571503105
       ],
-      "description": "Recinto de la Unidad Cultural Profesor Jesús Castro Agúndez. Fue inaugurado el 26 de enero de 1986 y alberga presentaciones de teatro, música y danza.",
+      "description": "Recinto de la Unidad Cultural Profesor Jesús Castro Agúndez, dedicado a presentaciones de artes escénicas. No corresponde al Teatro Juárez.",
       "references": [
         {
-          "title": "Fuente oficial",
+          "title": "Fuente institucional",
           "url": "https://sic.cultura.gob.mx/ficha.php?table=teatro&table_id=12"
         }
       ],
       "coordinate_evidence": {
+        "source_ref": "osm:way:155831068",
         "verified": true,
-        "source_ref": "sic:teatro:12",
-        "method": "Coordenadas del enlace cartográfico de la ficha oficial SIC. El edificio OSM 155831068 identifica el mismo conjunto, con un punto representativo distinto. No corresponde al Teatro Juárez.",
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
         "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
-        "checked_on": "2026-11-16"
+        "checked_on": "2026-11-17"
       },
       "activation": {
-        "road_id": "28533869:10",
-        "t": 0.85,
+        "road_id": "1153082119:0",
+        "t": 0.5336257370766031,
         "radius_m": 9.0,
         "max_speed_mps": 3.0,
         "position_xz": [
-          162.54271753628683,
-          1341.414452916991
+          251.4771229165471,
+          1191.5496499878584
         ],
-        "street": "Calle Antonio Navarro",
-        "offset_from_place_m": 17.013323916810943,
+        "street": "",
+        "offset_from_place_m": 45.85917310140226,
         "validated": true,
         "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
-        "validation_method": "offline 11 x 5.2 m vehicle footprint covered by current arcade asphalt"
+        "validation_method": "offline 11 x 5.2m footprint covered by existing asphalt"
       },
-      "enabled": true
+      "enabled": true,
+      "model_id": "teatro"
+    },
+    {
+      "id": "poi_004",
+      "name": "El Molinito",
+      "category": "Arte, historia y patrimonio",
+      "latitude": 24.1729648,
+      "longitude": -110.3067286,
+      "position_xz": [
+        1295.7315923313172,
+        -1552.814911605946
+      ],
+      "description": "Hito del paseo costero identificado como Molinito en la cartografía OpenStreetMap. Su representación utiliza el modelo aportado al proyecto.",
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://turismo.lapaz.gob.mx/atractivos/malecon-de-la-paz"
+        }
+      ],
+      "coordinate_evidence": {
+        "source_ref": "osm:node:10805405566",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "activation": {
+        "road_id": "1238980210:1",
+        "t": 0.5103209634295066,
+        "radius_m": 9.0,
+        "max_speed_mps": 3.0,
+        "position_xz": [
+          1333.7118446487464,
+          -1538.8480274720305
+        ],
+        "street": "Carretera La Paz-Pichilingue",
+        "offset_from_place_m": 40.46694229251582,
+        "validated": true,
+        "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+        "validation_method": "offline 11 x 5.2m footprint covered by existing asphalt"
+      },
+      "enabled": true,
+      "model_id": "molinito"
+    },
+    {
+      "id": "poi_005",
+      "name": "Museo de Arte de Baja California Sur",
+      "category": "Arte, historia y patrimonio",
+      "latitude": 24.162451165222873,
+      "longitude": -110.31411710884976,
+      "position_xz": [
+        546.1251015128715,
+        -383.7520637958048
+      ],
+      "description": "Museo de arte frente al Jardín Velasco. Ocupa la reconstrucción de la antigua Casa de Gobierno.",
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://muabcs.cultura-bcs.gob.mx/historia-del-recinto/"
+        }
+      ],
+      "coordinate_evidence": {
+        "source_ref": "osm:way:155831056",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "activation": {
+        "road_id": "28531353:1",
+        "t": 0.5247136891615835,
+        "radius_m": 9.0,
+        "max_speed_mps": 3.0,
+        "position_xz": [
+          574.5713303881329,
+          -361.8964557181891
+        ],
+        "street": "Calle Francisco I. Madero",
+        "offset_from_place_m": 35.87276880401196,
+        "validated": true,
+        "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+        "validation_method": "offline 11 x 5.2m footprint covered by existing asphalt"
+      },
+      "enabled": true,
+      "model_id": "museo_arte"
+    },
+    {
+      "id": "poi_006",
+      "name": "Universidad Autónoma de Baja California Sur",
+      "category": "Universidad",
+      "latitude": 24.100926649999998,
+      "longitude": -110.31698695,
+      "position_xz": [
+        254.96329909898304,
+        6457.461893253677
+      ],
+      "description": "Campus La Paz de la UABCS. Este punto de registro está dentro de la universidad, sobre una vialidad existente del campus. Los modelos académicos genéricos se identifican como aproximaciones.",
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://www.uabcs.mx/recorrido-virtual/menu.html"
+        },
+        {
+          "title": "Plano oficial del campus 2022",
+          "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf"
+        }
+      ],
+      "coordinate_evidence": {
+        "verified": true,
+        "source_ref": "osm:way:137201460",
+        "method": "Point on existing mapped internal roadway inside the OSM campus parcel; not an official entrance coordinate"
+      },
+      "activation": {
+        "road_id": "886168660:7",
+        "t": 0.5000000000000009,
+        "radius_m": 9.0,
+        "max_speed_mps": 3.0,
+        "position_xz": [
+          254.96329909898304,
+          6457.461893253677
+        ],
+        "street": "",
+        "offset_from_place_m": 0.0,
+        "validated": true,
+        "validation_map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+        "validation_method": "offline 11 x 5.2m footprint covered by existing asphalt"
+      },
+      "enabled": true,
+      "model_id": "uabcs_campus"
     }
+  ],
+  "retired_poi_ids": [
+    "poi_007",
+    "poi_008",
+    "poi_009",
+    "poi_010",
+    "poi_011"
   ]
 }

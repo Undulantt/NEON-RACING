@@ -21,6 +21,7 @@ static func box(parent: Node3D, size: Vector3, at: Vector3, mat: Material) -> Me
 	return node
 
 static func build(parent: Node3D, vehicle_profile: String = "") -> Dictionary:
+	if parent.has_meta("imported_vehicle_model"):parent.remove_meta("imported_vehicle_model")
 	var paint := material(Color("26a99c"))
 	paint.set_meta("sf4_body",true)
 	var glass := material(Color("193342"))
@@ -72,4 +73,6 @@ static func build(parent: Node3D, vehicle_profile: String = "") -> Dictionary:
 		exhaust.append(flame)
 	var visuals: Dictionary={"exhaust": exhaust, "pivots": pivots, "wheels": wheels, "brake_material": brake}
 	if vehicle_profile=="COMET":preload("res://scripts/driving/CometVisual.gd").apply(parent,visuals)
+	elif vehicle_profile=="VECTOR":preload("res://scripts/driving/ImportedCarVisual.gd").apply(parent,visuals,preload("res://assets/autos/Vector.glb"),vehicle_profile)
+	elif vehicle_profile=="APEX":preload("res://scripts/driving/ImportedCarVisual.gd").apply(parent,visuals,preload("res://assets/autos/Apex.glb"),vehicle_profile)
 	return visuals

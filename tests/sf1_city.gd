@@ -15,6 +15,7 @@ func run() -> void:
 	flow.choose_mode(&"free_drive")
 	flow.select_vehicle("VECTOR")
 	flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	var deadline := Time.get_ticks_msec()+90000
 	while flow.transition_busy or flow.current_state != &"free_drive":
 		await process_frame

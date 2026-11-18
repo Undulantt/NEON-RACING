@@ -50,6 +50,7 @@ func run() -> void:
 	change_scene_to_file(flow.definition["menu_scene"])
 	await process_frame
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"free_drive"):finish();return
 	var world = current_scene
 	var car = world.player
@@ -100,7 +101,7 @@ func run() -> void:
 	check(world.request_race(str(flow.definition["default_race_id"])),"Existing free-drive race still starts")
 	if not await state(&"race"):finish();return
 	var visuals = activity.visuals
-	check(is_equal_approx(visuals.next_gate.scale.x,1.3) and is_equal_approx(visuals.next_gate.scale.y,1.3),"Checkpoint ring retains thirty-percent scale")
+	check(is_equal_approx(visuals.next_gate.scale.x,1.95) and is_equal_approx(visuals.next_gate.scale.y,1.95),"Checkpoint ring is fifty percent larger than the previous 1.3 scale")
 	check(visuals.next_gate.get_child_count()==1 and visuals.next_gate.get_child(0).mesh is ArrayMesh,"Checkpoint is a circular annulus with one mesh")
 	check(visuals.next_gate.get_child(0).material_override is ShaderMaterial,"Ring has gradient transparency material")
 	var ring_radius: float = visuals.next_gate.get_meta("radius_m")
@@ -110,7 +111,7 @@ func run() -> void:
 	var ring_vertices: PackedVector3Array=visuals.next_gate.get_child(0).mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 	var outer_count := 0
 	for v in ring_vertices:
-		if absf(Vector2(v.x,v.y).length()*1.3-ring_radius)<0.001: outer_count+=1
+		if absf(Vector2(v.x,v.y).length()*preload("res://scripts/racing/RaceGeometry.gd").CHECKPOINT_SCALE-ring_radius)<0.001: outer_count+=1
 	check(outer_count==96*3,"Outer boundary is circular in both axes")
 	check(visuals.ribbon.mesh.surface_get_primitive_type(0)==Mesh.PRIMITIVE_TRIANGLES,"Route is visible geometry, not single-pixel lines")
 	check(visuals.ribbon.material_override.albedo_color==Color("ff790f"),"Route uses neon orange")
@@ -132,7 +133,7 @@ func run() -> void:
 	session_fixture.advance(p,p,3.1)
 	var lateral := f.orthogonal()*float(first["half_width_m"])*1.2
 	session_fixture.advance(p-f+lateral,p+f+lateral,0.1)
-	check(session_fixture.next_checkpoint==1,"Checkpoint detection width remains unchanged by ring presentation")
+	check(session_fixture.next_checkpoint==1,"Common expanded checkpoint accepts lateral movement")
 	activity.session.advance(p-f*0.1,p+f*0.1,0.1)
 	check(activity.session.next_checkpoint==1,"Fixture passes first checkpoint")
 	var elapsed: float=activity.session.elapsed
@@ -140,6 +141,12 @@ func run() -> void:
 	var count_before: int=activity.session.next_checkpoint
 	var lap_before: int=activity.session.completed_laps
 	car.global_position += Vector3(4,0,4)
+	var recovery_blocker: CharacterBody3D
+	if not activity.competition.rivals.is_empty():
+		recovery_blocker=activity.competition.rivals[0]
+		recovery_blocker.set_physics_process(false)
+		var yaw:=atan2(-f.x,-f.y)
+		recovery_blocker.global_transform=Transform3D(Basis(Vector3.UP,yaw),Vector3(p.x,recovery_blocker.supported_pose_height(p.x,p.y,yaw),p.y))
 	pose=car.global_transform
 	var recover_key := InputEventKey.new()
 	recover_key.physical_keycode = KEY_R
@@ -166,7 +173,13 @@ func run() -> void:
 	world.hud.set_pause(false)
 	await wait_recovery(activity)
 	check(car.recovery_count==recoveries+1,"Recovery occurs exactly once")
-	check(Vector2(car.position.x,car.position.z).distance_to(p)<0.3,"Recovery returns to last passed checkpoint")
+	var recovery_offset: float=Vector2(car.position.x,car.position.z).distance_to(p)
+	check(recovery_offset<8.1,"Recovery returns beside or behind last checkpoint if traffic occupies its centre")
+	metrics["recovery_offset_m"]=recovery_offset
+	if is_instance_valid(recovery_blocker):
+		check(recovery_offset>1,"Occupied checkpoint uses an alternative recovery pose")
+		check(Vector2(recovery_blocker.position.x,recovery_blocker.position.z).distance_to(p)<.01,"Recovery never displaces the blocking rival")
+		recovery_blocker.set_physics_process(true)
 	check(car.safe_road_transform(car.global_transform),"Recovered car has valid road support and clearance")
 	check(activity.session.next_checkpoint==count_before and activity.session.completed_laps==lap_before,"Recovery cannot skip checkpoints or alter laps")
 	check(activity.session.elapsed-elapsed>=3,"Race clock includes recovery delay")

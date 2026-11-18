@@ -2,12 +2,13 @@ extends Control
 
 const Profiles = preload("res://scripts/driving/VehicleProfiles.gd")
 const STAT_LABELS := {"speed": "Velocidad máxima", "acceleration": "Aceleración", "handling": "Manejo", "braking": "Frenado", "drift": "Derrape", "turbo": "Turbo", "drift_boost": "Impulso de derrape", "burst": "BURST"}
+var cinematic: CanvasLayer
 var body: VBoxContainer
 var heading: Label
 var status: Label
 var back_button: Button
 var buttons: Dictionary = {}
-var vehicle_buttons: Dictionary = {}
+var vehicle_selector: Control
 var stat_values: Dictionary = {}
 var sliders: Dictionary = {}
 var volume_labels: Dictionary = {}
@@ -19,6 +20,9 @@ var options_page:=0
 var graphic_controls: Dictionary={}
 var licenses_open:=false
 var current_view: StringName
+var race_buttons: Dictionary={}
+var race_preview: Control
+var race_description: Label
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -27,8 +31,11 @@ func _ready() -> void:
 	add_child(presentation);presentation.configure(self)
 	GameFlow.state_changed.connect(render)
 	GameFlow.vehicle_changed.connect(_refresh_vehicle_selection)
+	GameFlow.race_changed.connect(_refresh_race_selection)
 	GameFlow.settings_changed.connect(_sync_options)
 	render(GameFlow.current_state)
+	cinematic=preload("res://scripts/ui/MenuCinematic.gd").new()
+	add_child(cinematic);cinematic.configure(self)
 
 func text(value: String, parent: Node = null, font_size := 18) -> Label:
 	var item := Label.new()
@@ -57,7 +64,8 @@ func render(state: StringName) -> void:
 		body.remove_child(node)
 		node.queue_free()
 	buttons.clear()
-	vehicle_buttons.clear()
+	vehicle_selector=null
+	race_buttons.clear();race_preview=null;race_description=null
 	stat_values.clear()
 	sliders.clear()
 	volume_labels.clear()
@@ -80,8 +88,9 @@ func render(state: StringName) -> void:
 			heading.text = "Jugar"
 			button("free_drive", "Modo libre", GameFlow.choose_mode.bind(&"free_drive"))
 			button("race", "Modo carrera", GameFlow.choose_mode.bind(&"race"))
-			text("Elige un modo y después tu vehículo. El modo carrera inicia un circuito de dos vueltas con cinco rivales.")
+			text("Elige un modo y después tu vehículo. En modo carrera podrás elegir el recorrido antes de iniciar.")
 		&"vehicle_select": _vehicles()
+		&"race_select": _races()
 		&"how_to_play": _how_to_play()
 		&"options": _options()
 		&"credits": _credits()
@@ -116,57 +125,40 @@ func _focus_first() -> void:
 	if back_button.visible:back_button.grab_focus()
 
 func _vehicles() -> void:
-	heading.text = "Seleccionar vehículo · " + ("Modo libre" if GameFlow.selected_mode == &"free_drive" else "Modo carrera")
-	text("Compara los perfiles actuales de la beta. Índices 1–10 calculados desde los parámetros de conducción.")
-	var grid := GridContainer.new()
-	grid.columns = 4
-	grid.add_theme_constant_override("h_separation", 16)
-	grid.add_theme_constant_override("v_separation", 5)
-	body.add_child(grid)
-	var stat_header := text("Estadística", grid, 20)
-	stat_header.custom_minimum_size.x = 180
-	stat_header.autowrap_mode = TextServer.AUTOWRAP_OFF
+	heading.text="Seleccionar vehículo"
 	for id in Profiles.IDS:
-		var profile: Dictionary = Profiles.load_profile(id)
-		var column := VBoxContainer.new()
-		column.custom_minimum_size.x = 180
-		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid.add_child(column)
-		text(id + " · " + str(profile["role"]), column, 21)
-		text("%.0f km/h · 0–100: %.1f s\nObjetivo de configuración" % [float(profile["config"]["max_forward_speed_mps"]) * 3.6, profile["config"]["target_0_100_s"]], column, 14)
-		var choose := button("vehicle_" + id, "Elegir " + id, GameFlow.select_vehicle.bind(id), column)
-		choose.toggle_mode = true
-		vehicle_buttons[id] = choose
-	for key in STAT_LABELS:
-		var stat_label := text(STAT_LABELS[key], grid, 17)
-		stat_label.custom_minimum_size.x = 180
-		stat_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-		for id in Profiles.IDS:
-			var value: int = Profiles.load_profile(id)["stats"][key]
-			stat_values[id + ":" + key] = value
-			var cell := text("%d / 10" % value, grid, 18)
-			cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	text("COMET utiliza el modelo 3D del equipo; VECTOR y APEX conservan la carrocería del prototipo.", null, 15)
-	if GameFlow.selected_mode==&"race":
-		text("Dificultad de los rivales",null,20)
-		var difficulty:=OptionButton.new()
-		difficulty.name="RivalDifficulty"
-		difficulty.add_item("Estándar")
-		difficulty.add_item("Experto")
-		difficulty.select(1 if GameFlow.rival_difficulty=="expert" else 0)
-		difficulty.item_selected.connect(func(index: int):GameFlow.set_rival_difficulty("expert" if index==1 else "standard"))
-		body.add_child(difficulty)
-		text("Experto: mayor ritmo y frenadas más exigentes. Estándar: más margen para aprender el circuito.",null,15)
-	button("continue", "Entrar al modo libre" if GameFlow.selected_mode == &"free_drive" else "Continuar a modo carrera", GameFlow.start_selected)
-	_refresh_vehicle_selection(GameFlow.selected_vehicle_id)
+		var stats: Dictionary=Profiles.load_profile(id)["stats"]
+		for key in STAT_LABELS:stat_values[id+":"+key]=stats[key]
+	vehicle_selector=preload("res://scripts/ui/VehicleSelection.gd").new()
+	body.add_child(vehicle_selector);vehicle_selector.configure(self)
 
 func _refresh_vehicle_selection(id: String) -> void:
-	if current_view != &"vehicle_select":
-		return
-	for key in vehicle_buttons:
-		var item: Button = vehicle_buttons[key]
-		item.set_pressed_no_signal(key == id)
-		item.text = ("Seleccionado: " if key == id else "Elegir ") + key
+	if current_view==&"vehicle_select" and is_instance_valid(vehicle_selector):vehicle_selector.set_selected(id)
+
+func _races() -> void:
+	heading.text="Seleccionar carrera"
+	text("Vehículo: %s · Rivales: %s"%[GameFlow.selected_vehicle_id,"Experto" if GameFlow.rival_difficulty=="expert" else "Estándar"],null,18)
+	var row:=HBoxContainer.new();row.add_theme_constant_override("separation",24);body.add_child(row)
+	var choices:=VBoxContainer.new();choices.custom_minimum_size.x=370;row.add_child(choices)
+	for id in GameFlow.menu_race_ids():
+		var data:=preload("res://scripts/racing/RaceStore.gd").load_id(id)
+		var choose:=button("race_"+id,data.get("name","Carrera no disponible"),GameFlow.select_race.bind(id),choices)
+		choose.toggle_mode=true;race_buttons[id]=choose
+		text(preload("res://scripts/racing/RaceStore.gd").format_label(data)+" · %.2f km"%(float(data.get("distance_m",0))/1000),choices,15)
+	race_preview=preload("res://scripts/ui/RacePreview.gd").new()
+	race_preview.custom_minimum_size=Vector2(500,235);race_preview.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	row.add_child(race_preview)
+	race_description=text("",null,17)
+	button("start_race","Iniciar carrera",GameFlow.launch_selected_race)
+	_refresh_race_selection(GameFlow.selected_race_id)
+
+func _refresh_race_selection(id: String) -> void:
+	if current_view!=&"race_select":return
+	for key in race_buttons:race_buttons[key].set_pressed_no_signal(key==id)
+	var data:=preload("res://scripts/racing/RaceStore.gd").load_id(id)
+	race_preview.definition=data;race_preview.queue_redraw()
+	var tour: Dictionary=data.get("tour",{})
+	race_description.text="UABCS → Teatro → Catedral → Museo de Arte → Kiosco → El Molinito\nUna vuelta de principio a fin, sin regresar a la salida." if not tour.is_empty() else "Circuito del centro de La Paz. Completa las vueltas indicadas."
 
 func _how_to_play() -> void:
 	heading.text = "Cómo jugar"
@@ -237,6 +229,12 @@ func _display_options(parent: VBoxContainer) -> void:
 
 func _graphics_options(parent: VBoxContainer) -> void:
 	text("Ajusta los efectos según el rendimiento de tu equipo.",parent,20)
+	var fps_row:=HBoxContainer.new();parent.add_child(fps_row)
+	var fps_title:=text("Límite de FPS",fps_row);fps_title.custom_minimum_size.x=480
+	var fps:=OptionButton.new();fps.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	for caption in ["Sin límite","30 FPS","60 FPS","90 FPS"]:fps.add_item(caption)
+	fps_row.add_child(fps);graphic_controls["fps_limit"]=fps
+	fps.item_selected.connect(func(index: int):GameFlow.set_graphics("fps_limit",[0,30,60,90][index]))
 	for entry in [["optical_mode","Reflejos y referencias de velocidad",["Desactivados","Reducidos","Completos"]],["smoke_quality","Cantidad de humo y huellas",["Baja","Normal","Alta"]]]:
 		var row:=HBoxContainer.new();parent.add_child(row)
 		var title:=text(entry[1],row);title.custom_minimum_size.x=480
@@ -245,7 +243,7 @@ func _graphics_options(parent: VBoxContainer) -> void:
 		row.add_child(choice);graphic_controls[entry[0]]=choice
 		var key: String=entry[0]
 		choice.item_selected.connect(func(index: int):GameFlow.set_graphics(key,["original","partial","full"][index] if key=="optical_mode" else index))
-	for entry in [["clouds_enabled","Nubes neón"],["smoke_enabled","Humo de derrape"],["marks_enabled","Huellas de neumáticos"],["burst_enabled","Carrocería y estelas BURST"]]:
+	for entry in [["enhanced_graphics","Iluminación y calidad mejoradas (MSAA 4×)"],["clouds_enabled","Nubes neón"],["smoke_enabled","Humo de derrape"],["marks_enabled","Huellas de neumáticos"],["burst_enabled","Carrocería y estelas BURST"],["water_effects","Oleaje y partículas del agua"]]:
 		var toggle:=CheckBox.new();toggle.text=entry[1];toggle.custom_minimum_size.y=36;parent.add_child(toggle);graphic_controls[entry[0]]=toggle
 		var key: String=entry[0]
 		toggle.toggled.connect(func(value: bool):GameFlow.set_graphics(key,value))
@@ -258,6 +256,7 @@ func _sync_options() -> void:
 	for key in graphic_controls:
 		var control=graphic_controls[key]
 		if control is CheckBox:control.set_pressed_no_signal(GameFlow.graphics[key])
+		elif key=="fps_limit":control.select([0,30,60,90].find(GameFlow.graphics[key]))
 		elif key=="optical_mode":control.select(["original","partial","full"].find(GameFlow.graphics[key]))
 		else:control.select(GameFlow.graphics[key])
 	for bus in sliders:

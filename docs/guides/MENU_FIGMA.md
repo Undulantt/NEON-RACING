@@ -38,8 +38,8 @@ No se copiaron archivos de fuentes de Windows al proyecto.
 disposición. `MenuBackdrop.gd` dibuja el recorte sombreado del diseño. GameShell
 conserva la navegación, IDs de botones, selección de vehículos y opciones
 existentes. Las otras vistas del shell adoptan el mismo estilo y conservan
-scroll para el contenido largo. La pausa dentro del mundo conserva su interfaz
-actual; el componente queda disponible para integrarlo allí más adelante.
+scroll para el contenido largo. La pausa dentro del mundo comparte ahora fondo, colores y botones mediante
+`PauseSkin.gd`; conserva el mapa y sus acciones de conducción.
 
 La composición conserva 16:9 y se centra dentro del área disponible. En otras
 relaciones de aspecto se usan bandas oscuras, evitando recortar botones,
@@ -105,6 +105,9 @@ petición del usuario; ese informe corresponde al alcance anterior.
 ```powershell
 godot --path . --script res://tests/godot_menu_audio.gd -- --capture-menu-audio
 ```
+
+La actualización de [agua, pausa y FPS](CARRERAS_AGUA_PAUSA_FPS.md) añade
+límites de 30/60/90 FPS y reducción de oleaje/partículas a las opciones gráficas.
 
 ## Gráficos: controles reales para el jugador
 

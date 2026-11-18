@@ -52,6 +52,7 @@ func run() -> void:
 	change_scene_to_file(flow.definition["menu_scene"])
 	await process_frame
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"free_drive"): finish();return
 	var world = current_scene
 	world.race_activity.toggle_editor()

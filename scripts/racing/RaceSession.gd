@@ -81,7 +81,8 @@ func advance(previous: Vector2, current: Vector2, delta: float, height_valid := 
 			if completed_laps == total_laps:
 				phase = "finished"
 				elapsed = crossing_time
-				completed.emit({"race_id":definition["id"],"summary":"Circuito completado" if definition.get("type") == "circuit" else "Sprint completado","elapsed_seconds":elapsed,"distance_m":definition["distance_m"],"checkpoints":gates.size()*total_laps,"laps":completed_laps if definition.get("type") == "circuit" else 0,"lap_times":lap_times.duplicate() if definition.get("type") == "circuit" else []})
+				var numbered: bool=int(definition.get("laps",0))>0
+				completed.emit({"race_id":definition["id"],"summary":"Circuito completado" if definition.get("type") == "circuit" else "Recorrido completado" if numbered else "Sprint completado","elapsed_seconds":elapsed,"distance_m":definition["distance_m"],"checkpoints":gates.size()*total_laps,"laps":completed_laps if numbered else 0,"lap_times":lap_times.duplicate() if numbered else []})
 				break
 			# Rearm the same ordered gates. Re-crossing just the finish never
 			# awards another lap; all mandatory gates must be passed again.

@@ -37,7 +37,7 @@ func configure(world: Node3D, settings: Dictionary) -> void:
 	for key in config["music"]:
 		var path: String = config["music"][key]
 		streams[key] = AudioStreamWAV.load_from_file(path) if path.ends_with(".wav") else load(path)
-	set_music_state("free_drive")
+	# DrivingMusic (GameFlow) owns the soundtrack; this mixer keeps ambience and bus controls.
 	ambience = AudioStreamPlayer.new()
 	ambience.bus = "Effects"
 	ambience.volume_db = -28

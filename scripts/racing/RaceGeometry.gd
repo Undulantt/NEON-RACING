@@ -1,5 +1,7 @@
 extends RefCounted
-const CHECKPOINT_SCALE := 1.3
+# Fifty percent larger than the previous 1.3 scale, shared by every racer
+# and by the ring mesh. This is a trigger, never a solid road obstacle.
+const CHECKPOINT_SCALE := 1.95
 const CENTER_HEIGHT_M := 0.75
 
 static func half_width(gate: Dictionary) -> float:

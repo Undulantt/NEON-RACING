@@ -37,11 +37,12 @@ func _draw() -> void:
 			draw_circle(destination,9,Color("ff65bd"))
 			draw_circle(destination,11,Color.WHITE,false,2)
 	var activity = world.race_activity
-	if activity != null and not activity.default_race.is_empty():
-		var p: Array = activity.default_race["start"]["position_xz"]
-		var start := screen(Vector2(p[0],p[1]))
-		draw_circle(start,7,Color("ff48b3"))
-		draw_string(ThemeDB.fallback_font,start+Vector2(12,5),"Carrera",HORIZONTAL_ALIGNMENT_LEFT,-1,14,Color("ffa2d8"))
+	if activity != null:
+		for race in activity.entrances:
+			var p: Array = race["start"]["position_xz"]
+			var start := screen(Vector2(p[0],p[1]))
+			draw_circle(start,7,Color("ff48b3"))
+			draw_string(ThemeDB.fallback_font,start+Vector2(12,5),str(race["name"]),HORIZONTAL_ALIGNMENT_LEFT,-1,14,Color("ffa2d8"))
 	var passport=world.get("passport")
 	if passport!=null and passport.allowed():
 		for poi in passport.active:
@@ -53,6 +54,7 @@ func _draw() -> void:
 	for p in [Vector2(0,-10),Vector2(7,8),Vector2(0,4),Vector2(-7,8)]: triangle.append(player+p.rotated(-world.player.rotation.y))
 	draw_colored_polygon(triangle,Color("ffe091"))
 	draw_string(ThemeDB.fallback_font,Vector2(size.x-27,24),"N",HORIZONTAL_ALIGNMENT_LEFT,-1,18,Color.WHITE)
+	draw_rect(Rect2(Vector2.ONE,size-Vector2.ONE*2),Color("00e5ee"),false,2)
 
 func select_at(local_position: Vector2) -> bool:
 	var at := (local_position-size*0.5)/zoom+center

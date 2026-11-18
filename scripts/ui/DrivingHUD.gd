@@ -16,6 +16,8 @@ var street_label: Label
 var notice: Label
 var pause_panel: PanelContainer
 var pause_label: Label
+var pause_background: Control
+var pause_layer: CanvasLayer
 var free_pause: CanvasLayer
 var race_recover_button: Button
 var toast_time := 0.0
@@ -81,7 +83,7 @@ func _ready() -> void:
 	credits_label = label("© OpenStreetMap · Overture Maps Foundation · INEGI | Fuentes y licencias en créditos", Vector2.ZERO, 11, Color("b1bcc2"))
 	pause_panel = PanelContainer.new()
 	pause_panel.position = Vector2(430, 190)
-	pause_panel.custom_minimum_size = Vector2(420, 290)
+	pause_panel.custom_minimum_size = Vector2(590, 460)
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color("152833")
 	style.content_margin_left = 28
@@ -89,32 +91,32 @@ func _ready() -> void:
 	style.content_margin_top = 24
 	style.content_margin_bottom = 24
 	pause_panel.add_theme_stylebox_override("panel", style)
+	pause_panel.add_theme_stylebox_override("panel",preload("res://scripts/ui/PauseSkin.gd").panel_style())
+	pause_panel.theme=preload("res://scripts/ui/PauseSkin.gd").theme()
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 14)
 	pause_label = Label.new()
 	pause_label.text = "PAUSA"
 	pause_label.add_theme_font_size_override("font_size", 28)
+	pause_label.add_theme_font_override("font",preload("res://scripts/ui/NeonButton.gd").arial(true))
+	pause_label.add_theme_color_override("font_color",Color("00e5ee"))
 	column.add_child(pause_label)
 	var controls := Label.new()
-	controls.text = "V cámara · C inspección · M sonido\nT prueba de velocidad ×2 · F8 ciudad\nF9 lugares · R recuperar vehículo\nMando: RT acelerar · LT frenar\nStick girar · A derrape · X turbo · Start pausa"
+	controls.text = "NEON RACING LP / PAUSA\nWASD / flechas: conducir · Espacio: derrape · Shift: TURBO\nR: recuperar · V: cámara · Esc / Start: continuar"
 	controls.add_theme_font_size_override("font_size", 14)
 	column.add_child(controls)
 	for entry in [["Continuar conduciendo", "resume"], ["Recuperar vehículo", "recover"], ["Volver al menú", "menu"]]:
-		var button := Button.new()
-		button.text = entry[0]
-		button.custom_minimum_size.y = 42
-		button.pressed.connect(_button.bind(entry[1]))
+		var button := preload("res://scripts/ui/PauseSkin.gd").button(entry[0],_button.bind(entry[1]))
 		column.add_child(button)
 		buttons.append(button)
-	race_recover_button = Button.new()
-	race_recover_button.text = "Recuperar último checkpoint · 3 s"
-	race_recover_button.custom_minimum_size.y = 42
-	race_recover_button.pressed.connect(_button.bind("race_recover"))
+	race_recover_button = preload("res://scripts/ui/PauseSkin.gd").button("Recuperar último checkpoint · 3 s",_button.bind("race_recover"))
 	column.add_child(race_recover_button)
 	column.move_child(race_recover_button,column.get_children().find(buttons[1]))
 	race_recover_button.hide()
 	pause_panel.add_child(column)
-	add_child(pause_panel)
+	pause_layer=CanvasLayer.new();pause_layer.layer=60;add_child(pause_layer)
+	pause_background=preload("res://scripts/ui/PauseSkin.gd").backdrop(pause_layer);pause_background.hide()
+	pause_layer.add_child(pause_panel)
 	pause_panel.hide()
 
 func attach(target: CharacterBody3D, level: Node3D) -> void:
@@ -167,6 +169,7 @@ func set_pause(active: bool) -> void:
 	var flow := get_node_or_null("/root/GameFlow")
 	var free: bool = flow != null and flow.current_state == &"free_drive" and world.get("navigation") != null
 	pause_panel.visible = active and not free
+	pause_background.visible=pause_panel.visible
 	if free_pause != null:
 		if active and free: free_pause.open()
 		else: free_pause.hide()

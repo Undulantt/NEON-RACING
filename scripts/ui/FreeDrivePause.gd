@@ -5,6 +5,8 @@ var frame: Control
 var map: Control
 var destination_label: Label
 var menu_buttons: Dictionary = {}
+var race_choice: OptionButton
+const PauseTheme=preload("res://scripts/ui/PauseSkin.gd")
 
 func configure(target: Node3D, driving_hud: CanvasLayer) -> void:
 	world = target
@@ -12,12 +14,10 @@ func configure(target: Node3D, driving_hud: CanvasLayer) -> void:
 	layer = 60
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	frame = Control.new()
-	frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.size=Vector2(1280,720);frame.theme=PauseTheme.theme()
 	add_child(frame)
-	var background := ColorRect.new()
-	background.color = Color(0.025,0.035,0.045,1.0)
-	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	frame.add_child(background)
+	PauseTheme.backdrop(frame)
+	get_viewport().size_changed.connect(_fit);_fit()
 	var margin := MarginContainer.new()
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side in ["left","right","top","bottom"]: margin.add_theme_constant_override("margin_"+side,28)
@@ -28,6 +28,8 @@ func configure(target: Node3D, driving_hud: CanvasLayer) -> void:
 	var title := Label.new()
 	title.text = "NEON RACING LP     /     MODO LIBRE — PAUSA"
 	title.add_theme_font_size_override("font_size",28)
+	title.add_theme_font_override("font",PauseTheme.Neon.arial(true))
+	title.add_theme_color_override("font_color",Color("00e5ee"))
 	column.add_child(title)
 	var tabs := Label.new()
 	tabs.text = "MAPA     /     DESTINO"
@@ -44,19 +46,19 @@ func configure(target: Node3D, driving_hud: CanvasLayer) -> void:
 	map.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	map.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	row.add_child(map)
+	var sidebar_scroll:=ScrollContainer.new();sidebar_scroll.custom_minimum_size.x=330;sidebar_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;row.add_child(sidebar_scroll)
 	var sidebar := VBoxContainer.new()
-	sidebar.custom_minimum_size.x = 285
-	sidebar.add_theme_constant_override("separation",12)
-	row.add_child(sidebar)
+	sidebar.custom_minimum_size.x = 310
+	sidebar.add_theme_constant_override("separation",6)
+	sidebar_scroll.add_child(sidebar)
 	destination_label = Label.new()
 	destination_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	destination_label.custom_minimum_size.y = 95
+	destination_label.custom_minimum_size.y = 60
 	sidebar.add_child(destination_label)
+	race_choice=OptionButton.new();sidebar.add_child(race_choice)
+	get_node("/root/GameFlow").menu_audio.bind_button(race_choice)
 	for entry in [["resume","Continuar",hud._button.bind("resume")],["passport","Pasaporte La Paz",_passport],["center","Centrar en jugador",map.recenter],["race","Destino: salida de carrera",_race_destination],["clear","Borrar destino",_clear],["recover","Recuperar · 3 segundos",hud._button.bind("recover")],["menu","Menú principal",hud._button.bind("menu")]]:
-		var button := Button.new()
-		button.text = entry[1]
-		button.custom_minimum_size.y = 43
-		button.pressed.connect(entry[2])
+		var button := PauseTheme.button(entry[1],entry[2])
 		sidebar.add_child(button)
 		menu_buttons[entry[0]] = button
 	var legend := Label.new()
@@ -66,6 +68,9 @@ func configure(target: Node3D, driving_hud: CanvasLayer) -> void:
 	hide()
 
 func open() -> void:
+	if world.race_activity!=null and race_choice.item_count!=world.race_activity.entrances.size():
+		race_choice.clear()
+		for race in world.race_activity.entrances:race_choice.add_item(race["name"])
 	show()
 	map.recenter()
 	_update_status()
@@ -76,15 +81,21 @@ func _update_status() -> void:
 	destination_label.text = world.navigation.status
 	if not world.navigation.destination_id.is_empty():
 		destination_label.text += "\nDestino X %.0f · Z %.0f m" % [world.navigation.destination.x,world.navigation.destination.y]
-	menu_buttons["race"].disabled = world.race_activity == null or world.race_activity.default_race.is_empty()
+	menu_buttons["race"].disabled = world.race_activity == null or world.race_activity.entrances.is_empty()
 
 func _process(_delta: float) -> void:
 	if visible: _update_status()
 
 func _race_destination() -> void:
-	var start: Array = world.race_activity.default_race["start"]["position_xz"]
+	if race_choice.selected<0:return
+	var start: Array = world.race_activity.entrances[race_choice.selected]["start"]["position_xz"]
 	world.navigation.set_destination(Vector2(start[0],start[1]))
 	map.queue_redraw()
+
+func _fit() -> void:
+	var viewport_size:=get_viewport().get_visible_rect().size
+	var factor:=minf(viewport_size.x/1280,viewport_size.y/720)
+	frame.scale=Vector2.ONE*factor;frame.position=(viewport_size-Vector2(1280,720)*factor)*.5
 
 func _passport() -> void:
 	if world.passport != null: world.passport.open_book()

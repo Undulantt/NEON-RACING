@@ -102,3 +102,41 @@ Ubicaciones del kiosco y la Catedral derivadas del snapshot OpenStreetMap existe
 Diseño de menú, créditos y opciones aportado por el usuario en [Figma: UI RAICING DARK LAPAZ](https://www.figma.com/design/J49HkD9RLXtIv2sJmowxIu/UI-RAICING-DARK-LAPAZ?node-id=16-2). Fondo y logo aportados en `assets/ui/menu/`; barras, subrayados y marco exportados del mismo diseño. Se conserva el SVG original del logo y una copia PNG compatible con sus filtros. Arial se solicita al sistema con fuentes de respaldo; no se redistribuyen archivos de fuentes de Windows. La implementación nativa y los detalles de exportación se documentan en `docs/guides/MENU_FIGMA.md`.
 
 Audio de interfaz aportado por el usuario: `assets/audio/Button-Notification.wav` y `assets/audio/Main menu.mp3`. Se integran sin modificar sus archivos originales; no se atribuyen autoría ni condiciones de licencia que no hayan sido proporcionadas.
+
+HUD de carrera basado en el frame [UI DE CARRERAS, 39:2](https://www.figma.com/design/J49HkD9RLXtIv2sJmowxIu/UI-RAICING-DARK-LAPAZ?node-id=39-2) del mismo diseño aportado por el usuario. Los dos acentos vectoriales originales se conservan en `assets/ui/race/`; la imagen de referencia de ciudad no se incorpora como fondo del juego. Integración y validación en `docs/guides/UI_CARRERAS.md`.
+
+## Modelos de vehículos aportados
+
+`assets/autos/Not1965FordMustangHoonicorn.glb` (COMET), `Vector.glb` (VECTOR)
+y `Apex.glb` (APEX) son recursos aportados por el usuario para el proyecto.
+Se conservan los GLB originales y sus atlas extraídos por Godot. No se atribuyen
+nombres de autores ni condiciones de licencia no proporcionados. Integración
+visual compartida documentada en `docs/guides/MODELOS_VEHICULOS.md`.
+
+## Banquetas y mobiliario de ciudad
+
+`assets/3D/BigPalm.glb`, `Palm.glb`, `Chair.glb` y `LightPole.glb` y sus atlas
+son recursos aportados por el usuario. No se atribuyen nombres ni licencias
+que no hayan sido proporcionados. Las banquetas y posiciones decorativas de
+`data/processed/streetscape/` se derivan de los datos OSM/Overture existentes,
+conservando su atribución y ODbL-1.0; la procedencia y los hashes quedan en el
+manifiesto. No constituyen un levantamiento municipal de banquetas, mobiliario
+o camellones. Dimensiones, colores y distribución son estimaciones artísticas.
+Detalles en `docs/guides/BANQUETAS_Y_MOBILIARIO.md`.
+
+## Pasaporte ampliado: modelos de lugares
+
+Los diez GLB de `assets/3D/Edificios/` y sus atlas son recursos aportados por el
+usuario; no se atribuyen autores ni licencias no proporcionados. Los modelos
+se conservan intactos. Sus posiciones derivan de la cartografía OSM/Overture
+existente bajo ODbL-1.0, conservando las atribuciones anteriores. Escala,
+orientación y asociaciones de edificios UABCS al plano son estimadas.
+
+Para UABCS se consultan el plano institucional 2022 y el directorio/recorrido
+virtual. URLs, hashes y límites de correspondencia en
+`data/reference/uabcs_landmark_evidence.json`. No se redistribuyen imágenes del
+plano ni panorámicas como recursos visuales del juego. Los edificios genéricos
+no se atribuyen a departamentos concretos. El Museo de Arte se contrasta con
+su sitio institucional; Kiosco y Catedral con Turismo Municipal, Teatro con SIC
+y Molinito con su nodo OSM. Fuentes e integración en
+`docs/guides/PASAPORTE_MODELOS_3D.md`.

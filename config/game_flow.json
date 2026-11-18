@@ -35,5 +35,10 @@
       }
     ],
     "licenses_file": "res://CREDITS_AND_LICENSES.md"
-  }
+  },
+  "menu_race_ids": [
+    "centro_circuit_d3",
+    "circuito_forjadores",
+    "arracon_malecon"
+  ]
 }

@@ -41,6 +41,8 @@ var prepared: Dictionary = {}
 var race_activity: Node3D
 var navigation: Node
 var passport: Node3D
+var landmark_models: Node3D
+var coast_water: Node3D
 
 func _ready() -> void:
 	var start := Time.get_ticks_msec()
@@ -241,6 +243,9 @@ func _ready() -> void:
 		stats.merge(city["statistics"])
 		stats["urban_chunks"] = city["chunks"].size()
 
+	if city_manager!=null and not baseline_b6 and (relief_manifest.is_empty() or relief_profile=="world"):
+		landmark_models=preload("res://scripts/world/LandmarkModels.gd").new()
+		landmark_models.name="LandmarkModels";add_child(landmark_models);landmark_models.configure(self)
 	follow_camera = Node3D.new()
 	follow_camera.set_script(Follow)
 	add_child(follow_camera)
@@ -355,25 +360,9 @@ func build_relief_limits() -> void:
 			wall.get_child(0).visible = false
 
 func build_relief_water() -> void:
-	var data = read_json("res://" + str(relief_manifest["water_file"]))
-	var vertices := PackedVector3Array()
-	for surface in data["surfaces"]:
-		for tri in surface["triangles_xz"]:
-			vertices.append_array(PackedVector3Array([Vector3(tri[0][0], float(surface["y"]), tri[0][1]), Vector3(tri[1][0], float(surface["y"]), tri[1][1]), Vector3(tri[2][0], float(surface["y"]), tri[2][1])]))
-	if vertices.is_empty():
-		return
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	var mesh := ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	var material := StandardMaterial3D.new()
-	material.albedo_color = Color("397f99")
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	mesh.surface_set_material(0,material)
-	var visual := MeshInstance3D.new()
-	visual.mesh = mesh
-	building_root.add_child(visual)
+	coast_water=preload("res://scripts/world/CoastWater.gd").new();coast_water.name="CoastWater"
+	building_root.add_child(coast_water)
+	coast_water.configure(self,read_json("res://"+str(relief_manifest["water_file"])))
 
 func load_arcade_layout() -> bool:
 	var path := "res://data/processed/arcade_layout.json"
@@ -505,7 +494,7 @@ func place_at(spawn: Dictionary) -> void:
 	player.reset_surface_motion()
 	if city_manager != null: city_manager.refresh()
 
-func prepare_at(spawn: Dictionary) -> void:
+func prepare_at(spawn: Dictionary, recovery_clearance:=false) -> void:
 	player.driving_enabled = false
 	var p: Array = spawn["position_xz"]
 	var at := Vector3(p[0],player.position.y,p[1])
@@ -530,6 +519,16 @@ func prepare_at(spawn: Dictionary) -> void:
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	place_at(spawn)
+	if recovery_clearance and not player.safe_road_transform(player.global_transform):
+		# Recovery can coincide with a rival occupying the checkpoint. Search
+		# beside/behind it; never move another car or spawn inside a solid.
+		var requested: Transform3D=player.global_transform
+		for offset in [Vector3(2,0,0),Vector3(-2,0,0),Vector3(3.5,0,0),Vector3(-3.5,0,0),Vector3(0,0,5),Vector3(2,0,5),Vector3(-2,0,5),Vector3(0,0,8)]:
+			var candidate:=requested;candidate.origin+=requested.basis*offset
+			candidate.origin.y=player.supported_pose_height(candidate.origin.x,candidate.origin.z,player.rotation.y)
+			if not player.safe_road_transform(candidate):continue
+			player.global_transform=candidate;player.safe_transform=candidate;player.spawn_transform=candidate
+			player.reset_surface_motion();break
 	if not road_root.failed_chunks.is_empty() or not player.safe_road_transform(player.global_transform): runtime_error = "No hay apoyo vial seguro en la salida."
 
 func initial_support_ready(spawn: Dictionary) -> bool:

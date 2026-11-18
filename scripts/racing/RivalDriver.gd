@@ -45,6 +45,18 @@ var pass_cooldown := 0.0
 var drift_phase := "ready"
 var drift_elapsed := 0.0
 var drift_cooldown := 0.0
+var turnaround_index:=-1
+var turnaround_done:=-1
+var turnaround_reverse:=false
+var turnaround_sign:=1.0
+var turnaround_switch:=0.0
+var turnarounds_completed:=0
+var turnaround_stall:=0.0
+var turnaround_position:=Vector2.ZERO
+var arcade:=false
+var tactics_rng:=RandomNumberGenerator.new()
+var tactics_timer:=0.0
+var line_choices:=0
 
 func configure(vehicle: CharacterBody3D, progress: RefCounted, id: String, settings: Dictionary, shared: RefCounted = null) -> void:
 	car=vehicle
@@ -57,6 +69,11 @@ func configure(vehicle: CharacterBody3D, progress: RefCounted, id: String, setti
 	if trajectory==null:
 		trajectory=Trajectory.new()
 		trajectory.configure(session.definition,car)
+	if not trajectory.closed:
+		# A grid car behind the starting line must not project onto a later
+		# traversal of the same street. Official progress supplies the context.
+		nav_s=trajectory.map_progress(session.progress_m)
+		best_nav_s=nav_s
 	car.external_control=true
 	car.recovery_handler=func(_reason: String):
 		reverse_time=2.0
@@ -68,7 +85,15 @@ func update(delta: float) -> void:
 		return
 	var started_usec:=Time.get_ticks_usec()
 	var p:=Vector2(car.position.x,car.position.z)
-	var frame: Dictionary=trajectory.project(p,nav_s)
+	var frame: Dictionary
+	if not trajectory.closed and is_finite(nav_s):
+		var window:=maxf(3.0,car.speed_mps*delta*2+1.0)
+		var lower: float=trajectory.turnarounds[turnaround_done]["s"]+.01 if turnaround_done>=0 else 0.0
+		frame=trajectory.project_interval(p,maxf(lower,nav_s-window),maxf(lower,minf(trajectory.length,nav_s+window)),maxf(lower,nav_s))
+		if turnaround_done<0 and nav_s<5:
+			var grid: Dictionary=trajectory.project_grid(p)
+			if not grid.is_empty():frame=grid
+	else:frame=trajectory.project(p,nav_s)
 	if not is_finite(nav_s):
 		nav_s=frame["s"]
 		if trajectory.closed and nav_s>trajectory.length*0.8 and p.distance_to(trajectory.points[0])<45: nav_s-=trajectory.length
@@ -76,12 +101,17 @@ func update(delta: float) -> void:
 		frame=trajectory.project(p,nav_s)
 	nav_s=frame["s"]
 	route_error_peak=maxf(route_error_peak,float(frame["error"]))
+	if not trajectory.closed and not car.road_hit(car.position) and float(frame["error"])>3:
+		if rejoin_road(frame):return
+	if drive_turnaround(delta,p,frame):return
+	if arcade:update_tactics(delta,frame)
 	var forward: Vector2=frame["forward"]
 	var right:=Vector2(-forward.y,forward.x)
 	var heading:=Vector2(-car.global_basis.z.x,-car.global_basis.z.z)
 	var route_lateral: float=frame["lateral"]
 	var straight_remaining:=straight_distance(nav_s)
 	var desired_lane:=preferred_lane*float(frame["freedom"])/maxf(0.1,float(frame["half_width"])-1.2)
+	if arcade:desired_lane=clampf(preferred_lane,float(frame["left_limit"]),float(frame["right_limit"]))
 	if prefer_full_lane: desired_lane=clampf(preferred_lane,float(frame["left_limit"]),float(frame["right_limit"]))
 	var obstacle_speed:=INF
 	var yielding:=false
@@ -110,7 +140,7 @@ func update(delta: float) -> void:
 		var ahead: float=other_frame["s"]-nav_s
 		var other_lateral: float=other_frame["lateral"]
 		if ahead<=0 or ahead>maxf(25,car.speed_mps*1.2): continue
-		if absf(other_lateral-route_lateral)>2.1: continue
+		if absf(other_lateral-route_lateral)>(1.8 if arcade else 2.1): continue
 		var stopped: bool=other.speed_mps<1
 		var gap:=3.8 if stopped else float(personality["gap"])
 		var other_heading:=Vector2(-other.global_basis.z.x,-other.global_basis.z.z)
@@ -119,14 +149,16 @@ func update(delta: float) -> void:
 			yielding=true
 			reverse_time=maxf(reverse_time,1.0)
 		var following_speed:=maxf(0,other.speed_mps+(ahead-gap)*0.7)
-		if allow_passing and pass_cooldown<=0 and (personality["overtake"] or stopped or (expert and car.speed_mps>other.speed_mps+2)) and straight_remaining>35 and float(frame["freedom"])>2.4 and heading.dot(forward)>0.94 and not is_instance_valid(passing_car):
+		var passing_room:=1.8 if stopped or arcade else 2.4
+		if allow_passing and pass_cooldown<=0 and (arcade or personality["overtake"] or stopped or (expert and car.speed_mps>other.speed_mps+2)) and straight_remaining>(12 if stopped else 22 if arcade else 35) and float(frame["freedom"])>passing_room and heading.dot(forward)>0.94 and not is_instance_valid(passing_car):
 			var offset:=minf(3.5,float(frame["freedom"]))
 			var best_score:=INF
 			var selected:=0.0
 			for candidate in [-offset,0.0,offset]:
-				if absf(candidate-other_lateral)<2.3: continue
+				if absf(candidate-other_lateral)<(1.8 if stopped else 2.0 if arcade else 2.3): continue
 				if lane_clear(candidate,p,nav_s):
 					var score: float=absf(candidate-route_lateral)*0.4+absf(candidate-preferred_lane)*0.25
+					if arcade:score+=tactics_rng.randf_range(0,.35)
 					if score<best_score:
 						best_score=score
 						selected=candidate
@@ -141,6 +173,7 @@ func update(delta: float) -> void:
 		# the normal following gap here deadlocks a car already committed to a
 		# clear side corridor; collision/pose guards still constrain each step.
 		if other==passing_car and ahead>2.0: following_speed=maxf(following_speed,2.5)
+		if arcade and other==passing_car and ahead>maxf(8,car.speed_mps*.4):following_speed=maxf(following_speed,other.speed_mps+2.5)
 		obstacle_speed=minf(obstacle_speed,following_speed)
 	# Returning to a preferred line is optional: hold the current corridor if
 	# an adjacent car occupies the merge, even after the original pass ended.
@@ -160,6 +193,17 @@ func update(delta: float) -> void:
 	var used_lane: float=lane
 	var aim_frame: Dictionary=trajectory.sample(nav_s+lookahead,used_lane)
 	var aim: Vector2=aim_frame["position"]
+	# A rounded racing line must still enter the next mandatory sphere. Blend
+	# the final approach toward its centre before it becomes a missed gate.
+	if not trajectory.closed and validate_gates:
+		var gate: Dictionary=session.definition["checkpoints"][session.next_checkpoint]
+		var gate_at:=Vector2(gate["position_xz"][0],gate["position_xz"][1])
+		var gate_s: float=trajectory.gate_distances[session.next_checkpoint]
+		if gate_s-nav_s>=-3 and gate_s-nav_s<lookahead+6:
+			var gate_forward:=Vector2(gate["forward_xz"][0],gate["forward_xz"][1])
+			var gate_side:=Vector2(-gate_forward.y,gate_forward.x)
+			var allowance:=maxf(0,preload("res://scripts/racing/RaceGeometry.gd").half_width(gate)-1.2)
+			aim=gate_at+gate_forward*1.0+gate_side*clampf(used_lane,-allowance,allowance)
 	# Correct a missed mandatory gate only as an exceptional recovery. Normal
 	# racing follows arc length even if checkpoint spacing/density changes.
 	var gate_key: int=session.completed_laps*session.definition["checkpoints"].size()+session.next_checkpoint
@@ -187,11 +231,16 @@ func update(delta: float) -> void:
 	if absf(angle)>1.4 or float(frame["error"])>8: target_speed=minf(target_speed,4.0)
 	if validation_recovery: target_speed=minf(target_speed,4.0)
 	if absf(route_lateral-float(aim_frame["offset"]))>2.0 and drift_phase=="ready": target_speed=minf(target_speed,10.0)
-	if not expert and absf(lane)>0.8 and not is_instance_valid(passing_car): target_speed=minf(target_speed,12.0)
+	if not arcade and not expert and absf(lane)>0.8 and not is_instance_valid(passing_car): target_speed=minf(target_speed,12.0)
 	if is_instance_valid(passing_car) and passing_car.speed_mps<1: target_speed=minf(target_speed,12.0)
 	target_speed=minf(target_speed,obstacle_speed)
 	var ray:=PhysicsRayQueryParameters3D.create(car.position,car.position-car.global_basis.z*maxf(4,car.speed_mps*0.8),12,[car.get_rid()])
 	if not car.get_world_3d().direct_space_state.intersect_ray(ray).is_empty(): target_speed=minf(target_speed,2.0)
+	# A blocked lane is a traffic queue, not a loss of navigation. Never
+	# reverse into following cars simply because the leader is stationary.
+	if obstacle_speed<1 and car.speed_mps<.5 and not validation_recovery:
+		blocked_time=0;no_progress_s=0;reverse_time=0
+		state="waiting_traffic";car.set_controls(0,0,true);return
 	if nav_s>best_nav_s+0.8:
 		best_nav_s=nav_s
 		no_progress_s=0
@@ -216,7 +265,8 @@ func update(delta: float) -> void:
 		if reverse_step_clear(rear_pose) and car.road_hit(behind):
 			state="reversing"
 			var back_steer:=clampf(atan2(local.x,local.z)*1.6,-1,1) if validation_recovery and recovery_approaching else -clampf(angle*1.6,-1,1)
-			car.set_controls(-0.55,back_steer)
+			if car.signed_speed>.3 or car.speed_mps>2.5:car.set_controls(0,back_steer,true)
+			else:car.set_controls(-0.55,back_steer)
 		else:
 			var front_pose: Transform3D=car.global_transform
 			front_pose.origin-=car.global_basis.z*0.12
@@ -229,6 +279,10 @@ func update(delta: float) -> void:
 				state="boxed_in"
 				car.set_controls(0,0,true)
 		return
+	# Brake/reverse is one input in this arcade controller. Braking a vehicle
+	# still rolling backwards would accelerate it backwards, not stop it.
+	if car.signed_speed<-.2:
+		state="stopping_reverse";car.set_controls(0,0,true);return
 	if target_speed<0.1 and car.speed_mps<0.5:
 		state="waiting"
 		car.set_controls(0,0,true)
@@ -237,6 +291,10 @@ func update(delta: float) -> void:
 	if target_speed>=car.current_speed_cap-0.1 and obstacle_speed==INF:
 		throttle=1.0 if car.speed_mps>car.base_speed_cap*0.9 else float(personality["throttle"])
 	var brake:=clampf((car.speed_mps-target_speed)*0.85,0,1)
+	# Sustain the real ability input through preparation instead of tapping
+	# the brake at the nominal cap. Corner/traffic planning still has priority.
+	if arcade and allow_abilities and obstacle_speed==INF and straight_remaining>car.speed_mps*.8+12 and target_speed>=car.base_speed_cap*.9 and absf(angle)<.12 and car.speed_mps<target_speed+1:
+		throttle=1.0;brake=0.0
 	var turbo: bool=allow_abilities and straight_remaining>car.speed_mps*2.0+18 and target_speed>car.speed_mps+4 and absf(angle)<0.12 and car.turbo_charge>float(personality["turbo_reserve"]) and obstacle_speed==INF
 	var drift: bool=allow_abilities and personality_id=="aggressive" and absf(angle)>0.15 and absf(angle)<0.3 and car.speed_mps>float(car.config["drift_min_speed_mps"])+1 and target_speed>16 and float(frame["half_width"])>6
 	if expert:
@@ -266,6 +324,121 @@ func straight_distance(at_s: float) -> float:
 		var frame: Dictionary=trajectory.sample(at_s+step)
 		if absf(float(frame["curvature"]))>0.025: return float(step)
 	return 80.0
+
+func update_tactics(delta: float, frame: Dictionary) -> void:
+	tactics_timer-=delta
+	if tactics_timer>0 or is_instance_valid(passing_car) or validation_recovery:return
+	tactics_timer=tactics_rng.randf_range(3.5,6.0)
+	var options: Array=[-2.0,0.0,2.0]
+	var first:=tactics_rng.randi_range(0,2)
+	for i in range(3):
+		var wanted: float=options[(first+i)%3]
+		var candidate:=clampf(float(wanted),float(frame["left_limit"]),float(frame["right_limit"]))
+		if absf(candidate-preferred_lane)<.7:continue
+		if lane_clear(candidate,Vector2(car.position.x,car.position.z),nav_s):
+			preferred_lane=candidate;line_choices+=1;return
+
+func rejoin_road(frame: Dictionary) -> bool:
+	var road: Vector2=frame["position"]
+	var local: Vector3=car.global_basis.inverse()*(Vector3(road.x,car.position.y,road.y)-car.position)
+	var angle:=atan2(local.x,-local.z)
+	var direction:=1.0 if absf(angle)<1.4 else -1.0
+	var steer:=clampf(angle*1.6,-1,1)*direction
+	var pose:=car.global_transform
+	pose.origin-=car.global_basis.z*.35*direction
+	var distance:=Vector2(pose.origin.x,pose.origin.z).distance_to(road)
+	# A car already outside the asphalt needs a bounded physical way back.
+	# Do not require the current/off-road axle probes to magically be asphalt.
+	if distance>float(frame["error"])+.4 or not car.world_bounds.grow(-3).has_point(Vector2(pose.origin.x,pose.origin.z)) or not is_finite(car.surface_height(pose.origin.x,pose.origin.z)) or not reverse_step_clear(pose):return false
+	state="rejoining_road";reverse_time=0;blocked_time=0;no_progress_s=0
+	if car.signed_speed*direction<-.2 or car.speed_mps>2.5:car.set_controls(0,steer,true)
+	else:car.set_controls(.55*direction,steer)
+	return true
+
+func drive_turnaround(delta: float, p: Vector2, frame: Dictionary) -> bool:
+	if trajectory.closed:return false
+	# A three-point turn needs the whole narrow road. Queue before the
+	# junction, leaving room for the owner to return along the incoming leg.
+	for i in range(turnaround_done+1,trajectory.turnarounds.size()):
+		var pending: Dictionary=trajectory.turnarounds[i]
+		var distance: float=pending["s"]-nav_s
+		if nav_s<float(pending["approach_s"]):break
+		if distance< -15:continue
+		var ref=trajectory.turn_reservations.get(i)
+		var owner=ref.get_ref() if ref is WeakRef else null
+		if owner!=null and (owner.session.phase!="running" or owner.nav_s>float(pending["clear_s"])):
+			owner=null
+		if owner==null:
+			owner=self
+			for other in participants:
+				if not is_instance_valid(other):continue
+				var other_ref=other.get_meta("race_pilot",null)
+				var candidate=other_ref.get_ref() if other_ref is WeakRef else null
+				if candidate!=null and candidate.trajectory==trajectory and candidate.session.phase=="running" and candidate.turnaround_done<i and candidate.nav_s>owner.nav_s and candidate.nav_s<float(pending["s"])+7:
+					owner=candidate
+			trajectory.turn_reservations[i]=weakref(owner)
+		if owner!=self:
+			state="turnaround_queue"
+			blocked_time=0;no_progress_s=0;reverse_time=0
+			if car.signed_speed>.5:car.set_controls(0,0,false,false,1)
+			else:car.set_controls(0,0,true)
+			return true
+		break
+	if turnaround_index<0:
+		for i in range(turnaround_done+1,trajectory.turnarounds.size()):
+			var turn: Dictionary=trajectory.turnarounds[i]
+			var remaining: float=turn["s"]-nav_s
+			if remaining>7:break
+			if remaining< -15:continue
+			var gate: Dictionary=session.definition["checkpoints"][session.next_checkpoint]
+			if float(gate["distance_m"])<float(turn["source_s"])-1:break
+			if car.speed_mps>4.0:
+				car.set_controls(0,0,false,false,1);state="turnaround_braking";return true
+			turnaround_index=i;turnaround_reverse=false;turnaround_sign=1.0
+			turnaround_stall=0;turnaround_position=p
+			# Prefer steering toward the centre of the available road corridor.
+			if float(frame["lateral"])>.3:turnaround_sign=-1
+			validation_recovery=false;passing_car=null;lane=0;reverse_time=0
+			break
+	if turnaround_index<0:return false
+	var turn: Dictionary=trajectory.turnarounds[turnaround_index]
+	if p.distance_to(turnaround_position)>.08:
+		turnaround_position=p;turnaround_stall=0
+	else:turnaround_stall+=delta
+	# Predictive probes cannot guarantee motion across every curb contact.
+	# Detect actual lack of displacement and try the opposite gear safely.
+	if turnaround_stall>1.5:
+		turnaround_reverse=not turnaround_reverse
+		turnaround_sign=-turnaround_sign
+		turnaround_stall=0;turnaround_switch=.35
+	var heading:=Vector2(-car.global_basis.z.x,-car.global_basis.z.z)
+	if heading.dot(turn["forward"])>.94:
+		if car.signed_speed<-.2:
+			car.set_controls(0,0,true);state="turnaround_stop_reverse";return true
+		nav_s=float(turn["s"])+maxf(0,(p-turn["position"]).dot(turn["forward"]))
+		best_nav_s=nav_s;no_progress_s=0;blocked_time=0
+		turnaround_done=turnaround_index;turnaround_index=-1;turnarounds_completed+=1
+		car.set_controls(.4,0);state="turnaround_exit";return true
+	turnaround_switch=maxf(0,turnaround_switch-delta)
+	var sign:= -1.0 if turnaround_reverse else 1.0
+	if not maneuver_clear(sign,turnaround_sign*sign) and turnaround_switch<=0:
+		turnaround_reverse=not turnaround_reverse;turnaround_switch=.35;sign=-sign
+	if not maneuver_clear(sign,turnaround_sign*sign):
+		car.set_controls(0,0,true);state="turnaround_wait";return true
+	if car.signed_speed*sign<-.3:
+		car.set_controls(0,0,true)
+	elif car.speed_mps>2.5:car.set_controls(0,turnaround_sign*sign,true)
+	else:car.set_controls(.55*sign,turnaround_sign*sign)
+	state="turnaround_reverse" if turnaround_reverse else "turnaround_forward"
+	return true
+
+func maneuver_clear(direction: float, steer: float) -> bool:
+	var step:=maxf(.45,car.speed_mps*.25)
+	var yaw: float=car.rotation.y-direction*step/float(car.config["wheelbase_m"])*tan(steer*float(car.config["max_steer_radians"])*float(car.config["steering_sensitivity"]))
+	var pose:=car.global_transform;pose.basis=Basis(Vector3.UP,yaw)
+	pose.origin-=pose.basis.z*step*direction
+	pose.origin.y=car.supported_pose_height(pose.origin.x,pose.origin.z,yaw)
+	return car.safe_road_transform(pose)
 
 func planned_speed(at_s: float, offset := 0.0) -> float:
 	var result: float=car.current_speed_cap
@@ -325,7 +498,7 @@ func lane_clear(offset: float, p: Vector2, at_s: float) -> bool:
 		if other==car or not is_instance_valid(other) or absf(other.position.y-car.position.y)>3: continue
 		var other_frame: Dictionary=traffic_frame(other)
 		var ahead: float=other_frame["s"]-at_s
-		if ahead>-5 and ahead<17 and absf(float(other_frame["lateral"])-offset)<2.1: return false
+		if ahead>-5 and ahead<17 and absf(float(other_frame["lateral"])-offset)<(1.8 if arcade or other.speed_mps<1 else 2.1): return false
 	for ahead in [3.0,6.0,12.0]:
 		var frame: Dictionary=trajectory.sample(at_s+ahead,offset)
 		var point: Vector2=frame["position"]
@@ -351,9 +524,19 @@ func traffic_frame(other: CharacterBody3D) -> Dictionary:
 	if reference is WeakRef:
 		var pilot=reference.get_ref()
 		if pilot!=null and pilot.trajectory==trajectory and is_finite(pilot.nav_s):
+			if not trajectory.closed:
+				var exit: Dictionary=trajectory.project_finish(other_p) if pilot.nav_s>trajectory.length-50 else {}
+				if not exit.is_empty():return exit
+				var grid: Dictionary=trajectory.project_grid(other_p) if pilot.nav_s<5 else {}
+				if not grid.is_empty():return grid
+				return trajectory.project_interval(other_p,maxf(0,pilot.nav_s-2),minf(trajectory.length,pilot.nav_s+2),pilot.nav_s)
 			return trajectory.project(other_p,pilot.nav_s)
-	# Human drivers have no autopilot snapshot. Global projection is safe for
-	# nearby traffic; never use our own local segment window for another car.
+	# Nearby human traffic must be mapped onto our current traversal too.
+	# A global nearest point is ambiguous on an out-and-back access road.
+	if not trajectory.closed:
+		var exit: Dictionary=trajectory.project_finish(other_p) if nav_s>trajectory.length-50 else {}
+		if not exit.is_empty():return exit
+		return trajectory.project_interval(other_p,maxf(0,nav_s-80),minf(trajectory.length,nav_s+80),nav_s)
 	var frame: Dictionary=trajectory.project(other_p,-INF)
 	if trajectory.closed: frame["s"]+=roundf((nav_s-float(frame["s"]))/trajectory.length)*trajectory.length
 	return frame
@@ -369,14 +552,28 @@ func reverse_step_clear(pose: Transform3D) -> bool:
 	if future.is_empty(): return true
 	query.transform=car.global_transform
 	var current:=space.intersect_shape(query,8)
+	var touches_static:=false
 	for hit in future:
 		var other=hit["collider"]
 		# Contact margin may already overlap a neighbouring chassis. Allow
 		# separating from that contact; still reject every new overlap.
-		if not other is CharacterBody3D: return false
 		var already:=current.any(func(contact): return contact["collider"]==other)
-		if not already or pose.origin.distance_squared_to(other.global_position)<=car.position.distance_squared_to(other.global_position): return false
+		if not already:return false
+		if other is CharacterBody3D:
+			if pose.origin.distance_squared_to(other.global_position)<=car.position.distance_squared_to(other.global_position):return false
+		else:touches_static=true
+	if touches_static:
+		# Existing contact margins must permit backing away from a wall.
+		# Reject deeper penetration and all new colliders; do not disable solids.
+		var before:=contact_depth(space.collide_shape(query,16))
+		query.transform=pose
+		if contact_depth(space.collide_shape(query,16))>=before-.0001:return false
 	return true
+
+func contact_depth(contacts: PackedVector3Array) -> float:
+	var depth:=0.0
+	for i in range(0,contacts.size()-1,2):depth=maxf(depth,contacts[i].distance_to(contacts[i+1]))
+	return depth
 
 func telemetry() -> String:
 	return "%s %.1f/%.1f m/s gas %.1f brake %.1f %s turbo %s burst %s route %.1f lane %.1f recover %d gate_recover %d" % [personality_id,car.speed_mps,target_speed,car.command_throttle,car.command_brake,state,car.turbo_active,car.abilities.burst_state,nav_s,lane,recovery_attempts,checkpoint_recoveries]

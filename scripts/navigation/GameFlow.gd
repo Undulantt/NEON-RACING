@@ -3,17 +3,19 @@ extends Node
 # One session owner. Views only issue commands and observe these signals.
 signal state_changed(state: StringName)
 signal vehicle_changed(id: String)
+signal race_changed(id: String)
 signal settings_changed
 signal race_requested(context: Dictionary)
 
 const Profiles = preload("res://scripts/driving/VehicleProfiles.gd")
 const Graphics = preload("res://scripts/ui/GraphicsPreferences.gd")
-const MENU_STATES := [&"main_menu", &"play_menu", &"vehicle_select", &"how_to_play", &"options", &"credits", &"race_pending", &"results"]
+const MENU_STATES := [&"main_menu", &"play_menu", &"vehicle_select", &"race_select", &"how_to_play", &"options", &"credits", &"race_pending", &"results"]
 var definition: Dictionary = {}
 var current_state: StringName = &"main_menu"
 var current_scene_path := ""
 var selected_mode: StringName = &""
 var selected_vehicle_id := "COMET"
+var selected_race_id := ""
 var rival_difficulty := "expert"
 var race_origin: StringName = &""
 var return_destination: StringName = &"main_menu"
@@ -29,6 +31,8 @@ var screen_mode := "windowed"
 var window_size := Vector2i(1280, 720)
 var graphics: Dictionary = {}
 var graphics_configured := false
+var intro_shown := false
+var driving_music: Node
 var menu_audio: Node
 var quitting:=false
 var _world: WeakRef
@@ -53,6 +57,8 @@ func _ready() -> void:
 	_install_menu_bindings()
 	menu_audio=preload("res://scripts/ui/MenuAudio.gd").new()
 	add_child(menu_audio);menu_audio.configure(self)
+	driving_music=preload("res://scripts/ui/DrivingMusic.gd").new()
+	add_child(driving_music);driving_music.configure(self)
 	get_tree().auto_accept_quit=false
 	get_tree().root.close_requested.connect(quit_game)
 
@@ -108,6 +114,7 @@ func go_back() -> void:
 	if transition_busy:
 		return
 	match current_state:
+		&"race_select": _set_state(&"vehicle_select")
 		&"vehicle_select": _set_state(&"play_menu")
 		&"play_menu", &"how_to_play", &"options", &"credits": _set_state(&"main_menu")
 		&"race_pending": cancel_activity()
@@ -123,9 +130,24 @@ func start_selected() -> bool:
 		_switch_scene(definition["world_scene"], &"free_drive")
 		return true
 	if selected_mode == &"race":
-		_begin_race(&"menu", str(definition["default_race_id"]))
+		if selected_race_id not in menu_race_ids():selected_race_id=str(definition["default_race_id"])
+		_set_state(&"race_select")
 		return true
 	return false
+
+func menu_race_ids() -> Array:
+	var ids: Array=definition.get("menu_race_ids",[definition["default_race_id"]]).duplicate()
+	var default_id:=str(definition["default_race_id"])
+	if default_id not in ids:ids.push_front(default_id)
+	return ids
+
+func select_race(id: String) -> bool:
+	if transition_busy or current_state!=&"race_select" or id not in menu_race_ids():return false
+	selected_race_id=id;navigation_error="";race_changed.emit(id);return true
+
+func launch_selected_race() -> bool:
+	if transition_busy or current_state!=&"race_select" or selected_mode!=&"race" or selected_race_id not in menu_race_ids() or selected_vehicle_id not in Profiles.IDS:return false
+	_begin_race(&"menu",selected_race_id);return true
 
 func pending_world_launch() -> Dictionary:
 	return launch_context.duplicate(true) if transition_busy and not launch_context.is_empty() else {}
@@ -194,7 +216,11 @@ func _prepare_existing_race() -> void:
 		_hide_loading()
 		return_to_main_menu()
 		return
+	if needs_loading:await _settle_world(world_instance())
 	world_instance().race_activity.start(active_race)
+	if not world_instance().runtime_error.is_empty():
+		navigation_error=world_instance().runtime_error;transition_busy=false
+		_hide_loading();return_to_main_menu();return
 	transition_busy = false
 	_set_state(&"race")
 	_hide_loading()
@@ -237,6 +263,7 @@ func return_from_activity() -> void:
 			transition_busy = false
 			return_to_main_menu()
 			return
+		if is_instance_valid(loading_overlay):await _settle_world(world)
 		world.place_at(destination)
 		world.player.turbo_charge = float(return_context.get("turbo_charge",1.0))
 		world.player.driving_enabled = true
@@ -327,9 +354,13 @@ func _perform_transition(path: String, destination: StringName) -> void:
 			transition_busy = false
 			_switch_scene(definition["menu_scene"],&"main_menu")
 			return
+		await _settle_world(world)
 		world.attach_racing()
 		if destination == &"race": world.race_activity.start(active_race)
 		else: world.player.driving_enabled = true
+		if not world.runtime_error.is_empty():
+			navigation_error=world.runtime_error;transition_busy=false;launch_context.clear()
+			_switch_scene(definition["menu_scene"],&"main_menu");return
 		apply_graphics(world)
 		world.prepared = {}
 	prepared_world = {}
@@ -337,6 +368,25 @@ func _perform_transition(path: String, destination: StringName) -> void:
 	transition_busy = false
 	_set_state(destination)
 	_hide_loading()
+
+func _settle_world(world: Node3D) -> void:
+	world.player.driving_enabled=false
+	var player_mode: int=world.player.process_mode
+	world.player.process_mode=Node.PROCESS_MODE_DISABLED
+	loading_stage("Preparando iluminación, banquetas y decorado cercano")
+	if "presentation_ready" in world:
+		while not world.presentation_ready:await get_tree().process_frame
+	if "night_style" in world and world.night_style!=null:
+		await world.night_style.prewarm_loaded()
+	apply_graphics(world)
+	loading_stage("Terminando de preparar La Paz")
+	# Real time, independent of FPS/time_scale. Driving/countdown starts only afterwards.
+	var started:=Time.get_ticks_msec()
+	while Time.get_ticks_msec()-started<2000:await get_tree().process_frame
+	if is_instance_valid(loading_overlay):loading_overlay.settle_ms=Time.get_ticks_msec()-started
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	world.player.process_mode=player_mode
 
 func _show_loading(message: String) -> void:
 	if not is_instance_valid(loading_overlay):
@@ -349,7 +399,7 @@ func loading_stage(message: String) -> void:
 
 func _hide_loading() -> void:
 	if is_instance_valid(loading_overlay):
-		last_loading_metrics = {"frames":loading_overlay.frames,"max_gap_ms":loading_overlay.max_gap_ms}
+		last_loading_metrics = {"frames":loading_overlay.frames,"max_gap_ms":loading_overlay.max_gap_ms,"settle_ms":loading_overlay.settle_ms}
 		loading_overlay.queue_free()
 	loading_overlay = null
 
@@ -386,6 +436,7 @@ func load_settings() -> void:
 	for key in Graphics.DEFAULTS:
 		var value=saved.get_value("graphics",key,graphics[key])
 		if Graphics.valid(key,value):graphics[key]=value
+	Graphics.apply(null,graphics)
 	for bus in volumes:
 		var value = saved.get_value("volume", bus, legacy.get_value("volume", bus, volumes[bus]))
 		volumes[bus] = clampf(float(value), 0.0, 1.0) if (value is float or value is int) and is_finite(float(value)) else volumes[bus]
@@ -433,6 +484,7 @@ func set_graphics(key: String, value: Variant) -> bool:
 	return true
 
 func apply_graphics(world: Node3D) -> void:
+	Graphics.apply_quality(world,graphics)
 	if graphics_configured:Graphics.apply(world,graphics)
 
 func reset_graphics() -> void:

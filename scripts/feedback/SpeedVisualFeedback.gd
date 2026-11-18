@@ -268,7 +268,8 @@ func register_nearby() -> void:
 			var entry: Dictionary=furniture.sectors[sector_id]
 			var owner=entry["owner"].get_ref()
 			if not is_instance_valid(owner): continue
-			var visual=owner.get_node_or_null("LampBatch")
+			# Only the imported emitter receives SF.3; preserve the pole's atlas.
+			var visual=owner.get_node_or_null("LampEmitterBatch")
 			if visual==null: continue
 			# Sector ownership is stable; fragment radius bounds the actual response.
 			var parts:=str(sector_id).split("_")

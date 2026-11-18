@@ -1,5 +1,9 @@
 # Pasaporte La Paz — D.4
 
+Esta guía conserva el alcance inicial de tres lugares. La ampliación actual,
+sus once interacciones y los modelos geográficos se describen en
+[Pasaporte y modelos 3D](PASAPORTE_MODELOS_3D.md).
+
 Prototipo exclusivo del modo libre, con tres lugares reales y un editor manual
 para desarrolladores. No añade recompensas, misiones ni modificaciones al coche.
 

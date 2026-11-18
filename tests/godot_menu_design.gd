@@ -59,7 +59,7 @@ func run() -> void:
 	check(shell.sliders.size()==4,"All real audio buses retained")
 	check(shell.presentation.tabs.size()==3,"Options has sound, graphics, display tabs")
 	shell.show_options_page(1);await shot("graphics")
-	check(shell.graphic_controls.size()==6,"Six functional graphics preferences")
+	check(shell.graphic_controls.size()==9,"Nine functional graphics preferences including enhanced lighting")
 	shell.graphic_controls["optical_mode"].item_selected.emit(0)
 	shell.graphic_controls["smoke_quality"].item_selected.emit(0)
 	for key in ["clouds_enabled","smoke_enabled","marks_enabled","burst_enabled"]:shell.graphic_controls[key].toggled.emit(false)
@@ -82,6 +82,7 @@ func run() -> void:
 			await shot("%dx%d"%[size.x,size.y])
 		root.size=Vector2i(1280,720);await frames(6)
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"free_drive"):finish();return
 	var world=current_scene
 	for i in range(20):await physics_frame

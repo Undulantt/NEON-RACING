@@ -1,6 +1,6 @@
 extends Node
 # One persistent owner: menu navigation keeps the same song and click tails.
-const MUSIC_STATES: Array[StringName]=[&"main_menu",&"credits",&"how_to_play",&"play_menu",&"vehicle_select",&"options"]
+const MUSIC_STATES: Array[StringName]=[&"main_menu",&"credits",&"how_to_play",&"play_menu",&"vehicle_select",&"race_select",&"options"]
 const SONG=preload("res://assets/audio/Main menu.mp3")
 const CLICK=preload("res://assets/audio/Button-Notification.wav")
 const FADE_IN_SECONDS:=1.5
@@ -10,6 +10,7 @@ var clicks: AudioStreamPlayer
 var click_players: Array[AudioStreamPlayer]=[]
 var next_click:=0
 var fade: Tween
+var cinematic_active:=false
 var wants_music:=false
 var shutting_down:=false
 var using_navigation:=false
@@ -61,7 +62,7 @@ func play_click() -> void:
 func set_state(state: StringName) -> void:
 	if shutting_down:return
 	var shell=menu_owner.get_ref() if menu_owner!=null else null
-	var next_music: bool=state in MUSIC_STATES and is_instance_valid(shell) and shell.is_inside_tree()
+	var next_music: bool=not cinematic_active and state in MUSIC_STATES and is_instance_valid(shell) and shell.is_inside_tree()
 	if next_music and wants_music and music.playing:return
 	wants_music=next_music
 	if fade!=null and fade.is_valid():fade.kill()
@@ -75,6 +76,13 @@ func set_state(state: StringName) -> void:
 		fade.tween_property(self,"gain",0.0,FADE_OUT_SECONDS).set_trans(Tween.TRANS_SINE)
 		fade.tween_callback(func():
 			if not wants_music:music.stop())
+
+func set_cinematic(value: bool) -> void:
+	cinematic_active=value
+	if value:
+		if fade!=null and fade.is_valid():fade.kill()
+		wants_music=false;gain=0;music.stop()
+	else:set_state(flow.current_state)
 
 func shutdown() -> void:
 	if shutting_down:return

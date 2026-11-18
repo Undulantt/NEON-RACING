@@ -12,6 +12,10 @@ def read(p):return json.loads((ROOT/p).read_text(encoding='utf8'))
 def sha(p):return hashlib.sha256((ROOT/p).read_bytes()).hexdigest()
 
 def build():
+    if (ROOT/'data/passport/landmark_models.json').exists():
+        from build_passport_landmarks import build as expanded_build
+        expanded_build()
+        return
     m=read('data/processed/la_paz_map.json');cfg=m['metadata']
     osm_path='data/raw/osm_map_c6_boundary_expansion.osm'
     osm=ET.parse(ROOT/osm_path).getroot();nodes={e.attrib['id']:(float(e.attrib['lon']),float(e.attrib['lat'])) for e in osm.findall('node')}

@@ -11,6 +11,7 @@ func run() -> void:
 	flow.choose_mode(&"race")
 	flow.select_vehicle("COMET")
 	flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	var deadline:=Time.get_ticks_msec()+120000
 	while flow.current_state!=&"race" or flow.transition_busy:
 		if Time.get_ticks_msec()>deadline: print("LOAD FAILED ",flow.navigation_error);quit(1);return
@@ -45,6 +46,9 @@ func run() -> void:
 	var parked_at: Vector3=world.player.position
 	var initial_safe: bool=competition.racers.all(func(r): return r["car"].safe_road_transform(r["car"].global_transform))
 	var launch_locked: bool=competition.racers.all(func(r):return not r["car"].driving_enabled)
+	var player_grid_place: int=competition.player_place()
+	var player_last: bool=player_grid_place==competition.racers.size() if not legacy_grid else true
+	var grid_2x3: bool=competition.grid_columns==2 and competition.racers[0].get("grid_slot",-1)==5 if competition.rivals.size()==5 and not legacy_grid else true
 	var ability_metrics: Dictionary={}
 	var physics_samples: Array[float]=[]
 	var max_physics_ms:=0.0
@@ -104,6 +108,8 @@ func run() -> void:
 	var report:={"passed":competition.racers.all(func(r):return (stationary and r["car"]==world.player) or r["session"].phase=="finished"),"stationary_player":stationary,"single_file_fixture":legacy_grid,"grid_columns":competition.grid_columns,"trajectory":{"length_m":competition.trajectory.length,"samples":competition.trajectory.points.size(),"rounded_corners":competition.trajectory.rounded_corners,"fallback_corners":competition.trajectory.fallback_corners},"player_displacement_m":Vector2(world.player.position.x-parked_at.x,world.player.position.z-parked_at.z).length(),"racers":rows,"peak":peak,"wall_s":(Time.get_ticks_msec()-start)/1000.0,"initial_safe":initial_safe,"countdown_locked":launch_locked,"abilities":ability_metrics,"max_physics_ms":max_physics_ms,"physics_p95_ms":physics_samples[int(physics_samples.size()*0.95)],"physics_p99_ms":physics_samples[int(physics_samples.size()*0.99)]}
 	report["finish_lane_cleared"]=competition.racers.all(func(r):return r["car"]==world.player or r.get("parked",false))
 	report["ability_audit"]=ability_audit
+	report["player_grid_place"]=player_grid_place;report["player_last"]=player_last;report["grid_2x3"]=grid_2x3
+	report["passed"]=report["passed"] and player_last and grid_2x3
 	report["passed"]=report["passed"] and initial_safe and launch_locked and (ability_audit or report["finish_lane_cleared"])
 	if stationary: report["passed"]=report["passed"] and report["player_displacement_m"]<0.25 and activity.session.next_checkpoint==0 and activity.session.completed_laps==0
 	print("D3_REPORT ",JSON.stringify(report))
@@ -124,6 +130,7 @@ func run() -> void:
 		flow.show_screen(&"play_menu")
 		flow.choose_mode(&"free_drive")
 		flow.start_selected()
+		if flow.current_state==&"race_select":flow.launch_selected_race()
 		while flow.transition_busy: await process_frame
 		world=current_scene
 		var selected: String=world.player.vehicle_profile

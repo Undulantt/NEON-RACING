@@ -50,7 +50,7 @@ func _ready() -> void:
 	verified=CheckBox.new();verified.text="He contrastado coordenadas y fuentes";form.add_child(verified)
 	latitude.text_changed.connect(func(_value: String):verified.button_pressed=false)
 	longitude.text_changed.connect(func(_value: String):verified.button_pressed=false)
-	enabled=CheckBox.new();enabled.text="Activo (máximo 3 en D.4)";form.add_child(enabled)
+	enabled=CheckBox.new();enabled.text="Activo (máximo %d lugares)"%Store.MAX_ACTIVE;form.add_child(enabled)
 	radius=SpinBox.new();radius.min_value=4;radius.max_value=15;radius.suffix="m de radio";form.add_child(radius)
 	speed=SpinBox.new();speed.min_value=0;speed.max_value=3;speed.step=.1;speed.suffix="m/s máximo para descubrir";form.add_child(speed)
 	var mode:=CheckBox.new();mode.text="Clic coloca lugar; apagado: aproximación vial";form.add_child(mode)
@@ -139,7 +139,7 @@ func load_draft() -> void:
 		if not poi is Dictionary or not Store.safe_id(str(poi.get("id",""))) or not poi.get("activation",{}) is Dictionary or not poi.get("coordinate_evidence",{}) is Dictionary or not poi.get("references",[]) is Array:notice.text="Borrador dañado o incompatible.";return
 		for source in poi.get("references",[]):
 			if not source is Dictionary:notice.text="Fuente de borrador incompatible.";return
-	draft=data;reload_list();select(0);notice.text="Borrador cargado. Aplicar valida el catálogo completo."
+	draft=Store.upgrade_catalog(data,Store.read(Store.CONTENT));reload_list();select(0);notice.text="Borrador cargado. Aplicar valida el catálogo completo."
 
 func commit(path: String) -> bool:
 	if not collect():return false

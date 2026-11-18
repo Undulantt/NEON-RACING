@@ -12,6 +12,7 @@ var observe := -1
 var grid_columns := 1
 var trajectory: RefCounted
 var difficulty := "standard"
+var corridor_cursor:=0
 
 func prepare(target: Node3D, data: Dictionary, player_session: RefCounted) -> void:
 	world=target
@@ -23,24 +24,14 @@ func prepare(target: Node3D, data: Dictionary, player_session: RefCounted) -> vo
 	var count:=clampi(int(settings["rival_count"]),0,5)
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--rivals="): count=clampi(int(argument.trim_prefix("--rivals=")),0,5)
-	racers.append({"name":"Tú","car":world.player,"session":player_session,"previous":Vector2(world.player.position.x,world.player.position.z),"finish":0,"driver":null})
-	# Use two columns where the road and physical support permit it. Narrow
-	# starts retain longitudinal spacing; every slot stays before gate one.
-	var points: Array=data["points_xz"]
-	var a:=Vector2(points[-2][0],points[-2][1]) if data["type"]=="circuit" else Vector2(points[0][0],points[0][1])
-	var b:=Vector2(points[0][0],points[0][1])
-	var incoming:=(b-a).normalized()
-	var start_forward:=Vector2(data["start"]["forward_xz"][0],data["start"]["forward_xz"][1])
-	var start_at:=Vector2(data["start"]["position_xz"][0],data["start"]["position_xz"][1])
-	var grid_right:=Vector2(-start_forward.y,start_forward.x)
-	if count>0 and minf(float(data["checkpoints"][0]["half_width_m"]),float(data["finish"]["half_width_m"]))>=4.8:
-		var player_pose:=grid_pose(world.player,start_at-grid_right*2.2,start_forward)
-		if world.player.safe_road_transform(player_pose):
-			grid_columns=2
-			world.player.global_transform=player_pose
-			world.player.spawn_transform=player_pose
-			world.player.safe_transform=player_pose
-			world.player.reset_surface_motion()
+	var slots:=starting_grid(world.player,data,count+1)
+	if slots.is_empty():
+		world.runtime_error="La salida no admite una parrilla segura de 2 x 3 antes del primer checkpoint. Mueve la salida a una calle mas ancha o recta."
+		return
+	grid_columns=2 if count>0 else 1
+	world.player.global_transform=slots[count]
+	world.player.spawn_transform=slots[count];world.player.safe_transform=slots[count];world.player.reset_surface_motion()
+	racers.append({"name":"Tú","car":world.player,"session":player_session,"previous":Vector2(world.player.position.x,world.player.position.z),"finish":0,"driver":null,"grid_slot":count})
 	for index in range(count):
 		var entry: Dictionary=settings["lineup"][index%settings["lineup"].size()]
 		var car=preload("res://scenes/cars/PlayerCar.tscn").instantiate()
@@ -54,24 +45,8 @@ func prepare(target: Node3D, data: Dictionary, player_session: RefCounted) -> vo
 		car.feedback.muted=true
 		car.feedback.set_process_unhandled_input(false)
 		if world.night_visuals: preload("res://scripts/style/RetroCar.gd").build(car)
-		var p:=b-incoming*(6.0+index*6.0)
-		var direction:=incoming
-		if data["type"]!="circuit":
-			p=start_at-start_forward*(6+index*6)
-			direction=start_forward
-		if grid_columns==2:
-			var slot:=index+1
-			var row:=slot/2
-			var lateral:=2.2 if slot%2==1 else -2.2
-			p=start_at+grid_right*lateral if row==0 else b-incoming*(row*7.0)+Vector2(-incoming.y,incoming.x)*lateral
-			direction=start_forward if row==0 else incoming
-			if data["type"]!="circuit":
-				p=start_at-start_forward*(row*7.0)+grid_right*lateral
-				direction=start_forward
-		var pose:=grid_pose(car,p,direction)
-		if not car.safe_road_transform(pose):
-			p=start_at-start_forward*(12+index*7)
-			pose=grid_pose(car,p,start_forward)
+		var pose: Transform3D=slots[index]
+		var p:=Vector2(pose.origin.x,pose.origin.z)
 		car.global_transform=pose
 		car.spawn_transform=car.global_transform
 		car.safe_transform=car.global_transform
@@ -89,7 +64,14 @@ func prepare(target: Node3D, data: Dictionary, player_session: RefCounted) -> vo
 		var driver=Driver.new()
 		driver.configure(car,progress,entry["personality"],preload("res://scripts/racing/RivalDifficulty.gd").settings(settings["profiles"][entry["personality"]],difficulty),trajectory)
 		driver.preferred_lane=float(entry.get("line_preference_m",0))
-		var racer:={"name":entry["name"],"car":car,"session":progress,"previous":p,"previous_y":car.position.y,"finish":0,"driver":driver}
+		var assist:=preload("res://scripts/racing/RivalAssist.gd").new()
+		var options: Dictionary=settings.get("arcade_assists",{}).duplicate(true)
+		if "--ai-assists=off" in OS.get_cmdline_user_args():options["enabled"]=false
+		assist.configure(car,driver,options,difficulty)
+		driver.tactics_rng.randomize()
+		for argument in OS.get_cmdline_user_args():
+			if argument.begins_with("--ai-seed="):driver.tactics_rng.seed=int(argument.trim_prefix("--ai-seed="))+index*131
+		var racer:={"name":entry["name"],"car":car,"session":progress,"previous":p,"previous_y":car.position.y,"finish":0,"driver":driver,"assist":assist,"grid_slot":index}
 		racers.append(racer)
 		rivals.append(car)
 	for racer in racers:
@@ -107,7 +89,60 @@ func grid_pose(car: CharacterBody3D, at: Vector2, direction: Vector2) -> Transfo
 	var yaw:=atan2(-direction.x,-direction.y)
 	return Transform3D(Basis(Vector3.UP,yaw),Vector3(at.x,car.supported_pose_height(at.x,at.y,yaw),at.y))
 
+func starting_grid(probe: CharacterBody3D, data: Dictionary, total: int) -> Array[Transform3D]:
+	var start: Array=data["start"]["position_xz"];var f: Array=data["start"]["forward_xz"]
+	var forward:=Vector2(f[0],f[1]);var right:=Vector2(-forward.y,forward.x)
+	var at:=Vector2(start[0],start[1])
+	if total==1:return [grid_pose(probe,at,forward)]
+	var first: Dictionary=data["checkpoints"][0]
+	var first_at:=Vector2(first["position_xz"][0],first["position_xz"][1])
+	var gate_radius:=preload("res://scripts/racing/RaceGeometry.gd").half_width(first)
+	for shift in [0.0,-3.0,-6.0,-9.0,-12.0,-18.0,3.0,6.0,9.0,12.0,15.0,18.0]:
+		var front: Vector2=at+forward*shift
+		if (front-first_at).dot(forward)>-gate_radius-1:continue
+		var plan: Array[Transform3D]=[]
+		for slot in range(total):
+			var row: int=slot/2
+			var p: Vector2=front-forward*(row*7.0)+right*(-2.2 if slot%2==0 else 2.2)
+			var pose:=grid_pose(probe,p,forward)
+			if not probe.safe_road_transform(pose):break
+			plan.append(pose)
+		if plan.size()==total:return plan
+	return []
+
+func retire_sprint(racer: Dictionary) -> void:
+	var car: CharacterBody3D=racer["car"]
+	var finish: Dictionary=racer["session"].definition["finish"]
+	var end:=Vector2(finish["position_xz"][0],finish["position_xz"][1])
+	var forward:=Vector2(finish["forward_xz"][0],finish["forward_xz"][1])
+	var right:=Vector2(-forward.y,forward.x)
+	var p:=Vector2(car.position.x,car.position.z)
+	var side:=1.0 if int(racer["finish"])%2==0 else -1.0
+	var goal: Vector2=end+forward*maxf(12,36-int(racer["finish"])*4)+right*side*2.2
+	var local: Vector3=car.global_basis.inverse()*(Vector3(goal.x,car.position.y,goal.y)-car.position)
+	var steer:=clampf(atan2(local.x,-local.z)*1.6,-1,1)
+	var pose:=car.global_transform
+	pose.basis=Basis(Vector3.UP,car.rotation.y-steer*.35/float(car.config["wheelbase_m"])*tan(float(car.config["max_steer_radians"])*float(car.config["steering_sensitivity"])))
+	pose.origin-=pose.basis.z*.35
+	pose.origin.y=car.supported_pose_height(pose.origin.x,pose.origin.z,pose.basis.get_euler().y)
+	var clear: bool=car.safe_road_transform(pose)
+	if p.distance_to(goal)<2 or ((p-end).dot(forward)>8 and not clear):
+		racer["parked"]=true;car.driving_enabled=false;car.set_controls(0,0,true)
+		racer["driver"].state="parked";return
+	# Finishing an open course must not freeze a rival inside the final gate.
+	# Continue physically onto supported road; official results stay frozen.
+	car.driving_enabled=true
+	car.set_controls(.5 if clear and car.speed_mps<5 else 0,steer,not clear or car.speed_mps>5)
+	var exit: Dictionary=trajectory.project_finish(p)
+	if not exit.is_empty():racer["driver"].nav_s=exit["s"]
+	car.set_meta("race_competing",false)
+	racer["driver"].state="clearing_finish"
+
 func step(delta: float) -> void:
+	if not rivals.is_empty():
+		var racer: Dictionary=racers[1+corridor_cursor%rivals.size()]
+		if racer["session"].phase=="running" and is_finite(racer["driver"].nav_s):trajectory.refresh_streamed_corridors(racer["driver"].nav_s,racer["car"])
+		corridor_cursor+=1
 	for racer in racers:
 		var car=racer["car"]
 		var progress=racer["session"]
@@ -118,6 +153,7 @@ func step(delta: float) -> void:
 			racer["previous"]=p
 			racer["previous_y"]=car.position.y
 			car.driving_enabled=progress.phase=="running"
+			racer["assist"].update(delta,racers[0]["session"])
 			racer["driver"].update(delta)
 		if progress.phase=="finished" and racer["finish"]==0:
 			finish_order+=1
@@ -131,7 +167,9 @@ func step(delta: float) -> void:
 	if debug_enabled:
 		var lines:=PackedStringArray()
 		for racer in racers:
-			if racer["driver"]!=null: lines.append(racer["name"]+" "+racer["driver"].telemetry())
+			if racer["driver"]!=null:
+				var assist: RefCounted=racer["assist"]
+				lines.append(racer["name"]+" "+racer["driver"].telemetry()+" ayuda +%.0f%% · distancia %.0f m · líneas %d" % [assist.speed_bonus*100,assist.gap_m,racer["driver"].line_choices])
 		debug_label.text="F6 depuración · Ctrl+Alt+O observar\n"+"\n".join(lines)
 		draw_debug()
 	else:
@@ -143,11 +181,14 @@ func step(delta: float) -> void:
 func clear_finish_lane(racer: Dictionary) -> void:
 	var car: CharacterBody3D=racer["car"]
 	var official: RefCounted=racer["session"]
-	if racer.get("parked",false) or official.definition["type"]!="circuit":
+	if racer.get("parked",false):
 		racer["driver"].state="parked"
 		racer["driver"].target_speed=0.0
 		car.set_controls(0,0,true)
 		car.driving_enabled=false
+		return
+	if official.definition["type"]!="circuit":
+		retire_sprint(racer)
 		return
 	var p:=Vector2(car.position.x,car.position.z)
 	if not racer.has("parking_driver"):
@@ -189,7 +230,8 @@ func clear_finish_lane(racer: Dictionary) -> void:
 		driver.best_nav_s=-INF
 	var frame: Dictionary=trajectory.project(p,driver.nav_s)
 	var local_s:=fposmod(float(frame["s"]),trajectory.length)
-	var stop_after:=15.0+5.0*(int(racer["finish"])-1)
+	var safe_after:=preload("res://scripts/racing/RaceGeometry.gd").half_width(official.definition["finish"])+3.0
+	var stop_after:=maxf(safe_after,15.0+5.0*(int(racer["finish"])-1))
 	var aligned: float=Vector2(-car.global_basis.z.x,-car.global_basis.z.z).dot(frame["forward"])
 	var room:=true
 	for other in [world.player]+rivals:
@@ -201,8 +243,8 @@ func clear_finish_lane(racer: Dictionary) -> void:
 	var street_forward: Vector2=(first_end-first_at).normalized()
 	var street_side: float=(p-first_at).dot(Vector2(-street_forward.y,street_forward.x))
 	var side_clear: bool=absf(street_side)>2.2 and aligned>0.97
-	var queued_on_side: bool=car.speed_mps<0.7 and local_s>7 and local_s<72
-	var can_stop: bool=side_clear and ((local_s>=stop_after and local_s<72 and room) or queued_on_side)
+	var queued_on_side: bool=car.speed_mps<0.7 and local_s>safe_after and local_s<72 and absf(street_side)>1.2 and aligned>.94
+	var can_stop: bool=(side_clear and local_s>=stop_after and local_s<72 and room) or queued_on_side
 	if racer.get("parking_braking",false) or can_stop:
 		racer["parking_braking"]=true
 		car.set_controls(0,0,true)
@@ -227,6 +269,7 @@ func standings() -> Array:
 		var y=b["session"]
 		if x.completed_laps!=y.completed_laps: return x.completed_laps>y.completed_laps
 		if x.next_checkpoint!=y.next_checkpoint: return x.next_checkpoint>y.next_checkpoint
+		if absf(x.progress_m-y.progress_m)<.01:return int(a.get("grid_slot",0))<int(b.get("grid_slot",0))
 		return x.progress_m>y.progress_m)
 	return order
 

@@ -84,14 +84,15 @@ func _draw_navigation(center: Vector2, position_xz: Vector2) -> void:
 			draw_circle(item["point"],5.5,Color.WHITE)
 			draw_circle(item["point"],3.8,Color("218cff"))
 			if item["index"] == session.next_checkpoint: draw_circle(item["point"],7,Color("8addff"),false,1.5)
-	elif activity != null and not activity.default_race.is_empty():
-		var p: Array = activity.default_race["start"]["position_xz"]
-		var at := screen(Vector2(p[0],p[1]),center,position_xz)
-		if bounds.grow(-7).has_point(at):
-			race_marker_visible = true
-			draw_circle(at,6,Color("ff43b3"))
-			draw_line(at+Vector2(0,-10),at+Vector2(0,5),Color.WHITE,1.5)
-			draw_colored_polygon(PackedVector2Array([at+Vector2(0,-10),at+Vector2(8,-7),at+Vector2(0,-3)]),Color("ffacd9"))
+	elif activity != null:
+		for race in activity.entrances:
+			var p: Array = race["start"]["position_xz"]
+			var at := screen(Vector2(p[0],p[1]),center,position_xz)
+			if bounds.grow(-7).has_point(at):
+				race_marker_visible = true
+				draw_circle(at,6,Color("ff43b3"))
+				draw_line(at+Vector2(0,-10),at+Vector2(0,5),Color.WHITE,1.5)
+				draw_colored_polygon(PackedVector2Array([at+Vector2(0,-10),at+Vector2(8,-7),at+Vector2(0,-3)]),Color("ffacd9"))
 	if not active_race and world.get("navigation") != null and not world.get("navigation").destination_id.is_empty():
 		var at := screen(world.get("navigation").destination,center,position_xz)
 		if bounds.grow(-7).has_point(at):

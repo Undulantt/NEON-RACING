@@ -6,10 +6,14 @@ var world: Node3D
 var session: RefCounted
 var definition: Dictionary = {}
 var default_race: Dictionary = {}
+var entrances: Array=[]
+var markers: Dictionary={}
+var nearby_race: Dictionary={}
 var visuals: Node3D
 var marker: MeshInstance3D
 var overlay: CanvasLayer
 var info: Label
+var race_hud: Control
 var panel: PanelContainer
 var panel_column: VBoxContainer
 var editor: Control
@@ -29,6 +33,9 @@ func configure(target: Node3D) -> void:
 	world.player.recovery_handler = request_recovery
 	default_race = Store.load_id(str(GameFlow.definition.get("default_race_id","")))
 	if not default_race.is_empty() and not Store.validate(default_race,GameFlow.road_graph).is_empty(): default_race = {}
+	for id in GameFlow.menu_race_ids():
+		var race:=Store.load_id(id)
+		if not race.is_empty() and Store.validate(race,GameFlow.road_graph).is_empty():entrances.append(race)
 	overlay = CanvasLayer.new()
 	overlay.layer = 15
 	add_child(overlay)
@@ -39,6 +46,8 @@ func configure(target: Node3D) -> void:
 	info.add_theme_color_override("font_outline_color",Color.BLACK)
 	info.add_theme_constant_override("outline_size",5)
 	overlay.add_child(info)
+	race_hud=preload("res://scripts/ui/RaceHUD.gd").new()
+	overlay.add_child(race_hud);race_hud.configure(self)
 	panel = PanelContainer.new()
 	panel.position = Vector2(350,190)
 	panel.size = Vector2(580,300)
@@ -47,23 +56,30 @@ func configure(target: Node3D) -> void:
 	panel_column.add_theme_constant_override("separation",14)
 	panel.add_child(panel_column)
 	panel.hide()
-	if not default_race.is_empty():
-		marker = MeshInstance3D.new()
+	for race in entrances:
+		var entry_marker := MeshInstance3D.new()
 		var cylinder := CylinderMesh.new()
 		cylinder.top_radius = 4
 		cylinder.bottom_radius = 4
 		cylinder.height = 5
 		cylinder.cap_top = false
 		cylinder.cap_bottom = false
-		marker.mesh = cylinder
-		marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		entry_marker.mesh = cylinder
+		entry_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		var material := ShaderMaterial.new()
 		material.shader = preload("res://shaders/race_start.gdshader")
 		material.set_shader_parameter("neon_color",Color(1.0,0.02,0.5,1.0))
-		marker.material_override = material
-		add_child(marker)
-		var p: Array = default_race["start"]["position_xz"]
-		marker.position = Vector3(p[0],world.player.surface_height(p[0],p[1])+2.5,p[1])
+		entry_marker.material_override = material
+		add_child(entry_marker)
+		var p: Array = race["start"]["position_xz"]
+		entry_marker.position = Vector3(p[0],world.player.surface_height(p[0],p[1])+2.5,p[1])
+
+		markers[race["id"]]=entry_marker
+		entry_marker.set_meta("race_id",race["id"])
+		entry_marker.visibility_range_end=450
+		if race["id"]==default_race.get("id",""):marker=entry_marker
+		var caption:=Label3D.new();caption.text=race["name"];caption.position.y=3.2;caption.font_size=38;caption.pixel_size=.018;caption.billboard=BaseMaterial3D.BILLBOARD_ENABLED;caption.visibility_range_end=180
+		entry_marker.add_child(caption)
 
 func add_text(value: String) -> void:
 	var label := Label.new()
@@ -86,17 +102,20 @@ func clear_panel() -> void:
 		child.queue_free()
 	panel.show()
 
-func confirm_start() -> void:
-	if default_race.is_empty() or GameFlow.current_state != &"free_drive": return
+func confirm_start(id: String="") -> void:
+	var chosen: Dictionary=nearby_race if not nearby_race.is_empty() else default_race
+	for race in entrances:
+		if race["id"]==id:chosen=race
+	if chosen.is_empty() or GameFlow.current_state != &"free_drive":return
 	prompting = true
 	world.player.driving_enabled = false
 	clear_panel()
-	add_text(str(default_race["name"]))
-	add_text("%s · %.0f m\nRecorrido ficticio sobre vías OSM" % [Store.format_label(default_race),default_race["distance_m"]])
+	add_text(str(chosen["name"]))
+	add_text("%s · %.0f m\nRecorrido ficticio sobre vías OSM" % [Store.format_label(default_race),chosen["distance_m"]])
 	add_button("Iniciar carrera",func():
 		prompting = false
 		panel.hide()
-		world.request_race(default_race["id"])).grab_focus()
+		world.request_race(chosen["id"])).grab_focus()
 	add_button("Cancelar",cancel_prompt)
 
 func cancel_prompt() -> void:
@@ -147,7 +166,8 @@ func start(data: Dictionary) -> void:
 	competition = preload("res://scripts/racing/RaceCompetition.gd").new()
 	add_child(competition)
 	competition.prepare(world,data,session)
-	if marker != null: marker.hide()
+	previous=Vector2(car.position.x,car.position.z);previous_y=car.position.y
+	for entry_marker in markers.values():entry_marker.hide()
 
 func _completed(result: Dictionary) -> void:
 	info.hide()
@@ -157,7 +177,7 @@ func _completed(result: Dictionary) -> void:
 	clear_panel()
 	add_text("Resultados · "+str(definition["name"]))
 	add_text("Tiempo: %.3f s\nDistancia: %.0f m\n%s" % [result["elapsed_seconds"],definition["distance_m"],result["summary"]])
-	if definition.get("type") == "circuit": add_text("Vueltas completadas: %d / %d" % [result["laps"],definition["laps"]])
+	if int(definition.get("laps",0))>0: add_text("Vueltas completadas: %d / %d" % [result["laps"],definition["laps"]])
 	result_table = Label.new()
 	result_table.add_theme_font_size_override("font_size",18)
 	panel_column.add_child(result_table)
@@ -176,7 +196,7 @@ func leave() -> void:
 		remove_child(visuals)
 		visuals.queue_free()
 	visuals = null
-	if marker != null: marker.show()
+	for entry_marker in markers.values():entry_marker.show()
 	info.text = ""
 	info.show()
 
@@ -190,6 +210,7 @@ func _physics_process(delta: float) -> void:
 	var car = world.player
 	var p := Vector2(car.position.x,car.position.z)
 	if recovering:
+		info.show()
 		if session != null: session.tick_without_progress(delta)
 		if not recovery_finishing:
 			recovery_remaining = maxf(0,recovery_remaining-delta)
@@ -204,15 +225,26 @@ func _physics_process(delta: float) -> void:
 		previous_y = car.position.y
 		car.driving_enabled = session.phase == "running"
 		if session.phase == "countdown":
+			info.show()
 			info.text = "%s · %d" % [definition["name"],ceili(session.countdown)]
 		else:
-			info.text = "%.2f s · %sSiguiente %d/%d · Restan %.0f m" % [session.elapsed,"Vuelta %d/%d · " % [session.current_lap(),session.total_laps] if definition.get("type") == "circuit" else "",mini(session.next_checkpoint+1,definition["checkpoints"].size()),definition["checkpoints"].size(),session.remaining()]
-			if is_instance_valid(competition):
-				info.text += " · Posición %d/%d\nVuelta: %.2f s\n%s" % [competition.player_place(),competition.racers.size(),session.elapsed-session.last_lap_elapsed,competition.table()]
+			info.hide()
+			info.text = ""
 			if session.phase != "finished": visuals.show_gate(session.next_checkpoint)
-	elif GameFlow.current_state == &"free_drive" and not default_race.is_empty() and not prompting:
-		var start: Array = default_race["start"]["position_xz"]
-		info.text = "E / mando B · %s · %.0f m" % [default_race["name"],default_race["distance_m"]] if p.distance_to(Vector2(start[0],start[1])) < 24 and car.speed_mps < 3 else ""
+	elif GameFlow.current_state == &"free_drive" and not prompting:
+		nearby_race=nearest_race(p)
+		info.text=""
+		if not nearby_race.is_empty() and car.speed_mps<3:
+			var start: Array=nearby_race["start"]["position_xz"]
+			if p.distance_to(Vector2(start[0],start[1]))<24:info.text="E / mando B · %s · %.0f m" % [nearby_race["name"],nearby_race["distance_m"]]
+
+func nearest_race(p: Vector2) -> Dictionary:
+	var chosen: Dictionary={};var best:=INF
+	for race in entrances:
+		var start: Array=race["start"]["position_xz"]
+		var distance:=p.distance_squared_to(Vector2(start[0],start[1]))
+		if distance<best:best=distance;chosen=race
+	return chosen
 
 func _unhandled_input(event: InputEvent) -> void:
 	if GameFlow.transition_busy: return
@@ -291,7 +323,7 @@ func _finish_recovery() -> void:
 	GameFlow.transition_busy = true
 	var generation := recovery_generation
 	var next_before: int = session.next_checkpoint if session != null else -1
-	await world.prepare_at(recovery_spawn)
+	await world.prepare_at(recovery_spawn,true)
 	if not is_inside_tree() or generation != recovery_generation: return
 	if not world.runtime_error.is_empty():
 		GameFlow.navigation_error = world.runtime_error

@@ -60,6 +60,7 @@ func run() -> void:
 	flow.choose_mode(&"free_drive")
 	flow.select_vehicle("COMET")
 	flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	await frames(2)
 	await shot("loading")
 	if not await wait_state(&"free_drive"):
@@ -165,6 +166,7 @@ func run() -> void:
 	if not await wait_state(&"main_menu"): finish();return
 	flow.definition["default_race_id"]=fixture_id
 	flow.show_screen(&"play_menu");flow.choose_mode(&"race");flow.select_vehicle("APEX");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await wait_state(&"race"): finish();return
 	world=current_scene
 	check(world.player.vehicle_profile=="APEX","Menu race preserves chosen vehicle")
@@ -202,6 +204,7 @@ func run() -> void:
 	check(root.get_children().filter(func(n:Node):return n is Node3D).is_empty(),"Menu abandonment frees race world")
 	# Free-drive entry, confirmation, cancellation, restart and return reuse scene.
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.select_vehicle("VECTOR");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await wait_state(&"free_drive"):finish();return
 	world=current_scene
 	for i in range(2): await physics_frame

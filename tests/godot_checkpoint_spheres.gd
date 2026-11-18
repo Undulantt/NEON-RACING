@@ -15,6 +15,14 @@ func fixture() -> RefCounted:
 	return s
 func run() -> void:
 	var y:=10.0+Geometry.CENTER_HEIGHT_M
+	var widened: Dictionary=fixture().definition.duplicate(true)
+	widened["checkpoints"][0]["half_width_m"]=3.0
+	for label in ["player","NPC"]:
+		var equal_rules=Session.new();equal_rules.begin(widened)
+		equal_rules.set_surface_heights(func(_x: float,_z: float):return 10.0);equal_rules.phase="running"
+		equal_rules.advance(Vector2(5,1),Vector2(5,-1),.1,true,y,y)
+		check(equal_rules.phase=="finished","Wider common checkpoint accepts the same lateral pass for "+label)
+	check(is_equal_approx(Geometry.half_width(widened["checkpoints"][0]),3*1.3*1.5),"Common trigger radius grows fifty percent")
 	var s=fixture()
 	s.advance(Vector2(-8,3),Vector2(-3,3),0.1,true,y,y)
 	check(s.phase=="finished","Sideways corner drift enters sphere without crossing checkpoint plane")

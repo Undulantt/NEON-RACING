@@ -30,11 +30,12 @@ func configure(target: Node3D) -> void:
 	badge=Label.new();badge.position=Vector2(24,330);badge.add_theme_font_size_override("font_size",15)
 	badge.add_theme_color_override("font_color",Color("6eeae7"));badge.add_theme_color_override("font_outline_color",Color.BLACK);badge.add_theme_constant_override("outline_size",4)
 	layer.add_child(badge)
-	var selected:=Store.read(local_catalog_path)
+	var shipped:=Store.read(Store.CONTENT)
+	var selected:=Store.upgrade_catalog(Store.read(local_catalog_path),shipped)
 	var local_error:=Store.validate(selected,GameFlow.road_graph,world.map_data["metadata"])
 	if selected.is_empty() or not local_error.is_empty():
 		if FileAccess.file_exists(local_catalog_path):world.hud.show_notice("Catálogo local descartado: "+local_error)
-		selected=Store.read(Store.CONTENT)
+		selected=shipped
 	apply_catalog(selected)
 	if not store.warning.is_empty():world.hud.show_notice(store.warning)
 
@@ -61,6 +62,8 @@ func apply_catalog(data: Dictionary) -> bool:
 		poi["interaction_xz"]=Store.approach(poi,GameFlow.road_graph)
 		active.append(poi)
 		var marker:=MeshInstance3D.new();var mesh:=PrismMesh.new();mesh.size=Vector3(.65,.9,.65);marker.mesh=mesh
+		marker.name="Passport_"+str(poi["id"])
+		marker.set_meta("poi_id",poi["id"]);marker.set_meta("model_id",poi.get("model_id",""))
 		var mat:=StandardMaterial3D.new();mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;mat.albedo_color=Color("49d4d2")
 		marker.material_override=mat;marker.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		var p: Vector2=poi["interaction_xz"];marker.position=Vector3(p.x,world.player.surface_height(p.x,p.y)+3.8,p.y)

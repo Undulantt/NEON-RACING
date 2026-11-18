@@ -1,0 +1,130 @@
+{
+  "checked_on": "2026-11-17",
+  "method": "Manual relative comparison of official campus plan and existing metric OSM/Overture footprints. Plan compass and access roundabouts used to compare orientation. This is not a surveyed georeferencing or a guarantee of departmental identity. Generic models carry no named department.",
+  "sources": [
+    {
+      "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf",
+      "sha256": "58edba41508034f6ddedfb8ee4c2d6697a33881f08a3941bd707c402d851f928",
+      "edition": "2022",
+      "local_research_copy": ".local/artifacts/uabcs_campus_2022.pdf"
+    },
+    {
+      "url": "https://www.uabcs.mx/recorrido-virtual/menu.html",
+      "use": "Official labels AD-19, AD-01, DSC-46"
+    },
+    {
+      "url": "https://www.uabcs.mx/recorrido-virtual/lapaz/gimnasio/pano.xml",
+      "sha256": "f326d2d9c9aa2bbb7edc30355bc735f6a39c23944b9befee784b9101bf066216",
+      "use": "Panorama capture points, not building centroids"
+    }
+  ],
+  "gym_panorama_capture_positions": [
+    {
+      "name": "Gim1",
+      "latitude": 24.102083,
+      "longitude": -110.314333
+    },
+    {
+      "name": "Gim2",
+      "latitude": 24.102194,
+      "longitude": -110.314139
+    }
+  ],
+  "campus_buildings": [
+    {
+      "id": "uabcs_rectoria",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSRectoria.glb",
+      "coordinate_evidence": {
+        "source_ref": "footprint:overture:c5c01479-fb5a-46d8-9659-c1fd45b4c62a:0:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "plan_label": "19",
+      "identity_confidence": "relative_plan_match_approximate",
+      "position_xz": [
+        282.44765385784973,
+        6435.589851182685
+      ],
+      "yaw": 1.417534585901611,
+      "scale": 0.6452193163001259
+    },
+    {
+      "id": "uabcs_gimnasio",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSGimnasioAuditorio.glb",
+      "coordinate_evidence": {
+        "source_ref": "footprint:osm:1342767403:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "plan_label": "01",
+      "identity_confidence": "relative_plan_match_approximate",
+      "position_xz": [
+        551.0871841166302,
+        6318.229165855789
+      ],
+      "yaw": -1.7071431817591962,
+      "scale": 0.7304736869129443
+    },
+    {
+      "id": "uabcs_sistemas",
+      "scene": "res://assets/3D/Edificios/UABCS/AD-46.glb",
+      "coordinate_evidence": {
+        "source_ref": "footprint:overture:74a61aba-f87e-4ace-b55c-f63384618bee:0:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "plan_label": "46",
+      "identity_confidence": "relative_plan_match_approximate",
+      "position_xz": [
+        339.3800649204158,
+        6252.165787860695
+      ],
+      "yaw": 1.4191002944257043,
+      "scale": 0.6899392582117712
+    },
+    {
+      "id": "uabcs_academico_1",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSGeneric1.glb",
+      "coordinate_evidence": {
+        "source_ref": "footprint:overture:c22792ec-8b0e-4a3d-a542-b5f197a853f5:0:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "plan_label": null,
+      "identity_confidence": "generic_representation_only",
+      "position_xz": [
+        476.0234493128753,
+        6389.304841162744
+      ],
+      "yaw": 2.993719990435733,
+      "scale": 0.8672812106773354
+    },
+    {
+      "id": "uabcs_academico_2",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSGeneric2.glb",
+      "coordinate_evidence": {
+        "source_ref": "footprint:osm:666815700:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "plan_label": null,
+      "identity_confidence": "generic_representation_only",
+      "position_xz": [
+        444.0284119938518,
+        6463.962179567748
+      ],
+      "yaw": 2.986814882568788,
+      "scale": 1.40136197900322
+    }
+  ]
+}

@@ -51,6 +51,7 @@ func run() -> void:
 	flow.settings_path="user://tests/d4/settings.cfg"
 	change_scene_to_file(flow.definition["menu_scene"]);await process_frame
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.select_vehicle("COMET");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"free_drive"):finish();return
 	var world=current_scene;var passport=world.passport;var car=world.player
 	check(passport.active.size()==3 and passport.count()==0,"Exactly three initially unknown POIs")
@@ -135,6 +136,7 @@ func run() -> void:
 	backup.load_progress();check(backup.discovered.has("historic_unknown_id"),"Corrupt main progress recovers backup and retains unknown historical IDs")
 	flow.return_to_main_menu();if not await state(&"main_menu"):finish();return
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"free_drive"):finish();return
 	check(current_scene.passport.count()==3,"Progress survives menu and world recreation")
 	check(current_scene.player.vehicle_profile=="COMET","Selected vehicle is retained")

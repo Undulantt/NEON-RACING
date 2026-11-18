@@ -35,6 +35,7 @@ func run() -> void:
 	flow=root.get_node("GameFlow");flow.settings_path="user://tests/comet/settings.cfg"
 	change_scene_to_file(flow.definition["menu_scene"]);await process_frame
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.select_vehicle("COMET");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"free_drive"):finish();return
 	var world=current_scene;var car=world.player
 	# Use the known accessible kiosk approach, away from the race-entry cylinder.
@@ -85,13 +86,14 @@ func run() -> void:
 	car.set_physics_process(false);car.velocity=Vector3.ZERO
 	var old_pose: Transform3D=car.global_transform
 	var lights_before: int=car.visual_root.find_children("*","Light3D",true,false).size()
-	check(car.apply_vehicle_profile("VECTOR") and car.visual_root.get_node_or_null("CometModel")==null,"VECTOR retains its procedural model")
-	check(car.apply_vehicle_profile("APEX") and car.visual_root.get_node_or_null("CometModel")==null,"APEX retains its procedural model")
+	check(car.apply_vehicle_profile("VECTOR") and car.visual_root.get_node_or_null("VectorModel")!=null,"VECTOR uses its own imported model")
+	check(car.apply_vehicle_profile("APEX") and car.visual_root.get_node_or_null("ApexModel")!=null,"APEX uses its own imported model")
 	check(car.apply_vehicle_profile("COMET") and car.visual_root.get_node_or_null("CometModel")!=null,"Returning to COMET restores imported model")
 	check(car.global_transform==old_pose and car.collision_shape.size==shape and car.collision_mask==mask and car.config==config,"Visual replacement preserves transform, collision and COMET stats")
 	check(car.visual_root.find_children("*","Light3D",true,false).size()==lights_before,"Profile changes preserve existing headlight nodes")
 	flow.return_to_main_menu();if not await state(&"main_menu"):finish();return
 	flow.show_screen(&"play_menu");flow.choose_mode(&"race");flow.select_vehicle("COMET");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	if not await state(&"race"):finish();return
 	world=current_scene
 	check(world.player.visual_root.get_node_or_null("CometModel")!=null,"Race player uses the same COMET model")

@@ -7,19 +7,19 @@ static func safe_id(id: String) -> bool:
 		if not character in "abcdefghijklmnopqrstuvwxyz0123456789_": return false
 	return not id.is_empty() and id.length() <= 64 and id.validate_node_name() == id and not "." in id and not "/" in id and not "\\" in id
 
-static func create(graph: RefCounted, anchors: Array, id: String, title: String, spacing := 30.0, wrong_way := false, race_type := "sprint", laps := 0) -> Dictionary:
-	return build(graph,anchors,id,title,spacing,wrong_way,race_type,laps)["data"]
+static func create(graph: RefCounted, anchors: Array, id: String, title: String, spacing := 30.0, wrong_way := false, race_type := "sprint", laps := 0, uniform := false) -> Dictionary:
+	return build(graph,anchors,id,title,spacing,wrong_way,race_type,laps,uniform)["data"]
 
 static func invalid(message: String) -> Dictionary:
 	return {"data":{},"error":message}
 
-static func build(graph: RefCounted, anchors: Array, id: String, title: String, spacing := 30.0, wrong_way := false, race_type := "sprint", laps := 0) -> Dictionary:
+static func build(graph: RefCounted, anchors: Array, id: String, title: String, spacing := 30.0, wrong_way := false, race_type := "sprint", laps := 0, uniform := false) -> Dictionary:
 	if graph == null: return invalid("Todavía no está preparada la red vial.")
 	if not safe_id(id): return invalid("ID inválido: usa sólo minúsculas, números y guion bajo, con un máximo de 64 caracteres.")
 	if title.strip_edges().is_empty(): return invalid("Escribe un nombre para la carrera.")
 	if race_type not in ["sprint","circuit"]: return invalid("Elige Sin vueltas (sprint) o Con vueltas (circuito).")
 	if race_type == "circuit" and (laps < 1 or laps > 99): return invalid("El circuito necesita entre 1 y 99 vueltas.")
-	if race_type == "sprint" and laps != 0: return invalid("Una carrera sin vueltas debe tener 0 vueltas.")
+	if race_type == "sprint" and laps not in [0,1]: return invalid("Un recorrido abierto admite sin vueltas (0) o una sola vuelta (1).")
 	if anchors.is_empty(): return invalid("Falta el recorrido: haz clic sobre una carretera para colocar la salida; después coloca la meta.")
 	if anchors.size() == 1: return invalid("Salida colocada. Haz clic en otro punto de la carretera para añadir la meta o un paso del circuito.")
 	for i in range(anchors.size()):
@@ -57,6 +57,7 @@ static func build(graph: RefCounted, anchors: Array, id: String, title: String, 
 			var p := a.lerp(b,float(j)/steps)
 			gates.append({"position_xz":[p.x,p.y],"forward_xz":[direction.x,direction.y],"half_width_m":half,"distance_m":distance+length*j/steps,"edge_index":i})
 		distance += length
+	if uniform:gates=equidistant_gates(graph,refs,spacing)
 	var a := Vector2(points[0][0],points[0][1])
 	var direction := (Vector2(points[1][0],points[1][1])-a).normalized()
 	# Spawn a few metres into the first road, never behind an intersection.
@@ -64,9 +65,27 @@ static func build(graph: RefCounted, anchors: Array, id: String, title: String, 
 	var start := {"position_xz":[spawn.x,spawn.y],"forward_xz":[direction.x,direction.y]}
 	var data := {"schema_version":1,"id":id,"name":title,"type":race_type,"laps":laps,"map_sha256":graph.map_hash,"anchors":anchors.duplicate(),"edges":refs,"points_xz":points,"checkpoints":gates,"start":start,"finish":gates[-1].duplicate(true),"spawn_positions":[start.duplicate(true)],"distance_m":distance*maxi(1,laps),"settings":{"checkpoint_spacing_m":spacing,"allow_wrong_way":wrong_way,"countdown_s":3.0}}
 	if race_type == "circuit": data["lap_distance_m"] = distance
+	if uniform:data["settings"]["checkpoint_distribution"]="route_distance"
 	return {"data":data,"error":""}
 
+static func equidistant_gates(graph: RefCounted, refs: Array, spacing: float) -> Array:
+	var gates: Array=[];var next_distance:=spacing;var distance:=0.0
+	for i in range(refs.size()):
+		var ref: Dictionary=refs[i]
+		var a: Vector2=graph.nodes[ref["from"]];var b: Vector2=graph.nodes[ref["to"]]
+		var length:=a.distance_to(b);var forward:=(b-a).normalized()
+		while next_distance<=distance+length+.000001:
+			var p:=a.lerp(b,clampf((next_distance-distance)/length,0,1))
+			gates.append({"position_xz":[p.x,p.y],"forward_xz":[forward.x,forward.y],"half_width_m":maxf(2,float(graph.roads[ref["road_id"]]["width_m"])*.48),"distance_m":next_distance,"edge_index":i})
+			next_distance+=spacing
+		distance+=length
+	if gates.is_empty() or distance-float(gates[-1]["distance_m"])>.000001:
+		var last: Dictionary=refs[-1];var a: Vector2=graph.nodes[last["from"]];var b: Vector2=graph.nodes[last["to"]];var forward:=(b-a).normalized()
+		gates.append({"position_xz":[b.x,b.y],"forward_xz":[forward.x,forward.y],"half_width_m":maxf(2,float(graph.roads[last["road_id"]]["width_m"])*.48),"distance_m":distance,"edge_index":refs.size()-1})
+	return gates
+
 static func format_label(data: Dictionary) -> String:
+	if data.get("type")=="sprint" and int(data.get("laps",0))==1:return "Recorrido abierto · 1 vuelta"
 	return "Circuito · %d vueltas" % int(data.get("laps",1)) if data.get("type") == "circuit" else "Sin vueltas · Sprint A → B"
 
 static func validate(data: Dictionary, graph: RefCounted) -> String:
@@ -76,11 +95,12 @@ static func validate(data: Dictionary, graph: RefCounted) -> String:
 	if not safe_id(str(data.get("id",""))): return "ID de carrera inválido: usa minúsculas, números y guion bajo."
 	var laps = data.get("laps",0)
 	if not (laps is float or laps is int) or not is_finite(float(laps)) or float(laps) != floorf(float(laps)): return "El número de vueltas debe ser un entero."
-	if data["type"] == "sprint" and int(laps) != 0: return "Un sprint es sin vueltas (0)."
+	if data["type"] == "sprint" and int(laps) not in [0,1]: return "Un recorrido abierto admite 0 o 1 vuelta."
 	if data["type"] == "circuit" and (int(laps) < 1 or int(laps) > 99): return "El circuito necesita entre 1 y 99 vueltas."
 	if data.get("map_sha256") != graph.map_hash: return "El mapa cambió: reabrir y regenerar la carrera en el editor."
 	if not data.get("settings") is Dictionary or not data.get("anchors") is Array or not data.get("edges") is Array: return "Estructura de carrera inválida."
 	var settings: Dictionary = data["settings"]
+	if settings.get("checkpoint_distribution","segment") not in ["segment","route_distance"]:return "Distribución de controles no compatible."
 	if not settings.get("allow_wrong_way",false) is bool: return "Excepción de circulación inválida."
 	for anchor in data["anchors"]:
 		if not anchor is String: return "Identificador de nodo inválido."
@@ -91,7 +111,7 @@ static func validate(data: Dictionary, graph: RefCounted) -> String:
 	var error: String = graph.validate_refs(data.get("edges",[]),settings.get("allow_wrong_way",false))
 	if not error.is_empty(): return error
 	# Geometry and gates are derived, never trusted independently of road references.
-	var built := build(graph,data["anchors"],data["id"],str(data.get("name","")),float(settings["checkpoint_spacing_m"]),settings.get("allow_wrong_way",false),data["type"],int(laps))
+	var built := build(graph,data["anchors"],data["id"],str(data.get("name","")),float(settings["checkpoint_spacing_m"]),settings.get("allow_wrong_way",false),data["type"],int(laps),settings.get("checkpoint_distribution","")=="route_distance")
 	if not built["error"].is_empty(): return built["error"]
 	var rebuilt: Dictionary = built["data"]
 	for key in ["edges","points_xz","checkpoints","start","finish","spawn_positions","distance_m"]:

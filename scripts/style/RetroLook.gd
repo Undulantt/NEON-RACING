@@ -52,6 +52,18 @@ func configure(target: Node3D) -> void:
 			turbo_trail.attach(world.player,effect,world.hud)
 	world.follow_camera.speed_feedback.vehicle_feedback.bind_world_effects(world.hud,turbo_trail)
 	refresh()
+func prewarm_loaded() -> void:
+	while not world.road_root.pending.is_empty():await get_tree().process_frame
+	while road_busy:await get_tree().process_frame
+	var complete:=false
+	while not complete:
+		await refresh()
+		while road_busy:await get_tree().process_frame
+		complete=true
+		for chunk in world.road_root.loaded.values():
+			if not chunk.has_meta("retro_road"):complete=false;break
+		if not complete:await get_tree().process_frame
+
 func refresh() -> void:
 	poll_baked()
 	if road_busy: return

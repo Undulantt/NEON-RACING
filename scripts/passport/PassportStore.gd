@@ -3,6 +3,8 @@ extends RefCounted
 const CONTENT := "res://data/passport/pois.json"
 const LOCAL := "user://passport/catalog.json"
 const DRAFT := "user://passport/draft.json"
+const MAX_ACTIVE := 64
+const RETIRED_UABCS_POIS:=["poi_007","poi_008","poi_009","poi_010","poi_011"]
 var progress_path := "user://passport/progress.json"
 var discovered: Dictionary = {}
 var warning := ""
@@ -34,6 +36,23 @@ static func safe_id(value: String) -> bool:
 	for c in value:
 		if not c in "abcdefghijklmnopqrstuvwxyz0123456789_":return false
 	return true
+
+static func upgrade_catalog(local: Dictionary, shipped: Dictionary) -> Dictionary:
+	# Legacy local catalogues must not hide newly shipped landmarks. Retain edits,
+	# disabled entries and stable discovery IDs; perform this merge once per revision.
+	if local.is_empty():return shipped.duplicate(true)
+	if not local.get("pois") is Array:return local
+	var result:=local.duplicate(true)
+	result["pois"]=result["pois"].filter(func(poi):return not poi is Dictionary or poi.get("id","") not in RETIRED_UABCS_POIS)
+	if int(local.get("content_revision",1))>=int(shipped.get("content_revision",1)):return result
+	var known:={}
+	for poi in result.get("pois",[]):
+		if poi is Dictionary:known[poi.get("id","")]=true
+	for poi in shipped.get("pois",[]):
+		if not known.has(poi["id"]):result["pois"].append(poi.duplicate(true))
+	result["content_revision"]=shipped.get("content_revision",1)
+	result["max_active_pois"]=MAX_ACTIVE
+	return result
 
 static func url_ok(value: String) -> bool:
 	return value.begins_with("https://") and value.length()>12 and not " " in value and not "\n" in value
@@ -69,6 +88,7 @@ static func validate(data: Dictionary, graph: RefCounted, metadata: Dictionary) 
 		if ids.has(poi["id"]):return "ID duplicado: "+str(poi["id"])
 		ids[poi["id"]]=true
 		if not poi.get("enabled",false):continue
+		if poi["id"] in RETIRED_UABCS_POIS:return "La UABCS utiliza un único punto de Pasaporte: poi_006."
 		count+=1
 		for key in ["name","category","description"]:
 			if not poi.get(key) is String or poi[key].strip_edges().is_empty():return "Completa nombre, categoría y descripción."
@@ -92,7 +112,7 @@ static func validate(data: Dictionary, graph: RefCounted, metadata: Dictionary) 
 		if at.distance_to(world_point(poi["latitude"],poi["longitude"],metadata))>180:return "La zona de aproximación está a más de 180 m del lugar."
 		var road: Dictionary=graph.roads[str(zone["road_id"])]
 		if graph.navigation!=null and not graph.navigation_pairs.has(str(road["from"])+">"+str(road["to"])) and not graph.navigation_pairs.has(str(road["to"])+">"+str(road["from"])):return "La aproximación no pertenece a la red transitable actual."
-	if count==0 or count>3:return "D.4 permite entre uno y tres POI activos; conserva los demás como borradores."
+	if count==0 or count>MAX_ACTIVE:return "El catálogo permite entre uno y %d lugares activos."%MAX_ACTIVE
 	return ""
 
 func load_progress() -> void:

@@ -2,12 +2,12 @@
 
 ## Cambios disponibles
 
-1. **Checkpoints:** aros circulares azul neón con transparencia degradada en ambos bordes de su banda. El borde inferior queda **un cuarto del radio por debajo del nivel local de la carretera**: el centro está a 0.75 radios sobre ella. Se conserva el factor de escala 1.3 y la zona de cruce anterior; el radio se calcula para mantener el ancho de paso a nivel de la vía. Son indicaciones sin colisión física.
+1. **Checkpoints:** aros circulares azul neón con transparencia degradada. La escala compartida de aro y volumen de validación es ahora 1.95, un 50 % mayor que la anterior 1.3, para jugador y rivales. Se conserva la proporción visual actual de medio radio bajo la carretera. Son indicaciones sin colisión física sólida.
 2. **Recuperación:** R / mando Y y el botón correspondiente esperan **3 segundos de juego**, mostrando cuenta regresiva. En carrera devuelven al último checkpoint validado; antes del primero, a la salida. En modo libre utilizan el último punto seguro. El coche se bloquea durante la espera, sin velocidad residual ni turbo activo. El cronómetro de carrera continúa; pausar detiene la cuenta. No se modifican vueltas ni controles pendientes.
 3. **Ruta de carrera:** cinta naranja neón de **0.8 m de ancho**, con triángulos sobre la superficie, en lugar de líneas GPU de un píxel. La geometría se subdivide cada 4 m para seguir el relieve.
 4. **Minimapa:** ruta naranja y hasta cinco checkpoints cercanos pendientes, dentro de su área visible. El siguiente tiene un contorno adicional. La selección de destino libre usa también una línea naranja y una marca de destino.
-5. **Entrada a carrera:** cilindro rosa neón abierto, de 4 m de radio y 5 m de altura. El color se desvanece hacia arriba y permite ver el escenario detrás mediante mezcla aditiva. El minimapa y el mapa de pausa muestran su ubicación. Se conserva la interacción E / mando B y su distancia original.
-6. **Pausa en modo libre:** mapa amplio de La Paz, con composición de menú oscura, cabecera y panel lateral, inspirado en la distribución de los mapas de pausa de juegos de mundo abierto. Toda la interfaz se dibuja con controles propios de Godot; no incorpora recursos de GTA.
+5. **Entrada a carrera:** cilindro rosa neón abierto, de 4 m de radio y 5 m de altura. El color se desvanece hacia arriba y permite ver el escenario detrás mediante mezcla aditiva. El minimapa y el mapa de pausa muestran su ubicación. Se conserva la interacción E / mando B y su distancia original. Cada recorrido del catálogo tiene su propio marcador, nombre y selección de destino en el mapa de pausa.
+6. **Pausa en modo libre:** mapa amplio de La Paz, selector de salida de carrera, GPS y acciones de conducción. Comparte el fondo, Arial y botones neón del menú principal mediante `PauseSkin.gd`. Ver [integración de carreras, agua y FPS](CARRERAS_AGUA_PAUSA_FPS.md).
 
 ![Aro circular y ruta naranja](../../.local/artifacts/evidence/navigation_race_ring.png)
 

@@ -17,6 +17,7 @@ var pilot: Node3D
 var emission: StandardMaterial3D
 var furniture: RefCounted
 var solid: StandardMaterial3D
+var retro: Node
 var clouds: Node3D
 
 func material(color: Color, luminous := false) -> StandardMaterial3D:
@@ -66,7 +67,7 @@ func configure(target: Node3D, config: Dictionary) -> void:
 	add_child(audio)
 	audio.configure(world,settings)
 	audio.music.stop()
-	var retro := preload("res://scripts/style/RetroLook.gd").new()
+	retro = preload("res://scripts/style/RetroLook.gd").new()
 	add_child(retro)
 	retro.configure(world)
 	clouds = preload("res://scripts/style/NeonClouds.gd").new()
@@ -77,6 +78,21 @@ func configure(target: Node3D, config: Dictionary) -> void:
 	world.follow_camera.speed_feedback.environment_feedback.bind_world(world,retro.road_material,furniture)
 	GameFlow.apply_graphics(world)
 	refresh()
+
+func prewarm_loaded() -> void:
+	# Finish every initially resident sector, including asynchronous sidewalks/furniture.
+	while world.city_manager.city_enabled and not world.city_manager.pending.is_empty():await get_tree().process_frame
+	var initial: Array=world.city_manager.loaded.keys()
+	while decorating:await get_tree().process_frame
+	for id in initial:
+		if not world.city_manager.loaded.has(id):continue
+		if not world.city_manager.loaded[id]["node"].has_meta("night_decorated"):
+			decorating=true
+			await decorate(str(id))
+			decorating=false
+		while decorating:await get_tree().process_frame
+
+	await retro.prewarm_loaded()
 
 func geometry() -> Dictionary:
 	return {"vertices":PackedVector3Array(),"normals":PackedVector3Array(),"colors":PackedColorArray()}
@@ -124,6 +140,7 @@ func ground(p: Vector2) -> float:
 	return world.player.surface_height(p.x,p.y)
 
 func refresh() -> void:
+	if not is_inside_tree() or not is_instance_valid(world) or not world.is_inside_tree():return
 	if decorating: return
 	if settings.get("citywide",false):
 		var ids: Array=world.city_manager.loaded.keys()
@@ -138,6 +155,7 @@ func refresh() -> void:
 		decorate(str(settings["sector"]))
 
 func decorate(id: String) -> void:
+	if not is_inside_tree() or not is_instance_valid(world) or not world.is_inside_tree():return
 	var manager = world.city_manager
 	if not manager.loaded.has(id):
 		return
@@ -176,9 +194,10 @@ func decorate(id: String) -> void:
 	var slice_start:=Time.get_ticks_usec()
 	for b in data["buildings"]:
 		if furniture!=null and Time.get_ticks_usec()-slice_start>1500:
+			if not is_inside_tree() or not is_instance_valid(chunk) or not chunk.is_inside_tree() or chunk.is_queued_for_deletion():return
 			record_work("facade_slice",slice_start)
 			await get_tree().process_frame
-			if not is_instance_valid(chunk) or chunk.is_queued_for_deletion(): return
+			if not is_inside_tree() or not is_instance_valid(chunk) or not chunk.is_inside_tree() or chunk.is_queued_for_deletion(): return
 			slice_start=Time.get_ticks_usec()
 		if b.get("disabled",false):
 			continue

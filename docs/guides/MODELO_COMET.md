@@ -6,7 +6,8 @@ por el usuario. Se conserva el archivo original: SHA-256
 La textura JPEG de 128 × 128 y sus `.import` se extraen al importar con Godot;
 deben acompañar al GLB en Git. El modelo contiene 5,236 triángulos de origen.
 
-`scripts/driving/CometVisual.gd` adapta exclusivamente la presentación:
+`scripts/driving/CometVisual.gd` delega en el adaptador compartido
+`ImportedCarVisual.gd` y adapta exclusivamente la presentación:
 
 - Rota 180° sobre Y para orientar el frontal hacia -Z.
 - Aplica escala uniforme 0.65 y desplazamiento `(0, -0.585, 0.13)` en el espacio
@@ -24,8 +25,9 @@ deben acompañar al GLB en Git. El modelo contiene 5,236 triángulos de origen.
   admite esa marca en el nodo, conservando el material multisuperficie del GLB.
 
 `CarVisual.gd` recibe el perfil al construir la representación. `RetroCar.gd`
-respeta el modelo importado para COMET; VECTOR y APEX mantienen su modelo
-procedural. `ArcadeCar.gd` reconstruye únicamente los hijos visuales al aplicar
+respeta los modelos importados de COMET, VECTOR y APEX (ver
+[integración de los tres modelos](MODELOS_VEHICULOS.md)). `ArcadeCar.gd`
+reconstruye únicamente los hijos visuales al aplicar
 un perfil en reposo y conserva los nodos de luz añadidos por la iluminación del
 mundo. No cambia las fórmulas de conducción, las estadísticas, la caja física,
 las máscaras de colisión ni la cámara. El modelo se usa tanto por el jugador

@@ -24,6 +24,7 @@ func run() -> void:
 	flow.choose_mode(&"race")
 	flow.select_vehicle("COMET")
 	flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	var deadline:=Time.get_ticks_msec()+120000
 	while flow.current_state!=&"race" or flow.transition_busy:
 		if Time.get_ticks_msec()>deadline: push_error("World load timeout");quit(1);return

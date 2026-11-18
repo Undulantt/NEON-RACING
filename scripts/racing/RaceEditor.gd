@@ -15,6 +15,7 @@ var edit_mode: OptionButton
 var notice: Label
 var race_kind: OptionButton
 var laps_count: SpinBox
+var uniform_spacing: CheckBox
 var draft_error := ""
 var write_buttons: Array[Button] = []
 var dragging := false
@@ -72,16 +73,20 @@ func _ready() -> void:
 	race_kind = OptionButton.new()
 	race_kind.add_item("Sin vueltas · Sprint A → B")
 	race_kind.add_item("Con vueltas · Circuito cerrado")
+	race_kind.add_item("Una vuelta · Recorrido abierto A → B")
 	format_row.add_child(race_kind)
 	laps_count = SpinBox.new()
 	laps_count.min_value = 1
 	laps_count.max_value = 99
 	laps_count.value = 3
 	laps_count.suffix = "vueltas"
-	laps_count.editable = false
+	laps_count.editable = false; laps_count.visible=false
 	laps_count.custom_minimum_size.x = 150
-	laps_count.tooltip_text = "Sólo se aplica a circuitos. Un sprint termina en la meta, sin repetir vueltas."
+	laps_count.tooltip_text = "Circuitos: vueltas configurables. Recorrido abierto de una vuelta: 1 fija, sin regresar a la salida."
 	format_row.add_child(laps_count)
+	uniform_spacing=CheckBox.new();uniform_spacing.text="Espaciado continuo"
+	uniform_spacing.tooltip_text="Distancia sobre el recorrido completo, sin reiniciarse por tramo OSM. La meta puede tener un intervalo final menor."
+	format_row.add_child(uniform_spacing);uniform_spacing.toggled.connect(func(_value):rebuild())
 	var actions := HBoxContainer.new()
 	column.add_child(actions)
 	edit_mode = OptionButton.new()
@@ -112,6 +117,8 @@ func _ready() -> void:
 	for field in [id_field,title_field]: field.text_changed.connect(func(_v): rebuild())
 	race_kind.item_selected.connect(func(index):
 		laps_count.editable = index == 1
+		laps_count.visible=index!=0
+		if index==2:laps_count.set_value_no_signal(1)
 		rebuild())
 	laps_count.value_changed.connect(func(_v): rebuild())
 	column.add_child(notice)
@@ -140,7 +147,7 @@ func _draw() -> void:
 	for i in range(anchors.size()):
 		if not graph.nodes.has(anchors[i]): continue
 		var p: Vector2 = graph.nodes[anchors[i]]
-		draw_circle(screen(p),7,Color.GREEN if i == 0 else (Color.RED if race_kind.selected == 0 and i == anchors.size()-1 else Color.YELLOW))
+		draw_circle(screen(p),7,Color.GREEN if i == 0 else (Color.RED if race_kind.selected != 1 and i == anchors.size()-1 else Color.YELLOW))
 		draw_string(ThemeDB.fallback_font,screen(p)+Vector2(9,-9),str(i),HORIZONTAL_ALIGNMENT_LEFT,-1,18)
 
 func _gui_input(event: InputEvent) -> void:
@@ -173,8 +180,8 @@ func add_map_point(p: Vector2) -> void:
 
 func rebuild() -> void:
 	var type := "circuit" if race_kind.selected == 1 else "sprint"
-	var laps := int(laps_count.value) if type == "circuit" else 0
-	var built := Store.build(graph,anchors,id_field.text.strip_edges(),title_field.text.strip_edges(),spacing.value,exception.button_pressed,type,laps)
+	var laps := int(laps_count.value) if type == "circuit" else 1 if race_kind.selected==2 else 0
+	var built := Store.build(graph,anchors,id_field.text.strip_edges(),title_field.text.strip_edges(),spacing.value,exception.button_pressed,type,laps,uniform_spacing.button_pressed)
 	draft = built["data"]
 	draft_error = built["error"]
 	if draft_error.is_empty():
@@ -220,12 +227,14 @@ func load_draft() -> void:
 		notice.text = "El archivo no contiene una carrera reconocible. El borrador actual se conserva."
 		return
 	anchors = data["anchors"].duplicate()
-	race_kind.select(1 if data["type"] == "circuit" else 0)
+	race_kind.select(1 if data["type"] == "circuit" else 2 if int(data.get("laps",0))==1 else 0)
 	laps_count.editable = race_kind.selected == 1
-	laps_count.set_value_no_signal(int(data.get("laps",3)) if race_kind.selected == 1 else 3)
+	laps_count.visible=race_kind.selected!=0
+	laps_count.set_value_no_signal(int(data.get("laps",3)) if race_kind.selected in [1,2] else 3)
 	title_field.text = data.get("name","")
 	spacing.set_value_no_signal(data.get("settings",{}).get("checkpoint_spacing_m",30))
 	exception.set_pressed_no_signal(data.get("settings",{}).get("allow_wrong_way",false))
+	uniform_spacing.set_pressed_no_signal(data.get("settings",{}).get("checkpoint_distribution","")=="route_distance")
 	rebuild()
 	var error := Store.validate(data,graph)
 	if not error.is_empty(): notice.text = error+" Revisar y guardar de nuevo."

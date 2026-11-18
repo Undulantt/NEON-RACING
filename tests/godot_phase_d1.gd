@@ -70,6 +70,12 @@ func screenshot(name_value: String) -> void:
 
 func press(id: String) -> void:
 	var shell = current_scene
+	if id.begins_with("vehicle_") and id.trim_prefix("vehicle_") in Profiles.IDS:
+		for i in range(Profiles.IDS.size()):
+			if flow.selected_vehicle_id==id.trim_prefix("vehicle_"):break
+			shell.buttons["vehicle_next"].pressed.emit()
+		check(flow.selected_vehicle_id==id.trim_prefix("vehicle_"),"Arrow selects requested profile")
+		return
 	check(shell.buttons.has(id),"Missing UI action: "+id)
 	if shell.buttons.has(id):
 		shell.buttons[id].pressed.emit()
@@ -210,6 +216,8 @@ func run() -> void:
 		check(current_scene.stat_values.size()==24,"Race reuses same comparison table")
 		press("vehicle_"+id)
 		press("continue")
+		check(flow.current_state==&"race_select","Vehicle choice leads to race selection")
+		flow.select_race("d1_missing_content_fixture");flow.launch_selected_race()
 		check(flow.current_state==&"race_pending" and flow.race_origin==&"menu","Menu race is explicitly pending D.2")
 		check(flow.selected_vehicle_id==id and flow.return_destination==&"main_menu","Race selection and return destination preserved")
 		check(not current_scene is Node3D,"No fake race or world created")

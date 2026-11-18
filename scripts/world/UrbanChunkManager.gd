@@ -26,6 +26,7 @@ var failed_chunks: Array[String] = []
 var facades_enabled := false
 var recovery_chunks: Dictionary = {}
 var recovery_buildings := 0
+var landmark_suppressed: Dictionary={}
 
 func configure(data: Dictionary, player: CharacterBody3D) -> void:
 	manifest = data.duplicate(true)
@@ -51,6 +52,11 @@ func configure(data: Dictionary, player: CharacterBody3D) -> void:
 	if defer_prime: set_physics_process(false)
 
 func configure_city_life() -> void:
+	landmark_suppressed.clear()
+	if not baseline_b6 and (data_root==DATA_ROOT or "/relief/world/" in data_root):
+		var landmarks:=preload("res://scripts/world/LandmarkModels.gd").read_valid()
+		for model in landmarks.get("models",[]):
+			for id in model["suppress_building_ids"]:landmark_suppressed[id]=model["id"]
 	recovery_chunks.clear()
 	recovery_buildings = 0
 	facades_enabled = false
@@ -244,6 +250,9 @@ func apply_arcade_layout(data: Dictionary) -> bool:
 			# Indices and custom model dimensions refer to the original footprint.
 			building.erase("facade_edge_index")
 			building.erase("model_path")
+		if landmark_suppressed.has(id):
+			building["disabled"]=true
+			building["landmark_replaced_by"]=landmark_suppressed[id]
 	return true
 
 func set_city_enabled(active: bool) -> bool:

@@ -30,6 +30,7 @@ func run() -> void:
 	flow.show_screen(&"play_menu")
 	flow.choose_mode(&"free_drive")
 	flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	var deadline := Time.get_ticks_msec()+60000
 	while flow.transition_busy or flow.current_state != &"free_drive":
 		if Time.get_ticks_msec()>deadline:

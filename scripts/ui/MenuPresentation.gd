@@ -58,11 +58,12 @@ func set_view(state: StringName) -> void:
 	var main: bool=state==&"main_menu"
 	var credits: bool=state==&"credits"
 	var options: bool=state==&"options"
+	var vehicles: bool=state==&"vehicle_select"
 	backdrop.main=main;backdrop.queue_redraw()
 	logo.visible=main or credits
 	logo.position=Vector2(674,40) if main else Vector2(606,38)
 	logo.size=Vector2(600,200) if main else Vector2(300,100)
-	panel.visible=not main
+	panel.visible=not main and not vehicles
 	shell.heading.visible=not main
 	shell.heading.position=Vector2(276,177) if credits else Vector2(256,26)
 	shell.heading.size=Vector2(950,40)
@@ -71,8 +72,9 @@ func set_view(state: StringName) -> void:
 	header_terminal.position=header_line.position+Vector2(321,0)
 	scroll.position=Vector2(778,240) if main else (Vector2(281,233) if credits else Vector2(280,178))
 	scroll.size=Vector2(400,440) if main else (Vector2(950,330) if credits else Vector2(950,440))
+	if vehicles:scroll.position=Vector2(256,116);scroll.size=Vector2(1000,526)
 	scroll.scroll_vertical=0
-	scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED if main else ScrollContainer.SCROLL_MODE_AUTO
+	scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED if main or vehicles else ScrollContainer.SCROLL_MODE_AUTO
 	shell.body.add_theme_constant_override("separation",20 if main else 12)
 	shell.back_button.position=Vector2(575,588) if credits else Vector2(256,656)
 	shell.back_button.size=Vector2(400,68)

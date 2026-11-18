@@ -37,6 +37,7 @@ func run() -> void:
 	change_scene_to_file(flow.definition["menu_scene"])
 	await process_frame
 	flow.show_screen(&"play_menu");flow.choose_mode(&"free_drive");flow.select_vehicle("VECTOR");flow.start_selected()
+	if flow.current_state==&"race_select":flow.launch_selected_race()
 	var deadline := Time.get_ticks_msec()+90000
 	while flow.transition_busy or flow.current_state != &"free_drive":
 		await process_frame

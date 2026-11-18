@@ -1,0 +1,833 @@
+{
+  "schema_version": 1,
+  "map_sha256": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+  "arcade_sha256": "91284db256c96fcb221a769cba85892d0a94045eabba9ade616a8da542aab93c",
+  "source_hashes": {
+    "data/processed/la_paz_map.json": "58d9e247ab2fde691adb4685dabf12c01ed736f1816c2aba52873b22f54c93c3",
+    "data/processed/arcade_layout.json": "91284db256c96fcb221a769cba85892d0a94045eabba9ade616a8da542aab93c",
+    "data/processed/urban/city_manifest.json": "d9e595414e8042bd190acc466070684dea016bd5511000e478cf39b5fe4106ab",
+    "data/processed/urban/sf3_recovery/manifest.json": "98f9a027b3af06eea059cba483480de447f477a6550a1dfb96b8cadf8ed15e34",
+    "data/raw/osm_map_c6_boundary_expansion.osm": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad"
+  },
+  "models": [
+    {
+      "id": "kiosco",
+      "poi_id": "poi_001",
+      "name": "Kiosco del Malecón",
+      "scene": "res://assets/3D/Edificios/Kiosco/Kiosco.glb",
+      "model_sha256": "10f91648739df9a2bb09806c170793277c0adadcac260e5d735d461705f40983",
+      "position_xz": [
+        300.1973322079473,
+        -530.6221899481303
+      ],
+      "yaw": 0.5430559446084241,
+      "scale": 1.0,
+      "source_bounds_min": [
+        -5.60157775878906,
+        0.400000005960464,
+        -16.6778259277344
+      ],
+      "source_bounds_max": [
+        4.35599994659424,
+        10.1160001754761,
+        -5.64400005340576
+      ],
+      "exclude_nodes": [
+        "Floor_001",
+        "Foundation_001",
+        "LightPoles",
+        "PalmTrees"
+      ],
+      "footprint_xz": [
+        [
+          301.6089494988689,
+          -537.9182164982402
+        ],
+        [
+          307.31073084629907,
+          -528.4717884489137
+        ],
+        [
+          298.78571491702564,
+          -523.3261633980204
+        ],
+        [
+          293.0839335695955,
+          -532.7725914473469
+        ]
+      ],
+      "suppress_building_ids": [],
+      "campus": false,
+      "identity_confidence": "source_geometry",
+      "coordinate_evidence": {
+        "source_ref": "osm:node:9284265569",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://turismo.lapaz.gob.mx/atractivos/kiosco-del-malecon-18"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "catedral",
+      "poi_id": "poi_002",
+      "name": "Catedral de Nuestra Señora de La Paz",
+      "scene": "res://assets/3D/Edificios/Iglesia/Church.glb",
+      "model_sha256": "f43f00bf97de21bca1933d690c7a2ba92bb55e3bfc3e3b9e9422846616dec286",
+      "position_xz": [
+        670.2182053280056,
+        -288.26475027544865
+      ],
+      "yaw": -2.21206645184477,
+      "scale": 0.6744774299458094,
+      "source_bounds_min": [
+        -13.9559993743896,
+        -0.00200003385543823,
+        -30.0
+      ],
+      "source_bounds_max": [
+        13.9559993743896,
+        24.0192947387695,
+        13.0799989700317
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          676.2292288463224,
+          -272.0307689909841
+        ],
+        [
+          652.9452024076047,
+          -289.41275819960435
+        ],
+        [
+          664.2071818096889,
+          -304.4987315599132
+        ],
+        [
+          687.4912082484066,
+          -287.11674235129294
+        ]
+      ],
+      "suppress_building_ids": [
+        "osm:1497400973:0",
+        "osm:155831066:0"
+      ],
+      "campus": false,
+      "identity_confidence": "source_geometry",
+      "coordinate_evidence": {
+        "source_ref": "osm:way:155831066",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://turismo.lapaz.gob.mx/atractivos/catedral-de-nuestra-senora-de-la-paz"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "teatro",
+      "poi_id": "poi_003",
+      "name": "Teatro de la Ciudad",
+      "scene": "res://assets/3D/Edificios/Teatro/Theater.glb",
+      "model_sha256": "47abe5288c98da09947d13ef0b41e1d5989948b086a258d55499ec80803d8481",
+      "position_xz": [
+        223.49982368897915,
+        1227.8860571503105
+      ],
+      "yaw": -0.654312500227185,
+      "scale": 0.40119294064051186,
+      "source_bounds_min": [
+        -46.3913421630859,
+        -0.5,
+        -76.0
+      ],
+      "source_bounds_max": [
+        50.4433059692383,
+        32.3446617126465,
+        45.8365859985352
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          253.7871806868359,
+          1220.3158787092755
+        ],
+        [
+          224.0381475334904,
+          1259.1005057756374
+        ],
+        [
+          193.2124666911224,
+          1235.4562355913456
+        ],
+        [
+          222.9614998444679,
+          1196.6716085249836
+        ]
+      ],
+      "suppress_building_ids": [
+        "osm:155831068:0"
+      ],
+      "campus": false,
+      "identity_confidence": "source_geometry",
+      "coordinate_evidence": {
+        "source_ref": "osm:way:155831068",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://sic.cultura.gob.mx/ficha.php?table=teatro&table_id=12"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "molinito",
+      "poi_id": "poi_004",
+      "name": "El Molinito",
+      "scene": "res://assets/3D/Edificios/Molinito/ElMolinito.glb",
+      "model_sha256": "c1a4705878f51b70187d89488549ecc3e46b8e0ba06ee4d69b795d3cad3cb72f",
+      "position_xz": [
+        1295.7315923313172,
+        -1552.814911605946
+      ],
+      "yaw": 1.218405123521745,
+      "scale": 1.0,
+      "source_bounds_min": [
+        -2.88407039642334,
+        0.0,
+        -3.29999995231628
+      ],
+      "source_bounds_max": [
+        2.8840708732605,
+        11.8511075973511,
+        2.60000014305115
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          1293.95828647495,
+          -1556.5399283908566
+        ],
+        [
+          1299.4957320935273,
+          -1554.5035843269432
+        ],
+        [
+          1297.5048981876844,
+          -1549.0898948210354
+        ],
+        [
+          1291.967452569107,
+          -1551.1262388849489
+        ]
+      ],
+      "suppress_building_ids": [],
+      "campus": false,
+      "identity_confidence": "source_geometry",
+      "coordinate_evidence": {
+        "source_ref": "osm:node:10805405566",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://turismo.lapaz.gob.mx/atractivos/malecon-de-la-paz"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "museo_arte",
+      "poi_id": "poi_005",
+      "name": "Museo de Arte de Baja California Sur",
+      "scene": "res://assets/3D/Edificios/Museo de Arte/ArtMuseum.glb",
+      "model_sha256": "1238f3f0936f5e47e329bba2c15fdd56f5aaebb0f5df626242e590a7ac56edf9",
+      "position_xz": [
+        546.1251015128715,
+        -383.7520637958048
+      ],
+      "yaw": 0.925158417056197,
+      "scale": 0.7627540047415458,
+      "source_bounds_min": [
+        -20.9231986999512,
+        -2.28881822295079e-06,
+        -29.2999992370605
+      ],
+      "source_bounds_max": [
+        20.9231986999512,
+        18.3415546417236,
+        22.1271286010742
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          540.0625955125247,
+          -408.30035139079655
+        ],
+        [
+          571.3932308680842,
+          -384.6976015998659
+        ],
+        [
+          552.1876075132184,
+          -359.2037762008131
+        ],
+        [
+          520.8569721576589,
+          -382.80652599174374
+        ]
+      ],
+      "suppress_building_ids": [],
+      "campus": false,
+      "identity_confidence": "source_geometry",
+      "coordinate_evidence": {
+        "source_ref": "osm:way:155831056",
+        "verified": true,
+        "method": "Existing OSM geometry; model scale/orientation adapted for playable asphalt",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://muabcs.cultura-bcs.gob.mx/historia-del-recinto/"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "uabcs_rectoria",
+      "poi_id": "poi_006",
+      "name": "UABCS · Rectoría AD-19",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSRectoria.glb",
+      "model_sha256": "9e214f1413041059140d9b3ce6816ba3d684e8b96f50fbacfd9ec10cd5139dd2",
+      "position_xz": [
+        282.44765385784973,
+        6435.589851182685
+      ],
+      "yaw": 1.417534585901611,
+      "scale": 0.6452193163001259,
+      "source_bounds_min": [
+        -20.0,
+        0.0,
+        -22.0
+      ],
+      "source_bounds_max": [
+        20.0,
+        11.9999980926514,
+        22.4099998474121
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          270.2585107906716,
+          6420.649515673395
+        ],
+        [
+          298.5768273091038,
+          6425.023934392286
+        ],
+        [
+          294.63679692502785,
+          6450.530186691975
+        ],
+        [
+          266.31848040659565,
+          6446.155767973085
+        ]
+      ],
+      "suppress_building_ids": [
+        "overture:c5c01479-fb5a-46d8-9659-c1fd45b4c62a:0:0"
+      ],
+      "campus": true,
+      "identity_confidence": "relative_plan_match_approximate",
+      "coordinate_evidence": {
+        "source_ref": "footprint:overture:c5c01479-fb5a-46d8-9659-c1fd45b4c62a:0:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://www.uabcs.mx/recorrido-virtual/menu.html"
+        },
+        {
+          "title": "Plano oficial del campus 2022",
+          "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf"
+        }
+      ],
+      "plan_label": "19",
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "uabcs_gimnasio",
+      "poi_id": "poi_006",
+      "name": "UABCS · Gimnasio Auditorio AD-01",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSGimnasioAuditorio.glb",
+      "model_sha256": "514ffc7d8cd10916a3472ad72a3519f746bd27bdb8c9ac60cb7a4a4496656e9e",
+      "position_xz": [
+        551.0871841166302,
+        6318.229165855789
+      ],
+      "yaw": -1.7071431817591962,
+      "scale": 0.7304736869129443,
+      "source_bounds_min": [
+        -19.25,
+        0.0,
+        -19.25
+      ],
+      "source_bounds_max": [
+        19.25,
+        14.9999980926514,
+        19.25
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          563.1069764200535,
+          6334.071603204478
+        ],
+        [
+          535.2447467679401,
+          6330.248958159212
+        ],
+        [
+          539.0673918132069,
+          6302.386728507099
+        ],
+        [
+          566.9296214653202,
+          6306.209373552366
+        ]
+      ],
+      "suppress_building_ids": [
+        "osm:1342767403:0"
+      ],
+      "campus": true,
+      "identity_confidence": "relative_plan_match_approximate",
+      "coordinate_evidence": {
+        "source_ref": "footprint:osm:1342767403:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://www.uabcs.mx/recorrido-virtual/menu.html"
+        },
+        {
+          "title": "Plano oficial del campus 2022",
+          "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf"
+        },
+        {
+          "title": "Coordenadas de panorámicas oficiales",
+          "url": "https://www.uabcs.mx/recorrido-virtual/lapaz/gimnasio/pano.xml"
+        }
+      ],
+      "plan_label": "01",
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "uabcs_sistemas",
+      "poi_id": "poi_006",
+      "name": "UABCS · Sistemas II DSC-46",
+      "scene": "res://assets/3D/Edificios/UABCS/AD-46.glb",
+      "model_sha256": "8a34142abd0ff81d1cc691666a8423cca9b4c22840a167292900765ac60554bd",
+      "position_xz": [
+        339.3800649204158,
+        6252.165787860695
+      ],
+      "yaw": 1.4191002944257043,
+      "scale": 0.6899392582117712,
+      "source_bounds_min": [
+        -16.4245281219482,
+        -6.85453414916992e-07,
+        -12.4754085540771
+      ],
+      "source_bounds_max": [
+        16.4245281219482,
+        9.0,
+        12.4754047393799
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          332.58405930579704,
+          6239.663307438152
+        ],
+        [
+          349.6009165917916,
+          6242.264681854711
+        ],
+        [
+          346.17607053503457,
+          6264.668268283238
+        ],
+        [
+          329.15921324904,
+          6262.066893866679
+        ]
+      ],
+      "suppress_building_ids": [
+        "overture:74a61aba-f87e-4ace-b55c-f63384618bee:0:0"
+      ],
+      "campus": true,
+      "identity_confidence": "relative_plan_match_approximate",
+      "coordinate_evidence": {
+        "source_ref": "footprint:overture:74a61aba-f87e-4ace-b55c-f63384618bee:0:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://www.uabcs.mx/recorrido-virtual/menu.html"
+        },
+        {
+          "title": "Plano oficial del campus 2022",
+          "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf"
+        }
+      ],
+      "plan_label": "46",
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "uabcs_academico_1",
+      "poi_id": "poi_006",
+      "name": "UABCS · Edificio académico A",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSGeneric1.glb",
+      "model_sha256": "74adb5e5742de193e9f45325e081d3dd06a350653e968be4c2afa29c385caf98",
+      "position_xz": [
+        476.0234493128753,
+        6389.304841162744
+      ],
+      "yaw": 2.993719990435733,
+      "scale": 0.8672812106773354,
+      "source_bounds_min": [
+        -16.4245281219482,
+        -6.85453414916992e-07,
+        -12.4754085540771
+      ],
+      "source_bounds_max": [
+        16.4245281219482,
+        9.0,
+        12.4754047393799
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          460.3401092094847,
+          6397.907717653709
+        ],
+        [
+          463.52833188283046,
+          6376.5045020607195
+        ],
+        [
+          491.7067894162659,
+          6380.701964671779
+        ],
+        [
+          488.51856674292014,
+          6402.105180264769
+        ]
+      ],
+      "suppress_building_ids": [
+        "overture:c22792ec-8b0e-4a3d-a542-b5f197a853f5:0:0"
+      ],
+      "campus": true,
+      "identity_confidence": "generic_representation_only",
+      "coordinate_evidence": {
+        "source_ref": "footprint:overture:c22792ec-8b0e-4a3d-a542-b5f197a853f5:0:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://www.uabcs.mx/recorrido-virtual/menu.html"
+        },
+        {
+          "title": "Plano oficial del campus 2022",
+          "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    },
+    {
+      "id": "uabcs_academico_2",
+      "poi_id": "poi_006",
+      "name": "UABCS · Edificio académico B",
+      "scene": "res://assets/3D/Edificios/UABCS/UABCSGeneric2.glb",
+      "model_sha256": "6aee7ddc87f2943aad19778e651ad17c40834175822a2f55c1ac5192d2b80d87",
+      "position_xz": [
+        444.0284119938518,
+        6463.962179567748
+      ],
+      "yaw": 2.986814882568788,
+      "scale": 1.40136197900322,
+      "source_bounds_min": [
+        -9.22452735900879,
+        -6.85453414916992e-07,
+        -12.4754056930542
+      ],
+      "source_bounds_max": [
+        9.22452735900879,
+        9.0,
+        12.4754056930542
+      ],
+      "exclude_nodes": [],
+      "footprint_xz": [
+        [
+          428.5609200614315,
+          6479.24293095659
+        ],
+        [
+          433.9511612728709,
+          6444.695792060133
+        ],
+        [
+          459.49590392627215,
+          6448.681428178906
+        ],
+        [
+          454.10566271483276,
+          6483.228567075363
+        ]
+      ],
+      "suppress_building_ids": [
+        "osm:666815700:0"
+      ],
+      "campus": true,
+      "identity_confidence": "generic_representation_only",
+      "coordinate_evidence": {
+        "source_ref": "footprint:osm:666815700:0",
+        "verified": true,
+        "method": "Source footprint location; campus identity from relative matching to official 2022 plan; not surveyed",
+        "osm_snapshot_sha256": "46c8f238ffc3a21a392ace20186f40bbfa94ad8a50c2bf39ea38034da07cf5ad",
+        "checked_on": "2026-11-17"
+      },
+      "references": [
+        {
+          "title": "Fuente institucional",
+          "url": "https://www.uabcs.mx/recorrido-virtual/menu.html"
+        },
+        {
+          "title": "Plano oficial del campus 2022",
+          "url": "https://www.uabcs.mx/dasc/wp-content/uploads/2022/10/Mapa-Campus-La-Paz-2022.pdf"
+        }
+      ],
+      "plan_label": null,
+      "asphalt_overlap_m2": 0.0
+    }
+  ],
+  "campus_polygon_xz": [
+    [
+      776.6333969760674,
+      6684.2383863989035
+    ],
+    [
+      588.8084211018536,
+      6743.294011939816
+    ],
+    [
+      494.36329063057065,
+      6771.782152146046
+    ],
+    [
+      395.58600088122705,
+      6803.083523996469
+    ],
+    [
+      351.3715977675339,
+      6813.246740292037
+    ],
+    [
+      306.5991881880927,
+      6815.882060053497
+    ],
+    [
+      258.4280119639958,
+      6808.265207578217
+    ],
+    [
+      210.54091175706878,
+      6793.9655400117235
+    ],
+    [
+      157.60131665551827,
+      6769.558253613239
+    ],
+    [
+      100.60349272304335,
+      6713.015633414627
+    ],
+    [
+      -60.60964759108937,
+      6561.367992456774
+    ],
+    [
+      -164.12491950057696,
+      6517.846298167916
+    ],
+    [
+      -267.64019140862274,
+      6474.3357233718525
+    ],
+    [
+      -360.8982899466404,
+      6424.398081816081
+    ],
+    [
+      -408.56218756813325,
+      6386.480611830023
+    ],
+    [
+      -213.59472895137702,
+      6248.109645113432
+    ],
+    [
+      -148.54132078878897,
+      6190.410597677633
+    ],
+    [
+      5.945305237801731,
+      6072.1214347134655
+    ],
+    [
+      58.9660649154805,
+      6031.668720399913
+    ],
+    [
+      188.49458363195794,
+      5928.090646230497
+    ],
+    [
+      195.16022448776417,
+      5930.670368528774
+    ],
+    [
+      199.8576243591231,
+      5932.505084818517
+    ],
+    [
+      219.6516354826167,
+      5917.193543419585
+    ],
+    [
+      206.17831576314015,
+      5913.524110840098
+    ],
+    [
+      266.8691279317996,
+      5865.465663544456
+    ],
+    [
+      271.5665278046003,
+      5863.564230298736
+    ],
+    [
+      275.5740287752643,
+      5862.2076521936215
+    ],
+    [
+      280.4743400891066,
+      5861.251375824364
+    ],
+    [
+      283.9441257384152,
+      5861.051224956435
+    ],
+    [
+      286.5312466189045,
+      5861.862947920945
+    ],
+    [
+      433.00287070416715,
+      5910.521847820769
+    ],
+    [
+      434.0884469169116,
+      5921.274397227329
+    ],
+    [
+      482.3915155788389,
+      5937.608931951496
+    ],
+    [
+      487.69764977476444,
+      5928.902369195007
+    ],
+    [
+      764.1746344646824,
+      6024.4632891532865
+    ],
+    [
+      778.8755684047675,
+      6038.340415998729
+    ],
+    [
+      773.0215733160112,
+      6061.8915014619215
+    ],
+    [
+      757.3771011724874,
+      6148.601305259361
+    ],
+    [
+      737.9178939278659,
+      6260.496759941806
+    ],
+    [
+      717.5151484798056,
+      6389.127051084277
+    ],
+    [
+      716.1150595325817,
+      6432.960091167427
+    ],
+    [
+      726.5447076277835,
+      6494.851187337728
+    ],
+    [
+      776.6333969760674,
+      6684.2383863989035
+    ]
+  ],
+  "note": "Source coordinates retained; dimensions/orientation estimated. Campus identifications approximate relative-plan matches; generic buildings have no confirmed departmental identity. No source buildings are deleted: runtime suppression only."
+}
