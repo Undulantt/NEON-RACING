@@ -73,6 +73,7 @@ func set_view(state: StringName) -> void:
 	scroll.position=Vector2(778,240) if main else (Vector2(281,233) if credits else Vector2(280,178))
 	scroll.size=Vector2(400,440) if main else (Vector2(950,330) if credits else Vector2(950,440))
 	if vehicles:scroll.position=Vector2(256,116);scroll.size=Vector2(1000,526)
+	if state==&"how_to_play":scroll.position=Vector2(280,100);scroll.size=Vector2(950,530)
 	scroll.scroll_vertical=0
 	scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED if main or vehicles else ScrollContainer.SCROLL_MODE_AUTO
 	shell.body.add_theme_constant_override("separation",20 if main else 12)

@@ -98,6 +98,8 @@ func open_book() -> bool:
 func close_book() -> void:
 	if not is_instance_valid(book):return
 	book.queue_free();book=null;get_tree().paused=book_was_paused
+	if book_was_paused and is_instance_valid(world.hud.free_pause):
+		world.hud.free_pause.menu_buttons["passport"].grab_focus.call_deferred()
 
 func open_editor() -> bool:
 	if not developer_available() or not allowed() or is_instance_valid(editor) or world.race_activity.prompting or is_instance_valid(world.race_activity.editor):return false
@@ -126,8 +128,8 @@ func _process(delta: float) -> void:
 			markers[i].position.y=world.player.surface_height(p.x,p.y)+3.8
 		if eligible(poi):candidate=poi
 	if marker_refresh<=0:marker_refresh=.25
-	badge.text="PASAPORTE LA PAZ · %d/%d · P: abrir"%[count(),active.size()]
-	if not candidate.is_empty():badge.text+="\nE: "+("Consultar " if store.discovered.has(candidate["id"]) else "Registrar ")+str(candidate["name"])
+	badge.text="PASAPORTE LA PAZ · %d/%d · P / pausa: abrir"%[count(),active.size()]
+	if not candidate.is_empty():badge.text+="\nE / mando B: "+("Consultar " if store.discovered.has(candidate["id"]) else "Registrar ")+str(candidate["name"])
 
 func _input(event: InputEvent) -> void:
 	# Consume modal cancel/pause before the underlying driving HUD, including gamepads.

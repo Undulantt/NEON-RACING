@@ -9,7 +9,7 @@ static func install_gamepad_bindings() -> void:
 		event.axis_value = binding[2]
 		if not InputMap.action_has_event(binding[0], event):
 			InputMap.action_add_event(binding[0], event)
-	for binding in [["handbrake", JOY_BUTTON_A], ["turbo", JOY_BUTTON_X], ["pause", JOY_BUTTON_START], ["recover", JOY_BUTTON_Y]]:
+	for binding in [["handbrake", JOY_BUTTON_A], ["turbo", JOY_BUTTON_X], ["pause", JOY_BUTTON_START], ["recover", JOY_BUTTON_Y], ["interact", JOY_BUTTON_B], ["driving_camera", JOY_BUTTON_RIGHT_SHOULDER]]:
 		var event := InputEventJoypadButton.new()
 		event.device = -1
 		event.button_index = binding[1]

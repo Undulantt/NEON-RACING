@@ -162,14 +162,8 @@ func _refresh_race_selection(id: String) -> void:
 
 func _how_to_play() -> void:
 	heading.text = "Cómo jugar"
-	text("Conducción", null, 24)
-	text("W / ↑: acelerar\nS / ↓: frenar y, al detenerte, reversa\nA, D / ←, →: girar\nEspacio: freno de mano y derrape\nShift: turbo\nR: recuperar el vehículo tras 3 segundos (último checkpoint en carrera)\nEsc: pausa; en modo libre abre el mapa para elegir destino\nV: cámara cerca/lejos · C: inspección aérea\nM: silenciar motor y efectos del coche · F7: mezcla de audio")
-	text("Mando", null, 24)
-	text("RT acelerar · LT frenar · stick izquierdo girar · A derrape · X turbo · Y recuperar · Start pausa. En los menús: dirección, aceptar y volver.")
-	text("Mecánicas disponibles", null, 24)
-	text("Derrapa con suficiente velocidad y termina una salida limpia para recibir impulso de derrape. El turbo consume su reserva y se recarga. BURST se prepara manteniendo la aceleración cerca de la velocidad base; el indicador muestra su entrada y recuperación. El cambio de marchas es automático.")
-	text("Puedes explorar el mundo en modo libre. E / mando B junto a la salida permite confirmar una carrera. Sigue los controles en orden y completa las vueltas indicadas en los circuitos; Esc permite reiniciar o abandonar. Compite contra cinco rivales con distintas personalidades. En modo libre, P abre Pasaporte La Paz; E registra los lugares al detenerte en su aproximación vial.", null, 16)
-	if preload("res://scripts/racing/RaceEditor.gd").available(): text("Desarrollo: Ctrl + Alt + E abre el editor de recorridos desde modo libre.", null, 16)
+	var guide:=preload("res://scripts/ui/HowToPlay.gd").new()
+	body.add_child(guide);guide.configure()
 
 func _options() -> void:
 	heading.text="OPCIONES"

@@ -25,6 +25,7 @@ func _ready() -> void:
 	button("Volver · P / Esc",passport.close_book,actions)
 	if passport.developer_available():button("Editor de POI · Ctrl+Alt+I",passport.open_editor,actions)
 	refresh()
+	list.grab_focus.call_deferred()
 
 func refresh() -> void:
 	heading.text="PASAPORTE LA PAZ · %d/%d"%[passport.count(),passport.active.size()]
@@ -49,5 +50,5 @@ func show_detail() -> void:
 		for source in poi["references"]:
 			var link:=LinkButton.new();link.text=source.get("title","Fuente")+" · "+str(source["url"])
 			link.pressed.connect(func():OS.shell_open(source["url"]));detail.add_child(link)
-	else:text("Lugar todavía no registrado. Acércate al marcador turquesa sobre la calle, reduce a menos de 11 km/h y pulsa E para descubrirlo. No es necesario subir a una banqueta.")
+	else:text("Lugar todavía no registrado. Acércate al marcador turquesa sobre la calle, reduce a menos de 11 km/h y pulsa E / mando B para descubrirlo. No es necesario subir a una banqueta.")
 	button("Marcar aproximación en el GPS",func():passport.world.navigation.set_destination(poi["interaction_xz"]);passport.world.hud.show_notice("Destino: "+poi["name"]),detail)
